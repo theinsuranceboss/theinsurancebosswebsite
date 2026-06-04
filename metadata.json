@@ -1,0 +1,6 @@
+{
+  "name": "The Insurance Boss",
+  "description": "Premium dark mode landing page with local storage persistence and a powerful Admin Control Panel for text, image, and link management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
