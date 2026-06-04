@@ -1,6 +1,7 @@
 import React from "react";
 import { WebsiteConfig } from "../types";
 import { ArrowRight, ShieldCheck, Target, Award } from "lucide-react";
+import { getDirectImageUrl } from "./Header";
 
 interface HeroProps {
   config: WebsiteConfig;
@@ -9,12 +10,14 @@ interface HeroProps {
 export default function Hero({ config }: HeroProps) {
   const { titleWhite, titleYellow, subtitle, keywords, supportingText, btnReviewText, btnReviewUrl, btnGrowText, btnGrowUrl, bgUrl } = config.hero;
 
+  const heroBg = config.globalBackgroundImage || bgUrl;
+
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center bg-black overflow-hidden py-16 md:py-24">
+    <section className="relative min-h-[85vh] flex items-center justify-center bg-transparent overflow-hidden pt-28 pb-16 md:pt-40 md:pb-24">
       {/* Background with Dark Overlays for absolute high contrast layout */}
       <div 
         className="absolute inset-0 bg-cover bg-center transition-all duration-700" 
-        style={{ backgroundImage: `url(${bgUrl})` }}
+        style={{ backgroundImage: `url(${getDirectImageUrl(heroBg)})` }}
         referrerPolicy="no-referrer"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-transparent" />

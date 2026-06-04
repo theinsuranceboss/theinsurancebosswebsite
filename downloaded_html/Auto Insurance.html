@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Insurance - Smart Ways to Reduce Your Premium | The Insurance Boss</title>
+    <meta name="description" content="Smart auto insurance solutions. Liability, Collision, Complete Coverage, and Roadside Assistance. Lower stress, lower rates, more control.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: transparent;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: transparent;
+            padding: 100px 20px;
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: transparent;
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section h1 {
+            color: #ffd700;
+            font-size: 4em;
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+        }
+
+        .hero-section .subtitle {
+            font-size: 1.6em;
+            margin-bottom: 40px;
+            color: #ffffff;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Section Styling */
+        .content-section {
+            padding: 80px 0;
+            background: transparent;
+        }
+
+        .section-title {
+            color: #ffd700;
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .section-intro {
+            text-align: center;
+            font-size: 1.3em;
+            color: #ffffff;
+            margin-bottom: 60px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Grid Layouts */
+        .grid-3-col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .grid-2-col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        /* --- CARDS & BOXES STYLING --- */
+        
+        .insurance-card {
+            background: #363636; /* Dark Grey Background */
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid #ffd700; /* Yellow Line Border */
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .insurance-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: #404040; /* Lighter grey on hover */
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.15);
+        }
+
+        .insurance-card h3 {
+            color: #ffd700;
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .insurance-card p {
+            color: #ffffff;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        /* Why Choose Us Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .feature-item {
+            background: #363636; /* Dark Grey Background */
+            padding: 35px;
+            border-radius: 15px;
+            border: 1px solid #ffd700; /* Yellow Line Border */
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .feature-item:hover {
+            background: #404040;
+            transform: translateX(10px);
+        }
+
+        .feature-item h4 {
+            color: #ffd700;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        /* FAQ Section - Styled to match previous request */
+        .faq-section {
+            margin: 80px 0;
+        }
+
+        .faq-item {
+            background: #363636; /* Dark Grey Background */
+            margin-bottom: 16px;
+            border-radius: 6px;
+            border: none; /* Clean look without border for FAQs, or add 1px solid #ffd700 if preferred */
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-item:hover {
+            background: #404040;
+        }
+
+        .faq-question {
+            padding: 24px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .faq-question h3 {
+            color: #ffd700;
+            margin: 0;
+            font-size: 1.2em;
+            font-weight: 700;
+            flex: 1;
+        }
+
+        .faq-toggle {
+            font-size: 24px;
+            color: #ffd700;
+            font-weight: bold;
+            background: transparent;
+            transition: transform 0.3s ease;
+            margin-left: 20px;
+            width: auto;
+            height: auto;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 30px;
+            background: inherit;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+            padding: 0 30px 24px 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .faq-answer p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.9;
+            font-size: 1.1em;
+            margin-bottom: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5em;
+            }
+
+            .grid-3-col, .grid-2-col, .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2.2em;
+            }
+        }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-fade {
+            opacity: 0;
+            transition: opacity 1s ease-out;
+        }
+
+        .animate-fade.animated {
+            opacity: 1;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Toggle
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', function() {
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, observerOptions);
+
+            // Animate elements
+            document.querySelectorAll('.section-title').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+
+            document.querySelectorAll('.section-intro').forEach(el => {
+                el.classList.add('animate-fade');
+                observer.observe(el);
+            });
+
+            document.querySelectorAll('.insurance-card').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+
+            document.querySelectorAll('.feature-item').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+
+            document.querySelectorAll('.faq-item').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <section class="hero-section">
+        <div class="container hero-content">
+            <h1>Smart ways to reduce your premium</h1>
+            <p class="subtitle">From higher deductibles to anti-theft devices, we help you find the right mix of savings without sacrificing the coverage you actually need. We’ll also check usage-based options if you drive less than average.</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Drive with Confidence</h2>
+            <p class="section-intro">Auto insurance is more than just a legal requirement it’s your financial safety net on the road. Whether you're commuting to work, running errands, or heading out on a road trip, the right coverage protects your vehicle, your passengers, and your assets from the unexpected. We connect you with licensed professionals to find the perfect balance of protection and affordability.</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose The Insurance Boss?</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h4>Licensed Experts</h4>
+                    <p>Our experienced professionals provide personalized guidance tailored to your driving needs and budget.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Competitive Rates</h4>
+                    <p>We compare quotes from top-rated carriers to find you the best coverage without breaking the bank.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>24/7 Claims Support</h4>
+                    <p>Access support anytime, anywhere. We’re here to help you get back on the road quickly after an accident.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Multi-Vehicle Discounts</h4>
+                    <p>Save more by insuring multiple vehicles or bundling with home insurance. We’ll find every discount available.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Award-Winning Service</h4>
+                    <p>Trusted by drivers nationwide and recognized for excellence in customer service and satisfaction.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Lower stress. Lower rates. More control.</h2>
+            <p class="section-intro">We go beyond standard auto insurance checkboxes. Our advisors look at how you drive, where you drive, your vehicle type, and your daily habits to tailor limits and discounts.</p>
+            
+            <div class="grid-2-col">
+                <div class="insurance-card">
+                    <h3>Bundle & Save</h3>
+                    <p>Combine auto + home or renters insurance to unlock stackable multi-policy discounts. One renewal date, one advisor, less hassle and more money back in your pocket.</p>
+                </div>
+                <div class="insurance-card">
+                    <h3>Claims Guidance</h3>
+                    <p>When the unexpected happens, you’re never on your own. Get 24/7 support to document the incident, schedule estimates, and keep your claim moving without the runaround.</p>
+                </div>
+                <div class="insurance-card">
+                    <h3>Flexible Deductibles</h3>
+                    <p>Adjust your premium with deductibles that match your comfort level and budget. We’ll model multiple options so you can clearly see the trade-off.</p>
+                </div>
+                <div class="insurance-card">
+                    <h3>Safe-Driver Perks</h3>
+                    <p>A clean driving record pays off. Earn shrinking deductibles, renewal rewards, and telematics-based discounts that can lower your rate simply by driving safely.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Complete Coverage Options</h2>
+            <p class="section-intro">Your vehicle deserves reliable protection. Our auto insurance policies are built to safeguard you on the road and give you peace of mind every time you're behind the wheel.</p>
+
+            <div class="grid-3-col">
+                <div class="insurance-card">
+                    <h3>Liability Coverage</h3>
+                    <p>Required in most states, this covers bodily injury and property damage you cause to others in an accident. It also protects your assets and includes legal defense if you're sued.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Collision Coverage</h3>
+                    <p>Pays for damage to your vehicle after a collision with another car or object regardless of fault. Essential for protecting the value of your vehicle.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Complete Coverage</h3>
+                    <p>Covers non-collision incidents such as theft, vandalism, fire, storms, falling objects, and animal impacts. Protects your car from life’s unexpected events.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Uninsured Motorist</h3>
+                    <p>Protects you if you're hit by a driver with little or no insurance or someone who leaves the scene. Covers medical bills and vehicle damage when the other party can't pay.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Medical Payments</h3>
+                    <p>Helps pay medical expenses for you and your passengers after an accident, no matter who is at fault. Includes hospital care, surgery, X-rays, and rehabilitation.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Roadside Assistance</h3>
+                    <p>Get support anytime with towing, jump-starts, lockout service, flat tire changes, and emergency fuel delivery. 24/7 peace of mind on the road.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-intro">Find answers to commonly asked questions about our products and services.</p>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What factors affect my auto insurance rates?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Your premium is influenced by several factors including your driving record, age, location, vehicle type, and daily mileage. Additionally, your credit history and coverage limits play a role. Maintaining a clean driving record and bundling policies can help lower your rate.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What’s the difference between full coverage and liability only?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Liability only covers damage you cause to others, which is the state minimum requirement. "Full coverage" typically refers to adding Collision and Complete coverage to your policy, protecting your own vehicle from accidents, theft, and weather damage regardless of fault.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How much coverage do I need?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>While state laws set minimums, they are often insufficient for serious accidents. We generally recommend higher liability limits to protect your assets (savings, home) from lawsuits. If you have a financed or valuable car, you will also need Collision and Complete coverage.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Can I save money on my auto insurance?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! You can lower your premium by bundling with home or renters insurance, increasing your deductibles, maintaining a good driving record, and taking advantage of discounts for safe driving, good grades (for students), and vehicle safety features.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What should I do after an accident?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>First, ensure everyone is safe and call emergency services if needed. Exchange information with the other driver and document the scene with photos. Then, contact us immediately to start your claim. Our 24/7 support team will guide you through the process.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

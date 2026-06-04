@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Savings - 529 Plans & Education Funding Strategies</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            background: transparent;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 80vh; /* Reduced slightly */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 107, 107, 0.1) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideDown 1s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .btn {
+            padding: 18px 45px;
+            font-size: 18px;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #1a1a1a;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #ffd700;
+            border: 2px solid #ffd700;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* --- GLOBAL CARD STYLES --- */
+        /* Updated background color to match the requested grey swatch */
+        .value-card, 
+        .stat-box, 
+        .comparison-card, 
+        .feature-card, 
+        .expense-card,
+        .cta-content,
+        .faq-item {
+            background: #363636; /* The specific grey color requested */
+            border: 1px solid #ffd700; /* Yellow Line Border */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Value Proposition Section */
+        .value-section {
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .value-card {
+            padding: 45px 35px;
+            border-radius: 20px;
+            /* Removed hover transform/background change */
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .value-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Removed hover effect to keep consistent with request */
+        
+        .value-icon {
+            font-size: 80px;
+            margin-bottom: 25px;
+            display: block;
+            /* Removed float animation to match static request */
+        }
+
+        .value-card h3 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 18px;
+        }
+
+        .value-card p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 100px 20px;
+            background: transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stats-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .stats-header h2 {
+            font-size: 52px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 40px 25px;
+            border-radius: 20px;
+            /* Removed hover scale/bg change */
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .stat-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Updated Stat Number to match other pages (Large Yellow Font) */
+        .stat-number {
+            font-size: 64px; /* Increased size */
+            font-weight: 800;
+            color: #ffd700;
+            display: block;
+            margin-bottom: 15px;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .stat-label {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.4;
+        }
+
+        /* Comparison Section */
+        .comparison-section {
+            padding: 100px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-title h2 {
+            font-size: 52px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .comparison-card {
+            padding: 45px 35px;
+            border-radius: 20px;
+            /* Removed hover transform/bg change */
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            opacity: 0;
+            transform: translateY(50px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .comparison-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .comparison-badge {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #1a1a1a;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .comparison-card h3 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .comparison-card > p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .comparison-list {
+            list-style: none;
+        }
+
+        .comparison-list li {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 12px 0 12px 35px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .comparison-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 100px 20px;
+            background: transparent;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            padding: 40px 30px;
+            border-radius: 20px;
+            /* Extra accent border on left */
+            border-left: 5px solid #ffd700; 
+            /* Removed hover transform/bg change */
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 18px;
+        }
+
+        .feature-card p {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+        }
+
+        /* Expenses Section */
+        .expenses-section {
+            padding: 100px 20px;
+        }
+
+        .expenses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .expense-card {
+            padding: 35px 30px;
+            border-radius: 20px;
+            text-align: center;
+            /* Removed hover scale/bg change */
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        .expense-card.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .expense-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .expense-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+
+        .expense-card p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 100px 20px;
+            background: transparent;
+        }
+
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            /* Global border removed here to match "clean" request for FAQs if needed, 
+               but kept consistent with "grey box + yellow outline" request. 
+               If you want NO border on FAQs, comment out the border line below. */
+            /* border: none;  <-- Use this if you want truly borderless FAQs */
+            margin-bottom: 16px;
+            border-radius: 6px;
+            overflow: hidden;
+            /* Removed hover bg change */
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .faq-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .faq-question {
+            padding: 24px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffd700;
+            margin: 0;
+            letter-spacing: 0.5px;
+        }
+
+        .faq-toggle {
+            font-size: 24px;
+            color: #ffd700;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            line-height: 1;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            background: inherit;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 800px;
+            padding: 0 30px 24px 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .faq-answer p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .faq-answer p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero p {
+                font-size: 20px;
+            }
+
+            .stats-header h2,
+            .section-title h2 {
+                font-size: 38px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .value-grid,
+            .comparison-grid,
+            .features-grid,
+            .expenses-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .value-card,
+            .comparison-card,
+            .feature-card {
+                padding: 30px 20px;
+            }
+
+            .stat-number {
+                font-size: 48px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="value-section">
+        <div class="value-grid">
+            <div class="value-card">
+                <span class="value-icon"></span>
+                <h3>Tax-Free Growth</h3>
+                <p>Your 529 plan contributions grow completely tax-free at the federal level. Withdrawals for qualified education expenses are also tax-free, maximizing your savings potential.</p>
+            </div>
+            <div class="value-card">
+                <span class="value-icon"></span>
+                <h3>State Tax Benefits</h3>
+                <p>Over 30 states offer tax deductions or credits for 529 contributions. Some states allow deductions up to $10,000 or more annually, putting money back in your pocket.</p>
+            </div>
+            <div class="value-card">
+                <span class="value-icon"></span>
+                <h3>High Contribution Limits</h3>
+                <p>Save significantly more with contribution limits exceeding $300,000 in most states. No annual caps like IRAs, giving you maximum flexibility to fund your child's education.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stats-header">
+                <h2>College Savings by the Numbers</h2>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="stat-number" data-target="180">0</span>
+                    <span class="stat-label">Average 4-Year College Cost ($K)</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" data-target="300">0</span>
+                    <span class="stat-label">529 Contribution Limits ($K+)</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" data-target="0">0</span>
+                    <span class="stat-label">Federal Tax on 529 Earnings (%)</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" data-target="18">0</span>
+                    <span class="stat-label">Years to Save for College</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="comparison-section" id="comparison">
+        <div class="section-title">
+            <h2>College Savings Plan Options</h2>
+            <p>Explore smart, tax-advantaged ways to save for future education costs. Compare flexible accounts, investment choices, and long-term growth benefits to find the plan that fits your family’s goals.</p>
+        </div>
+        <div class="comparison-grid">
+            <div class="comparison-card">
+                <span class="comparison-badge">MOST POPULAR</span>
+                <h3>529 College Savings Plan</h3>
+                <p>Tax-advantaged investment accounts specifically designed for education savings. Earnings grow tax-free and withdrawals are tax-free for qualified expenses.</p>
+                <ul class="comparison-list">
+                    <li>Tax-free growth and withdrawals for education</li>
+                    <li>High contribution limits ($300K+ in most states)</li>
+                    <li>State tax deductions in many states</li>
+                    <li>Change beneficiaries within family</li>
+                    <li>Minimal impact on financial aid</li>
+                    <li>Use at any eligible college nationwide</li>
+                </ul>
+            </div>
+
+            <div class="comparison-card">
+                <span class="comparison-badge">K-12 & COLLEGE</span>
+                <h3>Coverdell ESA</h3>
+                <p>Education Savings Account offering tax-free growth for K-12 and college expenses with more investment flexibility but lower contribution limits.</p>
+                <ul class="comparison-list">
+                    <li>Can be used for K-12 and college expenses</li>
+                    <li>More investment control than 529 plans</li>
+                    <li>Tax-free growth and qualified withdrawals</li>
+                    <li>Limited to $2,000 annual contribution</li>
+                    <li>Income limits for contributions</li>
+                    <li>Must be used by age 30</li>
+                </ul>
+            </div>
+
+            <div class="comparison-card">
+                <span class="comparison-badge">FLEXIBLE USE</span>
+                <h3>Custodial Account (UGMA/UTMA)</h3>
+                <p>Investment accounts held in a child's name with no restrictions on how funds are used, but no special tax advantages for education.</p>
+                <ul class="comparison-list">
+                    <li>Can be used for any purpose, not just education</li>
+                    <li>No contribution limits</li>
+                    <li>Child gains control at age 18 or 21</li>
+                    <li>Taxed at child's rate (kiddie tax applies)</li>
+                    <li>Larger impact on financial aid eligibility</li>
+                    <li>Irrevocable gift to the child</li>
+                </ul>
+            </div>
+
+            <div class="comparison-card">
+                <span class="comparison-badge">DUAL PURPOSE</span>
+                <h3>Roth IRA</h3>
+                <p>Retirement account that can also fund education. Contributions can be withdrawn anytime tax and penalty-free for college expenses.</p>
+                <ul class="comparison-list">
+                    <li>Contributions can be withdrawn anytime tax-free</li>
+                    <li>Earnings can be used penalty-free for education</li>
+                    <li>Protects retirement savings if not needed</li>
+                    <li>Annual contribution limits ($7,000 in 2024)</li>
+                    <li>Income limits apply</li>
+                    <li>Not counted as asset on FAFSA</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="section-title">
+            <h2>Why Choose a 529 Plan?</h2>
+            <p>A highly effective, tax-advantaged way to save for future education costs while giving your money the potential to grow over time.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Tax-Free Investment Growth</h3>
+                <p>Your contributions grow tax-free at both federal and state levels. Over 18 years, this tax advantage can add tens of thousands to your savings.</p>
+            </div>
+            <div class="feature-card">
+                <h3>State Tax Deductions</h3>
+                <p>Over 30 states offer tax deductions or credits for 529 contributions. Some states allow deductions up to $10,000 or more per year.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Professional Management</h3>
+                <p>Choose age-based portfolios that automatically adjust risk as your child approaches college, or select individual investment options.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Flexible Beneficiaries</h3>
+                <p>Change beneficiaries to another family member anytime without tax consequences. Funds can even be used for yourself or a spouse.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Use Nationwide</h3>
+                <p>529 plans can be used at any eligible college or university in the United States and many abroad. Not limited to your state's schools.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Gift Tax Benefits</h3>
+                <p>Contribute up to $18,000 per beneficiary annually without gift tax. Special election allows $90,000 lump sum over 5 years.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="expenses-section">
+        <div class="section-title">
+            <h2>What Can 529 Plans Cover?</h2>
+            <p>A wide range of qualified education expenses that allow you to make tax-free withdrawals when used for approved schooling costs.</p>
+        </div>
+        <div class="expenses-grid">
+            <div class="expense-card">
+                <span class="expense-icon"></span>
+                <h3>Tuition & Fees</h3>
+                <p>College tuition, mandatory fees, and required course materials. Also includes up to $10,000 per year for K-12 tuition.</p>
+            </div>
+            <div class="expense-card">
+                <span class="expense-icon"></span>
+                <h3>Room & Board</h3>
+                <p>On-campus housing and meal plans, or off-campus housing costs up to the school's cost of attendance allowance.</p>
+            </div>
+            <div class="expense-card">
+                <span class="expense-icon"></span>
+                <h3>Books & Supplies</h3>
+                <p>Required textbooks, course materials, supplies, and equipment needed for enrollment or attendance at eligible schools.</p>
+            </div>
+            <div class="expense-card">
+                <span class="expense-icon"></span>
+                <h3>Computer & Technology</h3>
+                <p>Computers, laptops, tablets, printers, and internet access if used primarily by the beneficiary during enrollment.</p>
+            </div>
+            <div class="expense-card">
+                <span class="expense-icon"></span>
+                <h3>Special Needs Services</h3>
+                <p>Special needs services and equipment required for students with disabilities to attend an eligible educational institution.</p>
+            </div>
+            <div class="expense-card">
+                <span class="expense-icon"></span>
+                <h3>Student Loan Repayment</h3>
+                <p>Up to $10,000 lifetime limit can be used to repay qualified student loans for the beneficiary or their siblings.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section" id="faq">
+        <div class="section-title">
+            <h2>Common College Savings Questions</h2>
+            <p>Everything you need to know about 529 plans</p>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How much should I save for college?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>The average cost for a 4-year in-state public university is around $100,000, while private universities average $180,000 or more. However, you don't need to save the full amount - financial aid, scholarships, and student income can cover significant portions.</p>
+                    <p>A good rule of thumb is to aim for saving one-third of projected costs, with the remaining thirds coming from financial aid/scholarships and current income during college. Starting early makes a huge difference due to compound growth.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What happens to unused 529 funds?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>You have several options: transfer the account to another family member for their education, use up to $10,000 for student loan repayment, hold the funds for graduate school, or withdraw the money (paying taxes and 10% penalty on earnings only).</p>
+                    <p>Starting in 2024, unused 529 funds can be rolled over to a Roth IRA for the beneficiary (up to $35,000 lifetime, subject to annual Roth limits and other conditions). The account must have been open for 15+ years.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Do I have to use my state's 529 plan?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>No, you can choose any state's 529 plan regardless of where you live, where your child attends college, or which state's plan you invest in. However, your home state may offer tax deductions only for contributions to its own plan.</p>
+                    <p>Compare fees, investment options, and performance across different state plans. Some states like Nevada, Utah, and Virginia have highly-rated plans with low fees that attract out-of-state investors.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How do 529 plans affect financial aid?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Parent-owned 529 plans have minimal impact on financial aid. They're assessed at a maximum 5.64% rate in federal aid formulas, meaning $10,000 in a 529 plan reduces aid eligibility by only about $564. This is much better than custodial accounts (20% assessment rate).</p>
+                    <p>Grandparent-owned 529 plans are not reported as assets on the FAFSA. However, distributions from grandparent-owned plans are reported as student income, which can affect aid. Consider timing distributions in later college years when FAFSA impact is minimized.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Can I change the beneficiary of a 529 plan?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, you can change the beneficiary to another qualifying family member at any time without tax consequences. Qualifying family members include siblings, parents, children, grandchildren, nieces, nephews, aunts, uncles, cousins, and in-laws.</p>
+                    <p>This flexibility means you can adjust if one child receives scholarships or decides not to attend college. You can even name yourself as beneficiary and use the funds for your own graduate education or career training.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What if my child gets a scholarship?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>If your child receives a scholarship, you can withdraw an amount equal to the scholarship from the 529 plan without paying the 10% penalty (though you'll still owe taxes on the earnings portion). Alternatively, you can save the funds for graduate school or transfer them to another beneficiary.</p>
+                    <p>This "scholarship exception" also applies to attendance at military academies where tuition is covered. Many parents keep the account intact for graduate school, knowing their child has undergraduate costs covered.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>When should I start saving in a 529 plan?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>The earlier, the better. Starting when your child is born gives you 18 years of tax-free compound growth. Even modest monthly contributions can grow substantially over time. For example, $200/month from birth to age 18 at 7% return grows to about $87,000.</p>
+                    <p>However, it's never too late to start. Even beginning in high school can provide some tax-free growth and state tax benefits. Many families start with smaller amounts and increase contributions as income grows.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Can 529 funds be used for online or international schools?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, 529 funds can be used at any eligible institution that participates in federal student aid programs. This includes many online schools and over 400 international institutions. The school must be eligible for Title IV federal student aid.</p>
+                    <p>You can verify if a school is eligible by checking the Federal School Code List on the Department of Education website. Most accredited colleges, universities, vocational schools, and trade schools qualify.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate counters for stat boxes
+                    if (entry.target.classList.contains('stat-box')) {
+                        const numberElement = entry.target.querySelector('.stat-number');
+                        if (numberElement && !numberElement.classList.contains('counted')) {
+                            animateCounter(numberElement);
+                        }
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        const animatedElements = document.querySelectorAll('.value-card, .stat-box, .comparison-card, .feature-card, .expense-card, .faq-item');
+        animatedElements.forEach(el => observer.observe(el));
+
+        // Counter animation
+        function animateCounter(element) {
+            element.classList.add('counted');
+            const target = parseInt(element.getAttribute('data-target'));
+            const duration = 2000;
+            const increment = target / (duration / 16);
+            let current = 0;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    element.textContent = Math.floor(current);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target;
+                }
+            };
+
+            updateCounter();
+        }
+
+        // FAQ toggle functionality
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close all FAQ items
+                faqItems.forEach(faq => faq.classList.remove('active'));
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

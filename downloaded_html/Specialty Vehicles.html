@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Specialty Vehicle Insurance</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .specialty-vehicle-wrapper {
+            width: 100%;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+        }
+
+        .animate-on-scroll.animated {
+            animation-duration: 0.8s;
+            animation-fill-mode: both;
+        }
+
+        .value-card {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .value-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .value-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .value-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px) !important;
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
+        }
+
+        .stat-card {
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #ffd700 !important;
+            transform: scale(1.05);
+        }
+
+        .vehicle-type-card {
+            transition: all 0.3s ease;
+        }
+
+        .vehicle-type-card:hover {
+            border-color: #ffd700 !important;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        details {
+            transition: all 0.3s ease;
+        }
+
+        details:hover {
+            border-color: #ffd700 !important;
+        }
+
+        details[open] summary span {
+            transform: rotate(45deg);
+            display: inline-block;
+        }
+
+        summary span {
+            transition: transform 0.3s ease;
+        }
+
+        .emoji-float {
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .counter {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="specialty-vehicle-wrapper">
+        <!-- Value Proposition Cards -->
+        <section class="value-prop-section" style="padding: 60px 20px; background: transparent;">
+            <div class="value-prop-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1400px; margin: 0 auto;">
+                <div class="value-card" style="background: rgba(60, 60, 60, 0.85); padding: 40px 30px; border-radius: 12px; text-align: center; border-top: 5px solid #ffd700; transition: transform 0.3s ease;">
+                    <div class="emoji-float" style="font-size: 70px; margin-bottom: 20px;"></div>
+                    <h3 style="color: #ffd700; font-size: 26px; font-weight: 700; margin-bottom: 15px;">Agreed Value Coverage</h3>
+                    <p style="color: #ffffff; font-size: 20px; line-height: 1.6;">Unlike standard auto policies, we lock in your vehicle’s value upfront. If your collector car is totaled, you receive the full agreed amount no depreciation, no surprises.</p>
+                </div>
+                <div class="value-card" style="background: rgba(60, 60, 60, 0.85); padding: 40px 30px; border-radius: 12px; text-align: center; border-top: 5px solid #ffd700; transition: transform 0.3s ease;">
+                    <div class="emoji-float" style="font-size: 70px; margin-bottom: 20px; animation-delay: 0.5s;"></div>
+                    <h3 style="color: #ffd700; font-size: 26px; font-weight: 700; margin-bottom: 15px;">Lower Premiums</h3>
+                    <p style="color: #ffffff; font-size: 20px; line-height: 1.6;">Specialty insurance is typically 40–60% cheaper than standard auto coverage because classic and collector vehicles are driven less and cared for more.</p>
+                </div>
+                <div class="value-card" style="background: rgba(60, 60, 60, 0.85); padding: 40px 30px; border-radius: 12px; text-align: center; border-top: 5px solid #ffd700; transition: transform 0.3s ease;">
+                    <div class="emoji-float" style="font-size: 70px; margin-bottom: 20px; animation-delay: 1s;"></div>
+                    <h3 style="color: #ffd700; font-size: 26px; font-weight: 700; margin-bottom: 15px;">Flexible Usage</h3>
+                    <p style="color: #ffffff; font-size: 20px; line-height: 1.6;">Coverage for car shows, club events, parades, occasional pleasure driving, and even limited commuting. Protect your passion vehicle wherever you drive it.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section animate-on-scroll" style="padding: 60px 20px; background: transparent;">
+            <div style="max-width: 1200px; margin: 0 auto; text-align: center; background: rgba(60, 60, 60, 0.85); padding: 50px 40px; border-radius: 12px;">
+                <h2 style="color: #ffd700; font-size: 42px; font-weight: 700; margin-bottom: 50px;">Specialty Vehicle Insurance Facts</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;">
+                    <div class="stat-card" style="text-align: center; background: rgba(50, 50, 50, 0.9); padding: 30px 20px; border-radius: 8px; border: 2px solid transparent; transition: border-color 0.3s ease, transform 0.3s ease;">
+                        <span style="color: #ffd700; font-size: 52px; font-weight: 700; display: block; margin-bottom: 15px;"><span class="counter" data-target="60">0</span>%</span>
+                        <span style="color: #ffffff; font-size: 18px; line-height: 1.4;">Lower Than Standard Insurance</span>
+                    </div>
+                    <div class="stat-card" style="text-align: center; background: rgba(50, 50, 50, 0.9); padding: 30px 20px; border-radius: 8px; border: 2px solid transparent; transition: border-color 0.3s ease, transform 0.3s ease;">
+                        <span style="color: #ffd700; font-size: 52px; font-weight: 700; display: block; margin-bottom: 15px;"><span class="counter" data-target="5">0</span>M+</span>
+                        <span style="color: #ffffff; font-size: 18px; line-height: 1.4;">Classic Cars in the US</span>
+                    </div>
+                    <div class="stat-card" style="text-align: center; background: rgba(50, 50, 50, 0.9); padding: 30px 20px; border-radius: 8px; border: 2px solid transparent; transition: border-color 0.3s ease, transform 0.3s ease;">
+                        <span style="color: #ffd700; font-size: 52px; font-weight: 700; display: block; margin-bottom: 15px;"><span class="counter" data-target="25">0</span></span>
+                        <span style="color: #ffffff; font-size: 18px; line-height: 1.4;">Years Old to Qualify</span>
+                    </div>
+                    <div class="stat-card" style="text-align: center; background: rgba(50, 50, 50, 0.9); padding: 30px 20px; border-radius: 8px; border: 2px solid transparent; transition: border-color 0.3s ease, transform 0.3s ease;">
+                        <span style="color: #ffd700; font-size: 52px; font-weight: 700; display: block; margin-bottom: 15px;"><span class="counter" data-target="100">0</span>%</span>
+                        <span style="color: #ffffff; font-size: 18px; line-height: 1.4;">Agreed Value Payout</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Section -->
+        <section class="animate-on-scroll" style="padding: 80px 20px; background: transparent;">
+            <div style="text-align: center; margin-bottom: 50px; padding: 0 20px;">
+                <h2 style="color: #ffd700; font-size: 42px; font-weight: 700; margin-bottom: 15px;">Types of Specialty Vehicles We Cover</h2>
+                <p style="color: #ffffff; font-size: 20px;">Specialized protection for your unique automotive investments</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 1400px; margin: 0 auto;">
+                <div class="vehicle-type-card" style="background: rgba(60, 60, 60, 0.85); padding: 40px; border-radius: 12px; border: 2px solid transparent; transition: border-color 0.3s ease, transform 0.3s ease;">
+                    <h3 style="color: #ffd700; font-size: 32px; font-weight: 700; margin-bottom: 20px;">Classic & Antique Cars</h3>
+                    <span style="background: rgba(255, 215, 0, 0.2); color: #ffd700; padding: 10px 15px; border-radius: 6px; font-size: 16px; font-weight: 700; display: inline-block; margin-bottom: 20px;">MOST POPULAR</span>
+                    <p style="color: #ffffff; font-size: 20px; line-height: 1.7; margin-bottom: 20px;">Vehicles 25+ years old that are maintained or restored to original condition. From vintage Mustangs to pre-war classics, we protect automotive history.</p>
+                    
+                    <ul style="list-style: none; padding: 0; margin: 20px 0;">
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Agreed value coverage with no depreciation
+                        </li>
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Coverage for original and period-correct parts
+                        </li>
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Show and event coverage included
+                        </li>
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Spare parts and memorabilia protection
+                        </li>
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Flexible mileage limitations
+                        </li>
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Lower premiums than modern cars
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="vehicle-type-card" style="background: rgba(60, 60, 60, 0.85); padding: 40px; border-radius: 12px; border: 2px solid transparent; transition: border-color 0.3s ease, transform 0.3s ease;">
+                    <h3 style="color: #ffd700; font-size: 32px; font-weight: 700; margin-bottom: 20px;">Exotic & Luxury Vehicles</h3>
+                    <span style="background: rgba(255, 215, 0, 0.2); color: #ffd700; padding: 10px 15px; border-radius: 6px; font-size: 16px; font-weight: 700; display: inline-block; margin-bottom: 20px;">HIGH-VALUE</span>
+                    <p style="color: #ffffff; font-size: 20px; line-height: 1.7; margin-bottom: 20px;">Supercars, hypercars, and ultra-luxury vehicles like Ferraris, Lamborghinis, McLarens, and Bentleys. Specialized coverage for extraordinary automobiles.</p>
+                    
+                    <ul style="list-style: none; padding: 0; margin: 20px 0;">
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Agreed value up to millions of dollars
+                        </li>
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Track day and racing event coverage available
+                        </li>
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Worldwide coverage options
+                        </li>
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Exotic parts replacement guaranteed
+                        </li>
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Factory-certified repair facility network
+                        </li>
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Diminished value coverage included
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="vehicle-type-card" style="background: rgba(60, 60, 60, 0.85); padding: 40px; border-radius: 12px; border: 2px solid transparent; transition: border-color 0.3s ease, transform 0.3s ease;">
+                    <h3 style="color: #ffd700; font-size: 32px; font-weight: 700; margin-bottom: 20px;">Modified & Custom Vehicles</h3>
+                    <span style="background: rgba(255, 215, 0, 0.2); color: #ffd700; padding: 10px 15px; border-radius: 6px; font-size: 16px; font-weight: 700; display: inline-block; margin-bottom: 20px;">SPECIALIZED</span>
+                    <p style="color: #ffffff; font-size: 20px; line-height: 1.7; margin-bottom: 20px;">Hot rods, resto-mods, and custom builds with aftermarket parts, engine swaps, and modifications. Coverage that recognizes your investment in customization.</p>
+                    
+                    <ul style="list-style: none; padding: 0; margin: 20px 0;">
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Full coverage for custom modifications
+                        </li>
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Agreed value includes upgrade costs
+                        </li>
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Performance parts fully covered
+                        </li>
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Custom paint and bodywork protection
+                        </li>
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Engine and drivetrain mods included
+                        </li>
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Show car and display coverage
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="vehicle-type-card" style="background: rgba(60, 60, 60, 0.85); padding: 40px; border-radius: 12px; border: 2px solid transparent; transition: border-color 0.3s ease, transform 0.3s ease;">
+                    <h3 style="color: #ffd700; font-size: 32px; font-weight: 700; margin-bottom: 20px;">Collector & Investment Vehicles</h3>
+                    <span style="background: rgba(255, 215, 0, 0.2); color: #ffd700; padding: 10px 15px; border-radius: 6px; font-size: 16px; font-weight: 700; display: inline-block; margin-bottom: 20px;">APPRECIATING ASSETS</span>
+                    <p style="color: #ffffff; font-size: 20px; line-height: 1.7; margin-bottom: 20px;">Rare, limited production, or investment-grade vehicles that appreciate over time. Coverage that grows with your vehicle's increasing value.</p>
+                    
+                    <ul style="list-style: none; padding: 0; margin: 20px 0;">
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Annual value appreciation reviews
+                        </li>
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Coverage increases with market value
+                        </li>
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Guaranteed original parts replacement
+                        </li>
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Collector car authentication coverage
+                        </li>
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Trailer and transport coverage
+                        </li>
+                        <li style="color: #ffffff; font-size: 18px; line-height: 1.7; margin-bottom: 12px; padding-left: 30px; position: relative;">
+                            <span style="color: #ffd700; font-weight: bold; font-size: 22px; position: absolute; left: 0;">✓</span>
+                            Storage facility requirements flexible
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Features -->
+        <section class="animate-on-scroll" style="padding: 60px 20px; background: transparent;">
+            <div style="text-align: center; margin-bottom: 50px; padding: 0 20px;">
+                <h2 style="color: #ffd700; font-size: 42px; font-weight: 700; margin-bottom: 15px;">Why Choose Specialty Vehicle Insurance?</h2>
+                <p style="color: #ffffff; font-size: 20px;">Superior coverage designed specifically for collector and enthusiast vehicles</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1400px; margin: 0 auto;">
+                <div style="background: rgba(60, 60, 60, 0.85); padding: 35px 30px; border-radius: 12px; border-left: 4px solid #ffd700;">
+                    <h3 style="color: #ffd700; font-size: 24px; font-weight: 700; margin-bottom: 15px;">Agreed Value - Not Actual Cash Value</h3>
+                    <p style="color: #ffffff; font-size: 20px; line-height: 1.7;">Standard policies depreciate your vehicle annually. We agree on your car's value upfront and pay the full amount if totaled - no depreciation surprises.</p>
+                </div>
+
+                <div style="background: rgba(60, 60, 60, 0.85); padding: 35px 30px; border-radius: 12px; border-left: 4px solid #ffd700;">
+                    <h3 style="color: #ffd700; font-size: 24px; font-weight: 700; margin-bottom: 15px;">Significantly Lower Premiums</h3>
+                    <p style="color: #ffffff; font-size: 20px; line-height: 1.7;">Classic and collector cars are driven less, stored better, and maintained more carefully. Expect to pay 40-60% less than standard auto insurance.</p>
+                </div>
+
+                <div style="background: rgba(60, 60, 60, 0.85); padding: 35px 30px; border-radius: 12px; border-left: 4px solid #ffd700;">
+                    <h3 style="color: #ffd700; font-size: 24px; font-weight: 700; margin-bottom: 15px;">No Mileage Penalties</h3>
+                    <p style="color: #ffffff; font-size: 20px; line-height: 1.7;">Reasonable annual mileage limits (typically 2,500-5,000 miles) with options for unlimited mileage. Enjoy your vehicle without worrying about odometer restrictions.</p>
+                </div>
+
+                <div style="background: rgba(60, 60, 60, 0.85); padding: 35px 30px; border-radius: 12px; border-left: 4px solid #ffd700;">
+                    <h3 style="color: #ffd700; font-size: 24px; font-weight: 700; margin-bottom: 15px;">Spare Parts & Tools Coverage</h3>
+                    <p style="color: #ffffff; font-size: 20px; line-height: 1.7;">Protection extends beyond the vehicle to spare parts, tools, manuals, memorabilia, and related equipment. Your entire collection is protected.</p>
+                </div>
+
+                <div style="background: rgba(60, 60, 60, 0.85); padding: 35px 30px; border-radius: 12px; border-left: 4px solid #ffd700;">
+                    <h3 style="color: #ffd700; font-size: 24px; font-weight: 700; margin-bottom: 15px;">Specialized Repair Networks</h3>
+                    <p style="color: #ffffff; font-size: 20px; line-height: 1.7;">Access to restoration specialists, factory-certified shops, and craftsmen who understand classic and exotic vehicles. No generic body shops.</p>
+                </div>
+
+                <div style="background: rgba(60, 60, 60, 0.85); padding: 35px 30px; border-radius: 12px; border-left: 4px solid #ffd700;">
+                    <h3 style="color: #ffd700; font-size: 24px; font-weight: 700; margin-bottom: 15px;">Flexible Usage Options</h3>
+                    <p style="color: #ffffff; font-size: 20px; line-height: 1.7;">Coverage for shows, club events, parades, pleasure driving, and even limited commuting. Some policies even cover track days and racing events.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Coverage Options -->
+        <section class="animate-on-scroll" style="padding: 60px 20px; background: rgba(60, 60, 60, 0.85);">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <h2 style="color: #ffd700; font-size: 42px; font-weight: 700; margin-bottom: 40px; text-align: center;">Additional Coverage Options</h2>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px;">
+                    <div style="background: rgba(50, 50, 50, 0.9); padding: 30px; border-radius: 8px; display: flex; align-items: flex-start; gap: 20px;">
+                        <div style="color: #ffd700; font-size: 36px; flex-shrink: 0;"></div>
+                        <div>
+                            <h3 style="color: #ffd700; font-size: 22px; font-weight: 700; margin-bottom: 10px;">Track Day & Racing Coverage</h3>
+                            <p style="color: #ffffff; font-size: 18px; line-height: 1.6;">Optional coverage for HPDE events, time trials, and amateur racing. Protect your investment even when pushing it to the limits on the track.</p>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(50, 50, 50, 0.9); padding: 30px; border-radius: 8px; display: flex; align-items: flex-start; gap: 20px;">
+                        <div style="color: #ffd700; font-size: 36px; flex-shrink: 0;"></div>
+                        <div>
+                            <h3 style="color: #ffd700; font-size: 22px; font-weight: 700; margin-bottom: 10px;">Trailer & Transportation</h3>
+                            <p style="color: #ffffff; font-size: 18px; line-height: 1.6;">Coverage for your vehicle while being transported on trailers, in enclosed haulers, or during shipping. Includes the trailer itself up to stated limits.</p>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(50, 50, 50, 0.9); padding: 30px; border-radius: 8px; display: flex; align-items: flex-start; gap: 20px;">
+                        <div style="color: #ffd700; font-size: 36px; flex-shrink: 0;"></div>
+                        <div>
+                            <h3 style="color: #ffd700; font-size: 22px; font-weight: 700; margin-bottom: 10px;">Restoration in Progress</h3>
+                            <p style="color: #ffffff; font-size: 18px; line-height: 1.6;">Specialized coverage for vehicles undergoing restoration. Protects your investment even when the car isn't driveable or complete.</p>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(50, 50, 50, 0.9); padding: 30px; border-radius: 8px; display: flex; align-items: flex-start; gap: 20px;">
+                        <div style="color: #ffd700; font-size: 36px; flex-shrink: 0;"></div>
+                        <div>
+                            <h3 style="color: #ffd700; font-size: 22px; font-weight: 700; margin-bottom: 10px;">Worldwide Coverage</h3>
+                            <p style="color: #ffffff; font-size: 18px; line-height: 1.6;">Take your specialty vehicle anywhere in the world. Coverage extends internationally for tours, shows, and events abroad.</p>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(50, 50, 50, 0.9); padding: 30px; border-radius: 8px; display: flex; align-items: flex-start; gap: 20px;">
+                        <div style="color: #ffd700; font-size: 36px; flex-shrink: 0;"></div>
+                        <div>
+                            <h3 style="color: #ffd700; font-size: 22px; font-weight: 700; margin-bottom: 10px;">Diminished Value</h3>
+                            <p style="color: #ffffff; font-size: 18px; line-height: 1.6;">Even after perfect repairs, accident history reduces resale value. Diminished value coverage compensates for this market value loss.</p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(50, 50, 50, 0.9); padding: 30px; border-radius: 8px; display: flex; align-items: flex-start; gap: 20px;">
+                        <div style="color: #ffd700; font-size: 36px; flex-shrink: 0;"></div>
+                        <div>
+                            <h3 style="color: #ffd700; font-size: 22px; font-weight: 700; margin-bottom: 10px;">Spare Parts & Memorabilia</h3>
+                            <p style="color: #ffffff; font-size: 18px; line-height: 1.6;">Coverage for your collection of spare parts, original components, tools, manuals, and vehicle-related collectibles and memorabilia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="animate-on-scroll" style="padding: 60px 20px; background: transparent;">
+            <div style="max-width: 1400px; margin: 0 auto;">
+                <h2 style="color: #ffd700; font-size: 42px; font-weight: 700; margin-bottom: 40px; text-align: center;">Why Specialty Vehicle Insurance Beats Standard Policies</h2>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px;">
+                    <div style="background: rgba(60, 60, 60, 0.85); padding: 30px; border-radius: 8px;">
+                        <h3 style="color: #ffd700; font-size: 24px; font-weight: 700; margin-bottom: 15px;">No Depreciation Surprises</h3>
+                        <p style="color: #ffffff; font-size: 20px; line-height: 1.7;">Standard policies depreciate your classic car annually like any used vehicle. Specialty insurance recognizes that collector cars maintain or increase in value over time.</p>
+                    </div>
+
+                    <div style="background: rgba(60, 60, 60, 0.85); padding: 30px; border-radius: 8px;">
+                        <h3 style="color: #ffd700; font-size: 24px; font-weight: 700; margin-bottom: 15px;">Expert Claims Adjusters</h3>
+                        <p style="color: #ffffff; font-size: 20px; line-height: 1.7;">Claims are handled by adjusters who understand classic and exotic vehicles. They know the difference between a numbers-matching '67 Corvette and a restomod.</p>
+                    </div>
+
+                    <div style="background: rgba(60, 60, 60, 0.85); padding: 30px; border-radius: 8px;">
+                        <h3 style="color: #ffd700; font-size: 24px; font-weight: 700; margin-bottom: 15px;">Restoration Shop Network</h3>
+                        <p style="color: #ffffff; font-size: 20px; line-height: 1.7;">Access to vetted restoration specialists and exotic car repair facilities. Your vehicle goes to experts, not generic chain body shops.</p>
+                    </div>
+
+                    <div style="background: rgba(60, 60, 60, 0.85); padding: 30px; border-radius: 8px;">
+                        <h3 style="color: #ffd700; font-size: 24px; font-weight: 700; margin-bottom: 15px;">Original Parts Replacement</h3>
+                        <p style="color: #ffffff; font-size: 20px; line-height: 1.7;">Policies specify original or period-correct parts, not aftermarket substitutes. Maintains authenticity and value of your collector vehicle.</p>
+                    </div>
+
+                    <div style="background: rgba(60, 60, 60, 0.85); padding: 30px; border-radius: 8px;">
+                        <h3 style="color: #ffd700; font-size: 24px; font-weight: 700; margin-bottom: 15px;">Multi-Car Discounts</h3>
+                        <p style="color: #ffffff; font-size: 20px; line-height: 1.7;">Insure your entire collection with increasing discounts for each additional vehicle. Many collectors pay less for 5 classics than 1 daily driver.</p>
+                    </div>
+
+                    <div style="background: rgba(60, 60, 60, 0.85); padding: 30px; border-radius: 8px;">
+                        <h3 style="color: #ffd700; font-size: 24px; font-weight: 700; margin-bottom: 15px;">Club & Organization Benefits</h3>
+                        <p style="color: #ffffff; font-size: 20px; line-height: 1.7;">Additional discounts available through recognized car clubs, marque-specific organizations, and collector car associations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="animate-on-scroll" style="padding: 60px 20px; background: transparent;">
+            <div style="text-align: center; margin-bottom: 50px; padding: 0 20px;">
+                <h2 style="color: #ffd700; font-size: 42px; font-weight: 700; margin-bottom: 15px;">Common Specialty Vehicle Insurance Questions</h2>
+                <p style="color: #ffffff; font-size: 20px;">Everything you need to know about insuring your collector and exotic cars</p>
+            </div>
+
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <details style="background: rgba(60, 60, 60, 0.85); margin-bottom: 15px; border-radius: 8px; border: 2px solid transparent;">
+                    <summary style="background: rgba(50, 50, 50, 0.9); padding: 25px 30px; cursor: pointer; color: #ffd700; font-size: 22px; font-weight: 700; list-style: none;">
+                        What qualifies as a specialty vehicle?
+                        <span style="float: right; color: #ffd700; font-size: 24px;">+</span>
+                    </summary>
+                    <div style="padding: 25px 30px;">
+                        <p style="color: #ffffff; font-size: 20px; line-height: 1.7; margin-bottom: 15px;">Vehicles typically 25+ years old, limited production models, exotic supercars, custom builds, or vehicles maintained primarily as collectibles qualify. The car must be in good or excellent condition, properly stored, and not used as a daily driver.</p>
+                        <p style="color: #ffffff; font-size: 20px; line-height: 1.7; margin-bottom: 0;">Examples include classic muscle cars, vintage European sports cars, pre-war automobiles, exotic supercars like Ferraris and Lamborghinis, custom hot rods, and rare limited-production vehicles.</p>
+                    </div>
+                </details>
+
+                <details style="background: rgba(60, 60, 60, 0.85); margin-bottom: 15px; border-radius: 8px; border: 2px solid transparent;">
+                    <summary style="background: rgba(50, 50, 50, 0.9); padding: 25px 30px; cursor: pointer; color: #ffd700; font-size: 22px; font-weight: 700; list-style: none;">
+                        How much does specialty vehicle insurance cost?
+                        <span style="float: right; color: #ffd700; font-size: 24px;">+</span>
+                    </summary>
+                    <div style="padding: 25px 30px;">
+                        <p style="color: #ffffff; font-size: 20px; line-height: 1.7; margin-bottom: 15px;">Specialty vehicle insurance is typically 40-60% cheaper than standard auto insurance. For a $50,000 classic car, expect $300-800 annually versus $1,500-2,500 for standard coverage. Exact costs depend on agreed value, driving record, storage, and usage.</p>
+                        <p style="color: #ffffff; font-size: 20px; line-height: 1.7; margin-bottom: 0;">Multi-car discounts significantly reduce costs. Many collectors insure 3-5 vehicles for less than one daily driver.</p>
+                    </div>
+                </details>
+
+                <details style="background: rgba(60, 60, 60, 0.85); margin-bottom: 15px; border-radius: 8px; border: 2px solid transparent;">
+                    <summary style="background: rgba(50, 50, 50, 0.9); padding: 25px 30px; cursor: pointer; color: #ffd700; font-size: 22px; font-weight: 700; list-style: none;">
+                        What is agreed value coverage?
+                        <span style="float: right; color: #ffd700; font-size: 24px;">+</span>
+                    </summary>
+                    <div style="padding: 25px 30px;">
+                        <p style="color: #ffffff; font-size: 20px; line-height: 1.7; margin-bottom: 15px;">Agreed value means you and the insurer agree upfront on your vehicle's value. If the car is totaled, you receive the full agreed amount without depreciation deductions. This contrasts with actual cash value policies that depreciate annually.</p>
+                        <p style="color: #ffffff; font-size: 20px; line-height: 1.7; margin-bottom: 0;">The agreed value is established through appraisals, recent sales data, and market comparisons. Most policies allow annual value updates to reflect appreciation.</p>
+                    </div>
+                </details>
+
+                <details style="background: rgba(60, 60, 60, 0.85); margin-bottom: 15px; border-radius: 8px; border: 2px solid transparent;">
+                    <summary style="background: rgba(50, 50, 50, 0.9); padding: 25px 30px; cursor: pointer; color: #ffd700; font-size: 22px; font-weight: 700; list-style: none;">
+                        Are there mileage restrictions?
+                        <span style="float: right; color: #ffd700; font-size: 24px;">+</span>
+                    </summary>
+                    <div style="padding: 25px 30px;">
+                        <p style="color: #ffffff; font-size: 20px; line-height: 1.7; margin-bottom: 15px;">Most specialty policies have annual mileage limits between 2,500-7,500 miles, though some offer unlimited mileage. These limits are reasonable for collector cars driven to shows, events, and occasional pleasure drives.</p>
+                        <p style="color: #ffffff; font-size: 20px; line-height: 1.7; margin-bottom: 0;">If you exceed agreed mileage, you won't lose coverage, but you may pay additional premiums. Many insurers offer mileage upgrades.</p>
+                    </div>
+                </details>
+
+                <details style="background: rgba(60, 60, 60, 0.85); margin-bottom: 15px; border-radius: 8px; border: 2px solid transparent;">
+                    <summary style="background: rgba(50, 50, 50, 0.9); padding: 25px 30px; cursor: pointer; color: #ffd700; font-size: 22px; font-weight: 700; list-style: none;">
+                        Can I daily drive my specialty vehicle?
+                        <span style="float: right; color: #ffd700; font-size: 24px;">+</span>
+                    </summary>
+                    <div style="padding: 25px 30px;">
+                        <p style="color: #ffffff; font-size: 20px; line-height: 1.7; margin-bottom: 15px;">Most specialty policies prohibit using the insured vehicle as primary transportation. You typically need a separate daily driver. However, occasional pleasure driving, errands, and limited commuting are usually permitted within mileage limits.</p>
+                        <p style="color: #ffffff; font-size: 20px; line-height: 1.7; margin-bottom: 0;">Some insurers offer "occasional use" policies allowing limited regular driving. Discuss this upfront to ensure proper coverage without violating policy terms.</p>
+                    </div>
+                </details>
+
+                <details style="background: rgba(60, 60, 60, 0.85); margin-bottom: 15px; border-radius: 8px; border: 2px solid transparent;">
+                    <summary style="background: rgba(50, 50, 50, 0.9); padding: 25px 30px; cursor: pointer; color: #ffd700; font-size: 22px; font-weight: 700; list-style: none;">
+                        Do I need special storage for my vehicle?
+                        <span style="float: right; color: #ffd700; font-size: 24px;">+</span>
+                    </summary>
+                    <div style="padding: 25px 30px;">
+                        <p style="color: #ffffff; font-size: 20px; line-height: 1.7; margin-bottom: 15px;">Most policies require secure storage in a locked garage or storage facility when not in use. Some high-value vehicles may require climate-controlled storage or alarm systems. Street parking is typically prohibited.</p>
+                        <p style="color: #ffffff; font-size: 20px; line-height: 1.7; margin-bottom: 0;">Storage requirements vary by insurer and vehicle value. A $30,000 classic may only need a home garage, while a $500,000 exotic might require enclosed climate-controlled storage with security systems.</p>
+                    </div>
+                </details>
+
+                <details style="background: rgba(60, 60, 60, 0.85); margin-bottom: 15px; border-radius: 8px; border: 2px solid transparent;">
+                    <summary style="background: rgba(50, 50, 50, 0.9); padding: 25px 30px; cursor: pointer; color: #ffd700; font-size: 22px; font-weight: 700; list-style: none;">
+                        Are modifications and custom parts covered?
+                        <span style="float: right; color: #ffd700; font-size: 24px;">+</span>
+                    </summary>
+                    <div style="padding: 25px 30px;">
+                        <p style="color: #ffffff; font-size: 20px; line-height: 1.7; margin-bottom: 15px;">Yes, modifications and custom parts are covered when disclosed and included in the agreed value. Engine swaps, custom paint, performance upgrades, and aftermarket parts are all coverable with proper documentation.</p>
+                        <p style="color: #ffffff; font-size: 20px; line-height: 1.7; margin-bottom: 0;">Document all modifications with receipts, photos, and appraisals. The agreed value should reflect the cost of customization.</p>
+                    </div>
+                </details>
+
+                <details style="background: rgba(60, 60, 60, 0.85); margin-bottom: 15px; border-radius: 8px; border: 2px solid transparent;">
+                    <summary style="background: rgba(50, 50, 50, 0.9); padding: 25px 30px; cursor: pointer; color: #ffd700; font-size: 22px; font-weight: 700; list-style: none;">
+                        Does specialty insurance cover track days or racing?
+                        <span style="float: right; color: #ffd700; font-size: 24px;">+</span>
+                    </summary>
+                    <div style="padding: 25px 30px;">
+                        <p style="color: #ffffff; font-size: 20px; line-height: 1.7; margin-bottom: 15px;">Standard specialty policies typically exclude racing and competition use. However, many insurers offer optional track day coverage or specialized racing policies for HPDE events, time trials, and amateur racing.</p>
+                        <p style="color: #ffffff; font-size: 20px; line-height: 1.7; margin-bottom: 0;">Track coverage is available as an add-on or separate policy. Costs vary based on experience, vehicle value, and track type. Always verify coverage before track use.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Counter animation
+        function animateCounter(el) {
+            const target = parseInt(el.getAttribute('data-target'));
+            const duration = 2000;
+            const increment = target / (duration / 16);
+            let current = 0;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    el.textContent = Math.floor(current);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    el.textContent = target;
+                }
+            };
+
+            updateCounter();
+        }
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                    
+                    // Trigger counter animations
+                    const counters = entry.target.querySelectorAll('.counter');
+                    counters.forEach(counter => {
+                        if (!counter.classList.contains('counted')) {
+                            counter.classList.add('counted');
+                            animateCounter(counter);
+                        }
+                    });
+
+                    // Add appropriate animation class
+                    if (entry.target.classList.contains('stats-section')) {
+                        entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                    } else {
+                        entry.target.style.animation = 'fadeIn 0.8s ease-out forwards';
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections with animate-on-scroll class
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

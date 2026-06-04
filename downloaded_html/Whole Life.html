@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whole Life Insurance - Lifetime Protection with Cash Value Growth</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            background: transparent;
+            color: #ffffff;
+        }
+
+        /* How It Works Section */
+        .how-it-works-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .how-it-works-intro {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(60, 60, 60, 0.85);
+            padding: 50px 60px;
+            border-radius: 12px;
+            border-left: 5px solid #ffd700;
+        }
+
+        .intro-content p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .intro-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Value Proposition Section */
+        .value-prop-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .value-prop-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .value-card {
+            background: rgba(60, 60, 60, 0.85);
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            border-top: 5px solid #ffd700;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .value-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .value-card .icon {
+            font-size: 70px;
+            margin-bottom: 20px;
+        }
+
+        .value-card h3 {
+            color: #ffd700;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .value-card p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+        /* Social Proof Section */
+        .social-proof-section {
+            padding: 60px 20px;
+            background: rgba(60, 60, 60, 0.85);
+        }
+
+        .social-proof-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .social-proof-container h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .stat-box {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .stat-box.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-box .number {
+            color: #ffd700;
+            font-size: 52px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-box .number-text {
+            color: #ffd700;
+            font-size: 52px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-box .label {
+            color: #ffffff;
+            font-size: 18px;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .testimonial {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid #ffd700;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .testimonial.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .testimonial .quote {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial .author {
+            color: #ffd700;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .testimonial .location {
+            color: #cccccc;
+            font-size: 14px;
+        }
+
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: #ffffff;
+            font-size: 20px;
+        }
+
+        /* Problem/Solution Section */
+        .problem-solution-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .problem-solution-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .problem-box,
+        .solution-box {
+            padding: 40px;
+            border-radius: 12px;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .solution-box {
+            transform: translateX(30px);
+        }
+
+        .problem-box.animate,
+        .solution-box.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .problem-box {
+            background: rgba(80, 40, 40, 0.85);
+            border-left: 5px solid #ff4444;
+        }
+
+        .solution-box {
+            background: rgba(40, 80, 40, 0.85);
+            border-left: 5px solid #44ff44;
+        }
+
+        .problem-box h2,
+        .solution-box h2 {
+            color: #ffd700;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .problem-box ul,
+        .solution-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .problem-box ul li,
+        .solution-box ul li {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            padding-left: 35px;
+            position: relative;
+        }
+
+        .problem-box ul li::before {
+            content: "✗";
+            color: #ff4444;
+            font-weight: bold;
+            font-size: 24px;
+            position: absolute;
+            left: 0;
+        }
+
+        .solution-box ul li::before {
+            content: "✓";
+            color: #44ff44;
+            font-weight: bold;
+            font-size: 24px;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: rgba(60, 60, 60, 0.85);
+            padding: 40px;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease;
+        }
+
+        .feature-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-card:hover {
+            border-color: #ffd700;
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: #ffd700;
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .feature-card p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .feature-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .feature-card ul li {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 12px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .feature-card ul li::before {
+            content: "→";
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 20px;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            padding: 60px 20px;
+            background: rgba(60, 60, 60, 0.85);
+        }
+
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefits-container h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .benefit-item {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .benefit-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .benefit-item .check {
+            color: #ffd700;
+            font-size: 32px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .benefit-item .content h3 {
+            color: #ffd700;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .benefit-item .content p {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* Comparison Section */
+        .comparison-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .comparison-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .comparison-container h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .comparison-table {
+            background: rgba(60, 60, 60, 0.85);
+            border-radius: 12px;
+            padding: 40px;
+        }
+
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .comparison-row:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-row.header {
+            font-weight: 700;
+            font-size: 22px;
+            color: #ffd700;
+        }
+
+        .comparison-cell {
+            color: #ffffff;
+            font-size: 18px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .comparison-cell.highlight {
+            color: #ffd700;
+            font-weight: 700;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(60, 60, 60, 0.85);
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease;
+        }
+
+        .faq-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .faq-item:hover {
+            border-color: #ffd700;
+        }
+
+        .faq-header {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .faq-header h3 {
+            color: #ffd700;
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .faq-header .icon {
+            color: #ffd700;
+            font-size: 24px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-header .icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-content {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-item.active .faq-content {
+            padding: 25px 30px;
+            max-height: 1000px;
+        }
+
+        .faq-content p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .faq-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 20px;
+            background: transparent;
+        }
+
+        .cta-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.98) 0%, rgba(255, 193, 7, 0.98) 100%);
+            padding: 60px 50px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 10px 50px rgba(255, 215, 0, 0.3);
+        }
+
+        .cta-container h2 {
+            color: #1a1a1a;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-container .urgency-text {
+            color: #cc0000;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-container p {
+            color: #1a1a1a;
+            font-size: 22px;
+            margin-bottom: 35px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #1a1a1a;
+            color: #ffd700;
+            padding: 18px 50px;
+            font-size: 22px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            background: #2a2a2a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .value-prop-grid,
+            .features-grid,
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonial-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .problem-solution-container {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-header h2,
+            .social-proof-container h2,
+            .benefits-container h2,
+            .comparison-container h2,
+            .cta-container h2 {
+                font-size: 32px;
+            }
+
+            .stats-row,
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .value-card,
+            .feature-card,
+            .cta-container {
+                padding: 30px 20px;
+            }
+
+            .how-it-works-intro {
+                padding: 30px 25px;
+            }
+
+            .intro-content p {
+                font-size: 18px;
+            }
+
+            .cta-container h2 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- How Whole Life Insurance Works Section -->
+    <section class="how-it-works-section">
+        <div class="section-header">
+            <h2>How Whole Life Insurance Works</h2>
+            <p>Protection with built-in savings and guaranteed benefits, provided by licensed insurance carriers. We offer educational guidance and help connect you with licensed insurance professionals who can explain whole life insurance options and features in detail.</p>
+        </div>
+
+        <div class="how-it-works-intro">
+            <div class="intro-content">
+                <p>Whole life insurance is a type of permanent life insurance that provides lifelong protection along with a built-in savings component. Unlike term insurance, which expires after a set period, whole life coverage lasts your entire lifetime as long as premiums are paid. Each premium contributes to both the cost of insurance and a cash value account that grows tax-deferred at guaranteed rates. While we do not sell or issue policies, we help connect you with licensed insurance professionals who can explain these options in detail.</p>
+                
+                <p>A whole life policy typically includes three components: a guaranteed death benefit paid to your beneficiaries, cash value that grows predictably every year, and level premiums that never increase based on age or health changes. This combination creates both a safety net for your family and a living financial asset you may access during your lifetime for emergencies, opportunities, or retirement planning. Specific features vary by carrier, and licensed agents in our partner network can review exact details with you.</p>
+                
+                <p>Some whole life policies issued by mutual insurance companies may also pay annual dividends depending on company performance. These dividends can be used to purchase additional coverage, reduce premiums, grow cash value more quickly, or be taken as cash. Over time, participating whole life insurance can become a stable financial tool that offers long-term protection, predictable growth, and potential tax advantages.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Proposition Cards -->
+    <section class="value-prop-section">
+        <div class="value-prop-grid">
+            <div class="value-card">
+                <h3>Lifetime Protection Guaranteed</h3>
+                <p>Enjoy lifelong coverage with a guaranteed death benefit. Your premiums never increase, and your policy remains active for life as long as payments are made on time.</p>
+            </div>
+            <div class="value-card">
+                <h3>Cash Value Growth</h3>
+                <p>Build tax-deferred cash value you can access when you need it most. Borrow against it for emergencies, retirement income, or financial opportunities while keeping your coverage in place..</p>
+            </div>
+            <div class="value-card">
+                <h3>Guaranteed Returns</h3>
+                <p>Your policy earns fixed, predictable growth without market volatility. Cash value accumulates at guaranteed rates, with the added potential of dividends on participating policies.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="social-proof-section">
+        <div class="social-proof-container">
+            <h2>Trusted Lifetime Protection</h2>
+            
+            <div class="stats-row">
+                <div class="stat-box">
+                    <span class="number" data-target="100" data-suffix="%">0</span>
+                    <span class="label">Guaranteed death benefit payout</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number" data-target="5" data-suffix="%">0</span>
+                    <span class="label">Average annual cash value growth</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number" data-target="0" data-prefix="$">0</span>
+                    <span class="label">Tax on cash value growth</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number" data-target="100">0</span>
+                    <span class="label">Years of coverage (lifetime)</span>
+                </div>
+            </div>
+
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <p class="quote">"I bought whole life at 35. Now at 60, I've built $180,000 in cash value that I'm using to supplement retirement income. My family still gets $500,000 when I pass. Best decision I ever made."</p>
+                    <p class="author">Robert K.</p>
+                    <p class="location">Business Owner, Atlanta, GA</p>
+                </div>
+                <div class="testimonial">
+                    <p class="quote">"When our daughter needed college tuition, we borrowed $50,000 from my policy's cash value at 5% interest. The policy continued growing, and the loan flexibility saved us from student loans."</p>
+                    <p class="author">Jennifer M.</p>
+                    <p class="location">Teacher, Portland, OR</p>
+                </div>
+                <div class="testimonial">
+                    <p class="quote">"My parents bought whole life for me as a baby. At 30, I have $45,000 in cash value for a down payment on my first home. The premiums are only $85/month because they locked in rates when I was young."</p>
+                    <p class="author">Sarah T.</p>
+                    <p class="location">Engineer, Austin, TX</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem/Solution Section -->
+    <section class="problem-solution-section">
+        <div class="problem-solution-container">
+            <div class="problem-box">
+                <h2>Term Life Insurance Limitations</h2>
+                <ul>
+                    <li>Coverage expires after 10-30 years when you need it most</li>
+                    <li>Premiums skyrocket at renewal if you can even qualify</li>
+                    <li>No cash value accumulation pure expense</li>
+                    <li>90% of term policies expire without paying out</li>
+                    <li>May become uninsurable due to health changes</li>
+                    <li>No living benefits or access to funds</li>
+                </ul>
+            </div>
+
+            <div class="solution-box">
+                <h2>Whole Life Insurance Advantages</h2>
+                <ul>
+                    <li>Guaranteed coverage for your entire lifetime</li>
+                    <li>Level premiums that never increase</li>
+                    <li>Cash value grows tax-deferred every year</li>
+                    <li>100% payout rate death benefit is guaranteed</li>
+                    <li>Coverage regardless of future health issues</li>
+                    <li>Borrow against cash value for any purpose</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="section-header">
+            <h2>Key Features of Whole Life Insurance</h2>
+            <p>Whole life insurance provides lifelong protection, guaranteed benefits, and cash value that grows over time. We offer educational guidance and help connect you with licensed insurance professionals who can explain specific features and policy options.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Guaranteed Death Benefit</h3>
+                <p>Your beneficiaries receive a guaranteed tax-free death benefit regardless of when you pass away next year or 60 years from now.</p>
+                <ul>
+                    <li>Coverage lasts your entire lifetime</li>
+                    <li>Death benefit never decreases</li>
+                    <li>Tax-free payout to beneficiaries</li>
+                    <li>No medical exams required at claim time</li>
+                    <li>Paid quickly often within weeks</li>
+                    <li>Can't be cancelled due to health changes</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <h3>Cash Value Accumulation</h3>
+                <p>A portion of each premium builds cash value that grows tax-deferred at guaranteed rates, creating a living asset you can access anytime.</p>
+                <ul>
+                    <li>Grows at 3-5% guaranteed annually</li>
+                    <li>Tax-deferred accumulation</li>
+                    <li>Can't lose value only grows</li>
+                    <li>Accumulates for your entire lifetime</li>
+                    <li>Adds to death benefit if not borrowed</li>
+                    <li>Protected from creditors in most states</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <h3>Policy Loans Available</h3>
+                <p>Borrow against your cash value with no credit checks, no income verification, and flexible repayment. Your policy continues growing even with outstanding loans.</p>
+                <ul>
+                    <li>Borrow up to 90% of cash value</li>
+                    <li>No credit check or approval process</li>
+                    <li>Competitive interest rates (5-8%)</li>
+                    <li>Flexible or no repayment schedule</li>
+                    <li>Policy continues growing during loan</li>
+                    <li>Tax-free loan proceeds</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <h3>Participating Dividends</h3>
+                <p>Many whole life policies pay annual dividends based on company performance. Dividends can increase cash value, reduce premiums, or buy additional coverage.</p>
+                <ul>
+                    <li>Potential annual dividend payments</li>
+                    <li>Reinvest to buy more coverage</li>
+                    <li>Use to reduce premium payments</li>
+                    <li>Take as cash payment</li>
+                    <li>Accelerate cash value growth</li>
+                    <li>Not guaranteed but historically stable</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <h3>Level Premiums for Life</h3>
+                <p>Your premium is locked in at purchase and never increases. Pay the same amount at 65 as you did at 25 even as health and life expectancy change.</p>
+                <ul>
+                    <li>Premium never increases with age</li>
+                    <li>Locked in regardless of health changes</li>
+                    <li>Predictable budgeting for decades</li>
+                    <li>Lower early premiums compound savings</li>
+                    <li>No renewal process or rate shocks</li>
+                    <li>Can be paid up after certain period</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <h3>Living Benefits & Riders</h3>
+                <p>Access death benefit while alive for terminal, chronic, or critical illnesses. Additional riders provide accelerated benefits when you need them most.</p>
+                <ul>
+                    <li>Terminal illness acceleration</li>
+                    <li>Chronic illness rider benefits</li>
+                    <li>Critical illness coverage</li>
+                    <li>Long-term care benefits</li>
+                    <li>Waiver of premium if disabled</li>
+                    <li>Accidental death benefit options</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="benefits-container">
+            <h2>Why Choose Whole Life Insurance?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Lifetime Protection Guarantee</h3>
+                        <p>Unlike term insurance that expires, whole life covers you for your entire life. Your family receives the death benefit whenever you pass no expiration dates.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Living Asset You Control</h3>
+                        <p>Cash value is yours to use for emergencies, opportunities, or retirement. Borrow for home down payments, business investments, or college tuition.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Tax-Advantaged Growth</h3>
+                        <p>Cash value grows tax-deferred. Policy loans are tax-free. Death benefits pass income tax-free to heirs. Triple tax advantage for wealth building.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>No Market Risk</h3>
+                        <p>Cash value grows at guaranteed rates with no stock market exposure. Your policy value can't decrease it only goes up, providing stability and certainty.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Estate Planning Tool</h3>
+                        <p>Provides immediate liquidity to pay estate taxes and expenses. Death benefit passes outside probate directly to beneficiaries, preserving wealth for heirs.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Creditor Protection</h3>
+                        <p>In most states, life insurance cash value is protected from creditors and lawsuits. Your policy remains safe even in bankruptcy or business failures.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Start Young, Save More</h3>
+                        <p>Premiums are lowest when you're young and healthy. Lock in low rates for life and maximize cash value accumulation over decades of compound growth.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Forced Savings Discipline</h3>
+                        <p>Regular premiums create automatic wealth accumulation. The structure forces consistent saving that many struggle to achieve through voluntary investments alone.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison-section">
+        <div class="comparison-container">
+            <h2>Whole Life vs Term Life Insurance</h2>
+            <div class="comparison-table">
+                <div class="comparison-row header">
+                    <div class="comparison-cell">Feature</div>
+                    <div class="comparison-cell">Term Life</div>
+                    <div class="comparison-cell highlight">Whole Life</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Coverage Duration</div>
+                    <div class="comparison-cell">10-30 years (expires)</div>
+                    <div class="comparison-cell highlight">Lifetime (never expires)</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Premium Changes</div>
+                    <div class="comparison-cell">Increases dramatically at renewal</div>
+                    <div class="comparison-cell highlight">Level for life</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Cash Value</div>
+                    <div class="comparison-cell">None pure expense</div>
+                    <div class="comparison-cell highlight">Grows tax-deferred</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Payout Rate</div>
+                    <div class="comparison-cell">1-2% (most policies expire)</div>
+                    <div class="comparison-cell highlight">100% guaranteed payout</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Borrow Against Policy</div>
+                    <div class="comparison-cell">Not possible</div>
+                    <div class="comparison-cell highlight">Yes, at any time</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Dividends</div>
+                    <div class="comparison-cell">None</div>
+                    <div class="comparison-cell highlight">Possible with participating policies</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Renewability</div>
+                    <div class="comparison-cell">Requires medical underwriting</div>
+                    <div class="comparison-cell highlight">Guaranteed regardless of health</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="section-header">
+            <h2>Whole Life Insurance FAQs</h2>
+            <p>Common questions about permanent life insurance</p>
+        </div>
+
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>How does cash value work in whole life insurance?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>A portion of each premium payment goes toward building cash value, which grows at guaranteed rates (typically 3-5% annually) plus potential dividends. The cash value accumulates tax-deferred and can be borrowed against at any time for any purpose.</p>
+                    <p>Early years have lower cash value growth as the insurance company covers policy costs. After 10-15 years, cash value accelerates significantly. By retirement, you may have substantial cash value equal to or exceeding total premiums paid.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Is whole life insurance worth the higher cost?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Whole life costs 5-15 times more than term initially, but provides lifetime coverage, guaranteed cash value growth, and living benefits. If you need permanent protection, want forced savings, or value certainty, whole life is worth it despite higher premiums.</p>
+                    <p>Consider: 90% of term policies expire worthless. With whole life, your family receives the death benefit with 100% certainty whenever you pass. The cash value also provides retirement income, emergency funds, and living benefits that term can never offer.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Can I borrow from my whole life policy?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Yes, you can borrow up to 90% of your cash value at any time with no credit check, income verification, or approval process. Interest rates are typically 5-8%, and you control the repayment schedule. Your policy continues growing even with outstanding loans.</p>
+                    <p>Policy loans are tax-free and don't show on credit reports. You can use funds for any purpose: home down payment, business investment, college tuition, or emergencies. Unpaid loans reduce the death benefit but never cause policy cancellation.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>What happens if I stop paying premiums?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>If you stop paying, you have options: 1) Use accumulated cash value to keep the policy in force automatically, 2) Convert to "paid-up" insurance with reduced death benefit requiring no future premiums, or 3) Surrender the policy for cash value minus surrender charges.</p>
+                    <p>Most policies have a grace period of 30-31 days to make late payments. After that, if you have sufficient cash value, the policy automatically continues using that value to pay premiums until the cash value is exhausted.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>What are participating dividends?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Participating whole life policies pay annual dividends when the insurance company performs well. Dividends aren't guaranteed but have been paid consistently by mutual companies for 100+ years. You can take dividends as cash, use them to reduce premiums, buy additional coverage, or reinvest for faster cash value growth.</p>
+                    <p>Dividends typically range from 5-7% of cash value annually. Over decades, dividends significantly boost both cash value and death benefit. Some policies have grown death benefits to 2-3 times the original face amount through dividend accumulation.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Should I buy whole life or invest the difference?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>The "buy term and invest the difference" strategy assumes perfect investment discipline, which most people lack. Studies show 90% of term policyholders don't invest the savings. Whole life provides forced savings, tax advantages, guarantees, and lifetime protection benefits investing alone can't match.</p>
+                    <p>Ideal approach: Do both. Use term insurance for temporary high coverage needs while young, and whole life for permanent protection and cash value building. As term expires, whole life provides coverage when you need it most and can't qualify for new policies.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>At what age should I buy whole life insurance?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>The younger, the better. Premiums are lowest in your 20s-30s and locked in for life. Early purchase maximizes cash value accumulation through decades of compound growth. A 25-year-old pays 60-70% less than a 45-year-old for the same coverage.</p>
+                    <p>Parents often buy whole life for children or grandchildren, locking in extremely low premiums ($30-50/month) that provide lifelong protection and substantial cash value by adulthood. Even at 50-60, whole life makes sense for estate planning and legacy purposes.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>How much whole life insurance do I need?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Consider: final expenses ($10K-20K), mortgage payoff, income replacement for dependents, college funding, estate taxes, and legacy goals. Common coverage amounts range from $100K-$1M depending on age, income, and family situation.</p>
+                    <p>Many people use a combination approach: term insurance for temporary high coverage needs (while kids are young, mortgage is high) plus a whole life base ($100K-250K) for permanent protection and cash value building. This balances affordability with lifetime guarantees.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    
+                    // If it's a stat box with a number, animate the counter
+                    if (entry.target.classList.contains('stat-box')) {
+                        const numberElement = entry.target.querySelector('.number');
+                        if (numberElement && !numberElement.classList.contains('counted')) {
+                            animateCounter(numberElement);
+                        }
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.value-card, .stat-box, .testimonial, .problem-box, .solution-box, .feature-card, .benefit-item, .faq-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter animation function
+        function animateCounter(element) {
+            element.classList.add('counted');
+            const target = parseFloat(element.getAttribute('data-target'));
+            const prefix = element.getAttribute('data-prefix') || '';
+            const suffix = element.getAttribute('data-suffix') || '';
+            const duration = 2000; // 2 seconds
+            const increment = target / (duration / 16); // 60fps
+            let current = 0;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    element.textContent = prefix + Math.floor(current) + suffix;
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = prefix + target + suffix;
+                }
+            };
+
+            updateCounter();
+        }
+
+        // FAQ Toggle functionality
+        document.querySelectorAll('.faq-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const faqItem = header.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all other FAQs
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Toggle current FAQ
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

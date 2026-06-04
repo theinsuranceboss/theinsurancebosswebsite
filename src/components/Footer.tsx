@@ -1,7 +1,33 @@
 import React from "react";
 import { WebsiteConfig } from "../types";
-import { Facebook, Instagram, Linkedin, Youtube, Shield, Phone, Mail, ArrowUp } from "lucide-react";
+import { 
+  Facebook, 
+  Instagram, 
+  Linkedin, 
+  Youtube, 
+  Twitter, 
+  Globe, 
+  Link as LinkIcon, 
+  MessageCircle, 
+  Send,
+  Shield, 
+  Phone, 
+  Mail, 
+  ArrowUp 
+} from "lucide-react";
 import { getDirectImageUrl } from "./Header";
+
+const SOCIAL_ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+  facebook: Facebook,
+  instagram: Instagram,
+  linkedin: Linkedin,
+  youtube: Youtube,
+  twitter: Twitter,
+  globe: Globe,
+  link: LinkIcon,
+  whatsapp: MessageCircle,
+  telegram: Send
+};
 
 interface FooterProps {
   config: WebsiteConfig;
@@ -25,17 +51,21 @@ export default function Footer({ config }: FooterProps) {
               COVERAGE SOLUTIONS
             </h4>
             <div className="flex flex-col space-y-2 text-xs text-zinc-400">
-              {config.subwebsites.map((category, idx) => (
-                <a
-                  key={idx}
-                  href={category.items[0]?.url || "#"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[#FAC000] hover:underline transition-all font-medium"
-                >
-                  {category.category}
-                </a>
-              ))}
+              {config.subwebsites.map((category, idx) => {
+                const url = category.items[0]?.url || "#";
+                const isLocal = url.startsWith("#");
+                return (
+                  <a
+                    key={idx}
+                    href={url}
+                    target={isLocal ? undefined : "_blank"}
+                    rel={isLocal ? undefined : "noopener noreferrer"}
+                    className="hover:text-[#FAC000] hover:underline transition-all font-medium"
+                  >
+                    {category.category}
+                  </a>
+                );
+              })}
               <a href="#policy-review" className="hover:text-[#FAC000] hover:underline transition-all">
                 Policy Review
               </a>
@@ -126,18 +156,21 @@ export default function Footer({ config }: FooterProps) {
 
           {/* Social Media Link Icons */}
           <div className="flex items-center md:justify-end space-x-4">
-            <a href="https://facebook.com" target="_blank" className="p-2 border border-zinc-900 bg-zinc-950 hover:border-[#FAC000] text-zinc-400 hover:text-[#FAC000] rounded-full transition-all" aria-label="Facebook">
-              <Facebook className="w-4 h-4" />
-            </a>
-            <a href="https://instagram.com" target="_blank" className="p-2 border border-zinc-900 bg-zinc-950 hover:border-[#FAC000] text-zinc-400 hover:text-[#FAC000] rounded-full transition-all" aria-label="Instagram">
-              <Instagram className="w-4 h-4" />
-            </a>
-            <a href="https://linkedin.com" target="_blank" className="p-2 border border-zinc-900 bg-zinc-950 hover:border-[#FAC000] text-zinc-400 hover:text-[#FAC000] rounded-full transition-all" aria-label="LinkedIn">
-              <Linkedin className="w-4 h-4" />
-            </a>
-            <a href="https://youtube.com" target="_blank" className="p-2 border border-zinc-900 bg-zinc-950 hover:border-[#FAC000] text-zinc-400 hover:text-[#FAC000] rounded-full transition-all" aria-label="YouTube">
-              <Youtube className="w-4 h-4" />
-            </a>
+            {(config.socialLinks || []).map((social, sIdx) => {
+              const IconComponent = SOCIAL_ICON_MAP[social.icon.toLowerCase()] || Globe;
+              return (
+                <a
+                  key={sIdx}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 border border-zinc-900 bg-zinc-950 text-zinc-400 hover:text-[#FAC000] hover:border-[#FAC000] hover:bg-[#FAC000]/10 hover:scale-110 hover:shadow-[0_0_12px_rgba(250,192,0,0.5)] rounded-full transition-all duration-300"
+                  aria-label={social.icon}
+                >
+                  <IconComponent className="w-4 h-4" />
+                </a>
+              );
+            })}
 
             {/* Back to top float */}
             <button

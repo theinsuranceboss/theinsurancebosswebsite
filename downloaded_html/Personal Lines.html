@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Lines Insurance - Complete Protection for Your Assets | The Insurance Boss</title>
+    <meta name="description" content="Complete personal insurance solutions. Auto, Homeowners, Umbrella, Landlord, Flood, and Specialty Vehicle insurance. Protect what matters most.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: transparent;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(0, 0, 0, 0.4) 100%);
+            padding: 100px 20px;
+            text-align: center;
+            border-bottom: 4px solid #ffd700;
+            margin-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section h1 {
+            color: #ffd700;
+            font-size: 4em;
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+        }
+
+        .hero-section .subtitle {
+            font-size: 1.6em;
+            margin-bottom: 40px;
+            color: #ffffff;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ffd700;
+            color: #000000;
+            padding: 20px 50px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            background: #fadc2f;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.6);
+        }
+
+        /* Section Styling */
+        .content-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            color: #ffd700;
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-intro {
+            text-align: center;
+            font-size: 1.3em;
+            color: #ffffff;
+            margin-bottom: 60px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Insurance Products Grid */
+        .insurance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .insurance-card {
+            background: linear-gradient(145deg, rgba(70, 70, 70, 0.7), rgba(50, 50, 50, 0.7));
+            border-radius: 20px;
+            padding: 40px;
+            border: 3px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .insurance-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.15), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .insurance-card:hover::before {
+            left: 100%;
+        }
+
+        .insurance-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(255, 215, 0, 0.7);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
+        }
+
+        .insurance-card h3 {
+            color: #ffd700;
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .insurance-card p {
+            color: #ffffff;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .insurance-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 25px 0;
+        }
+
+        .insurance-card ul li {
+            color: #ffffff;
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.05em;
+        }
+
+        .insurance-card ul li::before {
+            content: '✓';
+            color: #ffd700;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.3em;
+        }
+
+        .insurance-card strong {
+            color: #ffd700;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(90deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
+            padding: 70px 40px;
+            border-radius: 25px;
+            margin: 80px 0;
+            border: 3px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 50px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .stat-number {
+            color: #ffd700;
+            font-size: 3.5em;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .stat-label {
+            color: #ffffff;
+            font-size: 1.2em;
+            line-height: 1.4;
+        }
+
+        /* Benefits Grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .benefit-item {
+            background: rgba(70, 70, 70, 0.6);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 5px solid #ffd700;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            background: rgba(80, 80, 80, 0.7);
+            transform: translateX(10px);
+        }
+
+        .benefit-item h4 {
+            color: #ffd700;
+            font-size: 1.4em;
+            margin-bottom: 12px;
+        }
+
+        .benefit-item p {
+            color: #ffffff;
+            line-height: 1.7;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            padding: 35px;
+            margin: 40px 0;
+        }
+
+        .highlight-box h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .highlight-box p {
+            color: #ffffff;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        /* FAQ Section - UPDATED STYLE */
+        .faq-section {
+            margin: 80px 0;
+        }
+
+        .faq-item {
+            background: #363636;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border: none;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .faq-item:hover {
+            background: #404040;
+        }
+
+        .faq-question {
+            padding: 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .faq-question h3 {
+            color: #ffd700;
+            margin: 0;
+            font-size: 1.3em;
+            flex: 1;
+        }
+
+        .faq-toggle {
+            color: #ffd700;
+            font-size: 2em;
+            font-weight: 400;
+            background: transparent;
+            width: auto;
+            height: auto;
+            border-radius: 0;
+            display: block;
+            margin-left: 20px;
+            line-height: 0.5;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-toggle:hover {
+            background: transparent;
+            transform: scale(1.1);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 25px;
+            background: inherit;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+            padding: 0 25px 25px 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer p {
+            color: #ffffff;
+            line-height: 1.9;
+            font-size: 1.1em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2.5em; }
+            .insurance-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 2.2em; }
+        }
+
+        /* Animations */
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .animate-on-scroll.animated { opacity: 1; transform: translateY(0); }
+        .animate-fade { opacity: 0; transition: opacity 1s ease-out; }
+        .animate-fade.animated { opacity: 1; }
+        .animate-slide-left { opacity: 0; transform: translateX(-50px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .animate-slide-left.animated { opacity: 1; transform: translateX(0); }
+        .animate-slide-right { opacity: 0; transform: translateX(50px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .animate-slide-right.animated { opacity: 1; transform: translateX(0); }
+        .animate-scale { opacity: 0; transform: scale(0.9); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .animate-scale.animated { opacity: 1; transform: scale(1); }
+
+        /* Stagger delays */
+        .insurance-card:nth-child(1) { transition-delay: 0.1s; }
+        .insurance-card:nth-child(2) { transition-delay: 0.2s; }
+        .insurance-card:nth-child(3) { transition-delay: 0.3s; }
+        .insurance-card:nth-child(4) { transition-delay: 0.4s; }
+        .insurance-card:nth-child(5) { transition-delay: 0.5s; }
+        .insurance-card:nth-child(6) { transition-delay: 0.6s; }
+
+        .benefit-item:nth-child(1) { transition-delay: 0.1s; }
+        .benefit-item:nth-child(2) { transition-delay: 0.15s; }
+        .benefit-item:nth-child(3) { transition-delay: 0.2s; }
+        .benefit-item:nth-child(4) { transition-delay: 0.25s; }
+        .benefit-item:nth-child(5) { transition-delay: 0.3s; }
+        .benefit-item:nth-child(6) { transition-delay: 0.35s; }
+
+        html { scroll-behavior: smooth; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Toggle
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', function() {
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.section-title').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+
+            document.querySelectorAll('.section-intro').forEach(el => {
+                el.classList.add('animate-fade');
+                observer.observe(el);
+            });
+
+            document.querySelectorAll('.insurance-card').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+
+            document.querySelectorAll('.stats-section').forEach(el => {
+                el.classList.add('animate-scale');
+                observer.observe(el);
+            });
+
+            document.querySelectorAll('.stat-item').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+
+            document.querySelectorAll('.faq-item').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+
+            document.querySelectorAll('.highlight-box').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+
+            document.querySelectorAll('.benefit-item').forEach((el, index) => {
+                if (index % 2 === 0) {
+                    el.classList.add('animate-slide-left');
+                } else {
+                    el.classList.add('animate-slide-right');
+                }
+                observer.observe(el);
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Protect What Matters Most</h2>
+            <p class="section-intro">Your home, vehicles, and personal belongings represent important investments that deserve reliable protection. At The Insurance Boss, we help connect you with licensed insurance professionals who offer coverage options designed to help safeguard your property and financial well-being from unexpected losses, accidents, or liability claims.</p>
+
+            <div class="stats-section">
+                <h3 style="text-align: center; color: #ffd700; font-size: 2em; margin-bottom: 20px;">Why Personal Insurance Matters</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">1 in 7</span>
+                        <span class="stat-label">Drivers Will File an Accident Claim This Year</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">1 in 20</span>
+                        <span class="stat-label">Homes Will Have a Property Insurance Claim</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">$431K</span>
+                        <span class="stat-label">Average Home Rebuilding Cost</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">77%</span>
+                        <span class="stat-label">Of Americans Don't Have Adequate Umbrella Coverage</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Explore Personal Insurance Options</h2>
+            <p class="section-intro">We provide educational resources and connect you with licensed insurance professionals who offer a variety of coverage options designed to help protect your personal assets and provide important liability protection.</p>
+
+            <div class="insurance-grid">
+                <div class="insurance-card">
+                    <h3>Auto Insurance</h3>
+                    <p>Learn about auto insurance coverage options that can help protect you from financial loss related to liability, collisions, vehicle damage, medical expenses, and uninsured motorists. Coverage is required by law in most states and available through licensed insurance professionals.</p>
+                    
+                    <ul>
+                        <li>Liability coverage for injuries and property damage</li>
+                        <li>Collision coverage for accident damage</li>
+                        <li>Medical payments and personal injury protection</li>
+                        <li>Uninsured/underinsured motorist coverage</li>
+                        <li>Rental reimbursement and roadside assistance</li>
+                        <li>Gap insurance for financed vehicles</li>
+                        <li>Custom parts and equipment coverage</li>
+                    </ul>
+
+                    <p><strong>Who Needs It:</strong> All vehicle owners. Most states legally require minimum liability coverage. Lenders require collision and complete for financed vehicles.</p>
+                    
+                    <p><strong>Discounts Available:</strong> Multi-car, bundling home and auto, good driver, good student, safety features, low mileage, and paid-in-full discounts.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Homeowners Insurance</h3>
+                    <p>Complete protection for your home, personal belongings, liability, and additional living expenses. Covers dwelling, structures, personal property, and legal defense.</p>
+                    
+                    <ul>
+                        <li>Dwelling coverage for structure and attached items</li>
+                        <li>Other structures (detached garage, shed, fence)</li>
+                        <li>Personal property coverage for belongings</li>
+                        <li>Liability protection for injuries and property damage</li>
+                        <li>Medical payments to others</li>
+                        <li>Additional living expenses if home is uninhabitable</li>
+                        <li>Identity theft protection and coverage</li>
+                        <li>Water backup and equipment breakdown coverage</li>
+                    </ul>
+
+                    <p><strong>Who Needs It:</strong> All homeowners. Required by mortgage lenders. Essential for protecting your largest asset and personal liability exposure.</p>
+                    
+                    <p><strong>Important:</strong> Standard policies exclude floods and earthquakes. Coverage can be replacement cost or actual cash value. Choose replacement cost for better protection.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Umbrella Insurance</h3>
+                    <p>Extra liability protection that kicks in when your home or auto insurance limits are exhausted. Provides $1-5 million additional coverage at affordable rates.</p>
+                    
+                    <ul>
+                        <li>Excess liability coverage above underlying policies</li>
+                        <li>Protects assets from major lawsuits</li>
+                        <li>Covers liability gaps in underlying policies</li>
+                        <li>Worldwide coverage for covered claims</li>
+                        <li>Legal defense costs included</li>
+                        <li>Covers rental properties you own</li>
+                        <li>Protects against libel, slander, defamation</li>
+                        <li>Covers family members on your policies</li>
+                    </ul>
+
+                    <p><strong>Who Needs It:</strong> Anyone with significant assets to protect (home equity, savings, investments). Highly recommended for homeowners, landlords, high net worth individuals, and those with teen drivers or swimming pools.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Landlord / Dwelling Insurance</h3>
+                    <p>Specialized coverage for rental properties protecting structure, liability, and loss of rental income. Different from homeowners insurance for properties you don't live in.</p>
+                    
+                    <ul>
+                        <li>Dwelling coverage for rental property structure</li>
+                        <li>Other structures coverage (garage, sheds)</li>
+                        <li>Loss of rental income during repairs</li>
+                        <li>Liability protection for tenant injuries</li>
+                        <li>Optional personal property coverage for appliances</li>
+                        <li>Fair rental value coverage</li>
+                        <li>Vandalism and malicious mischief coverage</li>
+                        <li>Optional rent guarantee insurance</li>
+                    </ul>
+
+                    <p><strong>Who Needs It:</strong> Anyone renting out property they own. Required by lenders for investment properties. Essential for protecting rental income and structure.</p>
+                    
+                    <p><strong>Coverage Types:</strong> DP-1 (basic named perils), DP-2 (broad named perils), or DP-3 (special/all-risk coverage). DP-3 provides most complete protection.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Flood Insurance</h3>
+                    <p>Essential protection against flood damage not covered by standard homeowners policies. Available through NFIP or private carriers with building and contents coverage.</p>
+                    
+                    <ul>
+                        <li>Building coverage up to $250,000 (NFIP)</li>
+                        <li>Contents coverage up to $100,000 (NFIP)</li>
+                        <li>Covers flood from any external water source</li>
+                        <li>Storm surge and heavy rain flooding</li>
+                        <li>Mudflow and land subsidence from flooding</li>
+                        <li>Private market offers higher limits and extras</li>
+                        <li>Covers foundation and structural damage</li>
+                        <li>30-day waiting period (some exceptions)</li>
+                    </ul>
+
+                    <p><strong>Who Needs It:</strong> Anyone in flood-prone areas (required by lenders in high-risk zones). Recommended for ALL homeowners since 20% of claims come from low-risk areas.</p>
+                    
+                    <p><strong>Critical:</strong> Homeowners and renters insurance DO NOT cover floods. Separate policy required. Can save thousands in flood-prone areas.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Specialty Vehicles Insurance</h3>
+                    <p>Specialized coverage for motorcycles, RVs, boats, ATVs, classic cars, and other recreational vehicles. Standard auto policies don't adequately cover these assets.</p>
+                    
+                    <ul>
+                        <li>Motorcycles and scooters coverage</li>
+                        <li>RV and motorhome insurance (Class A, B, C)</li>
+                        <li>Boat and watercraft insurance</li>
+                        <li>ATV, UTV, and off-road vehicle coverage</li>
+                        <li>Classic and collector car insurance</li>
+                        <li>Snowmobile and jet ski coverage</li>
+                        <li>Agreed value coverage for classics</li>
+                        <li>Accessory and custom equipment coverage</li>
+                        <li>Towing and roadside assistance</li>
+                        <li>Uninsured boater/motorist coverage</li>
+                    </ul>
+
+                    <p><strong>Who Needs It:</strong> Owners of motorcycles, RVs, boats, classic cars, or recreational vehicles. Required by lenders for financed specialty vehicles.</p>
+                    
+                    <p><strong>Special Features:</strong> Agreed value for classics (no depreciation), total loss replacement, vacation liability, personal effects coverage, and lay-up periods for seasonal use.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Benefits of Bundling Your Insurance</h2>
+            <p class="section-intro">Combining multiple insurance policies with one carrier may offer potential discounts and the convenience of managing all your coverage in one place. Speak with a licensed insurance professional to learn if bundling is available and suitable for your situation.</p>
+
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <h4>Substantial Discounts</h4>
+                    <p>Save by bundling home and auto insurance together. Add umbrella, flood, or specialty vehicles for additional discounts. Multi-policy savings add up quickly.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>Simplified Management</h4>
+                    <p>One insurance company, one renewal date, one payment, one customer service number. Manage all policies through a single online portal or mobile app.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>Single Deductible</h4>
+                    <p>Some carriers waive or reduce deductibles when the same event damages both home and auto (like a hailstorm). Pay one deductible instead of two.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>Loyalty Rewards</h4>
+                    <p>Long-term customers with multiple policies receive additional loyalty discounts, accident forgiveness, and enhanced coverage options over time.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>Better Coverage</h4>
+                    <p>Bundling often unlocks premium features like enhanced liability limits, diminishing deductibles, or coverage upgrades at no additional cost.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>Streamlined Claims</h4>
+                    <p>When disaster strikes affecting multiple assets, working with one insurer simplifies the claims process with a single adjuster and faster resolution.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Average Bundling Savings</h3>
+                <p><strong>Home + Auto:</strong> Save 15-25% annually</p>
+                <p><strong>Home + Auto + Umbrella:</strong> Save 20-30% annually</p>
+                <p><strong>Complete Package (Home + Auto + Umbrella + Specialty):</strong> Save 25-35% annually</p>
+                <p style="margin-top: 20px;">Bundle policies to maximize savings while simplifying your insurance management. We shop multiple carriers to find the best bundled rates.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+
+            <!-- NEW FAQ 1 -->
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What are Personal Lines Insurance?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Personal lines insurance refers to the category of insurance products designed specifically for individuals and families as opposed to businesses, which are covered under commercial lines. These policies form the front line of wealth protection by covering your most valuable private assets: your home, your vehicles, your personal property, and your personal liability. In practical terms, personal lines insurance is what stands between an unexpected event an accident, a fire, a lawsuit and the financial devastation that could follow without coverage. The category includes Homeowners, Auto, Renters, Umbrella, Flood, and Specialty Vehicle insurance, each designed to protect a different dimension of your personal financial life. When structured correctly, these policies work together as an integrated shield around the assets that define your family's security and legacy.</p>
+                </div>
+            </div>
+
+            <!-- NEW FAQ 2 -->
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What Does Personal Lines Insurance Cover?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Personal lines insurance provides a complete coverage shield for your daily life across four core areas. Property coverage protects the physical things you own your home, its contents, your vehicles, and recreational assets against loss, damage, or destruction from covered events like fire, theft, storms, or accidents. Liability coverage protects you financially if you are held legally responsible for injuring someone or damaging their property, covering legal defense costs and any resulting judgments. Medical payments coverage handles immediate medical costs for others injured on your property or in an accident involving you, regardless of fault. And loss of use coverage ensures that if your home or vehicle becomes unusable due to a covered event, your daily life continues without financial disruption. When paired with an Umbrella policy, these coverages extend your liability protection into the millions, safeguarding the property, savings, and legacy your family has worked to build.</p>
+                </div>
+            </div>
+
+            <!-- NEW FAQ 3 -->
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How Do I Renew My Personal Lines Insurance?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Most personal lines insurance policies renew annually, and your insurer will typically send a renewal notice 30 to 45 days before your expiration date. While it may be tempting to simply auto-renew and move on, your renewal date is actually the most critical moment to audit your coverage. Your life changes your home's value increases, you acquire new assets, your vehicles age, your family grows and a policy that fit perfectly last year may leave you significantly underinsured today. At theinsuranceboss.com, we treat renewal as a strategic consultation, not a routine transaction. Rather than rubber-stamping last year's coverage, we connect you with our affiliate licensed agents who review your current policies against your lifestyle, identify gaps or inefficiencies, and shop across carriers to ensure your coverage is optimized for both your protection needs and your budget. The goal is never just to renew it's to make sure you enter the next year better protected than the last.</p>
+                </div>
+            </div>
+
+            <!-- EXISTING FAQs -->
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How much auto insurance do I need?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>State minimum liability coverage is rarely sufficient. We recommend at least $100,000/$300,000/$100,000 liability coverage (per person injured/per accident/property damage), or ideally $250,000/$500,000/$100,000. Add complete and collision if your car is worth more than a few thousand dollars. Include uninsured motorist coverage equal to your liability limits – about 13% of drivers have no insurance. If you have assets to protect, pair auto insurance with umbrella coverage. Your insurance should protect your assets from lawsuits, not just meet state minimums.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What's the difference between actual cash value and replacement cost for homeowners insurance?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Actual Cash Value (ACV) pays the depreciated value of your home and belongings. A 10-year-old roof damaged in a storm might only get you a portion of the value with ACV even though replacement costs are higher. Replacement Cost Value (RCV) pays to rebuild your home and replace belongings with new items of similar quality without deducting for depreciation. RCV costs slightly more but provides significantly better protection. Always choose RCV for dwelling coverage and consider it for personal property. The small premium difference is worth the substantially better coverage when you need to file a claim. Extended or guaranteed replacement cost offers even more protection if rebuilding costs exceed your coverage limit.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Do I really need umbrella insurance?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, if you have assets to protect! A serious accident where you're liable can result in judgments of $1 million or more. If your auto policy maxes at $300,000, you'd pay the remaining $700,000+ from personal assets – home equity, savings, retirement accounts, future wages. Umbrella insurance offers affordable protection for millions in liability. You need it if: you own a home, have significant savings/investments, have teen drivers, own rental properties, have a swimming pool or trampoline, or could be sued for defamation/libel. The peace of mind and asset protection is worth far more than the minimal cost. It's one of the best insurance values available.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Why do I need flood insurance if I'm not in a flood zone?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Over 20% of flood insurance claims come from low-to-moderate risk areas. Flash flooding from heavy rain, storm surge, overflowing storm drains, or broken water mains can happen anywhere. Homeowners insurance specifically excludes all flooding – just one inch of water causes significant damage. Flood insurance in low-risk zones is often very affordable. If you have a mortgage, basement with belongings, or live anywhere it can rain heavily, flood insurance is smart protection. FEMA flood maps are often outdated – climate change is making flooding more common nationwide. The relatively small premium is worth the protection against a devastating financial loss your homeowners policy won't cover.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How much does bundling home and auto insurance really save?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Typical bundling discounts range from 15-25%. Savings increase with more policies bundled. Add umbrella insurance and save another 5-10%. Some carriers offer up to 30% off for complete package bundling. Beyond savings, bundling simplifies management with one bill, one renewal, one company to deal with, and potential single deductible for events affecting both properties. We shop multiple carriers to find the best bundled rates – sometimes separate policies are cheaper, and we'll tell you honestly which option saves most.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What's the difference between landlord insurance and homeowners insurance?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Landlord insurance is designed for properties you rent to others and includes: loss of rental income coverage, higher liability limits for tenant-related claims, and typically no personal property coverage (tenants insure their own belongings). Homeowners insurance is for owner-occupied properties and includes: personal property coverage, additional living expenses if you can't live there, and lower liability limits. Using homeowners insurance on a rental property will result in denied claims – insurers consider rental properties higher risk. Landlord insurance typically costs more than homeowners but provides essential coverage for rental situations. If you're renting out your home, you MUST switch to landlord insurance or your claims will be denied.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Can I insure my classic car with regular auto insurance?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>You can, but you shouldn't. Standard auto insurance pays actual cash value which depreciates over time – terrible for appreciating classic cars. Specialty classic car insurance offers: agreed value coverage (you and insurer agree on value upfront, no depreciation), lower rates (classic cars driven less), spare parts coverage, inflation guard (value increases annually), and coverage for car shows and events. Restrictions typically include: annual mileage limits (2,500-5,000 miles), garage storage requirement, and age/value minimums (usually 20+ years old or valued over $10,000). Classic car insurance costs significantly less than standard policies for similar value vehicles. Protect your investment properly with specialty coverage designed for collectible vehicles.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What factors affect my insurance rates?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Auto insurance: driving record, age, location, vehicle type, annual mileage, credit score (in most states), coverage limits, and deductibles. Homeowners insurance: home age, construction type, roof condition, location, claims history, credit score, coverage amount, and deductibles. Both: bundling discounts, safety features, loyalty, payment method, and policy term. Some factors you can't control (age, location), but you can: maintain good credit, drive safely, install security/safety devices, increase deductibles, bundle policies, and shop regularly. Small improvements in credit score or adding safety features can save hundreds annually. We help identify every available discount to minimize your premiums while maintaining proper coverage.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Should I file a claim or pay out of pocket?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>File claims for: major losses exceeding 2x your deductible, liability claims (always let insurance handle), and total losses. Pay out of pocket for: damage slightly above your deductible or minor damage you can easily afford. Each claim can increase premiums significantly for 3-5 years, potentially costing more than the claim payout. Three claims in three years may result in non-renewal. Before filing, get repair estimates and calculate: (repair cost - deductible) vs. potential premium increases over 3-5 years. Call your agent to discuss whether filing makes financial sense. Complete claims (theft, weather, vandalism) typically impact rates less than collision or liability claims. Strategic claim filing protects your claims history while using insurance when truly needed.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How often should I review my insurance coverage?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Review coverage annually and after major life events: buying/selling property, acquiring new vehicles, marriage/divorce, children getting licenses, significant home improvements, starting a business, accumulating wealth, or changing jobs. Annual reviews ensure: adequate coverage as property values increase, taking advantage of new discounts, removing unnecessary coverage, adjusting deductibles as financial situation changes, and shopping for competitive rates. We recommend professional reviews every 1-2 years. Home values and rebuilding costs increase over time – many homeowners are underinsured without realizing it. Similarly, as you accumulate assets, you need higher liability limits and possibly umbrella coverage. Don't wait until you have a claim to discover you're underinsured. Proactive reviews ensure proper protection and optimal pricing.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</body>
+</html>

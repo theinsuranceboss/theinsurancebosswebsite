@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landlord & Dwelling Insurance - Protect Your Rental Property | The Insurance Boss</title>
+    <meta name="description" content="Complete landlord and dwelling insurance for rental properties. Keep your investment protected with property damage, liability, and rental income loss coverage.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: transparent;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            background: rgba(50, 50, 50, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .contact-info h2 {
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+
+        .contact-info p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        .contact-info a {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-info a:hover {
+            color: #fadc2f;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ffd700;
+            color: #000000;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: #fadc2f;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: transparent;
+            padding: 60px 0;
+        }
+
+        .content-section h2 {
+            color: #ffd700;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .content-section h3 {
+            color: #ffd700;
+            font-size: 1.8em;
+            margin: 30px 0 20px 0;
+        }
+
+        .content-section p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .card {
+            background: rgba(70, 70, 70, 0.5);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 215, 0, 0.5);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.2);
+        }
+
+        .card h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .card p {
+            color: #ffffff;
+            font-size: 1em;
+        }
+
+        .card ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .card li {
+            margin: 8px 0;
+            color: #ffffff;
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        /* Benefits List */
+        .benefits-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .benefit-item {
+            background: rgba(70, 70, 70, 0.5);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #ffd700;
+        }
+
+        .benefit-item h4 {
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: rgba(50, 50, 50, 0.5);
+            padding: 40px;
+            border-radius: 10px;
+            margin: 40px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            color: #ffd700;
+            font-size: 2.5em;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #ffffff;
+            font-size: 1.1em;
+        }
+
+        /* FAQ Section - UPDATED STYLE */
+        .faq-section {
+            margin: 60px 0;
+        }
+
+        .faq-item {
+            background: #363636; /* Dark Grey Background */
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: none; /* No border */
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .faq-item:hover {
+            background: #404040;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .faq-question h3 {
+            margin: 0;
+            flex: 1;
+            color: #ffd700;
+            font-size: 1.3em;
+        }
+
+        .faq-toggle {
+            width: auto;
+            height: auto;
+            background: transparent; /* No circle background */
+            color: #ffd700; /* Yellow Text */
+            font-size: 2em; /* Larger size */
+            font-weight: 400; /* Thinner */
+            display: block;
+            margin-left: 20px;
+            line-height: 0.5;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding-top 0.4s ease;
+            padding-top: 0;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg); /* Rotates to X */
+        }
+
+        .faq-item p {
+            color: #ffffff;
+            line-height: 1.8;
+            margin-bottom: 0;
+        }
+
+        /* Price Section */
+        .price-box {
+            background: rgba(50, 50, 50, 0.6);
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid #ffd700;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .price-box h3 {
+            color: #ffd700;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .price {
+            font-size: 3em;
+            color: #ffd700;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: rgba(255, 215, 0, 0.1);
+            border-left: 4px solid #ffd700;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 5px;
+        }
+
+        .highlight-box h4 {
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Apply scroll-triggered animations to all elements */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-fade {
+            opacity: 0;
+            transition: opacity 1s ease-out;
+        }
+
+        .animate-fade.animated {
+            opacity: 1;
+        }
+
+        .animate-slide-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-slide-left.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animate-slide-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-slide-right.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animate-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animate-scale.animated {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Stagger animations for cards */
+        .card:nth-child(1) { transition-delay: 0.1s; }
+        .card:nth-child(2) { transition-delay: 0.2s; }
+        .card:nth-child(3) { transition-delay: 0.3s; }
+        .card:nth-child(4) { transition-delay: 0.4s; }
+        .card:nth-child(5) { transition-delay: 0.5s; }
+        .card:nth-child(6) { transition-delay: 0.6s; }
+        .card:nth-child(7) { transition-delay: 0.7s; }
+        .card:nth-child(8) { transition-delay: 0.8s; }
+        .card:nth-child(9) { transition-delay: 0.9s; }
+
+        /* Stagger for benefit items */
+        .benefit-item:nth-child(1) { transition-delay: 0.1s; }
+        .benefit-item:nth-child(2) { transition-delay: 0.15s; }
+        .benefit-item:nth-child(3) { transition-delay: 0.2s; }
+        .benefit-item:nth-child(4) { transition-delay: 0.25s; }
+        .benefit-item:nth-child(5) { transition-delay: 0.3s; }
+        .benefit-item:nth-child(6) { transition-delay: 0.35s; }
+        .benefit-item:nth-child(7) { transition-delay: 0.4s; }
+        .benefit-item:nth-child(8) { transition-delay: 0.45s; }
+        .benefit-item:nth-child(9) { transition-delay: 0.5s; }
+        .benefit-item:nth-child(10) { transition-delay: 0.55s; }
+
+        /* FAQ items animation */
+        .faq-item:nth-child(1) { transition-delay: 0.05s; }
+        .faq-item:nth-child(2) { transition-delay: 0.1s; }
+        .faq-item:nth-child(3) { transition-delay: 0.15s; }
+        .faq-item:nth-child(4) { transition-delay: 0.2s; }
+        .faq-item:nth-child(5) { transition-delay: 0.25s; }
+        .faq-item:nth-child(6) { transition-delay: 0.3s; }
+        .faq-item:nth-child(7) { transition-delay: 0.35s; }
+        .faq-item:nth-child(8) { transition-delay: 0.4s; }
+        .faq-item:nth-child(9) { transition-delay: 0.45s; }
+        .faq-item:nth-child(10) { transition-delay: 0.5s; }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+    <script>
+        // FAQ Toggle Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', function() {
+                    // Close all other FAQs
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current FAQ
+                    item.classList.toggle('active');
+                });
+            });
+
+            //Global Intersection Observer for Full-Page Element Tracking
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, observerOptions);
+
+            // Add animation classes and observe all major elements
+            
+            // Animate contact info
+            document.querySelectorAll('.contact-info').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+
+            // Animate all h2 headings
+            document.querySelectorAll('.content-section h2').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+
+            // Animate all h3 headings (except in FAQs)
+            document.querySelectorAll('.content-section h3:not(.faq-question h3)').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+
+            // Animate paragraphs
+            document.querySelectorAll('.content-section > .container > p').forEach(el => {
+                el.classList.add('animate-fade');
+                observer.observe(el);
+            });
+
+            // Animate cards
+            document.querySelectorAll('.card').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+
+            // Animate benefit items with alternating directions
+            document.querySelectorAll('.benefit-item').forEach((el, index) => {
+                if (index % 2 === 0) {
+                    el.classList.add('animate-slide-left');
+                } else {
+                    el.classList.add('animate-slide-right');
+                }
+                observer.observe(el);
+            });
+
+            // Animate stats section
+            document.querySelectorAll('.stats-section').forEach(el => {
+                el.classList.add('animate-scale');
+                observer.observe(el);
+            });
+
+            // Animate stat items
+            document.querySelectorAll('.stat-item').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+
+            // Animate FAQ items
+            document.querySelectorAll('.faq-item').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+
+            // Animate price boxes
+            document.querySelectorAll('.price-box').forEach(el => {
+                el.classList.add('animate-scale');
+                observer.observe(el);
+            });
+
+            // Animate two-column sections
+            document.querySelectorAll('.two-column > div').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+
+            // Animate highlight boxes
+            document.querySelectorAll('.highlight-box').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+
+            // Animate CTA buttons
+            document.querySelectorAll('.cta-button').forEach(el => {
+                el.classList.add('animate-scale');
+                observer.observe(el);
+            });
+        });
+    </script>
+</head>
+<body>
+    <section class="content-section">
+        <div class="container">
+            <h2>Landlord & Dwelling Insurance</h2>
+            <p>Owning rental property is a significant investment that requires specialized insurance protection. Standard homeowners insurance won't adequately cover properties you rent to others, leaving you vulnerable to substantial financial losses. Landlord insurance (also known as dwelling fire insurance or rental property insurance) is specifically designed to protect your investment property from common risks including property damage, liability claims, and loss of rental income.</p>
+            
+            <p>Whether you own a single-family rental home, a multi-unit building, a vacation rental, or a commercial property with residential units, landlord insurance provides the essential coverage you need. This specialized policy protects not just the physical structure, but also your financial interests as a property owner and your legal liability as a landlord.</p>
+
+            <div class="highlight-box">
+                <h4>Critical Difference: Homeowners vs. Landlord Insurance</h4>
+                <p>A homeowners policy only covers owner-occupied properties. The moment you rent out a property, you need landlord insurance. Using a homeowners policy for a rental property can result in denied claims, leaving you to pay for damages out-of-pocket. Don't risk your investment – get proper landlord coverage.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>What Does Landlord Insurance Cover?</h2>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Dwelling Coverage</h3>
+                    <p>Protects the physical structure of your rental property:</p>
+                    <ul>
+                        <li>Main building structure</li>
+                        <li>Attached structures (garages, porches)</li>
+                        <li>Built-in appliances and fixtures</li>
+                        <li>Permanently installed items</li>
+                        <li>Coverage for fire, wind, hail, vandalism</li>
+                        <li>Rebuilding costs after covered losses</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Other Structures Coverage</h3>
+                    <p>Covers detached structures on your rental property:</p>
+                    <ul>
+                        <li>Detached garages and carports</li>
+                        <li>Storage sheds and barns</li>
+                        <li>Fences and gates</li>
+                        <li>Swimming pools and decks</li>
+                        <li>Guest houses or in-law units</li>
+                        <li>Driveways and walkways</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Liability Protection</h3>
+                    <p>Protects you from legal claims and lawsuits:</p>
+                    <ul>
+                        <li>Tenant or visitor injuries on property</li>
+                        <li>Property damage caused by your negligence</li>
+                        <li>Legal defense costs and attorney fees</li>
+                        <li>Court judgments and settlements</li>
+                        <li>Medical payments to injured parties</li>
+                        <li>Typically $300,000-$1,000,000 coverage</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Loss of Rental Income</h3>
+                    <p>Replaces lost rent when property is uninhabitable:</p>
+                    <ul>
+                        <li>Coverage during repairs after covered loss</li>
+                        <li>Typically 6-12 months of rental income</li>
+                        <li>Covers your mortgage and expenses</li>
+                        <li>Applies after fire, storm, or other damage</li>
+                        <li>Based on your actual rental income</li>
+                        <li>Helps maintain cash flow during repairs</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Personal Property Coverage (Optional)</h3>
+                    <p>Covers items you own that are on the rental property:</p>
+                    <ul>
+                        <li>Appliances you provide (fridge, stove, washer)</li>
+                        <li>Furniture in furnished rentals</li>
+                        <li>Lawn care equipment</li>
+                        <li>Tools and maintenance supplies</li>
+                        <li>Does NOT cover tenant belongings</li>
+                        <li>Add-on coverage typically required</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Ordinance or Law Coverage</h3>
+                    <p>Covers costs to meet updated building codes:</p>
+                    <ul>
+                        <li>Bringing property up to current codes</li>
+                        <li>Required upgrades after major damage</li>
+                        <li>Demolition and debris removal</li>
+                        <li>Increased construction costs</li>
+                        <li>Often required for older properties</li>
+                        <li>Add-on coverage recommended</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Types of Rental Properties We Insure</h2>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Single-Family Homes</h3>
+                    <p>Stand-alone houses rented to one tenant or family. This is the most common type of rental property. Coverage includes dwelling, liability, and rental income protection. Ideal for individual investors and small-scale landlords.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Multi-Family Properties</h3>
+                    <p>Duplexes, triplexes, and fourplexes with individual rental units. Because each unit brings in income, having solid coverage is even more important. Shared walls, structures, and common areas also create unique insurance needs.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Condos & Townhomes</h3>
+                    <p>Individually owned units within larger communities. Coverage must coordinate with the HOA’s master policy. Your policy protects the unit’s interior, improvements, personal liability, and potential loss assessments different from standard landlord insurance.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Vacation Rentals</h3>
+                    <p>Short-term rentals such as Airbnb or VRBO. These require specialized coverage due to higher turnover, guest liability risks, and property wear. Depending on rental volume, a commercial policy may be required. Protects both the structure and short-term rental liability.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Mixed-Use Properties</h3>
+                    <p>Buildings that combine residential and commercial spaces. These require commercial property policies with residential endorsements. Coverage must account for different tenant activities, higher foot traffic, and increased liability exposures.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Student Housing</h3>
+                    <p>Properties rented to students near colleges or universities. Higher risk due to tenant turnover and lifestyle factors. Often requires increased liability limits, frequent inspections, and additional maintenance considerations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Understanding Your Coverage Options</h2>
+            
+            <div class="two-column">
+                <div>
+                    <h3>DP-1: Basic Form</h3>
+                    <p>The most basic and affordable dwelling policy. Provides named-perils coverage, meaning only specific listed perils are covered.</p>
+                    
+                    <p><strong>Covered Perils:</strong></p>
+                    <ul>
+                        <li>Fire and lightning</li>
+                        <li>Windstorm and hail</li>
+                        <li>Explosion</li>
+                        <li>Riot or civil commotion</li>
+                        <li>Aircraft and vehicles</li>
+                        <li>Smoke damage</li>
+                        <li>Vandalism and malicious mischief</li>
+                        <li>Theft (limited)</li>
+                        <li>Volcanic eruption</li>
+                    </ul>
+                    
+                    <p><strong>Best For:</strong> Budget-conscious landlords with well-maintained properties in low-risk areas. Older properties where replacement cost isn't viable.</p>
+                </div>
+
+                <div>
+                    <h3>DP-3: Special Form</h3>
+                    <p>Our top-tier policy, offering open-perils (all-risk) coverage that insures against any cause of loss not expressly excluded.</p>
+                    
+                    <p><strong>Coverage Approach:</strong></p>
+                    <ul>
+                        <li>All-risk coverage for dwelling</li>
+                        <li>Named perils for personal property</li>
+                        <li>Broader protection scope</li>
+                        <li>Covers unusual or unexpected losses</li>
+                        <li>Only excludes specifically listed perils</li>
+                        <li>Replacement cost option available</li>
+                    </ul>
+                    
+                    <p><strong>Best For:</strong> Great for landlords who want full protection, especially if the property is in a higher-risk area or is a newer, well-kept home with a high rebuild cost.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>DP-2: Broad Form</h4>
+                <p>A middle ground between DP-1 and DP-3. Provides broader named-peril protection than DP-1 including water damage, falling objects, and the weight of ice or snow while still offering less coverage than the DP-3 form. Although less commonly selected, it can be an effective mid-tier solution for many rental properties.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>How Much Does Landlord Insurance Cost?</h2>
+            
+            <div class="stats-section">
+                <p style="text-align: center; font-size: 1.2em;">The average cost of landlord insurance is approximately <strong style="color: #ffd700;">25% more</strong> than a comparable homeowners policy, typically ranging from <strong style="color: #ffd700;">$1,500-$3,000</strong> annually for a single-family rental home.</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">$125-250</span>
+                        <span class="stat-label">Average Monthly Cost</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">$1,500-3,000</span>
+                        <span class="stat-label">Average Annual Premium</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">25%</span>
+                        <span class="stat-label">More Than Homeowners</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">$1,000-2,500</span>
+                        <span class="stat-label">Typical Deductible</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Factors That Affect Your Premium</h3>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Property Characteristics</h3>
+                    <p>Physical aspects of your rental property significantly impact rates:</p>
+                    <ul>
+                        <li>Age and condition of the building</li>
+                        <li>Square footage and number of units</li>
+                        <li>Construction materials (brick, wood, etc.)</li>
+                        <li>Roof age and condition</li>
+                        <li>Plumbing and electrical system age</li>
+                        <li>Presence of pools, trampolines, or other attractions</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Location Factors</h3>
+                    <p>Where your rental is located affects risk assessment:</p>
+                    <ul>
+                        <li>Crime rates in the neighborhood</li>
+                        <li>Proximity to fire stations and hydrants</li>
+                        <li>Natural disaster risks (flood, earthquake, hurricane)</li>
+                        <li>Local building codes and requirements</li>
+                        <li>Distance from coastlines or flood zones</li>
+                        <li>Urban vs. rural location</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Coverage Selections</h3>
+                    <p>Your coverage choices directly impact premium costs:</p>
+                    <ul>
+                        <li>Coverage amount (dwelling limit)</li>
+                        <li>Liability limit selection</li>
+                        <li>Deductible amount chosen</li>
+                        <li>Additional coverage endorsements</li>
+                        <li>DP-1 vs. DP-3 policy type</li>
+                        <li>Rental income protection amount</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Property Management</h3>
+                    <p>How you manage your rental affects your rates:</p>
+                    <ul>
+                        <li>Tenant screening processes</li>
+                        <li>Regular property inspections</li>
+                        <li>Maintenance and upkeep standards</li>
+                        <li>Vacancy rates and turnover</li>
+                        <li>Lease agreement quality</li>
+                        <li>Professional vs. self-management</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Claims History</h3>
+                    <p>Your track record influences future rates:</p>
+                    <ul>
+                        <li>Number of previous claims</li>
+                        <li>Type and severity of past claims</li>
+                        <li>Claims-free discount eligibility</li>
+                        <li>Time since last claim</li>
+                        <li>Pattern of small vs. large claims</li>
+                        <li>Overall loss history on the property</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Risk Mitigation Measures</h3>
+                    <p>Safety features and updates can lower premiums:</p>
+                    <ul>
+                        <li>Security systems and monitoring</li>
+                        <li>Smoke detectors and fire extinguishers</li>
+                        <li>Updated electrical and plumbing</li>
+                        <li>New roof or recent updates</li>
+                        <li>Hurricane shutters or reinforcements</li>
+                        <li>Central station fire alarm</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>10 Ways to Save on Landlord Insurance</h2>
+            
+            <div class="benefits-list">
+                <div class="benefit-item">
+                    <h4>1. Bundle Multiple Properties</h4>
+                    <p>Insure all your rental properties with the same carrier for multi-property discounts of 10-25%.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>2. Increase Your Deductible</h4>
+                    <p>Raising your deductible from $1,000 to $2,500 can reduce premiums by 15-30%.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>3. Install Security Systems</h4>
+                    <p>Monitored alarm systems, cameras, and smart locks can earn you 5-20% discounts.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>4. Update Major Systems</h4>
+                    <p>New roof, plumbing, electrical, and HVAC systems significantly reduce premiums.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>5. Maintain Claims-Free History</h4>
+                    <p>Avoid small claims and maintain clean history for loyalty and claims-free discounts.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>6. Pay Annually</h4>
+                    <p>Paying your premium annually instead of monthly saves 5-10% in billing fees.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>7. Choose DP-1 Over DP-3</h4>
+                    <p>Basic coverage usually costs significantly less than more complete policies, as long as it fits your property’s needs.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>8. Screen Tenants Thoroughly</h4>
+                    <p>Quality tenants reduce risk. Some insurers offer discounts for professional tenant screening.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>9. Implement Regular Maintenance</h4>
+                    <p>Document regular property inspections and preventive maintenance to qualify for discounts.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>10. Shop Around Annually</h4>
+                    <p>Compare quotes from multiple insurers each year – rates can vary by hundreds of dollars.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Why Liability Coverage is Critical for Landlords</h2>
+            <p>As a landlord, you face unique liability exposures that homeowners don't encounter. You're responsible for maintaining safe premises for tenants and visitors, and lawsuits can result in devastating financial consequences. Adequate liability coverage is not optional – it's essential protection for your assets and financial future.</p>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Premises Liability</h3>
+                    <p>You're responsible for injuries occurring on your property:</p>
+                    <ul>
+                        <li>Slip and fall accidents</li>
+                        <li>Inadequate security leading to crime</li>
+                        <li>Dangerous property conditions</li>
+                        <li>Defective stairs or railings</li>
+                        <li>Swimming pool accidents</li>
+                        <li>Dog bites (if you allow pets)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Negligent Maintenance</h3>
+                    <p>Failure to maintain property can lead to liability claims:</p>
+                    <ul>
+                        <li>Mold or water damage issues</li>
+                        <li>Pest infestations affecting health</li>
+                        <li>Broken locks or security features</li>
+                        <li>Defective smoke detectors</li>
+                        <li>Carbon monoxide leaks</li>
+                        <li>Electrical or plumbing hazards</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Legal Defense Costs</h3>
+                    <p>Liability coverage includes defense regardless of fault:</p>
+                    <ul>
+                        <li>Attorney fees and legal costs</li>
+                        <li>Court costs and filing fees</li>
+                        <li>Expert witness fees</li>
+                        <li>Investigation expenses</li>
+                        <li>Settlement negotiations</li>
+                        <li>Coverage even if lawsuit is frivolous</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Recommended Liability Coverage Limits</h3>
+            <div class="benefits-list">
+                <div class="benefit-item">
+                    <h4>$300,000 Minimum</h4>
+                    <p>Basic coverage for single-family rentals in low-risk areas with limited assets to protect.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>$500,000 Recommended</h4>
+                    <p>Standard coverage for most landlords. Provides solid protection without excessive cost.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>$1,000,000+ Optimal</h4>
+                    <p>Best protection for multi-unit properties, high-value assets, or properties with attractions like pools.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>Umbrella Policy</h4>
+                    <p>Additional $1-5 million in liability coverage over your base policy for just $200-500 annually.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Real-Life Scenarios: When Landlord Insurance Saves the Day</h2>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>House Fire Scenario</h3>
+                    <p><strong>Situation:</strong> A kitchen fire caused by tenant cooking destroys significant portions of your rental property.</p>
+                    <p><strong>Without Insurance:</strong> You pay $150,000+ to repair the property and lose $2,000/month in rent during repairs.</p>
+                    <p><strong>With Insurance:</strong> Your dwelling coverage pays $145,000 for repairs (minus $5,000 deductible), and loss of rental income coverage provides $12,000 for 6 months of lost rent.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Slip and Fall Lawsuit</h3>
+                    <p><strong>Situation:</strong> A tenant's guest slips on icy stairs and breaks their hip, requiring surgery. They sue you for $250,000.</p>
+                    <p><strong>Without Insurance:</strong> You pay $250,000 settlement plus $50,000 in legal fees from personal assets.</p>
+                    <p><strong>With Insurance:</strong> Your liability coverage pays the $250,000 settlement and $50,000 in legal defense costs, protecting your personal assets completely.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Storm Damage Scenario</h3>
+                    <p><strong>Situation:</strong> A severe windstorm tears off half your roof and causes extensive water damage to the interior.</p>
+                    <p><strong>Without Insurance:</strong> You pay $45,000 for roof replacement and $25,000 for interior repairs out-of-pocket.</p>
+                    <p><strong>With Insurance:</strong> After your $2,500 deductible, insurance pays $67,500 for all repairs, getting your property back to rentable condition.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Vandalism and Theft</h3>
+                    <p><strong>Situation:</strong> Property is vacant between tenants. Vandals break in, steal appliances, and cause $15,000 in damage.</p>
+                    <p><strong>Without Insurance:</strong> You pay $15,000 to repair damage and replace stolen appliances while losing rental income.</p>
+                    <p><strong>With Insurance:</strong> Coverage pays $13,500 for repairs and replacement (minus $1,500 deductible), minimizing your financial loss.</p>
+                </div>
+            </div>
+
+            <div class="price-box">
+                <h3>The Investment Protection Math</h3>
+                <p style="font-size: 1.2em;">Pay $2,000 per year to protect a $300,000+ investment</p>
+                <div class="price">
+                    $2,000<span style="font-size: 0.4em; color: #ffffff;">/year</span>
+                </div>
+                <p>vs.</p>
+                <div class="price">
+                    $150,000+<span style="font-size: 0.4em; color: #ffffff;"> potential loss</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>What's NOT Covered by Landlord Insurance?</h2>
+            <p>Understanding exclusions helps you identify when you need additional coverage or separate policies:</p>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Floods</h3>
+                    <p>Standard landlord policies exclude flood damage regardless of cause. You need separate flood insurance through NFIP or private carriers. This includes river flooding, storm surge, and heavy rain accumulation.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Earthquakes</h3>
+                    <p>Earthquake damage requires a separate earthquake policy or endorsement. Essential for properties in California, Alaska, and other seismically active regions. Ground movement and earth settling also excluded.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Tenant's Personal Property</h3>
+                    <p>Your policy only covers the building and your belongings, not tenant possessions. Tenants need their own renters insurance. You're not responsible for their furniture, electronics, or personal items.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Intentional Damage</h3>
+                    <p>Damage you or your tenants cause deliberately is never covered. This includes demolition without permits, intentional fires, or vandalism by property occupants. Criminal acts are excluded.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Wear and Tear</h3>
+                    <p>Normal deterioration, maintenance issues, and gradual damage aren't covered. Insurance is for sudden, unexpected losses only. Regular upkeep is the owner's responsibility.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Bed Bugs and Pests</h3>
+                    <p>Infestations and pest damage are considered maintenance issues. Bed bug removal, termite damage, and rodent issues are your responsibility as the property owner.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Mold (Often Limited)</h3>
+                    <p>Most policies exclude or severely limit mold coverage. If mold results from a covered peril (like a burst pipe), it may be covered up to a sub-limit. Chronic mold from maintenance neglect is excluded.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Business Liability</h3>
+                    <p>If you operate a property management business or have 5+ units, you may need commercial general liability insurance. Standard landlord policies may not cover business operations.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Lost Rent (Without Covered Loss)</h3>
+                    <p>Loss of rental income is only covered when the property is uninhabitable due to a covered loss. If a tenant simply stops paying or breaks their lease, you're not covered.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>Need Additional Coverage?</h4>
+                <p>Some exclusions can be filled in with the right add-ons. Ask your agent about flood insurance, earthquake coverage, umbrella policies, and additional endorsements to boost your protection.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Common Landlord Insurance Myths</h2>
+            
+            <div class="faq-section">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Myth: "My homeowners policy covers my rental property"</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Reality:</strong> Absolutely NOT. Homeowners insurance specifically excludes coverage for properties you rent to others. If you file a claim on a rental property under a homeowners policy, it will be denied. You'll be stuck paying for damages out-of-pocket and may face policy cancellation. Always get proper landlord insurance.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Myth: "Tenant's renters insurance covers the building"</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Reality:</strong> Renters insurance only covers the tenant's personal belongings and their liability. It does NOT cover the building structure, your appliances, or your liability as the property owner. You need landlord insurance to protect the building and your interests.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Myth: "Landlord insurance is too expensive"</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Reality:</strong> While landlord insurance costs 25% more than homeowners insurance, it's still relatively affordable at $1,500-3,000 annually. Compare this to the $100,000+ you could lose in a single fire or lawsuit. It's a necessary cost of doing business as a landlord and protects your entire investment.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Myth: "I don't need insurance if I have good tenants"</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Reality:</strong> Even the best tenants can't prevent fires, storms, theft, or accidents. Natural disasters don't care about tenant quality. Additionally, visitors to your property could sue you for injuries. Tenant quality doesn't eliminate the need for insurance – it's about protecting against unpredictable events.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Myth: "I can skip insurance if my property is paid off"</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Reality:</strong> Owning your property free and clear actually increases your risk exposure. You have more equity to lose and no lender requiring insurance. A major loss could wipe out your entire investment. Insurance is even MORE critical when you own the property outright.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Myth: "My LLC protects me, so I don't need much insurance"</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Reality:</strong> While an LLC provides some liability protection, it's not bulletproof. Courts can "pierce the corporate veil" in cases of negligence or improper LLC management. Insurance provides real financial protection that an LLC structure alone cannot guarantee. You need both.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Myth: "Short-term rentals are covered under standard landlord policies"</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Reality:</strong> Most standard landlord policies exclude or limit coverage for short-term rentals (Airbnb, VRBO). You need specialized vacation rental insurance or a commercial policy. Using a standard policy for short-term rentals can result in denied claims.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Myth: "I only need to insure for the property's market value"</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Reality:</strong> You should insure for REPLACEMENT COST – what it would cost to rebuild, not market value. Market value includes land (which doesn't burn). Replacement cost is often higher due to building code upgrades, debris removal, and current construction costs. Under-insuring leaves you financially vulnerable.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-section">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do I need landlord insurance by law?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>While not legally required by most states, landlord insurance is almost always required by mortgage lenders. If you have a loan on the property, your lender will mandate insurance to protect their investment. Even if you own the property outright, going without insurance is financially reckless. Additionally, some states and municipalities require minimum liability coverage for rental properties.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What's the difference between landlord insurance and homeowners insurance?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Homeowners insurance is for owner-occupied properties and covers your personal belongings and additional living expenses. Landlord insurance is for rental properties and covers the building, liability, and lost rental income – but NOT tenant belongings or your additional living expenses. Landlord insurance costs about 25% more due to increased risks associated with rental properties.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How much dwelling coverage do I need?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You need enough coverage to completely rebuild your property at today's construction costs. This is called replacement cost coverage. Work with your insurance agent to calculate this based on square footage, construction type, and local building costs. Don't insure based on market value – that includes land value which you don't need to replace. Most experts recommend getting a replacement cost estimate from a professional appraiser.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Should I require my tenants to have renters insurance?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely YES. Requiring tenants to carry renters insurance is a smart risk management strategy. It protects their belongings (so they can't claim against you), provides them with liability coverage (reducing your exposure), and ensures they have funds for temporary housing after a loss. Include a renters insurance requirement in your lease and collect proof of coverage annually. This is standard practice among professional landlords.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What should I do if my property is vacant between tenants?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Notify your insurance company immediately when your property becomes vacant. Most policies have a vacancy clause that limits or excludes coverage after 30-60 days of vacancy. You may need to purchase vacant property insurance or add a vacancy permit endorsement. Also, check the property regularly, maintain utilities, secure all entry points, and document your inspections. Vacant properties face higher risks of vandalism, theft, and weather damage.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Does landlord insurance cover tenant damage?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>It depends. Malicious damage by tenants (vandalism) is typically covered. However, normal wear and tear, gradual damage from neglect, or intentional destruction may be excluded. Your security deposit should cover most tenant-caused damage. If damage exceeds the deposit, you may need to pursue the tenant in small claims court. Landlord insurance is not a substitute for proper tenant screening and adequate security deposits.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What liability coverage limits do I need?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>At minimum, carry $300,000 in liability coverage. However, $500,000-$1,000,000 is recommended for better protection. Consider an umbrella policy for an additional $1-5 million in liability coverage at a low cost ($200-500 annually). Higher limits are especially important if you have multiple properties, significant personal assets to protect, or properties with swimming pools or other attractive nuisances.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Is loss of rental income coverage worth it?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely. Loss of rental income coverage is one of the most valuable components of landlord insurance. If your property becomes uninhabitable due to a covered loss, this coverage replaces your lost rent (typically for 6-12 months), allowing you to continue paying your mortgage and expenses during repairs. Without it, you're stuck paying a mortgage on a property that generates no income. The cost is minimal compared to the financial protection it provides.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I insure a property I'm renovating?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, but you'll need a vacant property or builder's risk policy during major renovations. Standard landlord insurance often excludes or limits coverage during construction. Notify your insurer about renovation plans before starting work. Once renovations are complete and the property is rented, you can switch to standard landlord insurance. Some insurers may inspect the property before binding coverage.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What's the difference between actual cash value and replacement cost coverage?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Actual Cash Value (ACV) pays the depreciated value of your property at the time of loss. If your roof is 15 years old when damaged, you get paid for a 15-year-old roof. Replacement Cost Value (RCV) pays to rebuild or replace with new materials of similar kind and quality without deducting for depreciation. RCV costs more but provides significantly better protection. Most landlords should choose RCV for proper financial protection.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do I need separate policies for each rental property?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Not necessarily. Many insurers offer landlord portfolio policies that cover multiple properties under one policy, often at a discount. However, each property should have its own dwelling coverage limit and be listed separately on the policy. Bundling properties with the same insurer typically results in multi-property discounts of 10-25%. Discuss your portfolio with an agent to find the most cost-effective approach.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What happens if I have a claim?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>First, document the damage with photos and videos. Then, contact your insurance company immediately to file a claim. An adjuster will inspect the damage and determine coverage and payout amounts. You may need to get repair estimates from contractors. The insurer will issue payment (minus your deductible) either directly to you or the contractors. Keep all receipts and documentation. For large claims, consider hiring a public adjuster to represent your interests.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I get coverage for short-term vacation rentals?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, but you need specialized coverage. Standard landlord policies typically exclude or severely limit coverage for short-term rentals. You'll need either a vacation rental endorsement to a landlord policy or a specialized short-term rental insurance policy. These policies address the unique risks of high tenant turnover, less stringent screening, and increased liability exposure. Don't risk operating an Airbnb or VRBO without proper coverage.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What's ordinance or law coverage and do I need it?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Ordinance or law coverage pays for the increased costs of rebuilding to meet current building codes after a covered loss. Building codes change over time, especially for older properties. Without this coverage, you'll pay out-of-pocket to bring your property up to code. This can add 25-50% or more to rebuilding costs. It's especially important for older properties and is often recommended or required by lenders.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How do I handle insurance if I use a property management company?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You still need your own landlord insurance policy as the property owner. The management company should have their own general liability and errors & omissions insurance. Verify they're properly insured and request certificates of insurance. Some policies offer discounts for professionally managed properties due to reduced risk. Coordinate with your property manager on claims and ensure they notify you immediately of any damage or incidents.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Why Choose The Insurance Boss for Landlord Insurance?</h2>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <h3> Landlord Specialists</h3>
+                    <p>We specialize in rental property insurance and understand the unique challenges landlords face. Our agents know the difference between DP-1, DP-2, and DP-3 policies and will recommend the right coverage for your specific situation.</p>
+                </div>
+
+                <div class="card">
+                    <h3> Portfolio Solutions</h3>
+                    <p>Whether you own one rental or fifty, we create customized insurance solutions for your entire portfolio. Multi-property discounts and streamlined policy management make protecting your investments simple and affordable.</p>
+                </div>
+
+                <div class="card">
+                    <h3> Complete Protection</h3>
+                    <p>We analyze your properties and risks to ensure you have adequate protection. From dwelling coverage to liability limits to loss of rental income, we make sure there are no gaps in your coverage.</p>
+                </div>
+
+                <div class="card">
+                    <h3> Competitive Rates</h3>
+                    <p>We work with multiple A-rated carriers to find you the best coverage at the most competitive rates. Our shopping process saves you time and money while ensuring quality protection.</p>
+                </div>
+
+                <div class="card">
+                    <h3> Fast, Easy Process</h3>
+                    <p>Get quotes quickly and bind coverage fast. We understand that time is money in the rental property business. Our streamlined process gets your properties insured without delays.</p>
+                </div>
+
+                <div class="card">
+                    <h3> Claims Advocacy</h3>
+                    <p>When you have a claim, we're in your corner. We help navigate the claims process, communicate with adjusters, and fight for fair treatment and maximum payouts for covered losses.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

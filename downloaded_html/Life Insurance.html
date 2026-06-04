@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Insurance Solutions - Protect Your Future | The Insurance Boss</title>
+    <meta name="description" content="Complete life insurance solutions. Term Life, Whole Life, Universal Life, Disability, Mortgage Protection, and Long-Term Care coverage.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: transparent;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section Styling */
+        .content-section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            color: #ffd700;
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-intro {
+            text-align: center;
+            font-size: 1.3em;
+            color: #ffffff;
+            margin-bottom: 60px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        /* Insurance Products Grid */
+        .insurance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        /* Standard Card Style (Grey Background + Yellow Border) */
+        .insurance-card {
+            background: #363636;
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid #ffd700;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            height: 100%;
+        }
+
+        .insurance-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: #404040;
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.15);
+        }
+
+        .insurance-card h3 {
+            color: #ffd700;
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .insurance-card p {
+            color: #ffffff;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .insurance-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 25px 0;
+        }
+
+        .insurance-card ul li {
+            color: #ffffff;
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.05em;
+        }
+
+        .insurance-card ul li::before {
+            content: '✓';
+            color: #ffd700;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.3em;
+        }
+
+        .insurance-card strong {
+            color: #ffd700;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: #363636;
+            padding: 70px 40px;
+            border-radius: 25px;
+            margin: 80px 0;
+            border: 1px solid #ffd700;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 50px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .stat-number {
+            color: #ffd700;
+            font-size: 3.5em;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .stat-label {
+            color: #ffffff;
+            font-size: 1.2em;
+            line-height: 1.4;
+        }
+
+        /* Comparison Table */
+        .comparison-wrapper {
+            overflow-x: auto;
+            margin: 40px 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #363636;
+            border-radius: 15px;
+            border: 1px solid #ffd700;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .comparison-table thead {
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .comparison-table th {
+            color: #ffd700;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.2em;
+            border-bottom: 2px solid #ffd700;
+        }
+
+        .comparison-table td {
+            padding: 18px 20px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+            color: #ffffff;
+        }
+
+        .comparison-table tr:hover {
+            background: #404040;
+        }
+
+        /* FAQ Section - Clean Style */
+        .faq-section {
+            margin: 80px 0;
+        }
+
+        .faq-item {
+            background: #363636;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            border: none;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .faq-item:hover {
+            background: #404040;
+        }
+
+        .faq-question {
+            padding: 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .faq-question h3 {
+            color: #ffd700;
+            margin: 0;
+            font-size: 1.4em;
+            flex: 1;
+            font-weight: 700;
+        }
+
+        .faq-toggle {
+            width: auto;
+            height: auto;
+            background: transparent;
+            color: #ffd700;
+            font-size: 2em;
+            font-weight: 400;
+            display: block;
+            margin-left: 20px;
+            line-height: 0.5;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 30px;
+            background: inherit;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+            padding: 0 30px 30px 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer p {
+            color: #ffffff;
+            line-height: 1.9;
+            font-size: 1.1em;
+        }
+
+        /* Process Steps */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 40px 25px;
+            background: #363636;
+            border-radius: 15px;
+            border: 1px solid #ffd700;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .process-step:hover {
+            transform: translateY(-10px);
+            background: #404040;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.15);
+        }
+
+        .step-number {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ffd700, #fadc2f);
+            color: #000000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: 700;
+            margin: 0 auto 25px;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .process-step h4 {
+            color: #ffd700;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .process-step p {
+            color: #ffffff;
+            line-height: 1.7;
+            font-size: 1.05em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .insurance-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 2.2em; }
+        }
+
+        /* Animations */
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .animate-on-scroll.animated { opacity: 1; transform: translateY(0); }
+        .animate-fade { opacity: 0; transition: opacity 1s ease-out; }
+        .animate-fade.animated { opacity: 1; }
+        .animate-scale { opacity: 0; transform: scale(0.9); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .animate-scale.animated { opacity: 1; transform: scale(1); }
+
+        html { scroll-behavior: smooth; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Toggle
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', function() {
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Intersection Observer
+            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, observerOptions);
+
+            // Animate elements
+            document.querySelectorAll('.section-title, .section-intro, .insurance-card, .stats-section, .stat-item, .faq-item, .process-step, .comparison-table').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+        });
+    </script>
+</head>
+<body>
+    
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Secure Your Family's Financial Future</h2>
+            <p class="section-intro">Life insurance provides essential financial protection for you and your loved ones. Whether you're looking to replace lost income, pay off debts, fund education, or protect against disability, we help connect you with trusted insurance professionals who can provide complete coverage options tailored to your unique needs and budget.</p>
+
+            <div class="stats-section">
+                <h3 style="text-align: center; color: #ffd700; font-size: 2em; margin-bottom: 20px;">Why Life Insurance Matters</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">52%</span>
+                        <span class="stat-label">Of Americans Have Life Insurance Coverage</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">$46,000</span>
+                        <span class="stat-label">Average Funeral & Final Expenses</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">1 in 4</span>
+                        <span class="stat-label">Workers Will Become Disabled Before Retirement</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">60%</span>
+                        <span class="stat-label">Of Americans Live Paycheck to Paycheck</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Life Insurance Options We Can Connect You With</h2>
+            <p class="section-intro">We work with licensed insurance partners to help you explore six complete coverage options designed to protect your family's financial security and provide peace of mind.</p>
+
+            <div class="insurance-grid">
+                <div class="insurance-card">
+                    <h3>Term Life Insurance</h3>
+                    <p>Affordable, straightforward coverage for a specific period (10, 20, or 30 years). Provides a death benefit to your beneficiaries if you pass away during the term.</p>
+                    
+                    <ul>
+                        <li>Most affordable life insurance option</li>
+                        <li>Coverage periods: 10, 15, 20, or 30 years</li>
+                        <li>Level premiums throughout the term</li>
+                        <li>Death benefit paid tax-free to beneficiaries</li>
+                        <li>Convertible to permanent coverage</li>
+                        <li>No cash value accumulation</li>
+                    </ul>
+
+                    <p><strong>Best For:</strong> Young families, mortgage protection, income replacement, debt coverage, and those seeking maximum coverage at lowest cost.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Whole Life Insurance</h3>
+                    <p>Permanent coverage that lasts your entire lifetime with guaranteed death benefit and cash value accumulation. Premiums never increase.</p>
+                    
+                    <ul>
+                        <li>Lifetime coverage (never expires)</li>
+                        <li>Guaranteed level premiums</li>
+                        <li>Cash value grows tax-deferred</li>
+                        <li>Borrow against cash value</li>
+                        <li>Guaranteed death benefit</li>
+                        <li>Potential dividend payments</li>
+                        <li>Estate planning benefits</li>
+                    </ul>
+
+                    <p><strong>Best For:</strong> Estate planning, leaving a legacy, long-term financial planning, supplemental retirement income, and those wanting permanent protection.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Universal Life Insurance</h3>
+                    <p>Flexible permanent life insurance with adjustable premiums and death benefits. Cash value grows based on current interest rates.</p>
+                    
+                    <ul>
+                        <li>Flexible premium payments</li>
+                        <li>Adjustable death benefit</li>
+                        <li>Cash value accumulation</li>
+                        <li>Tax-deferred growth</li>
+                        <li>Policy loans available</li>
+                        <li>Interest-sensitive crediting</li>
+                        <li>Lower cost than whole life</li>
+                    </ul>
+
+                    <p><strong>Best For:</strong> Those wanting permanent coverage with flexibility, supplemental retirement savings, and estate planning with adjustable premiums.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Mortgage Protection Insurance</h3>
+                    <p>Specialized term life insurance designed to pay off your mortgage if you pass away, ensuring your family keeps the home.</p>
+                    
+                    <ul>
+                        <li>Coverage matches mortgage balance</li>
+                        <li>Decreasing or level death benefit options</li>
+                        <li>Beneficiaries receive payment directly</li>
+                        <li>Protects family from losing home</li>
+                        <li>Affordable term life alternative</li>
+                        <li>No medical exam options available</li>
+                        <li>Optional disability and critical illness riders</li>
+                    </ul>
+
+                    <p><strong>Best For:</strong> Homeowners with mortgages, families dependent on one income, ensuring home remains in the family, and those with limited life insurance.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Disability Insurance</h3>
+                    <p>Replaces 50-70% of your income if you become disabled and unable to work due to illness or injury. Critical income protection.</p>
+                    
+                    <ul>
+                        <li>Replaces 50-70% of income</li>
+                        <li>Short-term (3-6 months) or long-term coverage</li>
+                        <li>Own occupation vs. any occupation</li>
+                        <li>Benefits paid tax-free (if you pay premiums)</li>
+                        <li>Covers illness and injury</li>
+                        <li>Waiting periods: 30-180 days</li>
+                        <li>Benefit periods: 2 years to age 65</li>
+                    </ul>
+
+                    <p><strong>Best For:</strong> Primary income earners, self-employed professionals, families with limited savings, and anyone dependent on their income to pay bills.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Long-Term Care Insurance</h3>
+                    <p>Covers the cost of long-term care services that regular health insurance and Medicare don't cover, protecting your savings from the high cost of extended care.</p>
+                    
+                    <ul>
+                        <li>Nursing home care coverage</li>
+                        <li>Assisted living facility costs</li>
+                        <li>In-home care and personal assistance</li>
+                        <li>Adult day care services</li>
+                        <li>Care coordination and planning</li>
+                        <li>Respite care for family caregivers</li>
+                    </ul>
+
+                    <p><strong>Best For:</strong> Individuals planning for retirement, those wanting to protect assets from depletion due to care costs, and anyone who wants to avoid burdening family members.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Term vs. Whole vs. Universal Life Comparison</h2>
+            <p class="section-intro">Understanding the differences helps you make an informed decision when exploring life insurance options with a licensed professional.</p>
+
+            <div class="comparison-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Term Life</th>
+                            <th>Whole Life</th>
+                            <th>Universal Life</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Coverage Duration</strong></td>
+                            <td>10-30 years (specified term)</td>
+                            <td>Lifetime (permanent)</td>
+                            <td>Lifetime (permanent)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Premium Cost</strong></td>
+                            <td>Lowest (most affordable)</td>
+                            <td>Highest (but guaranteed)</td>
+                            <td>Moderate (flexible)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Premium Flexibility</strong></td>
+                            <td>Fixed level premiums</td>
+                            <td>Fixed level premiums</td>
+                            <td>Adjustable premiums</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cash Value</strong></td>
+                            <td>None</td>
+                            <td>Yes, guaranteed growth</td>
+                            <td>Yes, interest-sensitive</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Death Benefit</strong></td>
+                            <td>Fixed amount</td>
+                            <td>Guaranteed, can increase with dividends</td>
+                            <td>Adjustable amount</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Policy Loans</strong></td>
+                            <td>Not available</td>
+                            <td>Yes, against cash value</td>
+                            <td>Yes, against cash value</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Best For</strong></td>
+                            <td>Temporary needs, affordability</td>
+                            <td>Estate planning, guaranteed returns</td>
+                            <td>Flexibility, moderate cost</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tax Benefits</strong></td>
+                            <td>Death benefit tax-free</td>
+                            <td>Tax-deferred growth, tax-free death benefit</td>
+                            <td>Tax-deferred growth, tax-free death benefit</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Investment Risk</strong></td>
+                            <td>None</td>
+                            <td>None (guaranteed)</td>
+                            <td>Some (interest rate sensitive)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section process-section">
+        <div class="container">
+            <h2 class="section-title">How to Get Coverage</h2>
+            <p class="section-intro">Getting life insurance is straightforward with our expert guidance.</p>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h4>Assess Your Needs</h4>
+                    <p>We evaluate your financial situation, family needs, debts, income replacement needs, and long-term goals.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h4>Compare Options</h4>
+                    <p>We present multiple quotes from top-rated carriers, explaining coverage differences and costs clearly.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h4>Complete Application</h4>
+                    <p>Simple application process, often with instant decisions. Medical exams may be required for larger policies.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h4>Get Protected</h4>
+                    <p>Once approved, coverage typically begins within days. You receive your policy documents and certificates.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+
+            <!-- NEW FAQ 1 -->
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Do I Actually Need Life Insurance?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>If anyone depends on your income — a spouse, children, aging parents — the answer is yes. Life insurance exists to fill the financial gap your absence would create. Without it, your family could be left managing mortgage payments, outstanding debts, daily living expenses, and future costs like education, all without the income they relied on. Beyond protecting dependents, life insurance also shields your estate from being depleted by final expenses, which can reach $46,000 or more. Even if you're single, if you carry student loans with a co-signer or have a parent who depends on you financially, a policy ensures your obligations don't become someone else's burden. The real question isn't whether you need life insurance — it's whether the people who depend on you can afford for you not to have it.</p>
+                </div>
+            </div>
+
+            <!-- NEW FAQ 2 -->
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How Much Life Insurance Coverage Do I Really Need?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>A widely used starting point is 10 to 12 times your annual income — but that's a baseline, not a complete answer. A more accurate calculation accounts for four key factors: your current debts (mortgage balance, car loans, credit cards), future education costs for your children, the number of years your income would need to be replaced, and any final expenses your family would face. For example, a household earning $80,000 annually, carrying a $350,000 mortgage, with two children and 20 years until the youngest is independent, may need $1,000,000 or more in coverage to truly protect their financial future. Our licensed partners can walk you through a personalized needs analysis so your coverage amount reflects your actual life — not just a rule of thumb.</p>
+                </div>
+            </div>
+
+            <!-- NEW FAQ 3 -->
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Term vs. Whole Life Insurance: Which Should I Choose?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>The right choice depends on what you need your policy to do. Term life insurance covers you for a set period — typically 10, 20, or 30 years — and offers the highest death benefit at the lowest cost. It's ideal for covering a mortgage, replacing income while children are young, or protecting against debt during a defined window of time. Whole life insurance is permanent coverage that never expires, and it does something term cannot: it builds cash value. A portion of every premium goes into a tax-deferred reserve that grows over time and can be borrowed against for any purpose — a business investment, education, or supplemental retirement income. This is the wealth protection element of permanent coverage, where your policy functions as both a safety net and a long-term financial asset. Many people benefit from a layered strategy — term for immediate, high-coverage needs and whole life for lifetime protection and legacy building.</p>
+                </div>
+            </div>
+
+            <!-- EXISTING FAQs -->
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Why do I need disability insurance?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Your ability to earn income is your most valuable asset. One in four 20-year-olds will become disabled before retirement. Disability insurance replaces 50-70% of your income if you can't work due to illness or injury. Without it, you'd drain savings, accumulate debt, or lose your home. Social Security disability is difficult to qualify for and provides minimal benefits. If you depend on your income to pay bills, disability insurance is essential – it's more likely you'll become disabled than die prematurely.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Can I get life insurance with pre-existing conditions?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! While pre-existing conditions may affect your rates or require special underwriting, coverage is often available. Common conditions like high blood pressure, diabetes, or past cancer can be insured – you'll just pay higher premiums. Some insurers specialize in high-risk cases. Guaranteed issue policies accept everyone regardless of health (no medical questions) but have lower coverage limits and higher costs. Don't assume you can't get coverage – many people with health issues successfully obtain life insurance.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What's the difference between own occupation and any occupation disability insurance?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>"Own occupation" pays benefits if you can't perform your specific job, even if you could work elsewhere. A surgeon who loses hand dexterity receives benefits even if they could teach. "Any occupation" only pays if you can't perform ANY job you're qualified for by education and experience. Own occupation is more expensive but provides better protection, especially for highly skilled professionals. Most group disability through employers is "any occupation" – consider supplemental own occupation coverage.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Should I get life insurance through my employer or buy my own?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Both! Employer-provided life insurance (typically 1-2x salary) is a great benefit but rarely sufficient. Major limitations: coverage is usually inadequate, it ends if you leave the job, rates increase with age, and you can't take it with you. Individual policies you own provide: portability (keeps coverage regardless of employment), guaranteed rates that don't increase, adequate coverage amounts, and you control the policy. Use employer coverage as a base and supplement with individual coverage for complete protection.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>When should I buy life insurance?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>The best time is NOW when you're younger and healthier. Life insurance costs significantly less when you're young – a 25-year-old pays half what a 40-year-old pays for the same coverage. Buy when: you get married, have children, buy a home, start a business, or anyone depends on your income. Even single people with student loans or aging parents should consider coverage. Don't wait until health issues arise – pre-existing conditions increase rates or limit coverage options.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Can I have multiple life insurance policies?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutely! Many people have multiple policies for different needs: term life for mortgage protection, whole life for estate planning, employer coverage as a base. Layering policies is smart planning – you can drop term coverage once the mortgage is paid while keeping permanent coverage. Having policies with different companies also diversifies risk. Just ensure your total coverage is justified by your insurable interest (income, debts, dependents) – insurers won't approve excessive amounts.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What happens if I stop paying premiums?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>For term life: most policies have a 30-31 day grace period. If you don't pay within this period, the policy lapses and coverage ends. You'll need to reapply for new coverage (likely at higher rates due to age). For permanent life (whole/universal): you have more options due to cash value. The insurer may use cash value to cover premiums, or you can surrender the policy for cash value, convert to paid-up insurance with lower death benefit, or take a policy loan. Never let a permanent policy lapse without exploring options – you lose years of cash value accumulation.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+</html>

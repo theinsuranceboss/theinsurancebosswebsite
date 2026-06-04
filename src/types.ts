@@ -8,6 +8,11 @@ export interface SubwebsiteCategory {
   items: Subwebsite[];
 }
 
+export interface SocialLink {
+  icon: string;
+  url: string;
+}
+
 export interface WebsiteConfig {
   logoText: string;
   logoUrl: string;
@@ -15,6 +20,25 @@ export interface WebsiteConfig {
   email: string;
   accentColor: string; // Dynamic hex color, default #FAC000
   fontScale: number; // multiplier for typography
+  globalBackground: string;
+  globalBackgroundImage?: string;
+  buttonsHtml: string;
+  socialLinks: SocialLink[];
+  carriersBanner: {
+    title: string;
+    subtitle: string;
+    logos: string[];
+  };
+  subwebsiteBanners: Record<string, {
+    topBannerUrl: string;
+    bottomBannerUrl: string;
+  }>;
+  fontFamilyPage?: Record<string, string>;
+  fontFamilyCategory?: Record<string, string>;
+  bannerTitleColor?: string;
+  bannerTitleSize?: number;
+  bannerTitleFont?: string;
+
   
   hero: {
     titleWhite: string;

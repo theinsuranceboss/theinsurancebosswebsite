@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Term Life Insurance - Affordable Protection | The Insurance Boss</title>
+    <meta name="description" content="Affordable Term Life Insurance. Secure your family's future with 10, 20, or 30-year fixed rate coverage. Simple, reliable, and budget-friendly.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: transparent;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section Styling */
+        .content-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            color: #ffd700;
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-intro {
+            text-align: center;
+            font-size: 1.3em;
+            color: #ffffff;
+            margin-bottom: 60px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Insurance Products Grid */
+        .insurance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        /* Standard Card Style (Grey Background + Yellow Border) */
+        .insurance-card {
+            background: #363636; /* Dark Grey Background */
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid #ffd700; /* Yellow Border */
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            height: 100%;
+        }
+
+        .insurance-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: #404040;
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.15);
+        }
+
+        .insurance-card h3 {
+            color: #ffd700;
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .insurance-card p {
+            color: #ffffff;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .insurance-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 25px 0;
+        }
+
+        .insurance-card ul li {
+            color: #ffffff;
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.05em;
+        }
+
+        .insurance-card ul li::before {
+            content: '✓';
+            color: #ffd700;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.3em;
+        }
+
+        .insurance-card strong {
+            color: #ffd700;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: #363636; /* Dark Grey Background */
+            padding: 70px 40px;
+            border-radius: 25px;
+            margin: 80px 0;
+            border: 1px solid #ffd700; /* Yellow Border */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 50px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .stat-number {
+            color: #ffd700;
+            font-size: 3.5em;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .stat-label {
+            color: #ffffff;
+            font-size: 1.2em;
+            line-height: 1.4;
+        }
+
+        /* Comparison Table */
+        .comparison-wrapper {
+            overflow-x: auto;
+            margin: 40px 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #363636; /* Dark Grey */
+            border-radius: 15px;
+            border: 1px solid #ffd700; /* Yellow Border */
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .comparison-table thead {
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .comparison-table th {
+            color: #ffd700;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.2em;
+            border-bottom: 2px solid #ffd700;
+        }
+
+        .comparison-table td {
+            padding: 18px 20px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+            color: #ffffff;
+        }
+
+        .comparison-table tr:hover {
+            background: #404040;
+        }
+
+        /* FAQ Section - Clean Style */
+        .faq-section {
+            margin: 80px 0;
+        }
+
+        .faq-item {
+            background: #363636; /* Dark Grey Background */
+            margin-bottom: 20px;
+            border-radius: 15px;
+            border: none; /* NO BORDER */
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .faq-item:hover {
+            background: #404040;
+        }
+
+        .faq-question {
+            padding: 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .faq-question h3 {
+            color: #ffd700;
+            margin: 0;
+            font-size: 1.4em;
+            flex: 1;
+            font-weight: 700;
+        }
+
+        /* Simple Yellow Plus Toggle */
+        .faq-toggle {
+            width: auto;
+            height: auto;
+            background: transparent; /* No circle */
+            color: #ffd700; /* Yellow Text */
+            font-size: 2em;
+            font-weight: 400;
+            display: block;
+            margin-left: 20px;
+            line-height: 0.5;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 30px;
+            background: inherit;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+            padding: 0 30px 30px 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg); /* Rotates to X */
+        }
+
+        .faq-answer p {
+            color: #ffffff;
+            line-height: 1.9;
+            font-size: 1.1em;
+        }
+
+        /* Process Steps */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 40px 25px;
+            background: #363636; /* Dark Grey Background */
+            border-radius: 15px;
+            border: 1px solid #ffd700; /* Yellow Border */
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .process-step:hover {
+            transform: translateY(-10px);
+            background: #404040;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.15);
+        }
+
+        .step-number {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ffd700, #fadc2f);
+            color: #000000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: 700;
+            margin: 0 auto 25px;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .process-step h4 {
+            color: #ffd700;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .process-step p {
+            color: #ffffff;
+            line-height: 1.7;
+            font-size: 1.05em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .insurance-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 2.2em; }
+        }
+
+        /* Animations */
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .animate-on-scroll.animated { opacity: 1; transform: translateY(0); }
+        .animate-fade { opacity: 0; transition: opacity 1s ease-out; }
+        .animate-fade.animated { opacity: 1; }
+        .animate-scale { opacity: 0; transform: scale(0.9); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .animate-scale.animated { opacity: 1; transform: scale(1); }
+
+        html { scroll-behavior: smooth; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Toggle
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', function() {
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Intersection Observer
+            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, observerOptions);
+
+            // Animate elements
+            document.querySelectorAll('.section-title, .section-intro, .insurance-card, .stats-section, .stat-item, .faq-item, .process-step, .comparison-table').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+        });
+    </script>
+</head>
+<body>
+    
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Affordable Coverage You Can Count On</h2>
+            <p class="section-intro">Term Life Insurance provides substantial death benefit protection for a specific period of time at a fixed, budget-friendly price. It's the simplest way to ensure your loved ones can pay the mortgage, cover living expenses, and maintain their lifestyle if the unexpected happens.</p>
+
+            <div class="stats-section">
+                <h3 style="text-align: center; color: #ffd700; font-size: 2em; margin-bottom: 20px;">Why Choose Term Life?</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">10-30</span>
+                        <span class="stat-label">Years of Fixed Rate Coverage</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">$16</span>
+                        <span class="stat-label">Average Monthly Cost for Healthy Adults</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Tax-Free Death Benefit for Beneficiaries</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">0%</span>
+                        <span class="stat-label">Investment Risk (Pure Protection)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Key Benefits of Term Life</h2>
+            <p class="section-intro">Term life is designed for families who need maximum protection at the lowest possible cost during their peak earning years.</p>
+
+            <div class="insurance-grid">
+                <div class="insurance-card">
+                    <h3>Budget Friendly</h3>
+                    <p>Term life is significantly less expensive than whole or universal life insurance. You get the most coverage for every dollar spent.</p>
+                    <ul>
+                        <li>Rates locked in for the full term</li>
+                        <li>High coverage limits for low premiums</li>
+                        <li>Ideal for young families on a budget</li>
+                    </ul>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Flexible Terms</h3>
+                    <p>Choose the duration that matches your financial obligations. Coverage lasts only as long as you need it—until the kids are grown or the house is paid off.</p>
+                    <ul>
+                        <li>10 Year Term: Short-term debts</li>
+                        <li>20 Year Term: Until kids graduate</li>
+                        <li>30 Year Term: Mortgage protection</li>
+                    </ul>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Income Replacement</h3>
+                    <p>If you pass away, your salary disappears. Term life provides a lump sum to replace that income, keeping your family's plans on track.</p>
+                    <ul>
+                        <li>Pay daily living expenses</li>
+                        <li>Fund college tuition</li>
+                        <li>Cover debts and final expenses</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">How to Choose Your Term Length</h2>
+            <p class="section-intro">Match your term length to your biggest financial responsibilities.</p>
+
+            <div class="comparison-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Term Length</th>
+                            <th>Best Used For</th>
+                            <th>Ideal Candidate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>10 Years</strong></td>
+                            <td>Short-term debts, loans, or final years before retirement.</td>
+                            <td>Older adults or those with short-term obligations.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>15-20 Years</strong></td>
+                            <td>Raising children to adulthood or covering a medium-term mortgage.</td>
+                            <td>Parents with young children or teens.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>30 Years</strong></td>
+                            <td>Long-term mortgage protection and income replacement for young families.</td>
+                            <td>Newlyweds, new parents, or new homeowners.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section process-section">
+        <div class="container">
+            <h2 class="section-title">Simple Steps to Get Covered</h2>
+            <p class="section-intro">Getting protected is easier than you think. Many policies require no medical exam.</p>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h4>Calculate Needs</h4>
+                    <p>Determine how much coverage your family needs (typically 10-12x income).</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h4>Compare Quotes</h4>
+                    <p>We shop dozens of top-rated carriers to find the best rate for your age and health.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h4>Apply Online</h4>
+                    <p>Complete a simple application. Some options offer instant approval without an exam.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h4>Peace of Mind</h4>
+                    <p>Once approved, your premium is locked in, and your family is protected.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Do I get my money back at the end of the term?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>With a standard term policy, no. It works like auto insurance—you pay for protection during the term. However, "Return of Premium" (ROP) term policies are available that refund your premiums if you outlive the term, though they cost more.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Do I need a medical exam?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Not always. We offer "Simplified Issue" and "Instant Decision" policies that use health questions and databases instead of a physical exam. These are faster but may be slightly more expensive than fully underwritten policies.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Can I convert to permanent insurance later?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, most term policies include a "conversion rider" that allows you to convert all or part of your coverage to a permanent policy (like Whole Life) without a new medical exam, usually within a specific timeframe.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What happens if I stop paying premiums?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Since term insurance has no cash value, if you stop paying premiums, the coverage simply ends after a grace period (usually 30-31 days). You won't owe back premiums, but you will lose the protection.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Does the price go up as I get older?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>No. With "Level Term Life Insurance," your premium is guaranteed to stay the same for the entire length of the term you choose (e.g., 20 years), regardless of changes in your health or age.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

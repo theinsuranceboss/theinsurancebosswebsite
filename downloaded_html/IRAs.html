@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRA Solutions - Grow Your Wealth Tax-Efficiently | The Insurance Boss</title>
+    <meta name="description" content="Maximize your retirement savings with Traditional and Roth IRAs. Secure, tax-advantaged growth strategies including Annuity IRAs and 401(k) Rollovers.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: transparent;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section Styling */
+        .content-section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            color: #ffd700;
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-intro {
+            text-align: center;
+            font-size: 1.3em;
+            color: #ffffff;
+            margin-bottom: 60px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        /* Boxed Card Grid Layout */
+        .insurance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .insurance-card {
+            background: #363636; /* Dark Grey Background */
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid #ffd700; /* Yellow Border */
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .insurance-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: #404040;
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.15);
+        }
+
+        .insurance-card h3 {
+            color: #ffd700;
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .insurance-card p {
+            color: #ffffff;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            flex-grow: 1; /* Pushes content down if needed */
+        }
+
+        .insurance-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .insurance-card ul li {
+            color: #ffffff;
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.05em;
+        }
+
+        /* Yellow Checkmark Icon */
+        .insurance-card ul li::before {
+            content: '✓'; 
+            color: #ffd700;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.3em;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: #363636;
+            padding: 70px 40px;
+            border-radius: 25px;
+            margin: 80px 0;
+            border: 1px solid #ffd700;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 50px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .stat-number {
+            color: #ffd700;
+            font-size: 3.5em;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .stat-label {
+            color: #ffffff;
+            font-size: 1.2em;
+            line-height: 1.4;
+        }
+
+        /* Comparison Table */
+        .comparison-wrapper {
+            overflow-x: auto;
+            margin: 40px 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #363636;
+            border-radius: 15px;
+            border: 1px solid #ffd700;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .comparison-table thead {
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .comparison-table th {
+            color: #ffd700;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.2em;
+            border-bottom: 2px solid #ffd700;
+        }
+
+        .comparison-table td {
+            padding: 18px 20px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+            color: #ffffff;
+        }
+
+        .comparison-table tr:hover {
+            background: #404040;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin: 80px 0;
+        }
+
+        .faq-item {
+            background: #363636;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            border: none;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .faq-item:hover {
+            background: #404040;
+        }
+
+        .faq-question {
+            padding: 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .faq-question h3 {
+            color: #ffd700;
+            margin: 0;
+            font-size: 1.4em;
+            flex: 1;
+            font-weight: 700;
+        }
+
+        .faq-toggle {
+            width: auto;
+            height: auto;
+            background: transparent;
+            color: #ffd700;
+            font-size: 2em;
+            font-weight: 400;
+            display: block;
+            margin-left: 20px;
+            line-height: 0.5;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 30px;
+            background: inherit;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+            padding: 0 30px 30px 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer p {
+            color: #ffffff;
+            line-height: 1.9;
+            font-size: 1.1em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .investment-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 2.2em; }
+        }
+
+        /* Animations */
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .animate-on-scroll.animated { opacity: 1; transform: translateY(0); }
+        .animate-fade { opacity: 0; transition: opacity 1s ease-out; }
+        .animate-fade.animated { opacity: 1; }
+        .animate-scale { opacity: 0; transform: scale(0.9); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .animate-scale.animated { opacity: 1; transform: scale(1); }
+
+        html { scroll-behavior: smooth; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Toggle
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', function() {
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Intersection Observer
+            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, observerOptions);
+
+            // Animate elements
+            document.querySelectorAll('.section-title, .section-intro, .insurance-card, .stats-section, .stat-item, .faq-item, .comparison-table').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+        });
+    </script>
+</head>
+<body>
+    
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">IRA Solutions & Tax-Advantaged Growth</h2>
+            <p class="section-intro">Secure your financial future with Individual Retirement Accounts (IRAs). Whether you're self-employed, an employee, or approaching retirement, IRAs offer powerful tax benefits to help your money grow faster.</p>
+
+            <div class="stats-section">
+                <h3 style="text-align: center; color: #ffd700; font-size: 2em; margin-bottom: 20px;">2026 IRA Benefits by the Numbers</h3>
+                <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr); gap: 30px;">
+                    <div class="stat-item">
+                        <span class="stat-number">$7,500</span>
+                        <span class="stat-label">Estimated Annual Contribution Limit</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">$1,000</span>
+                        <span class="stat-label">Catch-Up Contribution (Age 50+)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Tax-Deferred Growth Potential</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">59½</span>
+                        <span class="stat-label">Standard Age for Penalty-Free Withdrawals</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Explore Your IRA Options</h2>
+            <p class="section-intro">There isn't a one-size-fits-all retirement plan. Choose the IRA strategy that aligns with your current tax situation and your future income goals.</p>
+
+            <div class="insurance-grid">
+                <div class="insurance-card">
+                    <h3>Traditional IRA</h3>
+                    <p>The classic retirement account. Contributions may be tax-deductible now, lowering your current taxable income. Your money grows tax-deferred until you withdraw it in retirement.</p>
+                    <ul>
+                        <li>Immediate tax deductions (if eligible)</li>
+                        <li>Tax-deferred earnings growth</li>
+                        <li>Taxes paid only upon withdrawal</li>
+                        <li>Best if you expect to be in a lower tax bracket later</li>
+                    </ul>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Roth IRA</h3>
+                    <p>Pay taxes now to enjoy tax-free income later. Contributions are made with after-tax dollars, but your investment grows tax-free, and qualified withdrawals in retirement are 100% tax-free.</p>
+                    <ul>
+                        <li>Tax-free growth and withdrawals</li>
+                        <li>No Required Minimum Distributions (RMDs)</li>
+                        <li>Withdraw contributions anytime penalty-free</li>
+                        <li>Best if you expect taxes to rise in the future</li>
+                    </ul>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Rollover IRA</h3>
+                    <p>Don't leave your money behind. If you've changed jobs, consolidate your old 401(k) or 403(b) into a Rollover IRA. Keep your tax benefits while gaining more investment control.</p>
+                    <ul>
+                        <li>Avoid immediate taxes and penalties</li>
+                        <li>Consolidate scattered retirement accounts</li>
+                        <li>Access a wider range of investment options</li>
+                        <li>Maintain tax-deferred status</li>
+                    </ul>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Fixed Annuity IRA</h3>
+                    <p>Add an insurance layer to your retirement. A Fixed Annuity within an IRA guarantees your principal and provides a set interest rate, protecting your nest egg from market volatility.</p>
+                    <ul>
+                        <li>Principal protection (Zero market risk)</li>
+                        <li>Guaranteed interest rates</li>
+                        <li>Tax-deferred growth within the IRA</li>
+                        <li>Can convert to guaranteed lifetime income</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Traditional vs. Roth IRA Comparison</h2>
+            <p class="section-intro">Which tax advantage works best for you? Compare the key features to make the right choice.</p>
+
+            <div class="comparison-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Traditional IRA</th>
+                            <th>Roth IRA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Contributions</strong></td>
+                            <td>Pre-tax (Tax-deductible)*</td>
+                            <td>After-tax (Not deductible)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Growth</strong></td>
+                            <td>Tax-Deferred</td>
+                            <td>Tax-Free</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Withdrawals</strong></td>
+                            <td>Taxed as Income</td>
+                            <td>Tax-Free (Qualified distributions)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Required Distributions (RMDs)</strong></td>
+                            <td>Yes, starting at age 73</td>
+                            <td>None during owner's lifetime</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Income Limits</strong></td>
+                            <td>None to contribute</td>
+                            <td>Yes, income limits apply</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Early Withdrawal</strong></td>
+                            <td>Penalty + Tax on everything</td>
+                            <td>Contributions can be withdrawn tax/penalty free</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section faq-section">
+        <div class="container">
+            <h2 class="section-title">Common Questions</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How much can I contribute to an IRA?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>For 2024 and 2025, the standard limit is typically around $7,000 per year. If you are age 50 or older, you can add a "catch-up" contribution of $1,000, totaling $8,000. These limits are subject to change annually by the IRS.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Can I have both a 401(k) and an IRA?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes. Participating in a workplace 401(k) plan does not stop you from contributing to an IRA. However, if you have a workplace plan, your ability to deduct Traditional IRA contributions on your taxes might be limited based on your income level. Roth IRA contributions are limited only by your income level, not your 401(k) participation.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What is a "Backdoor" Roth IRA?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>This is a strategy for high-income earners who exceed the income limits for a regular Roth IRA. It involves making a non-deductible contribution to a Traditional IRA and then converting it to a Roth IRA. Taxes are paid on any earnings accumulated before the conversion.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Can I use an Annuity inside my IRA?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes. This is often called a "Qualified Annuity." Using an annuity inside an IRA provides the IRA's tax advantages combined with the annuity's principal protection and guaranteed income features. It's a popular strategy for the "safe money" portion of a retirement portfolio.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>When do I have to take money out?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>With a Traditional IRA (and other pre-tax accounts), you must start taking Required Minimum Distributions (RMDs) when you reach age 73. Roth IRAs do not have RMDs during the original owner's lifetime.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

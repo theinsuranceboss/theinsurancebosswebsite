@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>401(k) Rollover Facts - Transfer Your Retirement Savings</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: transparent;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section (No background, matches style) */
+        .hero-section {
+            background: transparent;
+            padding: 100px 20px;
+            text-align: center;
+            border-bottom: none;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section h1 {
+            color: #ffd700;
+            font-size: 4em;
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+        }
+
+        .hero-section .subtitle {
+            font-size: 1.6em;
+            margin-bottom: 40px;
+            color: #ffffff;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Section Styling */
+        .content-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            color: #ffd700;
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .section-intro {
+            text-align: center;
+            font-size: 1.3em;
+            color: #ffffff;
+            margin-bottom: 60px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Grid Layouts */
+        .insurance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        /* --- CARDS (Dark Grey + Yellow Border) --- */
+        .insurance-card {
+            background: #363636; /* Dark Grey Background */
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid #ffd700; /* Yellow Border */
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .insurance-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: #404040;
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.15);
+        }
+
+        .insurance-card h3 {
+            color: #ffd700;
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .insurance-card p {
+            color: #ffffff;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .insurance-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 25px 0;
+        }
+
+        .insurance-card ul li {
+            color: #ffffff;
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.05em;
+        }
+
+        .insurance-card ul li::before {
+            content: '✓';
+            color: #ffd700;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.3em;
+        }
+
+        .insurance-card strong {
+            color: #ffd700;
+        }
+        
+        /* FAQ Section (Dark Grey, No Border) */
+        .faq-section {
+            margin: 80px 0;
+        }
+
+        .faq-item {
+            background: #363636; /* Dark Grey Background */
+            margin-bottom: 20px;
+            border-radius: 15px;
+            border: none; /* NO BORDER */
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .faq-item:hover {
+            background: #404040;
+        }
+
+        .faq-question {
+            padding: 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .faq-question h3 {
+            color: #ffd700;
+            margin: 0;
+            font-size: 1.4em;
+            flex: 1;
+            font-weight: 700;
+        }
+
+        /* Simple Yellow Plus Toggle */
+        .faq-toggle {
+            width: auto;
+            height: auto;
+            background: transparent;
+            color: #ffd700;
+            font-size: 2em;
+            font-weight: 400;
+            display: block;
+            margin-left: 20px;
+            line-height: 0.5;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 30px;
+            background: inherit;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+            padding: 0 30px 30px 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer p {
+            color: #ffffff;
+            line-height: 1.9;
+            font-size: 1.1em;
+        }
+
+        /* Process Steps (Used for "Rollover Destinations") */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 40px 25px;
+            background: #363636; /* Dark Grey Background */
+            border-radius: 15px;
+            border: 1px solid #ffd700; /* Yellow Border */
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .process-step:hover {
+            transform: translateY(-10px);
+            background: #404040;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.15);
+        }
+
+        .step-number {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ffd700, #fadc2f);
+            color: #000000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: 700;
+            margin: 0 auto 25px;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .process-step h4 {
+            color: #ffd700;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .process-step p {
+            color: #ffffff;
+            line-height: 1.7;
+            font-size: 1.05em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2.5em; }
+            .insurance-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 2.2em; }
+        }
+
+        /* Animations */
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .animate-on-scroll.animated { opacity: 1; transform: translateY(0); }
+        .animate-fade { opacity: 0; transition: opacity 1s ease-out; }
+        .animate-fade.animated { opacity: 1; }
+
+        html { scroll-behavior: smooth; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Toggle
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', function() {
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Intersection Observer
+            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, observerOptions);
+
+            // Animate elements
+            document.querySelectorAll('.section-title, .section-intro, .insurance-card, .faq-item, .process-step').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <section class="hero-section">
+        <div class="container hero-content">
+            <h1>Smart 401(k) Rollover Strategies</h1>
+            <p class="subtitle">Optimize your retirement savings with tax-efficient rollovers and investment options tailored to your long-term goals.</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Why Consolidate?</h2>
+            <div class="insurance-grid">
+                <div class="insurance-card">
+                    <h3>Tax-Free Transfers</h3>
+                    <p>Execute a direct rollover from your old 401(k) to an IRA without triggering any taxes or penalties. Your money moves seamlessly between accounts, preserving every dollar for your retirement future.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Unlimited Investment Freedom</h3>
+                    <p>Break free from the limited menu of your employer's 401(k). Access thousands of stocks, bonds, ETFs, mutual funds, and alternative investments. Build the retirement portfolio you've always wanted.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Simplified Account Management</h3>
+                    <p>Consolidate multiple old 401(k) accounts from previous employers into one easy-to-manage IRA. Track everything in one place, reduce paperwork, and gain complete visibility into your retirement savings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Your Rollover Options, Explained</h2>
+            <p class="section-intro">Avoid costly mistakes by understanding how each method impacts taxes and growth.</p>
+
+            <div class="insurance-grid">
+                <div class="insurance-card">
+                    <h3>Direct Rollover</h3>
+                    <p><strong>Recommended:</strong> Funds transfer directly between institutions without touching your hands. The safest, cleanest method with zero tax implications.</p>
+                    
+                    <ul>
+                        <li>No taxes or penalties ever</li>
+                        <li>No mandatory 20% withholding</li>
+                        <li>No deadline pressure</li>
+                        <li>Electronic transfer between accounts</li>
+                        <li>Straightforward paperwork</li>
+                        <li>Complete peace of mind</li>
+                    </ul>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Indirect Rollover</h3>
+                    <p><strong>Risky Option:</strong> You receive the funds, then must redeposit within 60 days. Comes with automatic tax withholding and strict deadlines.</p>
+                    
+                    <ul>
+                        <li>Automatic 20% tax withholding</li>
+                        <li>Must replace the withheld 20% from pocket</li>
+                        <li>Strict 60-day deadline</li>
+                        <li>Limited to once per year</li>
+                        <li>Risk of penalties if you miss deadline</li>
+                        <li>More complicated process</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Why Roll Over?</h2>
+            <p class="section-intro">The compelling reasons to move your 401(k)</p>
+            
+            <div class="insurance-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                <div class="insurance-card">
+                    <h3>Lower Fees</h3>
+                    <p>Escape high administrative costs and access low-cost index funds that improve long-term returns.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Better Access</h3>
+                    <p>Enjoy more flexible withdrawal rules for emergencies, life events, and retirement planning.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Estate Control</h3>
+                    <p>Easily manage beneficiaries and improve how your assets transfer to heirs.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Creditor Protection</h3>
+                    <p>IRAs offer strong asset-protection benefits in most states, helping safeguard your savings.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Expert Advice</h3>
+                    <p>Gain access to professional guidance, portfolio management, and robo-advisor tools.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Modern Tools</h3>
+                    <p>Use improved platforms, apps, and research tools to manage your retirement more effectively.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Roth Conversion</h3>
+                    <p>Rolling over to an IRA allows strategic Roth conversions that can reduce taxes long-term.</p>
+                </div>
+
+                <div class="insurance-card">
+                    <h3>Consolidation</h3>
+                    <p>Combine old retirement accounts into one streamlined IRA for easier management.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section process-section">
+        <div class="container">
+            <h2 class="section-title">Rollover Destinations</h2>
+            <p class="section-intro">Where can you move your 401(k) money?</p>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h4>Traditional IRA</h4>
+                    <p>Most popular choice. Tax-deferred growth continues with no immediate tax impact. Maintains pre-tax status while giving you complete investment freedom.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h4>Roth IRA</h4>
+                    <p>Pay taxes now for tax-free growth and withdrawals later. Perfect if you expect higher tax rates in retirement or want to eliminate RMDs completely.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h4>New Employer 401(k)</h4>
+                    <p>Roll into your new company's plan if they accept transfers. Keeps everything in one retirement account with potential institutional pricing benefits.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h4>Leave It (Sometimes)</h4>
+                    <p>If your old 401(k) has excellent low-cost options and you have over a certain balance, staying put might make sense. Evaluate fees carefully.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section faq-section">
+        <div class="container">
+            <h2 class="section-title">Your Rollover Questions Answered</h2>
+            <p class="section-intro">Everything you need to know before you roll</p>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How long does a rollover take?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Direct rollovers typically take 2-4 weeks from start to finish. This includes paperwork processing at both institutions and the actual fund transfer. Some complete in just a few days while others take longer depending on your old 401(k) provider's responsiveness. Start early to avoid delays.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Will I pay taxes on the rollover?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Direct rollovers from traditional 401(k) to traditional IRA are completely tax-free. No taxes, no penalties when you move pre-tax money to another pre-tax account. Rolling to a Roth IRA triggers income taxes on the converted amount since you're converting from pre-tax to after-tax. Plan accordingly for the tax bill.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Can I roll over while still employed?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Most 401(k) plans don't allow in-service rollovers until age 59½. Check your plan documents or ask HR about your specific plan rules. After 59½, many plans permit in-service distributions, letting you roll funds to an IRA while continuing to work and contribute.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What about outstanding loans?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Outstanding 401(k) loans typically become due immediately when you leave your employer. If you can't repay, the balance becomes a taxable distribution with penalties. You cannot roll over a 401(k) with an active loan. Either repay in full or accept the tax consequences before changing jobs.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What if I have company stock?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Highly appreciated company stock may qualify for Net Unrealized Appreciation (NUA) treatment, potentially saving significant taxes through lower capital gains rates. This strategy requires careful planning and consultation with a tax professional to determine if it makes sense for your situation.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How do I start the process?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>First, open an IRA with your chosen provider. Then contact your 401(k) administrator and request a direct rollover to your new IRA account. Your new IRA provider can often help facilitate the paperwork. Keep copies of all documents and follow up to ensure the transfer completes smoothly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

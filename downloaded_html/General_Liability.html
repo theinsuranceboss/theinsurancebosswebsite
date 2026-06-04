@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General Liability Insurance - Essential Business Protection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            background: transparent;
+            color: #ffffff;
+        }
+
+        /* Value Proposition Section */
+        .value-prop-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .value-prop-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .value-card {
+            background: rgba(60, 60, 60, 0.85);
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            border-top: 5px solid #ffd700;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .value-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .value-card .icon {
+            font-size: 70px;
+            margin-bottom: 20px;
+        }
+
+        .value-card h3 {
+            color: #ffd700;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .value-card p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+        /* Social Proof Section */
+        .social-proof-section {
+            padding: 60px 20px;
+            background: rgba(60, 60, 60, 0.85);
+        }
+
+        .social-proof-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .social-proof-container h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .stat-box {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .stat-box.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-box .number {
+            color: #ffd700;
+            font-size: 52px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-box .number-text {
+            color: #ffd700;
+            font-size: 52px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-box .label {
+            color: #ffffff;
+            font-size: 18px;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .testimonial {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid #ffd700;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .testimonial.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .testimonial .quote {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial .author {
+            color: #ffd700;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .testimonial .location {
+            color: #cccccc;
+            font-size: 14px;
+        }
+
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: #ffffff;
+            font-size: 20px;
+        }
+
+        /* Problem/Solution Section */
+        .problem-solution-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .problem-solution-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .problem-box,
+        .solution-box {
+            padding: 40px;
+            border-radius: 12px;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .solution-box {
+            transform: translateX(30px);
+        }
+
+        .problem-box.animate,
+        .solution-box.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .problem-box {
+            background: rgba(80, 40, 40, 0.85);
+            border-left: 5px solid #ff4444;
+        }
+
+        .solution-box {
+            background: rgba(40, 80, 40, 0.85);
+            border-left: 5px solid #44ff44;
+        }
+
+        .problem-box h2,
+        .solution-box h2 {
+            color: #ffd700;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .problem-box ul,
+        .solution-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .problem-box ul li,
+        .solution-box ul li {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            padding-left: 35px;
+            position: relative;
+        }
+
+        .problem-box ul li::before {
+            content: "✗";
+            color: #ff4444;
+            font-weight: bold;
+            font-size: 24px;
+            position: absolute;
+            left: 0;
+        }
+
+        .solution-box ul li::before {
+            content: "✓";
+            color: #44ff44;
+            font-weight: bold;
+            font-size: 24px;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Coverage Section */
+        .coverage-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .coverage-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .coverage-card {
+            background: rgba(60, 60, 60, 0.85);
+            padding: 40px;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease;
+        }
+
+        .coverage-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .coverage-card:hover {
+            border-color: #ffd700;
+            transform: translateY(-5px);
+        }
+
+        .coverage-card h3 {
+            color: #ffd700;
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .coverage-card p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .coverage-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .coverage-card ul li {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 12px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .coverage-card ul li::before {
+            content: "✓";
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 22px;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Real Scenarios Section */
+        .scenarios-section {
+            padding: 60px 20px;
+            background: rgba(60, 60, 60, 0.85);
+        }
+
+        .scenarios-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .scenarios-container h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .scenario-item {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 4px solid #ffd700;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .scenario-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scenario-item h3 {
+            color: #ffd700;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .scenario-item .incident {
+            color: #ff9999;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .scenario-item .coverage {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .scenario-item .cost {
+            color: #ffd700;
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 15px;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefits-container h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .benefit-item {
+            background: rgba(60, 60, 60, 0.85);
+            padding: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .benefit-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .benefit-item .check {
+            color: #ffd700;
+            font-size: 32px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .benefit-item .content h3 {
+            color: #ffd700;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .benefit-item .content p {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 60px 20px;
+            background: rgba(60, 60, 60, 0.85);
+        }
+
+        .pricing-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 50px 40px;
+            text-align: center;
+        }
+
+        .pricing-container h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .pricing-container > p {
+            color: #ffffff;
+            font-size: 20px;
+            margin-bottom: 50px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pricing-box {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 40px 30px;
+            border-radius: 12px;
+            border: 2px solid #ffd700;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 320px;
+        }
+
+        .pricing-box h3 {
+            color: #ffd700;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .pricing-box .amount {
+            color: #ffd700;
+            font-size: 44px;
+            font-weight: 700;
+            margin: 25px 0;
+            display: block;
+            line-height: 1.2;
+        }
+
+        .pricing-box p {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(60, 60, 60, 0.85);
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease;
+        }
+
+        .faq-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .faq-item:hover {
+            border-color: #ffd700;
+        }
+
+        .faq-header {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .faq-header h3 {
+            color: #ffd700;
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .faq-header .icon {
+            color: #ffd700;
+            font-size: 24px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-header .icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-content {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-item.active .faq-content {
+            padding: 25px 30px;
+            max-height: 1000px;
+        }
+
+        .faq-content p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .faq-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 20px;
+            background: transparent;
+        }
+
+        .cta-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.98) 0%, rgba(255, 193, 7, 0.98) 100%);
+            padding: 60px 50px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 10px 50px rgba(255, 215, 0, 0.3);
+        }
+
+        .cta-container h2 {
+            color: #1a1a1a;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-container .urgency-text {
+            color: #cc0000;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-container p {
+            color: #1a1a1a;
+            font-size: 22px;
+            margin-bottom: 35px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #1a1a1a;
+            color: #ffd700;
+            padding: 18px 50px;
+            font-size: 22px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            background: #2a2a2a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .value-prop-grid,
+            .coverage-grid,
+            .benefits-grid,
+            .scenarios-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonial-grid,
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .problem-solution-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-header h2,
+            .social-proof-container h2,
+            .scenarios-container h2,
+            .benefits-container h2,
+            .pricing-container h2,
+            .cta-container h2 {
+                font-size: 32px;
+            }
+
+            .stats-row,
+            .testimonial-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .value-card,
+            .coverage-card,
+            .pricing-container,
+            .cta-container {
+                padding: 30px 20px;
+            }
+
+            .cta-container h2 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Value Proposition Cards -->
+    <section class="value-prop-section">
+        <div class="value-prop-grid">
+            <div class="value-card">
+                <h3>Lawsuit Defense Coverage</h3>
+                <p>General liability insurance may help cover legal defense costs, settlements, and certain claims involving third-party bodily injury, property damage, or personal injury depending on the policy and carrier.</p>
+            </div>
+            <div class="value-card">
+                <h3>Essential Business Protection</h3>
+                <p>A key component of many business insurance programs, general liability coverage is often recommended and sometimes required by landlords, clients, or contracts before work can begin.</p>
+            </div>
+            <div class="value-card">
+                <h3>Affordable & Scalable Options</h3>
+                <p>Many small businesses can access general liability coverage at competitive rates through licensed insurance professionals. Without adequate coverage, a single lawsuit could result in significant financial loss.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="social-proof-section">
+        <div class="social-proof-container">
+            <h2>Protecting Businesses Nationwide</h2>
+            
+            <div class="stats-row">
+                <div class="stat-box">
+                    <span class="number" data-target="1" data-prefix="$" data-suffix="M">0</span>
+                    <span class="label">Typical per-occurrence limit</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number" data-target="90" data-suffix="%">0</span>
+                    <span class="label">Of contracts require it</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number" data-target="500" data-prefix="$">0</span>
+                    <span class="label">Average annual cost</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number-text">24/7</span>
+                    <span class="label">Protection coverage</span>
+                </div>
+            </div>
+
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <p class="quote">"A customer slipped on a wet floor in our retail store and broke her ankle. Our General Liability policy covered the $95,000 medical claim plus legal fees. Without it, we'd be bankrupt."</p>
+                    <p class="author">Jennifer P.</p>
+                    <p class="location">Boutique Owner, Portland, OR</p>
+                </div>
+                <div class="testimonial">
+                    <p class="quote">"During a renovation project, we accidentally damaged a client's expensive equipment. Our GL policy paid the $47,000 claim immediately. Worth every penny of the premium."</p>
+                    <p class="author">Mike T.</p>
+                    <p class="location">Contractor, Dallas, TX</p>
+                </div>
+                <div class="testimonial">
+                    <p class="quote">"A competitor sued us for copyright infringement on our advertising. The lawsuit was baseless, but our General Liability covered $32,000 in legal defense costs. We won the case."</p>
+                    <p class="author">David K.</p>
+                    <p class="location">Marketing Agency, Chicago, IL</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem/Solution Section -->
+    <section class="problem-solution-section">
+        <div class="problem-solution-container">
+            <div class="problem-box">
+                <h2>Operating Without GL Insurance</h2>
+                <ul>
+                    <li>One slip-and-fall lawsuit could bankrupt your business</li>
+                    <li>Cannot sign commercial leases or client contracts</li>
+                    <li>Personal assets at risk in major lawsuits</li>
+                    <li>Legal defense costs $300-$500 per hour minimum</li>
+                    <li>Property damage claims you cause are out-of-pocket</li>
+                    <li>Reputational damage from unresolved claims</li>
+                </ul>
+            </div>
+
+            <div class="solution-box">
+                <h2>With General Liability Coverage</h2>
+                <ul>
+                    <li>Full legal defense even for baseless lawsuits</li>
+                    <li>Meet all lease and contract insurance requirements</li>
+                    <li>Protect personal savings and assets from claims</li>
+                    <li>Insurance company provides lawyers and defense</li>
+                    <li>Property damage to others fully covered</li>
+                    <li>Professional image and business credibility enhanced</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coverage Details Section -->
+    <section class="coverage-section">
+        <div class="section-header">
+            <h2>What Does General Liability Cover?</h2>
+            <p>Coverage options designed to help protect your business from many common third-party risks, including certain claims of bodily injury, property damage, and personal injury depending on the policy.</p>
+        </div>
+
+        <div class="coverage-grid">
+            <div class="coverage-card">
+                <h3>Bodily Injury Coverage</h3>
+                <p>Protects when customers, clients, or vendors are injured on your premises or as a result of your business operations.</p>
+                <ul>
+                    <li>Slip-and-fall accidents at your location</li>
+                    <li>Customer injuries during service delivery</li>
+                    <li>Medical expenses and hospitalization</li>
+                    <li>Lost wages for injured parties</li>
+                    <li>Pain and suffering settlements</li>
+                    <li>Legal defense costs included</li>
+                </ul>
+            </div>
+
+            <div class="coverage-card">
+                <h3>Property Damage Coverage</h3>
+                <p>Covers damage you accidentally cause to someone else's property while conducting business operations.</p>
+                <ul>
+                    <li>Damage to client property during work</li>
+                    <li>Accidental damage to rented spaces</li>
+                    <li>Equipment or inventory damage you cause</li>
+                    <li>Vehicle damage caused by operations</li>
+                    <li>Building or structure damage</li>
+                    <li>Repair and replacement costs covered</li>
+                </ul>
+            </div>
+
+            <div class="coverage-card">
+                <h3>Personal & Advertising Injury</h3>
+                <p>Protects against claims of slander, libel, copyright infringement, and other non-physical injuries in your advertising and communications.</p>
+                <ul>
+                    <li>Copyright and trademark infringement</li>
+                    <li>Slander and libel accusations</li>
+                    <li>False advertising claims</li>
+                    <li>Invasion of privacy lawsuits</li>
+                    <li>Wrongful eviction claims</li>
+                    <li>Defamation of character allegations</li>
+                </ul>
+            </div>
+
+            <div class="coverage-card">
+                <h3>Medical Payments Coverage</h3>
+                <p>Pays for immediate medical expenses of injured parties regardless of fault, helping avoid larger lawsuits.</p>
+                <ul>
+                    <li>Emergency room visits covered</li>
+                    <li>Ambulance transportation costs</li>
+                    <li>X-rays and diagnostic tests</li>
+                    <li>No fault determination needed</li>
+                    <li>Typically $5,000-$10,000 limits</li>
+                    <li>Helps settle claims quickly</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real Scenarios Section -->
+    <section class="scenarios-section">
+        <div class="scenarios-container">
+            <h2>Real Claims We've Covered</h2>
+            <div class="scenarios-grid">
+                <div class="scenario-item">
+                    <h3>Retail Store Slip & Fall</h3>
+                    <p class="incident">Customer slipped on spilled juice in grocery aisle, breaking wrist and requiring surgery.</p>
+                    <p class="coverage">GL insurance paid: Medical bills, lost wages, pain/suffering settlement, legal fees</p>
+                    <p class="cost">Total Claim: $87,500 | Policy Cost: $1,200/year</p>
+                </div>
+
+                <div class="scenario-item">
+                    <h3>Contractor Property Damage</h3>
+                    <p class="incident">Plumber accidentally flooded client's basement, destroying finished living space and belongings.</p>
+                    <p class="coverage">GL insurance paid: Water damage repairs, contents replacement, temporary housing costs</p>
+                    <p class="cost">Total Claim: $64,000 | Policy Cost: $1,800/year</p>
+                </div>
+
+                <div class="scenario-item">
+                    <h3>Restaurant Food Poisoning</h3>
+                    <p class="incident">Group of customers got food poisoning, resulting in hospitalization and lost work time.</p>
+                    <p class="coverage">GL insurance paid: Medical treatment, lost wages, legal defense, settlement costs</p>
+                    <p class="cost">Total Claim: $125,000 | Policy Cost: $2,400/year</p>
+                </div>
+
+                <div class="scenario-item">
+                    <h3>Advertising Copyright Claim</h3>
+                    <p class="incident">Photographer sued for using similar imagery in marketing campaign, claiming copyright infringement.</p>
+                    <p class="coverage">GL insurance paid: Legal defense costs, court fees, expert witnesses, settlement payment</p>
+                    <p class="cost">Total Claim: $45,000 | Policy Cost: $900/year</p>
+                </div>
+
+                <div class="scenario-item">
+                    <h3>Cleaning Service Accident</h3>
+                    <p class="incident">Employee knocked over expensive vase while cleaning executive office, damaging art piece.</p>
+                    <p class="coverage">GL insurance paid: Art restoration attempt, replacement value of damaged items</p>
+                    <p class="cost">Total Claim: $18,500 | Policy Cost: $750/year</p>
+                </div>
+
+                <div class="scenario-item">
+                    <h3>Event Venue Injury</h3>
+                    <p class="incident">Wedding guest tripped on uneven flooring, breaking ankle and incurring extensive medical bills.</p>
+                    <p class="coverage">GL insurance paid: Emergency room, surgery, physical therapy, legal fees, settlement</p>
+                    <p class="cost">Total Claim: $112,000 | Policy Cost: $2,100/year</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="benefits-container">
+            <h2>Why General Liability is Essential</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Contract Requirement</h3>
+                        <p>Most commercial leases, client agreements, and vendor contracts require proof of General Liability before you can operate or sign deals.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Lawsuit Defense</h3>
+                        <p>Average legal defense costs $54,000 even if you win. Your policy pays for lawyers, court costs, and expert witnesses automatically.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Asset Protection</h3>
+                        <p>Without insurance, lawsuits can target your personal savings, home, and assets. GL insurance shields both business and personal wealth.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Customer Confidence</h3>
+                        <p>Being insured demonstrates professionalism and financial stability. Enterprise clients won't work with uninsured vendors.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Business Continuity</h3>
+                        <p>A single uninsured lawsuit can force bankruptcy and closure. Insurance ensures one incident doesn't destroy your business.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Affordable Protection</h3>
+                        <p>Policies typically cost $500-$3,000 annually for small businesses far less than one lawsuit or major claim would cost.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Peace of Mind</h3>
+                        <p>Focus on growing your business instead of worrying about potential accidents, injuries, or property damage lawsuits.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Competitive Advantage</h3>
+                        <p>Win larger contracts and work with enterprise clients who require insurance. Opens doors that are closed to uninsured competitors.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+        <div class="pricing-container">
+            <h2>General Liability Insurance Costs</h2>
+            <p style="color: #ffffff; font-size: 20px; margin-bottom: 30px;">Flexible coverage options available for businesses of all sizes, with pricing determined by factors such as industry, location, and specific policy needs.</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-box">
+                    <h3>Low-Risk Businesses</h3>
+                    <span class="amount">$500-$1,000</span>
+                    <p>Consultants, online businesses, home offices, professional services</p>
+                </div>
+
+                <div class="pricing-box">
+                    <h3>Medium-Risk Businesses</h3>
+                    <span class="amount">$1,000-$2,500</span>
+                    <p>Retail stores, restaurants, light manufacturing, service providers</p>
+                </div>
+
+                <div class="pricing-box">
+                    <h3>Higher-Risk Businesses</h3>
+                    <span class="amount">$2,500-$5,000+</span>
+                    <p>Construction, bars with liquor, heavy manufacturing, high-traffic venues</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="section-header">
+            <h2>General Liability Insurance FAQs</h2>
+            <p>Common questions about GL coverage for your business</p>
+        </div>
+
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>What's the difference between General Liability and Professional Liability?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>General Liability covers bodily injury and property damage physical harm. Professional Liability (E&O) covers financial losses from your professional services, advice, or mistakes. A consultant needs both: GL for slip-and-falls at their office, E&O for bad advice that costs a client money.</p>
+                    <p>Service businesses (lawyers, accountants, consultants, tech companies) typically need both policies. Product-based businesses often only need General Liability plus Product Liability coverage.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>How much General Liability coverage do I need?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Most businesses carry $1 million per occurrence and $2 million aggregate written as $1M/$2M. This is the minimum most contracts require. Higher-risk businesses or those with larger contracts often need $2M/$4M or more.</p>
+                    <p>Check your commercial lease, client contracts, and vendor agreements. They'll specify required coverage amounts. It's better to have excess coverage than to be underinsured when a major claim occurs.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Does General Liability cover employee injuries?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>No. Employee injuries are covered by Workers' Compensation insurance, which is required by law in most states if you have employees. General Liability only covers third parties customers, clients, vendors, and visitors.</p>
+                    <p>If an employee is injured, Workers' Comp pays their medical bills and lost wages. If a customer is injured, General Liability responds. Both policies are essential for most businesses with physical locations or employees.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Does my home insurance cover my home-based business?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>No. Homeowners and renters insurance explicitly exclude business activities. If a client visits your home office and gets injured, your home insurance won't cover it. You need separate General Liability coverage for business operations.</p>
+                    <p>Some insurers offer in-home business endorsements for very small operations, but most home-based businesses need standalone General Liability policies starting around $500-$800 annually.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>When does my General Liability coverage start?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Coverage typically begins immediately or within 24 hours of policy purchase and payment. You'll receive a Certificate of Insurance (COI) that you can provide to landlords, clients, and vendors as proof of coverage.</p>
+                    <p>Don't wait to buy insurance. It only covers incidents that occur after the policy starts. If something happens before you're insured, you have no coverage and pay everything out-of-pocket.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>What's not covered by General Liability?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>GL doesn't cover: Employee injuries (need Workers' Comp), professional mistakes (need E&O), auto accidents (need Commercial Auto), property you own (need Commercial Property), cyber attacks (need Cyber Liability), or intentional acts.</p>
+                    <p>Think of General Liability as covering accidents and injuries involving third parties at your location or during operations. Everything else requires additional specialized policies.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Can I get General Liability with a claims history?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Yes, but expect higher premiums and possibly coverage exclusions. Insurers view past claims as indicators of future risk. Multiple claims in a short period may require specialty "surplus lines" insurers who charge more.</p>
+                    <p>Always disclose claims history honestly on applications. Lying voids coverage when you need it most. Work with an experienced broker who can find carriers willing to write businesses with claims history.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Is General Liability the same as a Business Owners Policy (BOP)?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>No, but a BOP includes General Liability. A Business Owners Policy bundles GL with Commercial Property insurance and Business Interruption coverage into one package usually at a lower price than buying separately.</p>
+                    <p>BOPs are ideal for small to mid-sized businesses with physical locations. If you only need liability coverage (no property to insure), standalone General Liability is the right choice.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    
+                    // If it's a stat box with a number, animate the counter
+                    if (entry.target.classList.contains('stat-box')) {
+                        const numberElement = entry.target.querySelector('.number');
+                        if (numberElement && !numberElement.classList.contains('counted')) {
+                            animateCounter(numberElement);
+                        }
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.value-card, .stat-box, .testimonial, .problem-box, .solution-box, .coverage-card, .scenario-item, .benefit-item, .faq-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter animation function
+        function animateCounter(element) {
+            element.classList.add('counted');
+            const target = parseFloat(element.getAttribute('data-target'));
+            const prefix = element.getAttribute('data-prefix') || '';
+            const suffix = element.getAttribute('data-suffix') || '';
+            const duration = 2000; // 2 seconds
+            const increment = target / (duration / 16); // 60fps
+            let current = 0;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    // Format based on whether it's a decimal or whole number
+                    if (target >= 1000) {
+                        element.textContent = prefix + Math.floor(current).toLocaleString() + suffix;
+                    } else if (target < 10) {
+                        element.textContent = prefix + current.toFixed(1) + suffix;
+                    } else {
+                        element.textContent = prefix + Math.floor(current) + suffix;
+                    }
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    // Final value
+                    if (target >= 1000) {
+                        element.textContent = prefix + target.toLocaleString() + suffix;
+                    } else if (target < 10) {
+                        element.textContent = prefix + target.toFixed(1) + suffix;
+                    } else {
+                        element.textContent = prefix + target + suffix;
+                    }
+                }
+            };
+
+            updateCounter();
+        }
+
+        // FAQ Toggle functionality
+        document.querySelectorAll('.faq-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const faqItem = header.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all other FAQs
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Toggle current FAQ
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

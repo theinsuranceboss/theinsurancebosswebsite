@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flood Insurance - Protect Your Home from Rising Water | The Insurance Boss</title>
+    <meta name="description" content="Essential flood insurance protection. Coverage for structural damage, personal property, and cleanup costs not covered by standard homeowners policies.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: transparent;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(0, 0, 0, 0.4) 100%);
+            padding: 100px 20px;
+            text-align: center;
+            border-bottom: 4px solid #ffd700;
+            margin-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: transparent;
+            padding: 60px 0;
+        }
+
+        .section-title {
+            color: #ffd700;
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            color: #ffffff;
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Info Boxes */
+        .info-boxes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .info-box {
+            background: #363636; /* Dark Grey */
+            padding: 35px;
+            border-radius: 15px;
+            border: 1px solid #ffd700; /* Yellow Border */
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .info-box:hover {
+            transform: translateY(-8px);
+            background: #404040;
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.15);
+        }
+
+        .info-box h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 1.6em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-box-icon {
+            font-size: 1.8em;
+        }
+
+        .info-box p {
+            color: #ffffff;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+
+        .info-box ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        .info-box li {
+            margin: 10px 0;
+            color: #ffffff;
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .feature-item {
+            background: #363636; /* Dark Grey */
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #ffd700; /* Yellow Border */
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .feature-item:hover {
+            background: #404040;
+            transform: translateX(10px);
+        }
+
+        .feature-item h4 {
+            color: #ffd700;
+            margin-bottom: 12px;
+            font-size: 1.4em;
+        }
+
+        .feature-item p {
+            color: #ffffff;
+            line-height: 1.7;
+        }
+
+        /* Stats Banner */
+        .stats-banner {
+            background: #363636; /* Dark Grey */
+            padding: 60px 40px;
+            border-radius: 20px;
+            margin: 60px 0;
+            border: 1px solid #ffd700; /* Yellow Border */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .stat-number {
+            color: #ffd700;
+            font-size: 3em;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .stat-label {
+            color: #ffffff;
+            font-size: 1.1em;
+            line-height: 1.4;
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: #363636; /* Dark Grey */
+            border: 1px solid #ffd700; /* Yellow Border */
+            border-radius: 15px;
+            padding: 35px;
+            margin: 40px 0;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .warning-box::before {
+            content: '⚠️';
+            font-size: 3em;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            opacity: 0.3;
+        }
+
+        .warning-box h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .warning-box p {
+            color: #ffffff;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .warning-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Comparison Table */
+        .comparison-wrapper {
+            overflow-x: auto;
+            margin: 40px 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #363636; /* Dark Grey */
+            border-radius: 15px;
+            border: 1px solid #ffd700; /* Yellow Border */
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .comparison-table thead {
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .comparison-table th {
+            color: #ffd700;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.2em;
+            border-bottom: 2px solid #ffd700;
+        }
+
+        .comparison-table td {
+            padding: 18px 20px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+            color: #ffffff;
+        }
+
+        .comparison-table tr:hover {
+            background: #404040;
+        }
+
+        /* Process Steps */
+        .process-steps {
+            margin: 50px 0;
+            position: relative;
+        }
+
+        .process-step {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 25px;
+            margin-bottom: 40px;
+            align-items: start;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ffd700, #fadc2f);
+            color: #000000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .step-content {
+            background: #363636; /* Dark Grey */
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #ffd700; /* Yellow Border */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .step-content:hover {
+            background: #404040;
+            transform: translateY(-5px);
+        }
+
+        .step-content h3 {
+            color: #ffd700;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+
+        .step-content p {
+            color: #ffffff;
+            line-height: 1.7;
+        }
+
+        /* FAQ Accordion - UPDATED STYLE */
+        .faq-section {
+            margin: 60px 0;
+        }
+
+        .faq-item {
+            background: #363636; /* Dark Grey Background */
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border: none; /* No border */
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .faq-item:hover {
+            background: #404040;
+        }
+
+        .faq-question {
+            padding: 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .faq-question h3 {
+            color: #ffd700;
+            margin: 0;
+            font-size: 1.3em;
+            flex: 1;
+        }
+
+        .faq-toggle {
+            color: #ffd700; /* Yellow Text */
+            font-size: 2em; /* Larger size */
+            font-weight: 400; /* Thinner */
+            background: transparent; /* No circle background */
+            width: auto;
+            height: auto;
+            border-radius: 0;
+            display: block;
+            margin-left: 20px;
+            line-height: 0.5;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-toggle:hover {
+            background: transparent;
+            transform: scale(1.1);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 25px;
+            background: inherit;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+            padding: 0 25px 25px 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg); /* Rotates to X */
+        }
+
+        .faq-answer p {
+            color: #ffffff;
+            line-height: 1.8;
+            font-size: 1.05em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .feature-grid, .risk-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .process-step {
+                grid-template-columns: 60px 1fr;
+                gap: 15px;
+            }
+
+            .step-number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5em;
+            }
+
+            .section-title, .risk-title {
+                font-size: 2em;
+            }
+        }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-fade {
+            opacity: 0;
+            transition: opacity 1s ease-out;
+        }
+
+        .animate-fade.animated {
+            opacity: 1;
+        }
+
+        .animate-slide-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-slide-left.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animate-slide-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-slide-right.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animate-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animate-scale.animated {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Stagger animations */
+        .info-box:nth-child(1) { transition-delay: 0.1s; }
+        .info-box:nth-child(2) { transition-delay: 0.2s; }
+        .info-box:nth-child(3) { transition-delay: 0.3s; }
+        .info-box:nth-child(4) { transition-delay: 0.4s; }
+        .info-box:nth-child(5) { transition-delay: 0.5s; }
+        .info-box:nth-child(6) { transition-delay: 0.6s; }
+
+        .feature-item:nth-child(1) { transition-delay: 0.1s; }
+        .feature-item:nth-child(2) { transition-delay: 0.15s; }
+        .feature-item:nth-child(3) { transition-delay: 0.2s; }
+        .feature-item:nth-child(4) { transition-delay: 0.25s; }
+        .feature-item:nth-child(5) { transition-delay: 0.3s; }
+        .feature-item:nth-child(6) { transition-delay: 0.35s; }
+        .feature-item:nth-child(7) { transition-delay: 0.4s; }
+        .feature-item:nth-child(8) { transition-delay: 0.45s; }
+
+        .faq-item:nth-child(1) { transition-delay: 0.05s; }
+        .faq-item:nth-child(2) { transition-delay: 0.1s; }
+        .faq-item:nth-child(3) { transition-delay: 0.15s; }
+        .faq-item:nth-child(4) { transition-delay: 0.2s; }
+        .faq-item:nth-child(5) { transition-delay: 0.25s; }
+        .faq-item:nth-child(6) { transition-delay: 0.3s; }
+        .faq-item:nth-child(7) { transition-delay: 0.35s; }
+        .faq-item:nth-child(8) { transition-delay: 0.4s; }
+        .faq-item:nth-child(9) { transition-delay: 0.45s; }
+        .faq-item:nth-child(10) { transition-delay: 0.5s; }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li::before {
+            content: '▸';
+            color: #ffd700;
+            font-weight: bold;
+            display: inline-block;
+            width: 1.2em;
+            margin-left: -1.2em;
+        }
+
+        ul {
+            padding-left: 1.5em;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Toggle Functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', function() {
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Intersection Observer
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, observerOptions);
+
+            // Animate all sections
+            document.querySelectorAll('.section-title, .section-subtitle, .info-box, .feature-item, .stats-banner, .stat-box, .warning-box, .faq-item, .process-step, .comparison-table').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Why Flood Insurance is Essential</h2>
+            <p class="section-subtitle">Flooding is the number one natural disaster in the U.S., and it can strike anywhere. Even if you’re outside a high-risk zone, flood insurance is essential for protecting your property from unexpected and expensive damage.</p>
+
+            <div class="warning-box">
+                <h3>Critical Fact: Homeowners Insurance Doesn't Cover Floods</h3>
+                <p>Many property owners assume their standard homeowners or business insurance covers flood damage, but it doesn’t. Flooding from hurricanes, heavy rain, storm surge, overflowing rivers, or melting snow requires a separate flood insurance policy. Without it, you’re exposed to potentially devastating financial losses.</p>
+            </div>
+
+            <div class="stats-banner">
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <span class="stat-number">90%</span>
+                        <span class="stat-label">Of Natural Disasters Involve Flooding</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">1"</span>
+                        <span class="stat-label">Of Water Can Cause $25,000 in Damage</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">20%</span>
+                        <span class="stat-label">Of Flood Claims Come From Low-Risk Areas</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">$500-1,500</span>
+                        <span class="stat-label">Average Annual Premium</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">What Does Flood Insurance Cover?</h2>
+            <p class="section-subtitle">Flood insurance policies provide coverage for direct physical losses caused by flooding, including structural damage and personal property protection.</p>
+
+            <div class="info-boxes">
+                <div class="info-box">
+                    <h3><span class="info-box-icon"></span> Building Coverage</h3>
+                    <p>Protects the structure of your home or building:</p>
+                    <ul>
+                        <li>Foundation and structural elements</li>
+                        <li>Electrical and plumbing systems</li>
+                        <li>Central air conditioning and furnace</li>
+                        <li>Water heaters and appliances</li>
+                        <li>Built-in cabinetry and bookcases</li>
+                        <li>Permanently installed flooring</li>
+                        <li>Detached garages (up to 10% of building limit)</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3><span class="info-box-icon"></span> Contents Coverage</h3>
+                    <p>Covers your personal belongings inside the building:</p>
+                    <ul>
+                        <li>Furniture and clothing</li>
+                        <li>Electronics and appliances</li>
+                        <li>Carpets not included in building</li>
+                        <li>Curtains and portable items</li>
+                        <li>Washers and dryers</li>
+                        <li>Food freezers and contents</li>
+                        <li>Artwork and collectibles (with limits)</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3><span class="info-box-icon"></span> Debris Removal</h3>
+                    <p>Coverage includes cleanup and removal costs:</p>
+                    <ul>
+                        <li>Removal of flood-damaged debris</li>
+                        <li>Cleanup of mud and silt</li>
+                        <li>Removal of waterlogged materials</li>
+                        <li>Demolition of damaged structures</li>
+                        <li>Hauling and disposal costs</li>
+                        <li>Environmental cleanup</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3><span class="info-box-icon"></span> Direct Flood Damage</h3>
+                    <p>Covers various flooding scenarios:</p>
+                    <ul>
+                        <li>River and stream overflow</li>
+                        <li>Storm surge and tidal flooding</li>
+                        <li>Heavy or prolonged rainfall</li>
+                        <li>Mudflow from flooding</li>
+                        <li>Flash flooding events</li>
+                        <li>Snowmelt flooding</li>
+                        <li>Dam or levee failure</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3><span class="info-box-icon"></span> Foundation Damage</h3>
+                    <p>Structural foundation repairs from flooding:</p>
+                    <ul>
+                        <li>Cracked or damaged foundations</li>
+                        <li>Basement structural damage</li>
+                        <li>Anchorage and support systems</li>
+                        <li>Structural wall damage</li>
+                        <li>Floor joist and support beam damage</li>
+                        <li>Crawl space flooding damage</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3><span class="info-box-icon"></span> Systems & Equipment</h3>
+                    <p>Critical home systems coverage:</p>
+                    <ul>
+                        <li>HVAC systems and ductwork</li>
+                        <li>Electrical panels and wiring</li>
+                        <li>Plumbing fixtures and pipes</li>
+                        <li>Water heaters and tanks</li>
+                        <li>Sump pumps and equipment</li>
+                        <li>Solar panels (building-mounted)</li>
+                        <li>Well water systems</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">What Flood Insurance Doesn't Cover</h2>
+            <p class="section-subtitle">Understanding the exclusions can help you determine if additional coverage is the right move for your property.</p>
+
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h4>❌ Temporary Living Expenses</h4>
+                    <p>Flood insurance does NOT cover hotel stays, meals, or other additional living expenses while your home is being repaired. You'll need to pay these costs out-of-pocket or relocate with family/friends.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h4>❌ Landscaping & Outdoor Items</h4>
+                    <p>Damage to landscaping, plants, trees, shrubs, swimming pools, hot tubs, fences, decks, patios, and septic systems is not covered. These are considered part of the land rather than the building.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h4>❌ Vehicles</h4>
+                    <p>Cars, motorcycles, RVs, boats, and other vehicles are not covered by flood insurance. Flood damage to vehicles is handled under the physical damage portion of your auto insurance policy.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h4>❌ Currency & Valuables</h4>
+                    <p>Cash, precious metals, stocks, bonds, important papers, and high-value items like jewelry have limited or no coverage. Consider a safe deposit box for irreplaceable documents and valuables.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h4>❌ Moisture/Mold/Mildew</h4>
+                    <p>Damage from moisture, mildew, or mold that could have been avoided by the property owner is excluded. However, mold resulting directly from flood damage may have limited coverage within 72 hours.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h4>❌ Self-Inflicted Loss</h4>
+                    <p>Financial losses you caused or could have prevented are not covered. This includes leaving doors open, failing to maintain property, or not taking reasonable steps to prevent additional damage.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h4>❌ Business Interruption</h4>
+                    <p>Lost business income, business interruption costs, and loss of use for commercial properties are not covered under standard flood policies. Businesses need separate business interruption insurance.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h4>❌ Basements (Partial)</h4>
+                    <p>Finished basements have limited coverage. Carpet, paneling, finished walls, and most personal contents in basements aren't covered. Only structural elements, utilities, and specific items qualify for coverage.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">NFIP vs. Private Flood Insurance</h2>
+            <p class="section-subtitle">You can get flood insurance through the National Flood Insurance Program (NFIP), a federal program, or through private insurance companies that offer their own flood coverage options.</p>
+
+            <div class="comparison-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>NFIP (Federal)</th>
+                            <th>Private Flood Insurance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Maximum Building Coverage</strong></td>
+                            <td>$250,000 (residential)<br>$500,000 (commercial)</td>
+                            <td>Up to $10 million or more</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Maximum Contents Coverage</strong></td>
+                            <td>$100,000 (residential)<br>$500,000 (commercial)</td>
+                            <td>Up to several million dollars</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pricing</strong></td>
+                            <td>Standardized rates based on flood maps</td>
+                            <td>Competitive, often lower for low-risk properties</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Replacement Cost Coverage</strong></td>
+                            <td>Limited availability</td>
+                            <td>Widely available</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Basement Coverage</strong></td>
+                            <td>Very limited</td>
+                            <td>More robust coverage options</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Additional Living Expenses</strong></td>
+                            <td>Not covered</td>
+                            <td>Often available as add-on</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Waiting Period</strong></td>
+                            <td>30 days</td>
+                            <td>Varies (often shorter or none)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Claims Process</strong></td>
+                            <td>Government-managed</td>
+                            <td>Direct with insurer</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Policy Customization</strong></td>
+                            <td>Standardized policy</td>
+                            <td>Flexible coverage options</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pool Coverage</strong></td>
+                            <td>Not covered</td>
+                            <td>May be available</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="warning-box">
+                <h3>Which Should You Choose?</h3>
+                <p><strong>Choose NFIP if:</strong> You need basic, affordable coverage and are required by your mortgage lender. Good for properties in high-risk zones with standard coverage needs.</p>
+                <p><strong>Choose Private Insurance if:</strong> You need higher coverage limits, replacement cost coverage, basement protection, or additional living expenses. Private policies often offer better rates for low risk properties and a wider range of coverage options.</p>
+                <p><strong>Best Option:</strong> Get quotes from both! Compare coverage, limits, exclusions, and pricing. Some property owners even carry both policies for maximum protection.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">How to Buy Flood Insurance</h2>
+            <p class="section-subtitle">Ready to protect your property from flood damage? Follow these quick steps to get started.</p>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Check Your Flood Zone</h3>
+                        <p>Visit FEMA's Flood Map Service Center to determine your property's flood zone. Zones are labeled A, V, X, etc. High-risk zones (A, V) require flood insurance if you have a federally-backed mortgage. Moderate-to-low risk zones (B, C, X) are often overlooked but still face flood risk.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Determine Coverage Needs</h3>
+                        <p>Calculate your property's replacement cost and the value of your contents. Consider your mortgage balance, equity, and ability to rebuild. Don't underinsure – the difference between $100,000 and $250,000 in coverage is usually minimal in premium cost.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Get Multiple Quotes</h3>
+                        <p>Contact insurance agents who sell both NFIP and private flood insurance. Compare coverage limits, exclusions, deductibles, and premiums. Ask about discounts for elevation, flood mitigation measures, and newly mapped properties.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Provide Property Information</h3>
+                        <p>You'll need your property address, year built, number of floors, foundation type, basement details, and elevation certificate (if available). Having an elevation certificate can significantly reduce premiums for some properties.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Wait for Coverage to Begin</h3>
+                        <p>NFIP policies have a 30-day waiting period from the purchase date before coverage begins. Exceptions include: new mortgages (coverage can start sooner), map changes that increase your flood risk, and renewals. Private policies may have shorter waiting periods or immediate coverage.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h3>Document Your Property</h3>
+                        <p>Create a detailed home inventory with photos and videos of your property and belongings. Store documentation in a safe place away from your home (cloud storage, safe deposit box). This makes filing claims much easier.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">What Does Flood Insurance Cost?</h2>
+            <p class="section-subtitle">Rates vary based on your property’s risk, but flood insurance is often more budget friendly than most people expect.</p>
+
+            <div class="stats-banner">
+                <p style="text-align: center; font-size: 1.3em; margin-bottom: 30px; color: #ffffff;">Average annual flood insurance premiums range from <strong style="color: #ffd700;">$500 to $1,500</strong> depending on your flood zone, coverage amount, and property characteristics.</p>
+                
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <span class="stat-number">$450</span>
+                        <span class="stat-label">Average for Low-Risk Zones (Preferred Risk Policy)</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">$700-1,500</span>
+                        <span class="stat-label">Average for Moderate-Risk Zones</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">$1,500-3,000</span>
+                        <span class="stat-label">Average for High-Risk Zones</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">30-45%</span>
+                        <span class="stat-label">Potential Savings with Elevation</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title" style="margin-top: 60px;">Factors That Affect Your Premium</h2>
+
+            <div class="info-boxes">
+                <div class="info-box">
+                    <h3>Location & Flood Zone</h3>
+                    <p>Your property's flood zone is the primary factor. High-risk zones (A, V) have higher premiums than moderate or low-risk zones (B, C, X). Even within zones, proximity to water sources affects rates.</p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Building Elevation</h3>
+                    <p>Properties elevated above the Base Flood Elevation (BFE) qualify for lower rates. An elevation certificate documenting your property's height can save hundreds or thousands annually.</p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Foundation Type</h3>
+                    <p>Buildings on pilings, piers, or elevated foundations typically have lower premiums than those with basements or slab foundations below flood elevation.</p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Building Age</h3>
+                    <p>Older buildings constructed before flood maps were created may face higher premiums. Properties built in compliance with current flood regulations often qualify for lower rates.</p>
+                </div>
+
+                <div class="info-box">
+                    <h3> Coverage Amount</h3>
+                    <p>Higher coverage limits increase premiums proportionally. Contents coverage is separate from building coverage and adds to your total premium.</p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Deductible Choice</h3>
+                    <p>Higher deductibles ($5,000-$10,000) result in lower premiums. Balance your deductible against what you can afford to pay out-of-pocket after a flood.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-section">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do I need flood insurance if I'm not in a high-risk zone?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! Over 20% of flood insurance claims come from properties outside high-risk flood zones. Moderate and low-risk areas can still flood from heavy rain, storm surge, snowmelt, or drainage problems. Flood insurance is much more affordable in low-risk zones (often under $500/year) making it a smart investment for any property owner.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How long does it take for flood insurance to go into effect?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>NFIP policies have a mandatory 30-day waiting period from the purchase date before coverage begins. Exceptions include: new mortgages (coverage can start sooner), map changes that increase your flood risk, and renewals. Private flood insurance may have shorter or no waiting periods. Don't wait until a storm is approaching – buy coverage well in advance.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Will my rates go up if I file a claim?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>NFIP rates are based on flood zone and property characteristics, not claims history. Filing a legitimate claim typically won't increase your premiums under NFIP. However, repeated claims may trigger scrutiny and potential non-renewal. Private insurers may consider claims history when setting rates. Always file valid claims – that's what insurance is for.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I get flood insurance for my condo or apartment?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! Condo owners should purchase contents coverage (up to $100,000) to protect their personal belongings. The condo association's master policy should cover the building structure. Renters can get contents-only flood insurance to protect their belongings. Both are relatively inexpensive and provide essential protection in flood-prone areas.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What's the difference between a flood watch and flood warning?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>A flood watch means flooding is possible – start preparing. A flood warning means flooding is occurring or imminent – take action immediately. During a flood watch, move valuables to higher floors, prepare emergency supplies, and stay informed. During a flood warning, evacuate if instructed, move to higher ground, and never drive through flooded areas.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Does flood insurance cover water backup from sewers?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Generally no. Sewer and drain backups are typically covered by a separate endorsement on your homeowners policy, not flood insurance. However, if sewer backup occurs as a direct result of flooding, it may be covered. Check with your agent about sewer backup coverage – it's usually inexpensive to add to your homeowners policy.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I cancel my flood insurance once the flood risk decreases?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can cancel, but it's rarely wise. If you have a mortgage, your lender may require flood insurance regardless of perceived risk. Flood zones can change, and unexpected flooding can occur anywhere. Once you cancel, you'll face a 30-day waiting period if you want coverage again. Keep continuous coverage to maintain grandfathered rates if flood maps change.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What should I do immediately after flood damage?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>First, ensure everyone's safety. Document all damage with photos and videos before cleanup. Notify your insurance company within 60 days (NFIP requirement). Remove standing water and begin drying out the property to prevent mold. Separate damaged from undamaged items. Keep receipts for all cleanup and temporary repairs. Don't throw away damaged items until the adjuster reviews them.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Is flood insurance tax deductible?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>For rental properties or business properties, flood insurance premiums are typically tax-deductible as a business expense. For primary residences, flood insurance premiums are generally not tax-deductible unless you qualify for certain itemized deductions. Consult with a tax professional about your specific situation.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How do I get an elevation certificate and why do I need one?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>An elevation certificate documents your property's elevation relative to the Base Flood Elevation. It's prepared by a licensed surveyor or engineer (costs $300-1,000). An elevation certificate can significantly reduce your premiums if your property is elevated above the BFE, potentially saving hundreds or thousands annually. Contact a local surveyor to get one prepared – the savings usually pay for it quickly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose The Insurance Boss for Flood Insurance?</h2>
+            
+            <div class="info-boxes">
+                <div class="info-box">
+                    <h3> Flood Insurance Experts</h3>
+                    <p>We specialize in flood insurance and understand the complexities of both NFIP and private flood coverage. Our agents help you navigate flood zones, elevation certificates, and coverage options to find the best protection.</p>
+                </div>
+
+                <div class="info-box">
+                    <h3> Multiple Options</h3>
+                    <p>We offer both NFIP and private flood insurance options. We compare coverage and pricing from multiple carriers to make sure you get the best value and the level of protection your property truly needs.</p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Best Rates</h3>
+                    <p>Our relationships with multiple insurers allow us to shop for competitive rates. We'll help you find discounts through elevation certificates, mitigation efforts, and preferred risk programs.</p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Fast Service</h3>
+                    <p>We understand flood insurance timing is critical. Our streamlined process gets you quoted and covered quickly, ensuring you meet lender requirements and protect your property before the next storm.</p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Claims Assistance</h3>
+                    <p>When flooding occurs, we're here to help. We guide you through the claims process, communicate with adjusters, and advocate for fair treatment to ensure you receive the full benefits you're entitled to.</p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Trusted Advisors</h3>
+                    <p>We've helped thousands of property owners protect their investments with proper flood coverage. Our reputation is built on expert advice, honest communication, and putting clients first.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

@@ -1,6 +1,6 @@
-@import "tailwindcss";
-
 @import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=JetBrains+Mono:wght@400;500;700;800&display=swap');
+
+@import "tailwindcss";
 
 @theme {
   --font-sans: "Bitter", Georgia, serif;
@@ -32,4 +32,37 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Translucent black backgrounds for all homepage sections and panels to show the global background image */
+section,
+#coverage-solutions,
+#policy-review,
+#for-agents,
+#inner-circle,
+#about {
+  background-color: rgba(0, 0, 0, 0.72) !important;
+}
+
+/* Make section card components translucent too with high-contrast glass style */
+.bg-zinc-950,
+.bg-zinc-900,
+.bg-zinc-900\/40,
+.bg-zinc-900\/60 {
+  background-color: rgba(9, 9, 11, 0.65) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+/* Ensure mega dropdown and mobile dropdown have full opaque backgrounds to prevent overlapping text */
+.mega-menu-container,
+.mobile-menu-container {
+  background-color: #09090b !important;
+  backdrop-filter: none !important;
+  opacity: 1 !important;
+}
+
+/* Footer should also let the background show through slightly */
+footer {
+  background-color: rgba(0, 0, 0, 0.85) !important;
+  backdrop-filter: blur(4px) !important;
 }

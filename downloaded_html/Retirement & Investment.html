@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retirement & Investment Solutions - Secure Your Financial Future | The Insurance Boss</title>
+    <meta name="description" content="Comprehensive retirement and investment solutions. IRAs, 401(k) Rollovers, Annuities, and College Savings Plans. Expert financial guidance for your future.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: transparent;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section Styling */
+        .content-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            color: #ffd700;
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-intro {
+            text-align: center;
+            font-size: 1.3em;
+            color: #ffffff;
+            margin-bottom: 60px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Investment Products Grid */
+        .investment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        /* Standard Card Style (Grey Background + Yellow Border) */
+        .investment-card {
+            background: #363636;
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid #ffd700;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            height: 100%;
+        }
+
+        .investment-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: #404040;
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.15);
+        }
+
+        .investment-card h3 {
+            color: #ffd700;
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .investment-card h4 {
+            color: #ffd700;
+            font-size: 1.4em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .investment-card p {
+            color: #ffffff;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .investment-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+
+        .investment-card ul li {
+            color: #ffffff;
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.05em;
+        }
+
+        .investment-card ul li::before {
+            content: '✓';
+            color: #ffd700;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.3em;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: #363636;
+            padding: 70px 40px;
+            border-radius: 25px;
+            margin: 80px 0;
+            border: 1px solid #ffd700;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 50px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .stat-number {
+            color: #ffd700;
+            font-size: 3.5em;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .stat-label {
+            color: #ffffff;
+            font-size: 1.2em;
+            line-height: 1.4;
+        }
+
+        /* Comparison Table */
+        .comparison-wrapper {
+            overflow-x: auto;
+            margin: 40px 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #363636;
+            border-radius: 15px;
+            border: 1px solid #ffd700;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .comparison-table thead {
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .comparison-table th {
+            color: #ffd700;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.2em;
+            border-bottom: 2px solid #ffd700;
+        }
+
+        .comparison-table td {
+            padding: 18px 20px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+            color: #ffffff;
+        }
+
+        .comparison-table tr:hover {
+            background: #404040;
+        }
+
+        /* FAQ Section - Clean Style */
+        .faq-section {
+            margin: 80px 0;
+        }
+
+        .faq-item {
+            background: #363636;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            border: none;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .faq-item:hover {
+            background: #404040;
+        }
+
+        .faq-question {
+            padding: 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .faq-question h3 {
+            color: #ffd700;
+            margin: 0;
+            font-size: 1.4em;
+            flex: 1;
+            font-weight: 700;
+        }
+
+        .faq-toggle {
+            width: auto;
+            height: auto;
+            background: transparent;
+            color: #ffd700;
+            font-size: 2em;
+            font-weight: 400;
+            display: block;
+            margin-left: 20px;
+            line-height: 0.5;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 30px;
+            background: inherit;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+            padding: 0 30px 30px 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer p {
+            color: #ffffff;
+            line-height: 1.9;
+            font-size: 1.1em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .investment-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 2.2em; }
+        }
+
+        /* Animations */
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .animate-on-scroll.animated { opacity: 1; transform: translateY(0); }
+        .animate-fade { opacity: 0; transition: opacity 1s ease-out; }
+        .animate-fade.animated { opacity: 1; }
+        .animate-scale { opacity: 0; transform: scale(0.9); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .animate-scale.animated { opacity: 1; transform: scale(1); }
+
+        html { scroll-behavior: smooth; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Toggle
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', function() {
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Intersection Observer
+            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, observerOptions);
+
+            // Animate elements
+            document.querySelectorAll('.section-title, .section-intro, .investment-card, .stats-section, .stat-item, .faq-item, .comparison-table').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+        });
+    </script>
+</head>
+<body>
+    
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Prepare for Your Financial Future</h2>
+            <p class="section-intro">Retirement planning isn't just about saving; it's about strategic growth and protection. We connect you with licensed financial professionals who can help you optimize your portfolio, minimize taxes, and ensure your money lasts as long as you do.</p>
+
+            <div class="stats-section">
+                <h3 style="text-align: center; color: #ffd700; font-size: 2em; margin-bottom: 20px;">The Retirement Reality</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">1.5M</span>
+                        <span class="stat-label">Recommended Retirement Savings for Comfortable Lifestyle</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">64%</span>
+                        <span class="stat-label">Of Americans Worry They Won't Have Enough for Retirement</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">300K+</span>
+                        <span class="stat-label">Average Cost of 4-Year College Education</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">30 Years</span>
+                        <span class="stat-label">Average Length of Retirement</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Explore Retirement & Investment Options</h2>
+            <p class="section-intro">We provide educational resources and connect you with licensed professionals who offer a range of insurance-based and financial solutions to help you save, invest, and work toward long-term financial security.</p>
+
+            <div class="investment-grid">
+                <div class="investment-card">
+                    <h3>Individual Retirement Accounts (IRAs)</h3>
+                    <p>Tax-advantaged retirement savings accounts that help you build wealth for your golden years. Choose between Traditional and Roth IRAs based on your tax situation and retirement goals.</p>
+                    
+                    <h4>Traditional IRA</h4>
+                    <ul>
+                        <li>Contributions may be tax-deductible</li>
+                        <li>Tax-deferred growth - pay taxes at withdrawal</li>
+                        <li>Required Minimum Distributions (RMDs) at age 73</li>
+                    </ul>
+
+                    <h4>Roth IRA</h4>
+                    <ul>
+                        <li>Contributions made with after-tax dollars</li>
+                        <li>Tax-free growth and qualified withdrawals</li>
+                        <li>No RMDs during owner's lifetime</li>
+                    </ul>
+                </div>
+
+                <div class="investment-card">
+                    <h3>401(k) Rollovers</h3>
+                    <p>Move funds from your old employer's 401(k) into an IRA or new employer's plan. Maintain tax-advantaged status while gaining more investment control and potentially lower fees.</p>
+                    
+                    <ul>
+                        <li>Consolidate multiple retirement accounts</li>
+                        <li>Expanded investment options beyond employer plan</li>
+                        <li>Potentially lower fees and expenses</li>
+                        <li>Greater control over your investments</li>
+                        <li>No taxes or penalties with direct rollover</li>
+                    </ul>
+                </div>
+
+                <div class="investment-card">
+                    <h3>Annuities</h3>
+                    <p>Insurance products that provide guaranteed income streams in retirement. Convert a lump sum into reliable payments for life or a specified period, eliminating longevity risk.</p>
+                    
+                    <ul>
+                        <li>Guaranteed income for life</li>
+                        <li>Principal protection options</li>
+                        <li>Tax-deferred growth</li>
+                        <li>Death benefit provisions for beneficiaries</li>
+                        <li>Fixed, Variable, and Indexed options available</li>
+                    </ul>
+                </div>
+
+                <div class="investment-card">
+                    <h3>College Savings Plans (529)</h3>
+                    <p>Tax-advantaged savings plans designed to encourage saving for future education costs. Legally known as "qualified tuition plans," they are sponsored by states, state agencies, or educational institutions.</p>
+                    
+                    <ul>
+                        <li>Tax-free growth when used for qualified expenses</li>
+                        <li>High contribution limits</li>
+                        <li>State tax deductions or credits (varies by state)</li>
+                        <li>Flexible beneficiary changes within the family</li>
+                        <li>Can be used for K-12 tuition in some cases</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Traditional IRA vs. Roth IRA Comparison</h2>
+            <p class="section-intro">Understanding the key differences helps you make an informed decision when exploring IRA options with a licensed financial professional.</p>
+
+            <div class="comparison-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Traditional IRA</th>
+                            <th>Roth IRA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Tax Treatment of Contributions</strong></td>
+                            <td>Tax-deductible (may reduce taxable income)</td>
+                            <td>Made with after-tax dollars (no deduction)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tax Treatment of Withdrawals</strong></td>
+                            <td>Taxed as ordinary income</td>
+                            <td>Tax-free if qualified (5-year rule applies)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Growth</strong></td>
+                            <td>Tax-deferred</td>
+                            <td>Tax-free</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Required Minimum Distributions</strong></td>
+                            <td>Must begin at age 73</td>
+                            <td>No RMDs during owner's lifetime</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Income Limits</strong></td>
+                            <td>None to contribute (deductibility may be limited)</td>
+                            <td>Yes - Income limits apply</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section faq-section">
+        <div class="container">
+            <h2 class="section-title">Common Questions</h2>
+
+            <!-- NEW FAQ 1 -->
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What is a Retirement Investment Plan?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>A retirement investment plan is a strategic roadmap built around one goal: ensuring you have the financial independence to live on your terms after your working years end. It begins by defining what your retirement actually looks like — the lifestyle you want, the income you'll need to sustain it, and the age at which you plan to stop working. From there, the plan identifies the specific tax-advantaged vehicles best suited to get you there. This may include a Traditional or Roth IRA for individual savings, a 401(k) through your employer, annuities for guaranteed income, or a combination of all three. A well-designed plan doesn't just accumulate money — it sequences withdrawals strategically to minimize taxes, protects your assets from market volatility, and ensures your capital outlasts your retirement. Think of it less as a savings account and more as a complete blueprint for your financial legacy.</p>
+                </div>
+            </div>
+
+            <!-- NEW FAQ 2 -->
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What is a Retirement Investment Portfolio?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Your retirement investment portfolio is the total collection of financial assets you own and have designated toward funding your future — stocks, bonds, mutual funds, ETFs, annuities, real estate, and cash equivalents. But owning assets isn't the same as having a portfolio that works. In a true wealth protection strategy, a portfolio is deliberately structured to balance risk against reward based on your timeline and income needs. Early in your career, a portfolio may lean toward growth-oriented assets. As retirement approaches, it shifts toward capital preservation and income generation — protecting what you've built while still generating the returns needed to fund 20 to 30 years of retirement. The goal is not just growth. It's building a collection of assets that produces reliable, predictable income without outliving itself — the financial foundation of a lasting legacy.</p>
+                </div>
+            </div>
+
+            <!-- NEW FAQ 3 -->
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What is a Retirement Investment Fund?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>A retirement investment fund is a pooled investment vehicle — such as a mutual fund, ETF, or target-date fund — where capital from many investors is combined and managed by professional portfolio managers. Rather than selecting individual stocks or bonds, you invest in a fund that holds hundreds or thousands of securities at once, giving you instant diversification that would be nearly impossible to achieve on your own. For retirement planning, funds are particularly powerful because they reduce concentration risk, provide access to professionally managed strategies, and allow you to invest with relatively modest amounts. Target-date funds take this further by automatically adjusting their asset allocation as you approach retirement — becoming more conservative over time without you having to manage the transition. For many people, a well-chosen fund is the foundation of a secure, predictable retirement income stream.</p>
+                </div>
+            </div>
+
+            <!-- EXISTING FAQs -->
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>When can I start withdrawing from my IRA without penalty?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Generally, you can start withdrawing from your IRA without the 10% early withdrawal penalty once you reach age 59½. Withdrawals before this age typically incur taxes plus the penalty, though there are some exceptions for first-time home purchases, education expenses, and medical costs.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Can I contribute to both a 401(k) and an IRA?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, you can contribute to both. Participating in a 401(k) at work does not stop you from contributing to an IRA. However, your ability to deduct Traditional IRA contributions on your taxes might be limited based on your income level if you have a workplace plan.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What is a rollover?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>A rollover is the transfer of funds from one retirement account (like an old 401(k)) to another (like an IRA) without triggering immediate taxes or penalties. It allows you to consolidate savings and maintain their tax-advantaged status.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Are annuities safe?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Annuities are insurance contracts backed by the financial strength of the issuing insurance company. Fixed annuities offer principal protection, meaning you won't lose money due to market downturns. It's important to choose highly-rated insurance carriers for maximum security.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What happens to my 529 plan if my child doesn't go to college?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>You have options! You can change the beneficiary to another family member (like a sibling), save it for future education (grad school), use up to $10,000 for student loan repayment, or roll over up to $35,000 into a Roth IRA for the beneficiary (subject to certain rules).</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Is there a time limit to roll over my old 401(k)?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Generally, no. You can usually keep funds in an old employer's plan indefinitely if the balance is over $5,000. However, initiating a direct rollover to an IRA at any time gives you more control and investment options. If you receive a check (indirect rollover), you must deposit it within 60 days to avoid taxes/penalties.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+</html>

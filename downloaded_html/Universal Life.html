@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Life Insurance - Flexible Permanent Coverage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            background: transparent;
+            color: #ffffff;
+        }
+
+        /* How It Works Section */
+        .how-it-works-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .how-it-works-intro {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(60, 60, 60, 0.85);
+            padding: 50px 60px;
+            border-radius: 12px;
+            border-left: 5px solid #ffd700;
+        }
+
+        .intro-content p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .intro-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: #ffffff;
+            font-size: 20px;
+        }
+
+        /* Value Proposition Section */
+        .value-prop-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .value-prop-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .value-card {
+            background: rgba(60, 60, 60, 0.85);
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            border-top: 5px solid #ffd700;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .value-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .value-card .icon {
+            font-size: 70px;
+            margin-bottom: 20px;
+        }
+
+        .value-card h3 {
+            color: #ffd700;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .value-card p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+        /* Social Proof Section */
+        .social-proof-section {
+            padding: 60px 20px;
+            background: rgba(60, 60, 60, 0.85);
+        }
+
+        .social-proof-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .social-proof-container h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .stat-box {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .stat-box.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-box .number {
+            color: #ffd700;
+            font-size: 52px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-box .number-text {
+            color: #ffd700;
+            font-size: 52px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-box .label {
+            color: #ffffff;
+            font-size: 18px;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .testimonial {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid #ffd700;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .testimonial.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .testimonial .quote {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial .author {
+            color: #ffd700;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .testimonial .location {
+            color: #cccccc;
+            font-size: 14px;
+        }
+
+        /* Problem/Solution Section */
+        .problem-solution-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .problem-solution-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .problem-box,
+        .solution-box {
+            padding: 40px;
+            border-radius: 12px;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .solution-box {
+            transform: translateX(30px);
+        }
+
+        .problem-box.animate,
+        .solution-box.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .problem-box {
+            background: rgba(80, 40, 40, 0.85);
+            border-left: 5px solid #ff4444;
+        }
+
+        .solution-box {
+            background: rgba(40, 80, 40, 0.85);
+            border-left: 5px solid #44ff44;
+        }
+
+        .problem-box h2,
+        .solution-box h2 {
+            color: #ffd700;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .problem-box ul,
+        .solution-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .problem-box ul li,
+        .solution-box ul li {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            padding-left: 35px;
+            position: relative;
+        }
+
+        .problem-box ul li::before {
+            content: "✗";
+            color: #ff4444;
+            font-weight: bold;
+            font-size: 24px;
+            position: absolute;
+            left: 0;
+        }
+
+        .solution-box ul li::before {
+            content: "✓";
+            color: #44ff44;
+            font-weight: bold;
+            font-size: 24px;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: rgba(60, 60, 60, 0.85);
+            padding: 40px;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease;
+        }
+
+        .feature-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-card:hover {
+            border-color: #ffd700;
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: #ffd700;
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .feature-card p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .feature-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .feature-card ul li {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 12px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .feature-card ul li::before {
+            content: "→";
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 20px;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            padding: 60px 20px;
+            background: rgba(60, 60, 60, 0.85);
+        }
+
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefits-container h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .benefit-item {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .benefit-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .benefit-item .check {
+            color: #ffd700;
+            font-size: 32px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .benefit-item .content h3 {
+            color: #ffd700;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .benefit-item .content p {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* Types Section */
+        .types-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .types-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .types-container h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .type-item {
+            background: rgba(60, 60, 60, 0.85);
+            padding: 40px 30px;
+            border-radius: 12px;
+            border: 2px solid #ffd700;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .type-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .type-item h3 {
+            color: #ffd700;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .type-item p {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .type-item ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .type-item ul li {
+            color: #ffffff;
+            font-size: 17px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .type-item ul li::before {
+            content: "✓";
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 20px;
+            position: absolute;
+            left: 0;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(60, 60, 60, 0.85);
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease;
+        }
+
+        .faq-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .faq-item:hover {
+            border-color: #ffd700;
+        }
+
+        .faq-header {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .faq-header h3 {
+            color: #ffd700;
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .faq-header .icon {
+            color: #ffd700;
+            font-size: 24px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-header .icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-content {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-item.active .faq-content {
+            padding: 25px 30px;
+            max-height: 1000px;
+        }
+
+        .faq-content p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .faq-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 20px;
+            background: transparent;
+        }
+
+        .cta-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.98) 0%, rgba(255, 193, 7, 0.98) 100%);
+            padding: 60px 50px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 10px 50px rgba(255, 215, 0, 0.3);
+        }
+
+        .cta-container h2 {
+            color: #1a1a1a;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-container .urgency-text {
+            color: #cc0000;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-container p {
+            color: #1a1a1a;
+            font-size: 22px;
+            margin-bottom: 35px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #1a1a1a;
+            color: #ffd700;
+            padding: 18px 50px;
+            font-size: 22px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            background: #2a2a2a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .value-prop-grid,
+            .features-grid,
+            .benefits-grid,
+            .types-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonial-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .problem-solution-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-header h2,
+            .social-proof-container h2,
+            .benefits-container h2,
+            .types-container h2,
+            .cta-container h2 {
+                font-size: 32px;
+            }
+
+            .stats-row,
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .value-card,
+            .feature-card,
+            .cta-container {
+                padding: 30px 20px;
+            }
+
+            .how-it-works-intro {
+                padding: 30px 25px;
+            }
+
+            .intro-content p {
+                font-size: 18px;
+            }
+
+            .cta-container h2 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- How Universal Life Insurance Works Section -->
+    <section class="how-it-works-section">
+        <div class="section-header">
+            <h2>How Universal Life Insurance Works</h2>
+            <p>Flexible permanent coverage with adjustable premiums and death benefits, offered by licensed insurance carriers. We provide educational guidance and help connect you with licensed insurance professionals who can explain universal life insurance options and features in detail.</p>
+        </div>
+
+        <div class="how-it-works-intro">
+            <div class="intro-content">
+                <p>Universal life insurance is a flexible permanent life insurance policy that provides lifetime coverage with the ability to adjust premiums and death benefits as your needs change. Unlike whole life insurance with fixed premiums, universal life allows you to increase or decrease premium payments within certain limits, skip payments if sufficient cash value exists, and even adjust your death benefit up or down based on your changing circumstances.</p>
+                
+                <p>The policy operates with two components: a death benefit that protects your beneficiaries, and a cash value account that earns interest based on current rates or market performance (depending on the type). Your premiums are split between the cost of insurance, administrative fees, and cash value accumulation. The cash value grows tax-deferred and can be accessed through withdrawals or loans, providing financial flexibility during your lifetime.</p>
+                
+                <p>Universal life insurance comes in several varieties including traditional universal life with fixed interest rates, indexed universal life tied to market indexes, and variable universal life with investment subaccounts. This flexibility makes universal life ideal for people who want permanent coverage but need the ability to adjust their policy as income, family situations, or financial goals change over time. The key advantage is control you decide how much to pay and when, within policy guidelines, giving you more financial adaptability than traditional whole life insurance.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Proposition Cards -->
+    <section class="value-prop-section">
+        <div class="value-prop-grid">
+            <div class="value-card">
+                <h3>Flexible Premium Payments</h3>
+                <p>Enjoy the freedom to adjust your payments as life changes. Increase contributions to build cash value faster, reduce premiums when needed, or even skip payments when your cash value is sufficient. You stay in control of your policy’s funding.</p>
+            </div>
+            <div class="value-card">
+                <h3>Adjustable Death Benefit</h3>
+                <p>Customize your coverage over time. Increase your death benefit when your protection needs grow, or decrease it later to help reduce premiums. Your policy adapts as your life evolves.</p>
+            </div>
+            <div class="value-card">
+                <h3>Cash Value Growth</h3>
+                <p>Build cash value on a tax-deferred basis, with growth tied to either fixed interest or market-linked crediting strategies. Access your money through policy loans or withdrawals for major goals, emergencies, or opportunities. Your policy becomes a flexible financial resource.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="social-proof-section">
+        <div class="social-proof-container">
+            <h2>Flexible Lifetime Protection</h2>
+            
+            <div class="stats-row">
+                <div class="stat-box">
+                    <span class="number-text">Lifetime</span>
+                    <span class="label">Coverage duration</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number" data-target="100" data-suffix="%">0</span>
+                    <span class="label">Premium flexibility</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number" data-target="4" data-suffix="-8%">0</span>
+                    <span class="label">Typical interest crediting rates</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number-text">$0</span>
+                    <span class="label">Tax on cash value growth</span>
+                </div>
+            </div>
+
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <p class="quote">"When my income dropped during a career change, I reduced my premiums temporarily using my policy's cash value. Once back on track, I increased payments again. That flexibility saved me from losing coverage."</p>
+                    <p class="author">Mark T.</p>
+                    <p class="location">Sales Manager, Chicago, IL</p>
+                </div>
+                <div class="testimonial">
+                    <p class="quote">"My indexed universal life policy has grown cash value faster than traditional policies by tracking the S&P 500. I've built $125,000 in cash value over 15 years with no market downside risk."</p>
+                    <p class="author">Patricia R.</p>
+                    <p class="location">Business Owner, Phoenix, AZ</p>
+                </div>
+                <div class="testimonial">
+                    <p class="quote">"I increased my death benefit when my twins were born, then decreased it 20 years later when they graduated. Universal life adapted to my changing needs perfectly without buying new policies."</p>
+                    <p class="author">Steven K.</p>
+                    <p class="location">Engineer, Seattle, WA</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem/Solution Section -->
+    <section class="problem-solution-section">
+        <div class="problem-solution-container">
+            <div class="problem-box">
+                <h2>Fixed Insurance Limitations</h2>
+                <ul>
+                    <li>Rigid premium schedules with no flexibility</li>
+                    <li>Can't adjust death benefit as needs change</li>
+                    <li>Lower cash value growth with fixed rates</li>
+                    <li>Miss payments = policy lapses immediately</li>
+                    <li>Need new policy if coverage requirements change</li>
+                    <li>No ability to pay more during high-income years</li>
+                </ul>
+            </div>
+
+            <div class="solution-box">
+                <h2>Universal Life Flexibility</h2>
+                <ul>
+                    <li>Adjust premiums up, down, or skip with cash value</li>
+                    <li>Increase or decrease death benefit as needed</li>
+                    <li>Higher growth potential with indexed or variable options</li>
+                    <li>Cash value covers missed payments automatically</li>
+                    <li>One policy adapts to changing life circumstances</li>
+                    <li>Maximize cash value during high-earning periods</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="section-header">
+            <h2>Key Features of Universal Life Insurance</h2>
+            <p>Enjoy lifelong protection with unmatched flexibility and full control over your policy’s cost, cash value, and benefits.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Flexible Premium Payments</h3>
+                <p>Pay more, less, or skip premiums based on your financial situation. Your policy remains active as long as cash value covers costs.</p>
+                <ul>
+                    <li>Pay more during high-income years</li>
+                    <li>Reduce payments during financial hardship</li>
+                    <li>Skip payments using cash value</li>
+                    <li>No fixed schedule requirements</li>
+                    <li>Accelerate cash value accumulation</li>
+                    <li>Complete control over payment timing</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <h3>Adjustable Death Benefit</h3>
+                <p>Increase coverage when you need more protection or decrease it to lower costs without buying a new policy.</p>
+                <ul>
+                    <li>Increase for growing family needs</li>
+                    <li>Decrease when dependents are grown</li>
+                    <li>Match coverage to current income</li>
+                    <li>Medical underwriting may be required for increases</li>
+                    <li>Adapt to business partnership changes</li>
+                    <li>One policy adjusts with your life</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <h3>Cash Value Accumulation</h3>
+                <p>Build tax-deferred cash value that grows based on interest crediting rates. Access funds through loans or withdrawals anytime.</p>
+                <ul>
+                    <li>Tax-deferred growth on cash value</li>
+                    <li>Interest rates typically 4-8% annually</li>
+                    <li>Withdraw or borrow from cash value</li>
+                    <li>Can exceed premium payments over time</li>
+                    <li>Protected from creditors in most states</li>
+                    <li>Automatic premium payments if desired</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <h3>Transparent Policy Costs</h3>
+                <p>Universal life provides complete transparency on how premiums are allocated you see exactly what goes to insurance costs versus cash value.</p>
+                <ul>
+                    <li>Clear breakdown of cost of insurance</li>
+                    <li>Visible administrative fees</li>
+                    <li>Track cash value growth monthly</li>
+                    <li>Understand policy performance clearly</li>
+                    <li>Annual statements show all charges</li>
+                    <li>Make informed adjustment decisions</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <h3>Living Benefits Access</h3>
+                <p>Access your cash value during your lifetime through loans or withdrawals for emergencies, opportunities, or retirement income.</p>
+                <ul>
+                    <li>Borrow against cash value anytime</li>
+                    <li>Tax-free policy loans</li>
+                    <li>No credit checks required</li>
+                    <li>Supplement retirement income</li>
+                    <li>Fund emergencies or opportunities</li>
+                    <li>Flexible repayment terms</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <h3>No-Lapse Guarantee Options</h3>
+                <p>Many policies offer no-lapse guarantees that keep coverage in force even if cash value drops to zero, as long as minimum premiums are paid.</p>
+                <ul>
+                    <li>Coverage guaranteed with minimum payments</li>
+                    <li>Protection even if cash value depletes</li>
+                    <li>Provides downside protection</li>
+                    <li>Predictable long-term costs</li>
+                    <li>Peace of mind during market downturns</li>
+                    <li>Optional rider on most policies</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="benefits-container">
+            <h2>Why Choose Universal Life Insurance?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Ultimate Flexibility</h3>
+                        <p>Adjust premiums and death benefits as your income, family needs, or financial goals evolve. One policy can adapt throughout your life without needing to replace it.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Permanent Protection</h3>
+                        <p>Enjoy lifelong coverage as long as required premiums are paid or sufficient cash value remains to support the policy. No renewal periods or expiration dates.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Cash Value Growth Potential</h3>
+                        <p>Acumulate cash value on a tax-deferred basis over time. Depending on the policy type, crediting may be fixed, indexed to market performance, or tied to market sub-accounts (with corresponding risks and caps).</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Tax Advantages</h3>
+                        <p>Cash value grows tax-deferred, policy loans can generally be accessed tax-free, and death benefits are typically received income-tax free by beneficiaries under current IRS rules. A powerful structure for long-term planning.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Lower Cost Than Whole Life</h3>
+                        <p>Universal life policies are often more affordable than whole life for the same amount of coverage, offering a flexible path to permanent protection.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Complete Transparency</h3>
+                        <p>Track exactly how premiums fund both the cost of insurance and the policy’s cash value. Regular statements help you manage your policy with full clarity and confidence.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Estate Planning Tool</h3>
+                        <p>Provides immediate liquidity for estate taxes and expenses. Death benefit passes outside probate directly to beneficiaries, preserving wealth.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Business Planning Uses</h3>
+                        <p>Ideal for key person insurance, buy-sell agreements, and executive benefits. Flexibility accommodates changing business needs and ownership structures.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Types Section -->
+    <section class="types-section">
+        <div class="types-container">
+            <h2>Types of Universal Life Insurance</h2>
+            <div class="types-grid">
+                <div class="type-item">
+                    <h3>Traditional Universal Life</h3>
+                    <p>Cash value earns interest based on rates declared by the insurance company, typically with guaranteed minimums of 2-4% and current rates of 4-6%.</p>
+                    <ul>
+                        <li>Predictable interest crediting</li>
+                        <li>Guaranteed minimum rates</li>
+                        <li>Lower risk than variable options</li>
+                        <li>Transparent cost structure</li>
+                        <li>Most flexible premium options</li>
+                    </ul>
+                </div>
+
+                <div class="type-item">
+                    <h3>Indexed Universal Life (IUL)</h3>
+                    <p>Cash value growth tied to stock market indexes like the S&P 500 with downside protection. Participate in market gains without market losses.</p>
+                    <ul>
+                        <li>Higher growth potential (8-12%)</li>
+                        <li>No losses when markets drop</li>
+                        <li>Interest caps limit maximum gains</li>
+                        <li>Popular for wealth accumulation</li>
+                        <li>Guaranteed floor (typically 0-1%)</li>
+                    </ul>
+                </div>
+
+                <div class="type-item">
+                    <h3>Variable Universal Life (VUL)</h3>
+                    <p>Cash value invested in subaccounts similar to mutual funds. Highest growth potential but also highest risk cash value can decrease with market losses.</p>
+                    <ul>
+                        <li>Unlimited growth potential</li>
+                        <li>Choose investment allocations</li>
+                        <li>Cash value can lose money</li>
+                        <li>Requires active management</li>
+                        <li>Best for sophisticated investors</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="section-header">
+            <h2>Universal Life Insurance FAQs</h2>
+            <p>Common questions about flexible permanent coverage</p>
+        </div>
+
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>How does universal life insurance differ from whole life?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Universal life offers flexible premiums, adjustable death benefits, and transparent costs, while whole life has fixed premiums, guaranteed cash value growth, and potential dividends. Universal life gives you more control but requires more active management to ensure the policy stays in force.</p>
+                    <p>Whole life provides more guarantees and predictability. Universal life offers flexibility and potentially higher cash value growth. Choose whole life for set-it-and-forget-it simplicity, universal life if you want control over premiums and want to actively manage your policy.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Can my universal life policy lapse?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Yes, if cash value is insufficient to cover monthly insurance costs and you don't pay additional premiums, the policy will lapse. This is the tradeoff for premium flexibility. Monitor your policy annually and ensure sufficient cash value or regular premium payments maintain coverage.</p>
+                    <p>Many policies offer no-lapse guarantee riders that prevent lapse as long as you pay minimum required premiums. This provides downside protection while maintaining flexibility. Work with your agent to understand required payments for guaranteed coverage.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>What is indexed universal life (IUL)?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>IUL credits interest based on stock market index performance (usually S&P 500) with a guaranteed floor (typically 0-1%) protecting against losses and a cap (typically 10-14%) limiting maximum gains. You participate in market upside without downside risk.</p>
+                    <p>Over time, IUL can provide higher cash value growth than traditional universal life while protecting principal. The tradeoff is capped gains during strong market years. IUL is popular for wealth accumulation and supplemental retirement income planning.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>How much premium flexibility do I really have?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>You can pay anywhere from the minimum required to keep coverage in force (often $50-100/month) to the maximum allowed by IRS guidelines (typically much higher). Skip payments entirely if cash value is sufficient. Increase payments during high-income years to build cash value faster.</p>
+                    <p>Most policies provide annual statements showing required payments for guaranteed coverage, target premiums for expected performance, and maximum premiums allowed. This transparency helps you make informed decisions about payment amounts and timing.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Should I choose traditional, indexed, or variable universal life?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Choose traditional UL for predictable, guaranteed growth with lower risk. Choose IUL for higher growth potential with downside protection good for long-term wealth building. Choose VUL only if you're a sophisticated investor comfortable with market risk and active management.</p>
+                    <p>Most people choose IUL for the balance of growth potential and protection. Traditional UL works well if you prioritize stability over growth. VUL is best for high-net-worth individuals with investment experience who want maximum control and growth potential.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Can I increase my death benefit later?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Yes, but increases typically require medical underwriting to ensure you're still insurable at reasonable rates. The insurance company will assess your current health before approving increases. Decreases usually don't require underwriting and lower your costs immediately.</p>
+                    <p>Some policies include guaranteed insurability riders that allow specified increases on certain dates (marriage, birth of child) without medical exams. This provides flexibility to increase coverage when needed without health concerns preventing approval.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>How do I know if my policy is performing well?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Review annual statements showing cash value growth, interest credited, cost of insurance charges, and projected future performance. Compare actual performance to original illustrations. Monitor whether current premiums will keep the policy in force to age 100 or beyond.</p>
+                    <p>Meet with your agent annually to review policy performance. They can run updated illustrations showing if you need to increase premiums to maintain coverage or if you can reduce payments while maintaining desired death benefit. Proactive monitoring prevents unexpected lapses.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Is universal life insurance worth it?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Universal life is worth it if you need permanent coverage with flexibility, want cash value growth potential, and are willing to monitor policy performance. It's ideal for people with variable income, changing coverage needs, or those seeking wealth accumulation with tax advantages.</p>
+                    <p>Not right for everyone. If you want simplicity and guarantees, choose whole life. If you only need temporary coverage, choose term. But for permanent protection with maximum flexibility and control, universal life offers the best balance of cost, coverage, and adaptability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    
+                    // If it's a stat box with a number, animate the counter
+                    if (entry.target.classList.contains('stat-box')) {
+                        const numberElement = entry.target.querySelector('.number');
+                        if (numberElement && !numberElement.classList.contains('counted')) {
+                            animateCounter(numberElement);
+                        }
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.value-card, .stat-box, .testimonial, .problem-box, .solution-box, .feature-card, .benefit-item, .type-item, .faq-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter animation function
+        function animateCounter(element) {
+            element.classList.add('counted');
+            const target = parseFloat(element.getAttribute('data-target'));
+            const prefix = element.getAttribute('data-prefix') || '';
+            const suffix = element.getAttribute('data-suffix') || '';
+            const duration = 2000; // 2 seconds
+            const increment = target / (duration / 16); // 60fps
+            let current = 0;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    element.textContent = prefix + Math.floor(current) + suffix;
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = prefix + target + suffix;
+                }
+            };
+
+            updateCounter();
+        }
+
+        // FAQ Toggle functionality
+        document.querySelectorAll('.faq-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const faqItem = header.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all other FAQs
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Toggle current FAQ
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

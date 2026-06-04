@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { WebsiteConfig, SubwebsiteCategory, Subwebsite } from "../types";
-import { X, Save, RefreshCw, Layers, Sliders, Type, Link, Image, Trash2, Plus, Info, Layout } from "lucide-react";
+import { X, Save, RefreshCw, Layers, Sliders, Type, Link, Image, Trash2, Plus, Info, Layout, Lock } from "lucide-react";
+import { getDirectImageUrl } from "./Header";
 
 interface AdminPanelProps {
   config: WebsiteConfig;
@@ -10,13 +11,21 @@ interface AdminPanelProps {
 }
 
 export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPanelProps) {
-  const [activeTab, setActiveTab] = useState<"global" | "hero" | "pillars" | "splits" | "subwebsites">("global");
+  const [activeTab, setActiveTab] = useState<"global" | "hero" | "pillars" | "splits" | "subwebsites" | "carriers" | "banners" | "buttons" | "fonts">("global");
   const [localConfig, setLocalConfig] = useState<WebsiteConfig>({ ...config });
   const [saveSuccess, setSaveSuccess] = useState(false);
+  const [passwordInput, setPasswordInput] = useState("");
+  const [isUnlocked, setIsUnlocked] = useState(() => {
+    return sessionStorage.getItem("boss_admin_unlocked") === "true";
+  });
+  const [passwordError, setPasswordError] = useState("");
+
+  // Initialize selected subpage for banner editing
+  const allSubwebsiteLabels = localConfig.subwebsites.flatMap(c => c.items.map(i => i.label));
+  const [selectedBannerPage, setSelectedBannerPage] = useState<string>(allSubwebsiteLabels[0] || "");
 
   if (!isOpen) return null;
 
-  // Presets of beautiful dark backgrounds they can easily choose instead of uploading a direct URL
   const bgPresetOptions = [
     { label: "Dark Tokyo Skyline", url: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&q=80&w=1920" },
     { label: "Midnight Office", url: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1920" },
@@ -27,6 +36,22 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
 
   const handleUpdateGlobal = (field: keyof WebsiteConfig, value: any) => {
     setLocalConfig((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleBackgroundImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 2 * 1024 * 1024) {
+        alert("Image file is too large (must be under 2MB) for browser local storage. Please compress the image first or paste a direct URL instead.");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        handleUpdateGlobal("globalBackgroundImage", base64String);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleUpdateNested = (section: keyof WebsiteConfig, field: string, value: any) => {
@@ -60,7 +85,6 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
 
   const handleResetDefaults = () => {
     if (confirm("Are you sure you want to revert all changes to standard website defaults?")) {
-      // Import on demand to prevent circular reference or just use a standard quick refresh
       localStorage.removeItem("the_insurance_boss_config");
       window.location.reload();
     }
@@ -80,7 +104,7 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
     const updated = [...localConfig.subwebsites];
     updated[catIdx].items.push({
       label: "New Subwebsite Line",
-      url: "https://theinsuranceboss.com/"
+      url: "#subpage-New%20Subwebsite%20Line"
     });
     setLocalConfig((prev) => ({ ...prev, subwebsites: updated }));
   };
@@ -91,13 +115,130 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
     setLocalConfig((prev) => ({ ...prev, subwebsites: updated }));
   };
 
+  const handleUpdateBannerUrl = (page: string, field: "topBannerUrl" | "bottomBannerUrl", val: string) => {
+    const banners = { ...localConfig.subwebsiteBanners };
+    const current = banners[page] || { topBannerUrl: "", bottomBannerUrl: "" };
+    banners[page] = {
+      ...current,
+      [field]: val
+    };
+    setLocalConfig(prev => ({
+      ...prev,
+      subwebsiteBanners: banners
+    }));
+  };
+
+  const fontOptions = [
+    { value: "Default", label: "Default Site Font (Bitter)" },
+    { value: "Outfit", label: "Outfit (Sleek Geometric Sans)" },
+    { value: "Inter", label: "Inter (Clean & Professional)" },
+    { value: "Poppins", label: "Poppins (Friendly Geometric)" },
+    { value: "Montserrat", label: "Montserrat (Classic Headline)" },
+    { value: "Playfair Display", label: "Playfair Display (Premium Editorial Serif)" },
+    { value: "Cinzel", label: "Cinzel (Classical Luxury Serif)" },
+    { value: "Lora", label: "Lora (Contemporary Text Serif)" },
+    { value: "Roboto", label: "Roboto (Standard Modern Sans)" },
+    { value: "EB Garamond", label: "EB Garamond (Elegant Traditional Serif)" },
+    { value: "Syncopate", label: "Syncopate (Wide Futuristic Display)" }
+  ];
+
+  const handleUpdateFontCategory = (categoryName: string, fontValue: string) => {
+    setLocalConfig(prev => ({
+      ...prev,
+      fontFamilyCategory: {
+        ...(prev.fontFamilyCategory || {}),
+        [categoryName]: fontValue
+      }
+    }));
+  };
+
+  const handleUpdateFontPage = (pageLabel: string, fontValue: string) => {
+    setLocalConfig(prev => ({
+      ...prev,
+      fontFamilyPage: {
+        ...(prev.fontFamilyPage || {}),
+        [pageLabel]: fontValue
+      }
+    }));
+  };
+
+  if (!isUnlocked) {
+    return (
+      <div className="fixed inset-0 w-full h-full bg-zinc-950 z-[999] flex flex-col items-center justify-center p-4">
+        {/* Background glow effects */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#FAC000]/10 rounded-full filter blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#FAC000]/5 rounded-full filter blur-[120px] pointer-events-none" />
+
+        <div className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-8 max-w-md w-full shadow-2xl backdrop-blur-md relative z-10 flex flex-col items-center text-center space-y-6">
+          <div className="p-4 bg-zinc-950 border border-zinc-850 rounded-2xl text-[#FAC000]">
+            <Lock className="w-10 h-10" />
+          </div>
+          <div>
+            <h3 className="text-sm font-black text-white tracking-widest uppercase">
+              BOSS ADMIN PANEL GATE
+            </h3>
+            <p className="text-[10px] text-zinc-500 font-mono mt-1 uppercase">
+              ENTER SYSTEM KEYCODE FOR PERSISTENT DESIGN ACCESS
+            </p>
+          </div>
+
+          <form 
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (passwordInput === "insuranceboss") {
+                setIsUnlocked(true);
+                sessionStorage.setItem("boss_admin_unlocked", "true");
+                setPasswordError("");
+              } else {
+                setPasswordError("Access Denied: Invalid Keycode");
+              }
+            }}
+            className="w-full space-y-4"
+          >
+            <div className="space-y-2 text-left">
+              <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider">
+                System Password
+              </label>
+              <input
+                type="password"
+                placeholder="Enter password..."
+                value={passwordInput}
+                onChange={(e) => setPasswordInput(e.target.value)}
+                className="w-full bg-zinc-950 border border-zinc-800 focus:border-[#FAC000] rounded-lg p-3 text-center text-white font-mono text-sm tracking-widest focus:outline-none placeholder-zinc-700"
+                autoFocus
+              />
+              {passwordError && (
+                <p className="text-red-500 text-[10px] font-mono font-bold text-center mt-1 animate-pulse">
+                  {passwordError}
+                </p>
+              )}
+            </div>
+
+            <div className="flex gap-3 pt-2">
+              <button
+                type="button"
+                onClick={onClose}
+                className="flex-1 font-mono text-xs font-bold text-zinc-400 hover:text-white border border-zinc-800 hover:border-zinc-700 rounded-lg p-2.5 transition-all bg-transparent"
+              >
+                CANCEL
+              </button>
+              <button
+                type="submit"
+                className="flex-1 font-mono text-xs font-black tracking-widest bg-[#FAC000] text-black hover:bg-black hover:text-[#FAC000] border border-[#FAC000] rounded-lg p-2.5 transition-all"
+              >
+                UNLOCK
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
-      {/* Backdrop shade overlay */}
-      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity" onClick={onClose} />
-      
-      {/* Drawer slide-out */}
-      <div className="fixed top-0 right-0 h-full w-full max-w-xl bg-zinc-950 border-l border-zinc-90 w border-zinc-900 shadow-2xl z-50 flex flex-col justify-between overflow-hidden">
+      {/* Full Screen Admin Panel */}
+      <div className="fixed inset-0 h-full w-full bg-zinc-950 border-zinc-900 shadow-2xl z-50 flex flex-col justify-between overflow-hidden">
         
         {/* Header Drawer */}
         <div className="p-6 border-b border-zinc-90 w border-zinc-900 bg-zinc-900/40 flex items-center justify-between">
@@ -125,9 +266,7 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
           <button
             onClick={() => setActiveTab("global")}
             className={`py-3 px-4 border-b-2 font-bold transition-all flex items-center space-x-1.5 ${
-              activeTab === "global"
-                ? "border-[#FAC000] text-[#FAC000]"
-                : "border-transparent text-zinc-500 hover:text-zinc-300"
+              activeTab === "global" ? "border-[#FAC000] text-[#FAC000]" : "border-transparent text-zinc-500 hover:text-zinc-300"
             }`}
           >
             <Layout className="w-3.5 h-3.5" />
@@ -137,9 +276,7 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
           <button
             onClick={() => setActiveTab("hero")}
             className={`py-3 px-4 border-b-2 font-bold transition-all flex items-center space-x-1.5 ${
-              activeTab === "hero"
-                ? "border-[#FAC000] text-[#FAC000]"
-                : "border-transparent text-zinc-500 hover:text-zinc-300"
+              activeTab === "hero" ? "border-[#FAC000] text-[#FAC000]" : "border-transparent text-zinc-500 hover:text-zinc-300"
             }`}
           >
             <Layers className="w-3.5 h-3.5" />
@@ -149,9 +286,7 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
           <button
             onClick={() => setActiveTab("pillars")}
             className={`py-3 px-4 border-b-2 font-bold transition-all flex items-center space-x-1.5 ${
-              activeTab === "pillars"
-                ? "border-[#FAC000] text-[#FAC000]"
-                : "border-transparent text-zinc-500 hover:text-zinc-300"
+              activeTab === "pillars" ? "border-[#FAC000] text-[#FAC000]" : "border-transparent text-zinc-500 hover:text-zinc-300"
             }`}
           >
             <Type className="w-3.5 h-3.5" />
@@ -161,9 +296,7 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
           <button
             onClick={() => setActiveTab("splits")}
             className={`py-3 px-4 border-b-2 font-bold transition-all flex items-center space-x-1.5 ${
-              activeTab === "splits"
-                ? "border-[#FAC000] text-[#FAC000]"
-                : "border-transparent text-zinc-500 hover:text-zinc-300"
+              activeTab === "splits" ? "border-[#FAC000] text-[#FAC000]" : "border-transparent text-zinc-500 hover:text-zinc-300"
             }`}
           >
             <Sliders className="w-3.5 h-3.5" />
@@ -171,11 +304,49 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
           </button>
 
           <button
+            onClick={() => setActiveTab("carriers")}
+            className={`py-3 px-4 border-b-2 font-bold transition-all flex items-center space-x-1.5 ${
+              activeTab === "carriers" ? "border-[#FAC000] text-[#FAC000]" : "border-transparent text-zinc-500 hover:text-zinc-300"
+            }`}
+          >
+            <Sliders className="w-3.5 h-3.5" />
+            <span>CARRIERS</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("banners")}
+            className={`py-3 px-4 border-b-2 font-bold transition-all flex items-center space-x-1.5 ${
+              activeTab === "banners" ? "border-[#FAC000] text-[#FAC000]" : "border-transparent text-zinc-500 hover:text-zinc-300"
+            }`}
+          >
+            <Image className="w-3.5 h-3.5" />
+            <span>BANNERS</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("buttons")}
+            className={`py-3 px-4 border-b-2 font-bold transition-all flex items-center space-x-1.5 ${
+              activeTab === "buttons" ? "border-[#FAC000] text-[#FAC000]" : "border-transparent text-zinc-500 hover:text-zinc-300"
+            }`}
+          >
+            <Link className="w-3.5 h-3.5" />
+            <span>BUTTONS HTML</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("fonts")}
+            className={`py-3 px-4 border-b-2 font-bold transition-all flex items-center space-x-1.5 ${
+              activeTab === "fonts" ? "border-[#FAC000] text-[#FAC000]" : "border-transparent text-zinc-500 hover:text-zinc-300"
+            }`}
+          >
+            <Type className="w-3.5 h-3.5" />
+            <span>FONTS</span>
+          </button>
+
+          <button
             onClick={() => setActiveTab("subwebsites")}
             className={`py-3 px-4 border-b-2 font-bold transition-all flex items-center space-x-1.5 ${
-              activeTab === "subwebsites"
-                ? "border-[#FAC000] text-[#FAC000]"
-                : "border-transparent text-zinc-500 hover:text-zinc-300"
+              activeTab === "subwebsites" ? "border-[#FAC000] text-[#FAC000]" : "border-transparent text-zinc-500 hover:text-zinc-300"
             }`}
           >
             <Link className="w-3.5 h-3.5" />
@@ -184,7 +355,8 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
         </div>
 
         {/* Main Content Area */}
-        <div className="flex-1 p-6 overflow-y-auto space-y-6 text-xs text-zinc-300 bg-black">
+        <div className="flex-1 p-6 overflow-y-auto bg-black">
+          <div className="max-w-5xl mx-auto w-full space-y-6 text-xs text-zinc-300">
           
           {/* TAB: GLOBAL SETTINGS */}
           {activeTab === "global" && (
@@ -214,10 +386,10 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider">Phone Number</label>
                   <input
-                    type="text"
-                    value={localConfig.phone}
-                    onChange={(e) => handleUpdateGlobal("phone", e.target.value)}
-                    className="w-full bg-zinc-900 border border-zinc-800 focus:border-[#FAC000] rounded p-2.5 text-white font-mono focus:outline-none"
+                     type="text"
+                     value={localConfig.phone}
+                     onChange={(e) => handleUpdateGlobal("phone", e.target.value)}
+                     className="w-full bg-zinc-900 border border-zinc-800 focus:border-[#FAC000] rounded p-2.5 text-white font-mono focus:outline-none"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -239,18 +411,36 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                       type="color"
                       value={localConfig.accentColor}
                       onChange={(e) => handleUpdateGlobal("accentColor", e.target.value)}
-                      className="w-10 h-10 bg-transparent border border-zinc-805 rounded cursor-pointer shrink-0"
+                      className="w-10 h-10 bg-transparent border border-zinc-800 rounded cursor-pointer shrink-0"
                     />
                     <input
                       type="text"
                       value={localConfig.accentColor}
                       onChange={(e) => handleUpdateGlobal("accentColor", e.target.value)}
-                      className="w-full bg-zinc-900 border border-zinc-850 rounded p-2 text-center text-white font-mono focus:outline-none"
+                      className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-center text-white font-mono focus:outline-none"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
+                  <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider">Global Background Color</label>
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="color"
+                      value={localConfig.globalBackground || "#000000"}
+                      onChange={(e) => handleUpdateGlobal("globalBackground", e.target.value)}
+                      className="w-10 h-10 bg-transparent border border-zinc-800 rounded cursor-pointer shrink-0"
+                    />
+                    <input
+                      type="text"
+                      value={localConfig.globalBackground || "#000000"}
+                      onChange={(e) => handleUpdateGlobal("globalBackground", e.target.value)}
+                      className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-center text-white font-mono focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div className="col-span-2 space-y-1.5 mt-2">
                   <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider">
                     General Font Scale multiplier ({localConfig.fontScale.toFixed(2)}x)
                   </label>
@@ -263,6 +453,110 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                     onChange={(e) => handleUpdateGlobal("fontScale", parseFloat(e.target.value))}
                     className="w-full accent-[#FAC000] mt-3"
                   />
+                </div>
+
+                <div className="col-span-2 border-t border-zinc-900 pt-4 mt-2 space-y-3">
+                  <div className="flex flex-col space-y-1.5">
+                    <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider">Global Background Image URL (Google Drive or direct link)</label>
+                    <input
+                      type="text"
+                      value={localConfig.globalBackgroundImage || ""}
+                      onChange={(e) => handleUpdateGlobal("globalBackgroundImage", e.target.value)}
+                      placeholder="https://lh3.googleusercontent.com/d/ID or direct image link"
+                      className="w-full bg-zinc-900 border border-zinc-800 focus:border-[#FAC000] rounded p-2 text-white font-mono focus:outline-none"
+                    />
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                    <div className="flex-1 space-y-1">
+                      <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">Or Upload Local Image File (Max 2MB)</label>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleBackgroundImageUpload}
+                        className="w-full text-zinc-400 font-mono text-[10px] file:mr-3 file:py-1 file:px-2.5 file:rounded file:border file:border-zinc-800 file:bg-zinc-900 file:text-zinc-300 file:cursor-pointer hover:file:border-[#FAC000] hover:file:text-white"
+                      />
+                    </div>
+                    {localConfig.globalBackgroundImage && (
+                      <div className="flex items-center space-x-2 shrink-0 bg-zinc-900/60 p-2 border border-zinc-800 rounded">
+                        <img 
+                          src={getDirectImageUrl(localConfig.globalBackgroundImage)} 
+                          alt="Bg Preview" 
+                          className="h-10 w-16 object-cover rounded border border-zinc-700"
+                          onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => handleUpdateGlobal("globalBackgroundImage", "")}
+                          className="text-[9px] font-mono font-bold text-red-500 hover:text-red-400 uppercase tracking-widest px-1.5 py-0.5 border border-red-950 rounded bg-red-950/20 hover:bg-red-950/40"
+                        >
+                          Clear
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="col-span-2 border-t border-zinc-900 pt-4 mt-2 space-y-3">
+                  <div className="flex justify-between items-center">
+                    <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider">Social Media Footer Links</label>
+                    <button
+                      onClick={() => {
+                        const updated = [...(localConfig.socialLinks || [])];
+                        updated.push({ icon: "facebook", url: "https://" });
+                        handleUpdateGlobal("socialLinks", updated);
+                      }}
+                      className="text-[9px] font-mono font-bold tracking-wider px-2 py-1 bg-[#FAC000]/10 border border-[#FAC000]/30 hover:border-[#FAC000] text-[#FAC000] hover:bg-[#FAC000]/25 rounded transition-all"
+                    >
+                      + ADD SOCIAL LINK
+                    </button>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    {((localConfig.socialLinks) || []).map((social, idx) => (
+                      <div key={idx} className="flex items-center space-x-2 bg-zinc-900/50 p-2 rounded border border-zinc-900">
+                        <select
+                          value={social.icon}
+                          onChange={(e) => {
+                            const updated = [...localConfig.socialLinks];
+                            updated[idx] = { ...updated[idx], icon: e.target.value };
+                            handleUpdateGlobal("socialLinks", updated);
+                          }}
+                          className="bg-zinc-900 border border-zinc-800 text-xs text-white p-1.5 rounded focus:outline-none font-mono"
+                        >
+                          <option value="facebook">Facebook</option>
+                          <option value="instagram">Instagram</option>
+                          <option value="linkedin">LinkedIn</option>
+                          <option value="youtube">YouTube</option>
+                          <option value="twitter">Twitter</option>
+                          <option value="globe">Website/Globe</option>
+                          <option value="whatsapp">WhatsApp</option>
+                          <option value="telegram">Telegram</option>
+                        </select>
+                        <input
+                          type="text"
+                          value={social.url}
+                          onChange={(e) => {
+                            const updated = [...localConfig.socialLinks];
+                            updated[idx] = { ...updated[idx], url: e.target.value };
+                            handleUpdateGlobal("socialLinks", updated);
+                          }}
+                          placeholder="Link URL"
+                          className="w-full bg-zinc-900 border border-zinc-800 text-xs text-white p-2 rounded focus:outline-none font-mono"
+                        />
+                        <button
+                          onClick={() => {
+                            const updated = localConfig.socialLinks.filter((_, sIdx) => sIdx !== idx);
+                            handleUpdateGlobal("socialLinks", updated);
+                          }}
+                          className="p-2 border border-red-900/40 text-red-500 hover:bg-red-500 hover:text-white rounded transition-colors"
+                          title="Delete Social Link"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -337,8 +631,6 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                   <Image className="w-3.5 h-3.5" />
                   <span>Choose Hero Background Image</span>
                 </label>
-                
-                {/* Input text URL */}
                 <input
                   type="text"
                   value={localConfig.hero.bgUrl}
@@ -347,16 +639,13 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                   placeholder="Paste direct image URL"
                 />
 
-                {/* Grid selection buttons */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {bgPresetOptions.slice(0, 3).map((opt, idx) => (
                     <button
                       key={idx}
                       onClick={() => handleUpdateNested("hero", "bgUrl", opt.url)}
-                      className={`p-2 bg-zinc-90 w bg-zinc-900 hover:bg-zinc-850 rounded text-[10px] font-mono text-center border transition-all ${
-                        localConfig.hero.bgUrl === opt.url
-                          ? "border-[#FAC000] text-[#FAC000]"
-                          : "border-zinc-800 text-zinc-400"
+                      className={`p-2 bg-zinc-900 hover:bg-zinc-850 rounded text-[10px] font-mono text-center border transition-all ${
+                        localConfig.hero.bgUrl === opt.url ? "border-[#FAC000] text-[#FAC000]" : "border-zinc-800 text-zinc-400"
                       }`}
                     >
                       {opt.label}
@@ -367,10 +656,9 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
             </div>
           )}
 
-          {/* TAB: PILLARS & CORE VALUES REPRESENTATION */}
+          {/* TAB: PILLARS */}
           {activeTab === "pillars" && (
             <div className="space-y-6">
-              {/* Pillar 1: Coverage Solutions */}
               <div className="p-4 bg-zinc-950 border border-zinc-900 rounded-lg space-y-4">
                 <span className="text-[10px] font-mono text-[#FAC000] font-bold tracking-widest uppercase block border-b border-zinc-900 pb-1.5">
                   Pillar 1: Coverage Solutions
@@ -395,7 +683,6 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                 </div>
               </div>
 
-              {/* Pillar 2: Insurance Agents */}
               <div className="p-4 bg-zinc-950 border border-zinc-900 rounded-lg space-y-4">
                 <span className="text-[10px] font-mono text-[#FAC000] font-bold tracking-widest uppercase block border-b border-zinc-900 pb-1.5">
                   Pillar 2: Insurance Agents
@@ -420,7 +707,6 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                 </div>
               </div>
 
-              {/* Pillar 3: Referral Partners */}
               <div className="p-4 bg-zinc-950 border border-zinc-900 rounded-lg space-y-4">
                 <span className="text-[10px] font-mono text-[#FAC000] font-bold tracking-widest uppercase block border-b border-zinc-900 pb-1.5">
                   Pillar 3: Referral Partners
@@ -444,24 +730,12 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                   />
                 </div>
               </div>
-
-              {/* Tagline/Brand */}
-              <div className="p-4 bg-zinc-950 border border-zinc-900 rounded-lg space-y-3">
-                <span className="text-[10px] font-mono text-[#FAC000] font-bold tracking-widest uppercase block">Why Boss Tagline</span>
-                <input
-                  type="text"
-                  value={localConfig.valueProps.title}
-                  onChange={(e) => handleUpdateNested("valueProps", "title", e.target.value)}
-                  className="w-full bg-zinc-900 border border-zinc-800 focus:border-[#FAC000] rounded p-2 text-white font-extrabold uppercase text-[11px]"
-                />
-              </div>
             </div>
           )}
 
-          {/* TAB: SPLIT SECTIONS (POLICY REVIEW, INNER CIRCLE, ABOUT) */}
+          {/* TAB: SECTIONS */}
           {activeTab === "splits" && (
             <div className="space-y-6">
-              {/* Section 1: Policy Review */}
               <div className="p-4 bg-zinc-950 border border-zinc-900 rounded-lg space-y-3">
                 <span className="text-[10px] font-mono text-zinc-500 font-bold uppercase block border-b border-zinc-900 pb-1.5">Policy Review Section</span>
                 <div className="space-y-1">
@@ -493,7 +767,6 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                 </div>
               </div>
 
-              {/* Section 2: For Insurance Agents */}
               <div className="p-4 bg-zinc-950 border border-zinc-900 rounded-lg space-y-3">
                 <span className="text-[10px] font-mono text-zinc-500 font-bold uppercase block border-b border-zinc-900 pb-1.5">Agents Growth Column</span>
                 <input
@@ -504,7 +777,6 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                 />
               </div>
 
-              {/* Section 3: Inner Circle */}
               <div className="p-4 bg-zinc-950 border border-zinc-900 rounded-lg space-y-3">
                 <span className="text-[10px] font-mono text-zinc-500 font-bold uppercase block border-b border-zinc-900 pb-1.5">Inner Circle Referral Column</span>
                 <input
@@ -521,7 +793,6 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                 />
               </div>
 
-              {/* Section 4: About Boss */}
               <div className="p-4 bg-zinc-950 border border-zinc-900 rounded-lg space-y-3">
                 <span className="text-[10px] font-mono text-zinc-500 font-bold uppercase block border-b border-zinc-900 pb-1.5">About Us Column</span>
                 <input
@@ -537,7 +808,7 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                   className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white"
                 />
                 <div className="space-y-1.5 pt-2">
-                  <label className="text-[9px] font-mono text-zinc-500">Avatar Photo Link (Cap style guy)</label>
+                  <label className="text-[9px] font-mono text-zinc-500">Avatar Photo Link</label>
                   <input
                     type="text"
                     value={localConfig.aboutBoss.bgUrl}
@@ -549,10 +820,280 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
             </div>
           )}
 
-          {/* TAB: SUBWEBSITES COMPREHENSIVE MANAGER */}
+          {/* TAB: CARRIERS BANNER */}
+          {activeTab === "carriers" && (
+            <div className="space-y-4">
+              <div className="space-y-1.5">
+                <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider">Carriers Section Title</label>
+                <input
+                  type="text"
+                  value={localConfig.carriersBanner.title}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setLocalConfig(prev => ({
+                      ...prev,
+                      carriersBanner: { ...prev.carriersBanner, title: val }
+                    }));
+                  }}
+                  className="w-full bg-zinc-900 border border-zinc-800 focus:border-[#FAC000] rounded p-2.5 text-white focus:outline-none"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider">Carriers Section Subtitle</label>
+                <textarea
+                  rows={3}
+                  value={localConfig.carriersBanner.subtitle}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setLocalConfig(prev => ({
+                      ...prev,
+                      carriersBanner: { ...prev.carriersBanner, subtitle: val }
+                    }));
+                  }}
+                  className="w-full bg-zinc-900 border border-zinc-800 focus:border-[#FAC000] rounded p-2.5 text-white focus:outline-none"
+                />
+              </div>
+
+              <div className="space-y-3">
+                <div className="flex items-center justify-between border-b border-zinc-900 pb-2">
+                  <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider">Carrier Logo Image URLs ({localConfig.carriersBanner.logos.length})</label>
+                  <button
+                    onClick={() => {
+                      setLocalConfig(prev => ({
+                        ...prev,
+                        carriersBanner: {
+                          ...prev.carriersBanner,
+                          logos: [...prev.carriersBanner.logos, "https://"]
+                        }
+                      }));
+                    }}
+                    className="text-[10px] font-mono text-[#FAC000] hover:text-white flex items-center gap-1 font-bold"
+                  >
+                    <Plus className="w-3.5 h-3.5" /> ADD LOGO
+                  </button>
+                </div>
+
+                <div className="space-y-3 max-h-96 overflow-y-auto pr-1">
+                  {localConfig.carriersBanner.logos.length === 0 ? (
+                    <p className="p-2 text-zinc-550 italic text-[11px]">No logos added. Click "ADD LOGO" above.</p>
+                  ) : (
+                    localConfig.carriersBanner.logos.map((logo, idx) => (
+                      <div key={idx} className="flex gap-2 items-center bg-zinc-900/30 p-2 border border-zinc-900 rounded">
+                        <div className="w-12 h-12 bg-zinc-900 rounded border border-zinc-800 flex items-center justify-center shrink-0 p-1">
+                          <img src={logo} alt="" className="max-h-full max-w-full object-contain filter grayscale" onError={(e)=>{(e.target as HTMLElement).style.display="none"}} />
+                        </div>
+                        <input
+                          type="text"
+                          value={logo}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            const updatedLogos = [...localConfig.carriersBanner.logos];
+                            updatedLogos[idx] = val;
+                            setLocalConfig(prev => ({
+                              ...prev,
+                              carriersBanner: { ...prev.carriersBanner, logos: updatedLogos }
+                            }));
+                          }}
+                          className="w-full bg-zinc-950 border border-zinc-850 rounded p-1.5 text-xs text-zinc-300 font-mono"
+                          placeholder="Logo Image URL or Data URL"
+                        />
+                        <button
+                          onClick={() => {
+                            const updatedLogos = localConfig.carriersBanner.logos.filter((_, i) => i !== idx);
+                            setLocalConfig(prev => ({
+                              ...prev,
+                              carriersBanner: { ...prev.carriersBanner, logos: updatedLogos }
+                            }));
+                          }}
+                          className="text-red-500 hover:text-red-400 p-2"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB: PAGE BANNERS */}
+          {activeTab === "banners" && (
+            <div className="space-y-4">
+              <div className="space-y-1.5">
+                <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider">Select Subpage to Configure</label>
+                <select
+                  value={selectedBannerPage}
+                  onChange={(e) => setSelectedBannerPage(e.target.value)}
+                  className="w-full bg-zinc-900 border border-zinc-800 focus:border-[#FAC000] rounded p-2.5 text-white font-mono focus:outline-none"
+                >
+                  {allSubwebsiteLabels.map((l, i) => (
+                    <option key={i} value={l} className="bg-zinc-900 text-white">{l}</option>
+                  ))}
+                </select>
+              </div>
+
+              {selectedBannerPage && (
+                <div className="p-4 bg-zinc-950 border border-zinc-900 rounded-lg space-y-4">
+                  <span className="text-[10px] font-mono text-[#FAC000] font-bold tracking-widest uppercase block border-b border-zinc-900 pb-1.5">
+                    BANNERS FOR: {selectedBannerPage}
+                  </span>
+                  
+                  {(() => {
+                    const currentBanners = localConfig.subwebsiteBanners[selectedBannerPage] || { topBannerUrl: "", bottomBannerUrl: "" };
+                    return (
+                      <>
+                        <div className="space-y-1.5">
+                          <label className="text-[9px] font-mono text-zinc-500 uppercase">Top Banner Image URL</label>
+                          <input
+                            type="text"
+                            value={currentBanners.topBannerUrl}
+                            onChange={(e) => handleUpdateBannerUrl(selectedBannerPage, "topBannerUrl", e.target.value)}
+                            className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white font-mono focus:outline-none"
+                            placeholder="https://images.unsplash.com/..."
+                          />
+                        </div>
+                        <div className="space-y-1.5">
+                          <label className="text-[9px] font-mono text-zinc-500 uppercase">Bottom Banner Image URL</label>
+                          <input
+                            type="text"
+                            value={currentBanners.bottomBannerUrl}
+                            onChange={(e) => handleUpdateBannerUrl(selectedBannerPage, "bottomBannerUrl", e.target.value)}
+                            className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white font-mono focus:outline-none"
+                            placeholder="https://images.unsplash.com/..."
+                          />
+                        </div>
+                      </>
+                    );
+                  })()}
+                </div>
+              )}
+
+              {/* Banner Title Styles Section */}
+              <div className="p-4 bg-zinc-950 border border-zinc-900 rounded-lg space-y-4">
+                <span className="text-[10px] font-mono text-[#FAC000] font-bold tracking-widest uppercase block border-b border-zinc-900 pb-1.5">
+                  BANNER TITLE TYPOGRAPHY (GLOBAL FOR ALL SUBWEBSITES)
+                </span>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Banner Title Color */}
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">Title Color</label>
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="color"
+                        value={localConfig.bannerTitleColor || "#FAC000"}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          setLocalConfig(prev => ({ ...prev, bannerTitleColor: val }));
+                        }}
+                        className="w-10 h-10 bg-transparent border border-zinc-805 rounded cursor-pointer shrink-0"
+                      />
+                      <input
+                        type="text"
+                        value={localConfig.bannerTitleColor || "#FAC000"}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          setLocalConfig(prev => ({ ...prev, bannerTitleColor: val }));
+                        }}
+                        className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-center text-white font-mono focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Banner Title Size */}
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">
+                      Title Font Size ({localConfig.bannerTitleSize || 48}px)
+                    </label>
+                    <input
+                      type="range"
+                      min="20"
+                      max="72"
+                      step="1"
+                      value={localConfig.bannerTitleSize || 48}
+                      onChange={(e) => {
+                        const val = parseInt(e.target.value);
+                        setLocalConfig(prev => ({ ...prev, bannerTitleSize: val }));
+                      }}
+                      className="w-full accent-[#FAC000] mt-3"
+                    />
+                  </div>
+
+                  {/* Banner Title Font Family */}
+                  <div className="space-y-1.5 md:col-span-2">
+                    <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">Title Font Family</label>
+                    {(() => {
+                      const activeFont = localConfig.bannerTitleFont || "Default";
+                      const isCustom = activeFont !== "Default" && !fontOptions.some(f => f.value === activeFont);
+                      return (
+                        <div className="space-y-2">
+                          <select
+                            value={isCustom ? "Custom" : activeFont}
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              if (val === "Custom") {
+                                setLocalConfig(prev => ({ ...prev, bannerTitleFont: "Outfit" }));
+                              } else {
+                                setLocalConfig(prev => ({ ...prev, bannerTitleFont: val }));
+                              }
+                            }}
+                            className="w-full bg-zinc-900 border border-zinc-800 focus:border-[#FAC000] rounded p-2.5 text-white focus:outline-none font-mono"
+                          >
+                            {fontOptions.map((opt, oIdx) => (
+                              <option key={oIdx} value={opt.value} className="bg-zinc-900 text-white">
+                                {opt.label}
+                              </option>
+                            ))}
+                            <option value="Custom" className="bg-zinc-900 text-white">Custom Google Font...</option>
+                          </select>
+                          {(isCustom || activeFont === "Custom") && (
+                            <div className="space-y-1.5">
+                              <span className="text-[9px] font-mono text-zinc-650 uppercase">Google Font Name</span>
+                              <input
+                                type="text"
+                                value={activeFont === "Custom" ? "" : activeFont}
+                                onChange={(e) => {
+                                  const val = e.target.value;
+                                  setLocalConfig(prev => ({ ...prev, bannerTitleFont: val }));
+                                }}
+                                className="w-full bg-zinc-900 border border-zinc-800 rounded p-2.5 text-white font-mono"
+                                placeholder="e.g. Space Grotesk"
+                              />
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })()}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB: BUTTONS HTML */}
+          {activeTab === "buttons" && (
+            <div className="space-y-4">
+              <div className="space-y-1.5">
+                <label className="text-[10px] font-mono text-[#FAC000] font-bold uppercase tracking-wider block border-b border-zinc-900 pb-1.5">Custom Buttons HTML Section</label>
+                <p className="text-zinc-500 text-[10px] leading-relaxed mb-2 font-mono">
+                  This HTML code is embedded at the bottom of all subwebsite pages. You can change button names, styles, or targets.
+                </p>
+                <textarea
+                  rows={18}
+                  value={localConfig.buttonsHtml}
+                  onChange={(e) => handleUpdateGlobal("buttonsHtml", e.target.value)}
+                  className="w-full bg-zinc-900 border border-zinc-800 focus:border-[#FAC000] rounded p-2.5 text-white font-mono text-xs focus:outline-none leading-normal"
+                />
+              </div>
+            </div>
+          )}
+
+          {/* TAB: SUBWEBSITES */}
           {activeTab === "subwebsites" && (
             <div className="space-y-6">
-              <div className="bg-zinc-900/40 p-3 rounded border border-zinc-850 text-zinc-400 text-[11px] leading-relaxed flex items-start gap-2 select-none">
+              <div className="bg-zinc-900/40 p-3 rounded border border-zinc-855 text-zinc-400 text-[11px] leading-relaxed flex items-start gap-2 select-none">
                 <Info className="w-4 h-4 text-[#FAC000] shrink-0 mt-0.5" />
                 <span>
                   The Insurance Boss owns <strong>25+ independent subwebsites</strong>. Below you can edit their redirect names, modify direct URLs, or add/delete lines under each category!
@@ -616,6 +1157,128 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
               ))}
             </div>
           )}
+
+          {/* TAB: FONTS CUSTOMIZATION */}
+          {activeTab === "fonts" && (
+            <div className="space-y-6">
+              <div className="bg-zinc-900/40 p-3 rounded border border-zinc-850 text-zinc-400 text-[11px] leading-relaxed flex items-start gap-2 select-none">
+                <Info className="w-4 h-4 text-[#FAC000] shrink-0 mt-0.5" />
+                <span>
+                  Configure typography styles for each subwebsite. You can set a <strong>Category Font</strong> (applies to all subpages in a category) or specify a <strong>Page Font Override</strong> (applies to that specific page only).
+                </span>
+              </div>
+
+              {/* Category-level Fonts */}
+              <div className="p-4 bg-zinc-950 border border-zinc-900 rounded-xl space-y-4">
+                <span className="text-[10px] font-mono text-[#FAC000] font-black tracking-widest uppercase block border-b border-zinc-900 pb-2">
+                  Category Fonts (Global for each category)
+                </span>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {localConfig.subwebsites.map((cat, idx) => {
+                    const activeFont = (localConfig.fontFamilyCategory || {})[cat.category] || "Default";
+                    const isCustom = activeFont !== "Default" && !fontOptions.some(f => f.value === activeFont);
+                    return (
+                      <div key={idx} className="bg-zinc-900/30 p-3 border border-zinc-900 rounded-lg space-y-2">
+                        <label className="text-[10px] font-mono text-zinc-400 font-bold uppercase tracking-wider block">
+                          {cat.category}
+                        </label>
+                        <select
+                          value={isCustom ? "Custom" : activeFont}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            if (val === "Custom") {
+                              handleUpdateFontCategory(cat.category, "Outfit");
+                            } else {
+                              handleUpdateFontCategory(cat.category, val);
+                            }
+                          }}
+                          className="w-full bg-zinc-950 border border-zinc-800 focus:border-[#FAC000] rounded p-2 text-xs text-white focus:outline-none"
+                        >
+                          {fontOptions.map((opt, oIdx) => (
+                            <option key={oIdx} value={opt.value} className="bg-zinc-950 text-white">
+                              {opt.label}
+                            </option>
+                          ))}
+                          <option value="Custom" className="bg-zinc-950 text-white">Custom Google Font...</option>
+                        </select>
+                        {(isCustom || activeFont === "Custom") && (
+                          <div className="space-y-1 mt-1">
+                            <span className="text-[9px] font-mono text-zinc-600 uppercase">Google Font Name</span>
+                            <input
+                              type="text"
+                              value={activeFont === "Custom" ? "" : activeFont}
+                              onChange={(e) => handleUpdateFontCategory(cat.category, e.target.value)}
+                              className="w-full bg-zinc-950 border border-zinc-800 rounded p-1.5 text-xs text-white font-mono"
+                              placeholder="e.g. Space Grotesk"
+                            />
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Page-level Fonts */}
+              <div className="p-4 bg-zinc-950 border border-zinc-900 rounded-xl space-y-4">
+                <span className="text-[10px] font-mono text-[#FAC000] font-black tracking-widest uppercase block border-b border-zinc-900 pb-2">
+                  Page Font Overrides (Set font per individual page)
+                </span>
+                <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2">
+                  {localConfig.subwebsites.map((cat, catIdx) => (
+                    <div key={catIdx} className="space-y-2">
+                      <h4 className="text-[9px] font-mono text-zinc-550 font-bold uppercase tracking-widest border-b border-zinc-900 pb-1">
+                        {cat.category} Overrides
+                      </h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {cat.items.map((sub, itemIdx) => {
+                          const activeFont = (localConfig.fontFamilyPage || {})[sub.label] || "Default";
+                          const isCustom = activeFont !== "Default" && !fontOptions.some(f => f.value === activeFont);
+                          return (
+                            <div key={itemIdx} className="bg-zinc-900/10 p-2.5 border border-zinc-900 rounded-md flex flex-col space-y-1.5">
+                              <span className="text-zinc-300 text-xs font-bold font-mono truncate">{sub.label}</span>
+                              <select
+                                value={isCustom ? "Custom" : activeFont}
+                                onChange={(e) => {
+                                  const val = e.target.value;
+                                  if (val === "Custom") {
+                                    handleUpdateFontPage(sub.label, "Outfit");
+                                  } else {
+                                    handleUpdateFontPage(sub.label, val);
+                                  }
+                                }}
+                                className="w-full bg-zinc-950 border border-zinc-850 rounded p-1.5 text-[11px] text-white focus:outline-none"
+                              >
+                                {fontOptions.map((opt, oIdx) => (
+                                  <option key={oIdx} value={opt.value} className="bg-zinc-950 text-white">
+                                    {opt.label}
+                                  </option>
+                                ))}
+                                <option value="Custom" className="bg-zinc-950 text-white">Custom Google Font...</option>
+                              </select>
+                              {(isCustom || activeFont === "Custom") && (
+                                <div className="space-y-1">
+                                  <span className="text-[8px] font-mono text-zinc-650 uppercase">Google Font Name</span>
+                                  <input
+                                    type="text"
+                                    value={activeFont === "Custom" ? "" : activeFont}
+                                    onChange={(e) => handleUpdateFontPage(sub.label, e.target.value)}
+                                    className="w-full bg-zinc-950 border border-zinc-850 rounded p-1 text-[10px] text-white font-mono"
+                                    placeholder="e.g. Space Grotesk"
+                                  />
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+          </div>
         </div>
 
         {/* Drawer Action Bar */}

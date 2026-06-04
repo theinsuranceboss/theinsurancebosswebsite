@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guaranteed Lifetime Income with Annuities</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            background: transparent;
+            color: #ffffff;
+        }
+
+        /* Value Proposition Section */
+        .value-prop-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .value-prop-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .value-card {
+            background: rgba(60, 60, 60, 0.85);
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            border-top: 5px solid #ffd700;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .value-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .value-card .icon {
+            font-size: 70px;
+            margin-bottom: 20px;
+        }
+
+        .value-card h3 {
+            color: #ffd700;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .value-card p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+        /* Social Proof Section */
+        .social-proof-section {
+            padding: 60px 20px;
+            background: rgba(60, 60, 60, 0.85);
+        }
+
+        .social-proof-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .social-proof-container h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .stat-box {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .stat-box.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-box .number {
+            color: #ffd700;
+            font-size: 52px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-box .label {
+            color: #ffffff;
+            font-size: 18px;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .testimonial {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid #ffd700;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .testimonial.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .testimonial .quote {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial .author {
+            color: #ffd700;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .testimonial .location {
+            color: #cccccc;
+            font-size: 14px;
+        }
+
+        /* Problem/Solution Section */
+        .problem-solution-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .problem-solution-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .problem-box,
+        .solution-box {
+            padding: 40px;
+            border-radius: 12px;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .solution-box {
+            transform: translateX(30px);
+        }
+
+        .problem-box.animate,
+        .solution-box.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .problem-box {
+            background: rgba(80, 40, 40, 0.85);
+            border-left: 5px solid #ff4444;
+        }
+
+        .solution-box {
+            background: rgba(40, 80, 40, 0.85);
+            border-left: 5px solid #44ff44;
+        }
+
+        .problem-box h2,
+        .solution-box h2 {
+            color: #ffd700;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .problem-box ul,
+        .solution-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .problem-box ul li,
+        .solution-box ul li {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            padding-left: 35px;
+            position: relative;
+        }
+
+        .problem-box ul li::before {
+            content: "✗";
+            color: #ff4444;
+            font-weight: bold;
+            font-size: 24px;
+            position: absolute;
+            left: 0;
+        }
+
+        .solution-box ul li::before {
+            content: "✓";
+            color: #44ff44;
+            font-weight: bold;
+            font-size: 24px;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Annuity Types Section */
+        .annuity-types-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: #ffffff;
+            font-size: 20px;
+        }
+
+        .annuity-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .annuity-card {
+            background: rgba(60, 60, 60, 0.85);
+            padding: 40px;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease;
+        }
+
+        .annuity-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .annuity-card:hover {
+            border-color: #ffd700;
+            transform: translateY(-5px);
+        }
+
+        .annuity-card h3 {
+            color: #ffd700;
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .annuity-card .best-for {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .annuity-card p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .annuity-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .annuity-card ul li {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 12px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .annuity-card ul li::before {
+            content: "→";
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 20px;
+            position: absolute;
+            left: 0;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(60, 60, 60, 0.85);
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease;
+        }
+
+        .faq-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .faq-item:hover {
+            border-color: #ffd700;
+        }
+
+        .faq-header {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .faq-header h3 {
+            color: #ffd700;
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .faq-header .icon {
+            color: #ffd700;
+            font-size: 24px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-header .icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-content {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-item.active .faq-content {
+            padding: 25px 30px;
+            max-height: 1000px;
+        }
+
+        .faq-content p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .faq-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Benefits Checklist */
+        .benefits-section {
+            padding: 60px 20px;
+            background: rgba(60, 60, 60, 0.85);
+        }
+
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefits-container h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .benefit-item {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .benefit-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .benefit-item .check {
+            color: #ffd700;
+            font-size: 32px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .benefit-item .content h3 {
+            color: #ffd700;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .benefit-item .content p {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 20px;
+            background: transparent;
+        }
+
+        .cta-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.98) 0%, rgba(255, 193, 7, 0.98) 100%);
+            padding: 60px 50px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 10px 50px rgba(255, 215, 0, 0.3);
+        }
+
+        .cta-container h2 {
+            color: #1a1a1a;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-container .urgency-text {
+            color: #cc0000;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-container p {
+            color: #1a1a1a;
+            font-size: 22px;
+            margin-bottom: 35px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #1a1a1a;
+            color: #ffd700;
+            padding: 18px 50px;
+            font-size: 22px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            background: #2a2a2a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .value-prop-grid,
+            .annuity-grid,
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-row,
+            .testimonial-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .problem-solution-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 36px;
+            }
+
+            .section-header h2,
+            .social-proof-container h2,
+            .benefits-container h2,
+            .cta-container h2 {
+                font-size: 32px;
+            }
+
+            .stats-row,
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content,
+            .value-card,
+            .annuity-card,
+            .cta-container {
+                padding: 30px 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 28px;
+            }
+
+            .cta-container h2 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Value Proposition Cards -->
+    <section class="value-prop-section">
+        <div class="value-prop-grid">
+            <div class="value-card">
+                <div class="icon"></div>
+                <h3>Guaranteed Income for Life</h3>
+                <p>Create a reliable stream of income you can’t outlive. Annuities can provide guaranteed monthly payments for as long as you live, offering stability and confidence throughout retirement.</p>
+            </div>
+            <div class="value-card">
+                <div class="icon"></div>
+                <h3>Market Crash Protection</h3>
+                <p>Your income isn’t tied to market performance. Annuities can protect you from stock market volatility, economic downturns, and unexpected financial swings.</p>
+            </div>
+            <div class="value-card">
+                <div class="icon"></div>
+                <h3>Attractive Current Rates</h3>
+                <p>Many annuity products are offering some of the most competitive rates seen in years. Locking in today’s rates may provide stronger long-term income, depending on the product and availability.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="social-proof-section">
+        <div class="social-proof-container">
+            <h2>Average  numbers  nationwide</h2>
+            
+            <div class="stats-row">
+                <div class="stat-box">
+                    <span class="number" data-target="2.5" data-prefix="$" data-suffix="B+">0</span>
+                    <span class="label">Assets Protected</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number" data-target="15000" data-suffix="+">0</span>
+                    <span class="label">Happy Clients</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number" data-target="4.9">0</span>
+                    <span class="label">Client Rating</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number" data-target="25" data-suffix="+">0</span>
+                    <span class="label">Years Experience</span>
+                </div>
+            </div>
+
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <p class="quote">"We receive $4,200 every month, guaranteed. It covers all our expenses and we never worry about market crashes anymore. Best decision we ever made."</p>
+                    <p class="author">Robert & Linda M.</p>
+                    <p class="location">Phoenix, AZ</p>
+                </div>
+                <div class="testimonial">
+                    <p class="quote">"I locked in an 8.5% rate just before rates dropped. My $300,000 annuity now pays me $25,500 per year for life. Couldn't be happier with the guaranteed income."</p>
+                    <p class="author">James T.</p>
+                    <p class="location">Tampa, FL</p>
+                </div>
+                <div class="testimonial">
+                    <p class="quote">"After losing 40% in 2008, I needed security. My annuity gives me $3,000/month no matter what. I finally sleep well at night knowing my income is protected."</p>
+                    <p class="author">Patricia S.</p>
+                    <p class="location">Denver, CO</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem/Solution Section -->
+    <section class="problem-solution-section">
+        <div class="problem-solution-container">
+            <div class="problem-box">
+                <h2>Retirement Risks Without Annuities</h2>
+                <ul>
+                    <li>Market crashes can devastate your retirement savings</li>
+                    <li>You might outlive your money if you live longer than expected</li>
+                    <li>Unpredictable income makes budgeting impossible</li>
+                    <li>Sequence of returns risk can destroy your portfolio early in retirement</li>
+                    <li>Forced to make drastic lifestyle cuts when markets drop</li>
+                    <li>Constant stress and anxiety about running out of money</li>
+                </ul>
+            </div>
+
+            <div class="solution-box">
+                <h2>Peace of Mind With Annuities</h2>
+                <ul>
+                    <li>Guaranteed income for life, no matter how long you live</li>
+                    <li>Zero market risk your income never decreases</li>
+                    <li>Predictable monthly paychecks make budgeting easy</li>
+                    <li>Protect your spouse with joint-life income options</li>
+                    <li>Tax-deferred growth maximizes your returns</li>
+                    <li>Sleep soundly knowing you'll never run out of money</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Annuity Types Section -->
+    <section class="annuity-types-section">
+        <div class="section-header">
+            <h2>Find the Right Annuity for Your Goals</h2>
+            <p>Different types of annuities are designed to support specific retirement needs, income timelines, and financial priorities.</p>
+        </div>
+
+        <div class="annuity-grid">
+            <div class="annuity-card">
+                <h3>Immediate Annuities</h3>
+                <span class="best-for">BEST FOR: Retirees who need income now</span>
+                <p>Convert a lump sum into guaranteed monthly income that starts immediately. Perfect if you're already retired or retiring soon and need income right away.</p>
+                <ul>
+                    <li>Income starts within 30 days</li>
+                    <li>Highest payout rates available</li>
+                    <li>Simple and straightforward</li>
+                    <li>No market exposure</li>
+                    <li>Life-only or joint-life options</li>
+                </ul>
+            </div>
+
+            <div class="annuity-card">
+                <h3>Deferred Income Annuities</h3>
+                <span class="best-for">BEST FOR: Pre-retirees planning ahead</span>
+                <p>Purchase now, receive guaranteed income later. Allows your money to grow and locks in higher future payments. Ideal for people 5-15 years from retirement.</p>
+                <ul>
+                    <li>Income starts at your chosen age</li>
+                    <li>Higher payouts than immediate annuities</li>
+                    <li>Lock in current high rates</li>
+                    <li>Bridge the gap to Social Security</li>
+                    <li>Tax-deferred accumulation</li>
+                </ul>
+            </div>
+
+            <div class="annuity-card">
+                <h3>Fixed Index Annuities</h3>
+                <span class="best-for">BEST FOR: Growth with downside protection</span>
+                <p>Earn returns linked to market indexes with zero downside risk. Your principal is protected, you capture market gains (up to a cap), and can convert to lifetime income later.</p>
+                <ul>
+                    <li>Principal protection guaranteed</li>
+                    <li>Participate in market gains (5-10% typical)</li>
+                    <li>No losses when markets drop</li>
+                    <li>Optional lifetime income riders</li>
+                    <li>Flexible access to funds</li>
+                </ul>
+            </div>
+
+            <div class="annuity-card">
+                <h3>Multi-Year Guaranteed Annuities</h3>
+                <span class="best-for">BEST FOR: Safe growth like a CD</span>
+                <p>Fixed interest rate guaranteed for a set term (3-10 years). Similar to a bank CD but typically offers higher rates and tax-deferred growth.</p>
+                <ul>
+                    <li>Guaranteed fixed rates (5-6% currently)</li>
+                    <li>No market risk whatsoever</li>
+                    <li>FDIC-like protection via state guaranty</li>
+                    <li>Tax-deferred compounding</li>
+                    <li>Perfect for conservative investors</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Checklist Section -->
+    <section class="benefits-section">
+        <div class="benefits-container">
+            <h2>Why Annuities Make Sense for Your Retirement</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Longevity Protection</h3>
+                        <p>Americans are living longer than ever. Annuities ensure you'll never outlive your money, even if you live to 100.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Pension Replacement</h3>
+                        <p>Traditional pensions are rare. Annuities recreate that guaranteed monthly income our parents enjoyed in retirement.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Social Security Supplement</h3>
+                        <p>Social Security replaces only 40% of pre-retirement income. Annuities fill the gap with additional guaranteed income.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Tax-Deferred Growth</h3>
+                        <p>Your money grows tax-deferred until withdrawal, potentially adding years of additional compound growth.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Spousal Protection</h3>
+                        <p>Joint-life annuities continue paying your spouse after you pass, ensuring they're never left without income.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Inflation Options</h3>
+                        <p>Choose cost-of-living adjustments that increase your payments annually to keep pace with rising expenses.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Creditor Protection</h3>
+                        <p>In most states, annuities are protected from creditors and lawsuits, keeping your retirement funds secure.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Probate Avoidance</h3>
+                        <p>Annuities pass directly to beneficiaries outside of probate, saving time and legal fees for your heirs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="section-header">
+            <h2>Common Questions About Annuities</h2>
+            <p>Everything you need to know before making your decision</p>
+        </div>
+
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>How much income will I receive from an annuity?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Income depends on your age, gender, amount invested, and annuity type. Generally, a 65-year-old male investing $100,000 in an immediate annuity receives approximately $600-700 per month for life. At age 70, that increases to $700-800 per month.</p>
+                    <p>Current rates are at 15-year highs, so now is an excellent time to lock in guaranteed income. Exact quotes depend on multiple factors and vary by insurance company.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>What happens to my money if I die early?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>You have several options to protect your beneficiaries. Period-certain options guarantee payments for a minimum number of years (10, 15, 20) regardless of when you die. Joint-life annuities continue paying your spouse. Cash refund options return any unpaid principal to beneficiaries.</p>
+                    <p>While life-only annuities (with no death benefits) offer the highest monthly payments, most people choose options that provide some protection for heirs.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Are annuities safe? What if the insurance company fails?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Annuities are backed by state guaranty associations (similar to FDIC for banks) that protect your investment if an insurance company fails. Coverage varies by state but typically protects $250,000-500,000 per person per company.</p>
+                    <p>Working with A-rated or higher insurance companies provides additional security. These companies have survived multiple recessions, depressions, and market crashes over 100+ years in business.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Can I access my money if I need it?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>It depends on the annuity type. Immediate annuities are illiquid you exchange a lump sum for lifetime income with no access to principal. Fixed index and multi-year guaranteed annuities typically allow 10% penalty-free withdrawals annually and full access after the surrender period (usually 5-10 years).</p>
+                    <p>It's recommended to use only a portion of your assets for immediate annuities to cover essential expenses, keeping other funds accessible for emergencies and discretionary spending.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>How are annuity payments taxed?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Taxation depends on how you funded the annuity. Non-qualified annuities (purchased with after-tax money) use an exclusion ratio part of each payment is tax-free return of principal, part is taxable interest. Qualified annuities (funded with IRA/401(k) dollars) are fully taxable as ordinary income.</p>
+                    <p>Annuities grow tax-deferred, meaning you pay no taxes on growth until you withdraw. This allows your investment to compound faster than taxable accounts.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>When is the best time to buy an annuity?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Now is an exceptional time. Annuity rates are at 15-year highs due to rising interest rates. Rates have increased 40-50% compared to 2020-2021, meaning significantly higher lifetime income for the same investment. When interest rates eventually fall, so will annuity payouts.</p>
+                    <p>Most people purchase annuities between ages 55-75. Buying earlier locks in guaranteed future income at higher rates. Waiting until older provides higher immediate payouts but less time to benefit from tax-deferred growth.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Should I annuitize all of my retirement savings?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>No. Financial experts recommend annuitizing only enough to cover essential expenses (housing, food, healthcare, utilities). Keep the rest in liquid investments for discretionary spending, emergencies, healthcare costs, and legacy goals.</p>
+                    <p>A common strategy is the "income floor" approach: use annuities plus Social Security to guarantee 70-80% of expenses, keeping remaining assets flexible. This provides security without sacrificing all liquidity.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>How do I choose the right insurance company?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Focus on financial strength ratings from agencies like A.M. Best, Moody's, and Standard & Poor's. Look for A-rated or higher companies. Also consider the company's history, claims-paying record, and state guaranty association backing.</p>
+                    <p>Comparing quotes from multiple top-rated carriers ensures you get the highest payout rates and best contract features for your guaranteed income.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    
+                    // If it's a stat box with a number, animate the counter
+                    if (entry.target.classList.contains('stat-box')) {
+                        const numberElement = entry.target.querySelector('.number');
+                        if (numberElement && !numberElement.classList.contains('counted')) {
+                            animateCounter(numberElement);
+                        }
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.value-card, .stat-box, .testimonial, .problem-box, .solution-box, .annuity-card, .benefit-item, .faq-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter animation function
+        function animateCounter(element) {
+            element.classList.add('counted');
+            const target = parseFloat(element.getAttribute('data-target'));
+            const prefix = element.getAttribute('data-prefix') || '';
+            const suffix = element.getAttribute('data-suffix') || '';
+            const duration = 2000; // 2 seconds
+            const increment = target / (duration / 16); // 60fps
+            let current = 0;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    // Format based on whether it's a decimal or whole number
+                    if (target >= 1000) {
+                        element.textContent = prefix + Math.floor(current).toLocaleString() + suffix;
+                    } else if (target < 10) {
+                        element.textContent = prefix + current.toFixed(1) + suffix;
+                    } else {
+                        element.textContent = prefix + Math.floor(current) + suffix;
+                    }
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    // Final value
+                    if (target >= 1000) {
+                        element.textContent = prefix + target.toLocaleString() + suffix;
+                    } else if (target < 10) {
+                        element.textContent = prefix + target.toFixed(1) + suffix;
+                    } else {
+                        element.textContent = prefix + target + suffix;
+                    }
+                }
+            };
+
+            updateCounter();
+        }
+
+        // FAQ Toggle functionality
+        document.querySelectorAll('.faq-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const faqItem = header.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all other FAQs
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Toggle current FAQ
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
