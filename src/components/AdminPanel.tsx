@@ -1,7 +1,123 @@
 import React, { useState } from "react";
 import { WebsiteConfig, SubwebsiteCategory, Subwebsite } from "../types";
-import { X, Save, RefreshCw, Layers, Sliders, Type, Link, Image, Trash2, Plus, Info, Layout, Lock } from "lucide-react";
+import { X, Save, RefreshCw, Layers, Sliders, Type, Link, Image, Trash2, Plus, Info, Layout, Lock, Upload, Loader2, AlertCircle } from "lucide-react";
 import { getDirectImageUrl } from "./Header";
+import { uploadToSupabase } from "../utils/supabase";
+
+interface SupabaseImageUploaderProps {
+  value: string;
+  onChange: (url: string) => void;
+  label: string;
+}
+
+function SupabaseImageUploader({ value, onChange, label }: SupabaseImageUploaderProps) {
+  const [isUploading, setIsUploading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const maxSize = 10 * 1024 * 1024;
+    if (file.size > maxSize) {
+      setErrorMsg("Image file is too large (max 10MB). Please compress it first.");
+      return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+      setErrorMsg("Please select a valid image file.");
+      return;
+    }
+
+    setErrorMsg(null);
+    setIsUploading(true);
+    try {
+      const publicUrl = await uploadToSupabase(file);
+      onChange(publicUrl);
+    } catch (err: any) {
+      console.error("Supabase upload error:", err);
+      setErrorMsg(err.message || "Failed to upload file to Supabase.");
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  return (
+    <div className="space-y-2.5 p-3.5 bg-zinc-950 border border-zinc-900 rounded-lg">
+      <div className="flex justify-between items-center">
+        <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">
+          {label}
+        </label>
+        {value && (
+          <button
+            type="button"
+            onClick={() => onChange("")}
+            className="text-[9px] font-mono font-bold text-red-500 hover:text-red-400 uppercase tracking-wider px-1.5 py-0.5 border border-red-950 rounded bg-red-950/20 hover:bg-red-950/40"
+          >
+            Clear Image
+          </button>
+        )}
+      </div>
+
+      <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
+        <div className="flex-1">
+          <input
+            type="text"
+            value={value || ""}
+            onChange={(e) => onChange(e.target.value)}
+            placeholder="Paste direct URL or upload below"
+            className="w-full bg-zinc-900 border border-zinc-800 focus:border-[#FAC000] rounded p-2 text-xs text-white font-mono focus:outline-none placeholder-zinc-600"
+          />
+        </div>
+
+        {value && (
+          <div className="flex items-center shrink-0">
+            <img
+              src={getDirectImageUrl(value)}
+              alt="Preview"
+              className="h-9 w-16 object-cover rounded border border-zinc-800"
+              onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+            />
+          </div>
+        )}
+      </div>
+
+      <div className="flex flex-col space-y-2">
+        <div className="flex items-center space-x-3">
+          <label className="relative flex items-center justify-center space-x-2 px-3 py-1.5 bg-zinc-900 hover:bg-zinc-850 hover:border-[#FAC000] border border-zinc-800 rounded text-xs font-mono text-zinc-300 cursor-pointer transition-all">
+            <Upload className="w-3.5 h-3.5 text-zinc-400" />
+            <span>{isUploading ? "Uploading..." : "Upload File"}</span>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+              disabled={isUploading}
+              className="hidden"
+            />
+          </label>
+
+          {isUploading && (
+            <div className="flex items-center space-x-2 text-[10px] font-mono text-zinc-400">
+              <Loader2 className="w-3.5 h-3.5 animate-spin text-[#FAC000]" />
+              <span>Uploading to Supabase Storage...</span>
+            </div>
+          )}
+        </div>
+
+        {errorMsg && (
+          <div className="flex items-start space-x-1.5 text-[10px] font-mono text-red-500 bg-red-950/20 border border-red-950/40 p-2 rounded">
+            <AlertCircle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+            <span>{errorMsg}</span>
+          </div>
+        )}
+
+        <span className="text-[9px] font-mono text-zinc-600 block">
+          * Uploads to Supabase. Make sure the public bucket <strong>'banners'</strong> exists. Max 10MB.
+        </span>
+      </div>
+    </div>
+  );
+}
 
 interface AdminPanelProps {
   config: WebsiteConfig;
@@ -36,22 +152,6 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
 
   const handleUpdateGlobal = (field: keyof WebsiteConfig, value: any) => {
     setLocalConfig((prev) => ({ ...prev, [field]: value }));
-  };
-
-  const handleBackgroundImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      if (file.size > 2 * 1024 * 1024) {
-        alert("Image file is too large (must be under 2MB) for browser local storage. Please compress the image first or paste a direct URL instead.");
-        return;
-      }
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64String = reader.result as string;
-        handleUpdateGlobal("globalBackgroundImage", base64String);
-      };
-      reader.readAsDataURL(file);
-    }
   };
 
   const handleUpdateNested = (section: keyof WebsiteConfig, field: string, value: any) => {
@@ -455,46 +555,12 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                   />
                 </div>
 
-                <div className="col-span-2 border-t border-zinc-900 pt-4 mt-2 space-y-3">
-                  <div className="flex flex-col space-y-1.5">
-                    <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider">Global Background Image URL (Google Drive or direct link)</label>
-                    <input
-                      type="text"
-                      value={localConfig.globalBackgroundImage || ""}
-                      onChange={(e) => handleUpdateGlobal("globalBackgroundImage", e.target.value)}
-                      placeholder="https://lh3.googleusercontent.com/d/ID or direct image link"
-                      className="w-full bg-zinc-900 border border-zinc-800 focus:border-[#FAC000] rounded p-2 text-white font-mono focus:outline-none"
-                    />
-                  </div>
-
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-                    <div className="flex-1 space-y-1">
-                      <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">Or Upload Local Image File (Max 2MB)</label>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleBackgroundImageUpload}
-                        className="w-full text-zinc-400 font-mono text-[10px] file:mr-3 file:py-1 file:px-2.5 file:rounded file:border file:border-zinc-800 file:bg-zinc-900 file:text-zinc-300 file:cursor-pointer hover:file:border-[#FAC000] hover:file:text-white"
-                      />
-                    </div>
-                    {localConfig.globalBackgroundImage && (
-                      <div className="flex items-center space-x-2 shrink-0 bg-zinc-900/60 p-2 border border-zinc-800 rounded">
-                        <img 
-                          src={getDirectImageUrl(localConfig.globalBackgroundImage)} 
-                          alt="Bg Preview" 
-                          className="h-10 w-16 object-cover rounded border border-zinc-700"
-                          onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
-                        />
-                        <button
-                          type="button"
-                          onClick={() => handleUpdateGlobal("globalBackgroundImage", "")}
-                          className="text-[9px] font-mono font-bold text-red-500 hover:text-red-400 uppercase tracking-widest px-1.5 py-0.5 border border-red-950 rounded bg-red-950/20 hover:bg-red-950/40"
-                        >
-                          Clear
-                        </button>
-                      </div>
-                    )}
-                  </div>
+                <div className="col-span-2 border-t border-zinc-900 pt-4 mt-2">
+                  <SupabaseImageUploader
+                    value={localConfig.globalBackgroundImage || ""}
+                    onChange={(url) => handleUpdateGlobal("globalBackgroundImage", url)}
+                    label="Global Background Image"
+                  />
                 </div>
 
                 <div className="col-span-2 border-t border-zinc-900 pt-4 mt-2 space-y-3">
@@ -626,31 +692,29 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                 </div>
               </div>
 
-              <div className="space-y-2 border-t border-zinc-900 pt-4">
-                <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider flex items-center space-x-1">
-                  <Image className="w-3.5 h-3.5" />
-                  <span>Choose Hero Background Image</span>
-                </label>
-                <input
-                  type="text"
+              <div className="space-y-3 border-t border-zinc-900 pt-4">
+                <SupabaseImageUploader
                   value={localConfig.hero.bgUrl}
-                  onChange={(e) => handleUpdateNested("hero", "bgUrl", e.target.value)}
-                  className="w-full bg-zinc-900 border border-zinc-800 focus:border-[#FAC000] rounded p-2.5 text-white font-mono focus:outline-none mb-3"
-                  placeholder="Paste direct image URL"
+                  onChange={(url) => handleUpdateNested("hero", "bgUrl", url)}
+                  label="Hero Background Image"
                 />
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                  {bgPresetOptions.slice(0, 3).map((opt, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => handleUpdateNested("hero", "bgUrl", opt.url)}
-                      className={`p-2 bg-zinc-900 hover:bg-zinc-850 rounded text-[10px] font-mono text-center border transition-all ${
-                        localConfig.hero.bgUrl === opt.url ? "border-[#FAC000] text-[#FAC000]" : "border-zinc-800 text-zinc-400"
-                      }`}
-                    >
-                      {opt.label}
-                    </button>
-                  ))}
+                <div className="space-y-1">
+                  <label className="text-[9px] font-mono text-zinc-500 uppercase block">Or Choose Preset</label>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    {bgPresetOptions.slice(0, 3).map((opt, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => handleUpdateNested("hero", "bgUrl", opt.url)}
+                        className={`p-2 bg-zinc-900 hover:bg-zinc-850 rounded text-[10px] font-mono text-center border transition-all ${
+                          localConfig.hero.bgUrl === opt.url ? "border-[#FAC000] text-[#FAC000]" : "border-zinc-800 text-zinc-400"
+                        }`}
+                      >
+                        {opt.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -807,13 +871,11 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                   onChange={(e) => handleUpdateNested("aboutBoss", "body", e.target.value)}
                   className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white"
                 />
-                <div className="space-y-1.5 pt-2">
-                  <label className="text-[9px] font-mono text-zinc-500">Avatar Photo Link</label>
-                  <input
-                    type="text"
+                <div className="pt-2">
+                  <SupabaseImageUploader
                     value={localConfig.aboutBoss.bgUrl}
-                    onChange={(e) => handleUpdateNested("aboutBoss", "bgUrl", e.target.value)}
-                    className="w-full bg-zinc-900 border border-zinc-850 rounded p-2 text-white font-mono"
+                    onChange={(url) => handleUpdateNested("aboutBoss", "bgUrl", url)}
+                    label="Avatar Photo Link"
                   />
                 </div>
               </div>
@@ -944,24 +1006,16 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                     const currentBanners = localConfig.subwebsiteBanners[selectedBannerPage] || { topBannerUrl: "", bottomBannerUrl: "" };
                     return (
                       <>
-                        <div className="space-y-1.5">
-                          <label className="text-[9px] font-mono text-zinc-500 uppercase">Top Banner Image URL</label>
-                          <input
-                            type="text"
+                        <div className="space-y-3">
+                          <SupabaseImageUploader
                             value={currentBanners.topBannerUrl}
-                            onChange={(e) => handleUpdateBannerUrl(selectedBannerPage, "topBannerUrl", e.target.value)}
-                            className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white font-mono focus:outline-none"
-                            placeholder="https://images.unsplash.com/..."
+                            onChange={(url) => handleUpdateBannerUrl(selectedBannerPage, "topBannerUrl", url)}
+                            label="Top Banner Image"
                           />
-                        </div>
-                        <div className="space-y-1.5">
-                          <label className="text-[9px] font-mono text-zinc-500 uppercase">Bottom Banner Image URL</label>
-                          <input
-                            type="text"
+                          <SupabaseImageUploader
                             value={currentBanners.bottomBannerUrl}
-                            onChange={(e) => handleUpdateBannerUrl(selectedBannerPage, "bottomBannerUrl", e.target.value)}
-                            className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white font-mono focus:outline-none"
-                            placeholder="https://images.unsplash.com/..."
+                            onChange={(url) => handleUpdateBannerUrl(selectedBannerPage, "bottomBannerUrl", url)}
+                            label="Bottom Banner Image"
                           />
                         </div>
                       </>
