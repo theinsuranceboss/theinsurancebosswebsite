@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { WebsiteConfig, SubwebsiteCategory, Subwebsite } from "../types";
-import { X, Save, RefreshCw, Layers, Sliders, Type, Link, Image, Trash2, Plus, Info, Layout, Lock, Upload, Loader2, AlertCircle } from "lucide-react";
+import { X, Save, RefreshCw, Layers, Sliders, Type, Link, Image, Trash2, Plus, Info, Layout, Lock, Upload, Loader2, AlertCircle, Grid, LogOut } from "lucide-react";
 import { getDirectImageUrl } from "./Header";
 import { uploadToSupabase } from "../utils/supabase";
 
@@ -400,125 +400,202 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
   return (
     <>
       {/* Full Screen Admin Panel */}
-      <div className="fixed inset-0 h-full w-full bg-zinc-950 border-zinc-900 shadow-2xl z-50 flex flex-col justify-between overflow-hidden">
+      <div 
+        className="fixed inset-0 h-full w-full z-50 flex flex-col justify-between overflow-hidden bg-cover bg-center bg-no-repeat bg-fixed admin-portal-wrapper"
+        style={{
+          backgroundImage: config.globalBackgroundImage ? `linear-gradient(rgba(9, 9, 11, 0.93), rgba(0, 0, 0, 0.97)), url(${getDirectImageUrl(config.globalBackgroundImage)})` : "linear-gradient(to bottom, #09090b, #000000)"
+        }}
+      >
         
         {/* Header Drawer */}
-        <div className="p-6 border-b border-zinc-90 w border-zinc-900 bg-zinc-900/40 flex items-center justify-between">
-          <div className="flex items-center space-x-2.5">
-            <Sliders className="w-5 h-5 text-[#FAC000]" />
+        <div className="px-8 py-5 border-b border-zinc-900/60 bg-zinc-950/40 backdrop-blur-md flex flex-col md:flex-row gap-4 md:items-center justify-between shrink-0 select-none">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-zinc-900/80 rounded-xl flex items-center justify-center border border-zinc-800 shadow-md">
+              <Grid className="w-5 h-5 text-[#FAC000]" />
+            </div>
             <div>
-              <h3 className="text-sm font-black text-white tracking-widest uppercase">
-                BOSS VISUAL ADMIN PANEL
+              <h3 className="text-xl font-black text-white tracking-tight leading-tight">
+                Admin Portal
               </h3>
-              <p className="text-[10px] text-zinc-500 font-mono">
-                Real-time configuration & persistent modifications
+              <p className="text-xs text-zinc-500 font-medium">
+                The Insurance Boss Customizer
               </p>
             </div>
           </div>
-          <button
-            onClick={onClose}
-            className="p-1.5 rounded-lg border border-zinc-800 hover:border-[#FAC000]/50 text-zinc-400 hover:text-[#FAC000] transition-colors"
-          >
-            <X className="w-4 h-4" />
-          </button>
+          
+          <div className="flex items-center space-x-3.5">
+            <button
+              onClick={onClose}
+              className="px-5 py-2 rounded-full bg-zinc-900/80 hover:bg-zinc-850 border border-zinc-800 hover:border-zinc-700 text-zinc-350 hover:text-white text-xs font-bold transition-all duration-200 cursor-pointer shadow-md"
+            >
+              View Website
+            </button>
+            <button
+              onClick={() => {
+                sessionStorage.removeItem("boss_admin_unlocked");
+                setIsUnlocked(false);
+              }}
+              className="px-5 py-2 rounded-full bg-red-650 hover:bg-red-500 text-white text-xs font-bold transition-all duration-200 cursor-pointer shadow-md flex items-center gap-1.5"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              <span>Logout</span>
+            </button>
+          </div>
         </div>
 
         {/* Dynamic Category Navigation Tabs */}
-        <div className="flex border-b border-zinc-900 bg-zinc-950/80 px-2 select-none overflow-x-auto text-[10px] font-mono whitespace-nowrap scrollbar-none">
+        <div className="flex gap-2.5 bg-zinc-950/30 backdrop-blur-sm px-8 py-4 select-none overflow-x-auto text-xs whitespace-nowrap scrollbar-none border-b border-zinc-900/60 shrink-0">
           <button
             onClick={() => setActiveTab("global")}
-            className={`py-3 px-4 border-b-2 font-bold transition-all flex items-center space-x-1.5 ${
-              activeTab === "global" ? "border-[#FAC000] text-[#FAC000]" : "border-transparent text-zinc-500 hover:text-zinc-300"
+            className={`py-2.5 px-5 rounded-full font-bold transition-all flex items-center space-x-2 border text-xs cursor-pointer ${
+              activeTab === "global" 
+                ? "bg-[#FAC000] border-[#FAC000] text-black shadow-lg shadow-[#FAC000]/25" 
+                : "bg-zinc-900/40 border-zinc-800/60 text-zinc-400 hover:text-white hover:border-zinc-700"
             }`}
           >
-            <Layout className="w-3.5 h-3.5" />
-            <span>GLOBAL</span>
+            <Layout className="w-4 h-4" />
+            <span>Global Branding</span>
           </button>
           
           <button
             onClick={() => setActiveTab("hero")}
-            className={`py-3 px-4 border-b-2 font-bold transition-all flex items-center space-x-1.5 ${
-              activeTab === "hero" ? "border-[#FAC000] text-[#FAC000]" : "border-transparent text-zinc-500 hover:text-zinc-300"
+            className={`py-2.5 px-5 rounded-full font-bold transition-all flex items-center space-x-2 border text-xs cursor-pointer ${
+              activeTab === "hero" 
+                ? "bg-[#FAC000] border-[#FAC000] text-black shadow-lg shadow-[#FAC000]/25" 
+                : "bg-zinc-900/40 border-zinc-800/60 text-zinc-400 hover:text-white hover:border-zinc-700"
             }`}
           >
-            <Layers className="w-3.5 h-3.5" />
-            <span>HERO</span>
+            <Layers className="w-4 h-4" />
+            <span>Hero Banner</span>
           </button>
 
           <button
             onClick={() => setActiveTab("pillars")}
-            className={`py-3 px-4 border-b-2 font-bold transition-all flex items-center space-x-1.5 ${
-              activeTab === "pillars" ? "border-[#FAC000] text-[#FAC000]" : "border-transparent text-zinc-500 hover:text-zinc-300"
+            className={`py-2.5 px-5 rounded-full font-bold transition-all flex items-center space-x-2 border text-xs cursor-pointer ${
+              activeTab === "pillars" 
+                ? "bg-[#FAC000] border-[#FAC000] text-black shadow-lg shadow-[#FAC000]/25" 
+                : "bg-zinc-900/40 border-zinc-800/60 text-zinc-400 hover:text-white hover:border-zinc-700"
             }`}
           >
-            <Type className="w-3.5 h-3.5" />
-            <span>PILLARS</span>
+            <Type className="w-4 h-4" />
+            <span>Pillars Section</span>
           </button>
 
           <button
             onClick={() => setActiveTab("splits")}
-            className={`py-3 px-4 border-b-2 font-bold transition-all flex items-center space-x-1.5 ${
-              activeTab === "splits" ? "border-[#FAC000] text-[#FAC000]" : "border-transparent text-zinc-500 hover:text-zinc-300"
+            className={`py-2.5 px-5 rounded-full font-bold transition-all flex items-center space-x-2 border text-xs cursor-pointer ${
+              activeTab === "splits" 
+                ? "bg-[#FAC000] border-[#FAC000] text-black shadow-lg shadow-[#FAC000]/25" 
+                : "bg-zinc-900/40 border-zinc-800/60 text-zinc-400 hover:text-white hover:border-zinc-700"
             }`}
           >
-            <Sliders className="w-3.5 h-3.5" />
-            <span>SECTIONS</span>
+            <Sliders className="w-4 h-4" />
+            <span>Home Sections</span>
           </button>
 
           <button
             onClick={() => setActiveTab("carriers")}
-            className={`py-3 px-4 border-b-2 font-bold transition-all flex items-center space-x-1.5 ${
-              activeTab === "carriers" ? "border-[#FAC000] text-[#FAC000]" : "border-transparent text-zinc-500 hover:text-zinc-300"
+            className={`py-2.5 px-5 rounded-full font-bold transition-all flex items-center space-x-2 border text-xs cursor-pointer ${
+              activeTab === "carriers" 
+                ? "bg-[#FAC000] border-[#FAC000] text-black shadow-lg shadow-[#FAC000]/25" 
+                : "bg-zinc-900/40 border-zinc-800/60 text-zinc-400 hover:text-white hover:border-zinc-700"
             }`}
           >
-            <Sliders className="w-3.5 h-3.5" />
-            <span>CARRIERS</span>
+            <Image className="w-4 h-4" />
+            <span>Carrier Logos</span>
           </button>
 
           <button
             onClick={() => setActiveTab("banners")}
-            className={`py-3 px-4 border-b-2 font-bold transition-all flex items-center space-x-1.5 ${
-              activeTab === "banners" ? "border-[#FAC000] text-[#FAC000]" : "border-transparent text-zinc-500 hover:text-zinc-300"
+            className={`py-2.5 px-5 rounded-full font-bold transition-all flex items-center space-x-2 border text-xs cursor-pointer ${
+              activeTab === "banners" 
+                ? "bg-[#FAC000] border-[#FAC000] text-black shadow-lg shadow-[#FAC000]/25" 
+                : "bg-zinc-900/40 border-zinc-800/60 text-zinc-400 hover:text-white hover:border-zinc-700"
             }`}
           >
-            <Image className="w-3.5 h-3.5" />
-            <span>BANNERS</span>
+            <Image className="w-4 h-4" />
+            <span>Page Banners</span>
           </button>
 
           <button
             onClick={() => setActiveTab("buttons")}
-            className={`py-3 px-4 border-b-2 font-bold transition-all flex items-center space-x-1.5 ${
-              activeTab === "buttons" ? "border-[#FAC000] text-[#FAC000]" : "border-transparent text-zinc-500 hover:text-zinc-300"
+            className={`py-2.5 px-5 rounded-full font-bold transition-all flex items-center space-x-2 border text-xs cursor-pointer ${
+              activeTab === "buttons" 
+                ? "bg-[#FAC000] border-[#FAC000] text-black shadow-lg shadow-[#FAC000]/25" 
+                : "bg-zinc-900/40 border-zinc-800/60 text-zinc-400 hover:text-white hover:border-zinc-700"
             }`}
           >
-            <Link className="w-3.5 h-3.5" />
-            <span>BUTTONS HTML</span>
+            <Link className="w-4 h-4" />
+            <span>Buttons HTML</span>
           </button>
 
           <button
             onClick={() => setActiveTab("fonts")}
-            className={`py-3 px-4 border-b-2 font-bold transition-all flex items-center space-x-1.5 ${
-              activeTab === "fonts" ? "border-[#FAC000] text-[#FAC000]" : "border-transparent text-zinc-500 hover:text-zinc-300"
+            className={`py-2.5 px-5 rounded-full font-bold transition-all flex items-center space-x-2 border text-xs cursor-pointer ${
+              activeTab === "fonts" 
+                ? "bg-[#FAC000] border-[#FAC000] text-black shadow-lg shadow-[#FAC000]/25" 
+                : "bg-zinc-900/40 border-zinc-800/60 text-zinc-400 hover:text-white hover:border-zinc-700"
             }`}
           >
-            <Type className="w-3.5 h-3.5" />
-            <span>FONTS</span>
+            <Type className="w-4 h-4" />
+            <span>Visual Fonts</span>
           </button>
 
           <button
             onClick={() => setActiveTab("subwebsites")}
-            className={`py-3 px-4 border-b-2 font-bold transition-all flex items-center space-x-1.5 ${
-              activeTab === "subwebsites" ? "border-[#FAC000] text-[#FAC000]" : "border-transparent text-zinc-500 hover:text-zinc-300"
+            className={`py-2.5 px-5 rounded-full font-bold transition-all flex items-center space-x-2 border text-xs cursor-pointer ${
+              activeTab === "subwebsites" 
+                ? "bg-[#FAC000] border-[#FAC000] text-black shadow-lg shadow-[#FAC000]/25" 
+                : "bg-zinc-900/40 border-zinc-800/60 text-zinc-400 hover:text-white hover:border-zinc-700"
             }`}
           >
-            <Link className="w-3.5 h-3.5" />
-            <span>SUBWEBSITES ({localConfig.subwebsites.flatMap(c => c.items).length})</span>
+            <Link className="w-4 h-4" />
+            <span>Subwebsites Directory ({localConfig.subwebsites.flatMap(c => c.items).length})</span>
           </button>
         </div>
 
         {/* Main Content Area */}
-        <div className="flex-1 p-6 overflow-y-auto bg-black">
-          <div className="max-w-5xl mx-auto w-full space-y-6 text-xs text-zinc-300">
+        <div className="flex-1 p-8 md:p-10 overflow-y-auto bg-transparent">
+          <div className="max-w-6xl mx-auto w-full space-y-8 text-sm text-zinc-300">
+            
+            {/* Tab Header Card */}
+            <div className="p-6 bg-zinc-900/80 border border-zinc-800/60 backdrop-blur-md rounded-2xl flex items-center space-x-4 shadow-xl">
+              <div className="w-12 h-12 bg-zinc-950 border border-zinc-800 rounded-xl flex items-center justify-center text-[#FAC000] shadow-inner shrink-0">
+                {activeTab === "global" && <Layout className="w-6 h-6" />}
+                {activeTab === "hero" && <Layers className="w-6 h-6" />}
+                {activeTab === "pillars" && <Type className="w-6 h-6" />}
+                {activeTab === "splits" && <Sliders className="w-6 h-6" />}
+                {activeTab === "carriers" && <Image className="w-6 h-6" />}
+                {activeTab === "banners" && <Image className="w-6 h-6" />}
+                {activeTab === "buttons" && <Link className="w-6 h-6" />}
+                {activeTab === "fonts" && <Type className="w-6 h-6" />}
+                {activeTab === "subwebsites" && <Link className="w-6 h-6" />}
+              </div>
+              <div>
+                <h2 className="text-xl font-black text-white tracking-wide uppercase leading-tight">
+                  {activeTab === "global" && "Global Branding"}
+                  {activeTab === "hero" && "Hero Section Banner"}
+                  {activeTab === "pillars" && "Core Value Pillars"}
+                  {activeTab === "splits" && "Split Information Panels"}
+                  {activeTab === "carriers" && "Insurance Carriers Slider"}
+                  {activeTab === "banners" && "Subwebsite Banner Layouts"}
+                  {activeTab === "buttons" && "HTML Custom Button Integrations"}
+                  {activeTab === "fonts" && "Typography Styling Controls"}
+                  {activeTab === "subwebsites" && "Subwebsites Directory"}
+                </h2>
+                <p className="text-xs text-zinc-500 font-medium mt-1">
+                  {activeTab === "global" && "Configure primary contact details, logo assets, social links, and the default background image."}
+                  {activeTab === "hero" && "Update the main homepage hero statement, description copy, action buttons, and background preset."}
+                  {activeTab === "pillars" && "Edit the highlights of the three main service offerings (Coverage, Agents, Partners)."}
+                  {activeTab === "splits" && "Modify copywriting layouts for the growth programs, policy reviews, and About sections."}
+                  {activeTab === "carriers" && "Add or modify logos of the trusted carriers that rotate on the home page."}
+                  {activeTab === "banners" && "Customize top and bottom banner images and global typography parameters for all subwebsites."}
+                  {activeTab === "buttons" && "Customize the raw HTML codes for floating review/call CTAs."}
+                  {activeTab === "fonts" && "Manage family typefaces and scaling sizes dynamically across categories and subpages."}
+                  {activeTab === "subwebsites" && "Manage the categories and labels of all insurance sectors, and write custom page HTML layouts."}
+                </p>
+              </div>
+            </div>
           
           {/* TAB: GLOBAL SETTINGS */}
           {activeTab === "global" && (

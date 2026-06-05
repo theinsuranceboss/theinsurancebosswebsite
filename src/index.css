@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=JetBrains+Mono:wght@400;500;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=JetBrains+Mono:wght@400;500;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 @import "tailwindcss";
 
@@ -65,4 +65,75 @@ section,
 footer {
   background-color: rgba(0, 0, 0, 0.85) !important;
   backdrop-filter: blur(4px) !important;
+}
+
+/* ==========================================
+   Admin Portal Premium Styling Overrides
+   ========================================== */
+.admin-portal-wrapper {
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif !important;
+}
+
+/* Set rounded card layouts for settings groups */
+.admin-portal-wrapper .bg-zinc-950.border.border-zinc-900,
+.admin-portal-wrapper .bg-zinc-950.border.border-zinc-800 {
+  background-color: rgba(24, 24, 27, 0.55) !important; /* zinc-900/55 equivalent */
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 16px !important; /* rounded-2xl equivalent */
+  padding: 24px !important; /* p-6 equivalent */
+  backdrop-filter: blur(12px) !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Labels: Bigger, bolder, and high contrast font-sans uppercase */
+.admin-portal-wrapper label {
+  font-size: 11px !important;
+  letter-spacing: 0.1em !important;
+  color: rgba(161, 161, 170, 0.9) !important; /* zinc-400 */
+  font-family: 'Outfit', 'Inter', sans-serif !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+}
+
+/* Input Fields: Larger text, comfortable padding, clean transitions */
+.admin-portal-wrapper input[type="text"],
+.admin-portal-wrapper input[type="password"],
+.admin-portal-wrapper textarea,
+.admin-portal-wrapper select {
+  font-size: 14px !important; /* text-sm equivalent */
+  padding: 10px 14px !important; /* py-2.5 px-3.5 equivalent */
+  border-radius: 8px !important; /* rounded-lg equivalent */
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background-color: rgba(9, 9, 11, 0.75) !important; /* deep blackish zinc */
+  color: #ffffff !important;
+  font-family: inherit !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+.admin-portal-wrapper input[type="text"]::placeholder,
+.admin-portal-wrapper input[type="password"]::placeholder,
+.admin-portal-wrapper textarea::placeholder {
+  color: rgba(161, 161, 170, 0.35) !important;
+}
+
+.admin-portal-wrapper input[type="text"]:focus,
+.admin-portal-wrapper input[type="password"]:focus,
+.admin-portal-wrapper textarea:focus,
+.admin-portal-wrapper select:focus {
+  border-color: #FAC000 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(250, 192, 0, 0.2) !important;
+  background-color: rgba(9, 9, 11, 0.9) !important;
+}
+
+/* Custom styled subpage lists */
+.admin-portal-wrapper select {
+  cursor: pointer;
+}
+
+/* Make help text more readable */
+.admin-portal-wrapper .text-zinc-500,
+.admin-portal-wrapper .text-zinc-600 {
+  color: rgba(161, 161, 170, 0.6) !important;
+  font-size: 11px !important;
 }
