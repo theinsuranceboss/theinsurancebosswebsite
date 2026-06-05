@@ -277,7 +277,7 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
     setLocalConfig((prev) => ({ ...prev, subwebsites: updated }));
   };
 
-  const handleUpdateBannerUrl = (page: string, field: "topBannerUrl" | "bottomBannerUrl", val: string) => {
+  const handleUpdateBannerField = (page: string, field: string, val: any) => {
     const banners = { ...localConfig.subwebsiteBanners };
     const current = banners[page] || { topBannerUrl: "", bottomBannerUrl: "" };
     banners[page] = {
@@ -1149,7 +1149,7 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
               </div>
 
               {selectedBannerPage && (
-                <div className="p-4 bg-zinc-950 border border-zinc-900 rounded-lg space-y-4">
+                <div className="p-4 bg-zinc-950 border border-zinc-900 rounded-lg space-y-6">
                   <span className="text-[10px] font-mono text-[#FAC000] font-bold tracking-widest uppercase block border-b border-zinc-900 pb-1.5">
                     BANNERS FOR: {selectedBannerPage}
                   </span>
@@ -1157,20 +1157,185 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                   {(() => {
                     const currentBanners = localConfig.subwebsiteBanners[selectedBannerPage] || { topBannerUrl: "", bottomBannerUrl: "" };
                     return (
-                      <>
-                        <div className="space-y-3">
+                      <div className="space-y-8">
+                        {/* TOP BANNER CONFIG BLOCK */}
+                        <div className="space-y-3 p-4 bg-zinc-900/40 border border-zinc-800/80 rounded-xl">
+                          <span className="text-xs font-mono text-zinc-400 font-bold uppercase tracking-wider block">Top Banner Configuration</span>
+                          
                           <SupabaseImageUploader
                             value={currentBanners.topBannerUrl}
-                            onChange={(url) => handleUpdateBannerUrl(selectedBannerPage, "topBannerUrl", url)}
-                            label="Top Banner Image"
+                            onChange={(url) => handleUpdateBannerField(selectedBannerPage, "topBannerUrl", url)}
+                            label="Top Banner Image Link"
                           />
+
+                          {/* Large Preview Block */}
+                          {currentBanners.topBannerUrl && (
+                            <div className="space-y-1 mt-2">
+                              <label className="text-[9px] font-mono text-zinc-500 uppercase block">Live Preview</label>
+                              <div 
+                                className="relative w-full rounded-xl overflow-hidden border border-zinc-800 bg-zinc-950 flex items-center justify-center shadow-inner"
+                                style={{ height: "140px" }}
+                              >
+                                <div 
+                                  className="absolute inset-0 w-full h-full"
+                                  style={{
+                                    backgroundImage: `url(${getDirectImageUrl(currentBanners.topBannerUrl)})`,
+                                    backgroundRepeat: currentBanners.topFit === "tile" ? "repeat" : "no-repeat",
+                                    backgroundSize: currentBanners.topFit === "tile" ? "auto" : 
+                                                     currentBanners.topFit === "contain" ? "contain" :
+                                                     currentBanners.topFit === "fill" ? "100% 100%" : "cover",
+                                    backgroundPosition: currentBanners.topPosition || "center",
+                                    backgroundColor: "#000000"
+                                  }}
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                                <div className="relative z-10 text-center p-3 select-none pointer-events-none">
+                                  <span className="text-[8px] font-mono tracking-widest text-[#FAC000] uppercase block">TOP BANNER</span>
+                                  <h4 className="text-xs font-extrabold text-white uppercase tracking-wider mt-1">{selectedBannerPage}</h4>
+                                  <p className="text-[9px] text-zinc-400 mt-1 font-mono">
+                                    {currentBanners.topHeight || "380px"} • {currentBanners.topFit || "cover"} • {currentBanners.topPosition || "center"}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Custom Controls */}
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3 pt-3 border-t border-zinc-900/60">
+                            <div className="space-y-1">
+                              <div className="flex justify-between text-[10px] font-mono">
+                                <span className="text-zinc-500 uppercase font-bold">Banner Height</span>
+                                <span className="text-white font-bold">{currentBanners.topHeight || "380px"}</span>
+                              </div>
+                              <input
+                                type="range"
+                                min="200"
+                                max="600"
+                                step="50"
+                                value={parseInt(currentBanners.topHeight || "380")}
+                                onChange={(e) => handleUpdateBannerField(selectedBannerPage, "topHeight", `${e.target.value}px`)}
+                                className="w-full accent-[#FAC000] cursor-pointer"
+                              />
+                            </div>
+
+                            <div className="space-y-1">
+                              <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">Image Fit</label>
+                              <select
+                                value={currentBanners.topFit || "cover"}
+                                onChange={(e) => handleUpdateBannerField(selectedBannerPage, "topFit", e.target.value)}
+                                className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white"
+                              >
+                                <option value="cover">Ajustar y Recortar (Cover)</option>
+                                <option value="contain">Mostrar Completo (Contain)</option>
+                                <option value="fill">Estirar / Rellenar (Fill)</option>
+                                <option value="tile">Mosaico / Repetir (Tile)</option>
+                              </select>
+                            </div>
+
+                            <div className="space-y-1">
+                              <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">Image Position</label>
+                              <select
+                                value={currentBanners.topPosition || "center"}
+                                onChange={(e) => handleUpdateBannerField(selectedBannerPage, "topPosition", e.target.value)}
+                                className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white"
+                              >
+                                <option value="center">Centro (Center)</option>
+                                <option value="top">Arriba (Top)</option>
+                                <option value="bottom">Abajo (Bottom)</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* BOTTOM BANNER CONFIG BLOCK */}
+                        <div className="space-y-3 p-4 bg-zinc-900/40 border border-zinc-800/80 rounded-xl">
+                          <span className="text-xs font-mono text-zinc-400 font-bold uppercase tracking-wider block">Bottom Banner Configuration</span>
+                          
                           <SupabaseImageUploader
                             value={currentBanners.bottomBannerUrl}
-                            onChange={(url) => handleUpdateBannerUrl(selectedBannerPage, "bottomBannerUrl", url)}
-                            label="Bottom Banner Image"
+                            onChange={(url) => handleUpdateBannerField(selectedBannerPage, "bottomBannerUrl", url)}
+                            label="Bottom Banner Image Link"
                           />
+
+                          {/* Large Preview Block */}
+                          {currentBanners.bottomBannerUrl && (
+                            <div className="space-y-1 mt-2">
+                              <label className="text-[9px] font-mono text-zinc-500 uppercase block">Live Preview</label>
+                              <div 
+                                className="relative w-full rounded-xl overflow-hidden border border-zinc-800 bg-zinc-950 flex items-center justify-center shadow-inner"
+                                style={{ height: "140px" }}
+                              >
+                                <div 
+                                  className="absolute inset-0 w-full h-full"
+                                  style={{
+                                    backgroundImage: `url(${getDirectImageUrl(currentBanners.bottomBannerUrl)})`,
+                                    backgroundRepeat: currentBanners.bottomFit === "tile" ? "repeat" : "no-repeat",
+                                    backgroundSize: currentBanners.bottomFit === "tile" ? "auto" : 
+                                                     currentBanners.bottomFit === "contain" ? "contain" :
+                                                     currentBanners.bottomFit === "fill" ? "100% 100%" : "cover",
+                                    backgroundPosition: currentBanners.bottomPosition || "center",
+                                    backgroundColor: "#000000"
+                                  }}
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-b from-black/80 to-transparent" />
+                                <div className="relative z-10 text-center p-3 select-none pointer-events-none">
+                                  <span className="text-[8px] font-mono tracking-widest text-[#FAC000] uppercase block">BOTTOM BANNER</span>
+                                  <h4 className="text-xs font-extrabold text-white uppercase tracking-wider mt-1">{selectedBannerPage}</h4>
+                                  <p className="text-[9px] text-zinc-400 mt-1 font-mono">
+                                    {currentBanners.bottomHeight || "380px"} • {currentBanners.bottomFit || "cover"} • {currentBanners.bottomPosition || "center"}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Custom Controls */}
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3 pt-3 border-t border-zinc-900/60">
+                            <div className="space-y-1">
+                              <div className="flex justify-between text-[10px] font-mono">
+                                <span className="text-zinc-500 uppercase font-bold">Banner Height</span>
+                                <span className="text-white font-bold">{currentBanners.bottomHeight || "380px"}</span>
+                              </div>
+                              <input
+                                type="range"
+                                min="200"
+                                max="600"
+                                step="50"
+                                value={parseInt(currentBanners.bottomHeight || "380")}
+                                onChange={(e) => handleUpdateBannerField(selectedBannerPage, "bottomHeight", `${e.target.value}px`)}
+                                className="w-full accent-[#FAC000] cursor-pointer"
+                              />
+                            </div>
+
+                            <div className="space-y-1">
+                              <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">Image Fit</label>
+                              <select
+                                value={currentBanners.bottomFit || "cover"}
+                                onChange={(e) => handleUpdateBannerField(selectedBannerPage, "bottomFit", e.target.value)}
+                                className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white"
+                              >
+                                <option value="cover">Ajustar y Recortar (Cover)</option>
+                                <option value="contain">Mostrar Completo (Contain)</option>
+                                <option value="fill">Estirar / Rellenar (Fill)</option>
+                                <option value="tile">Mosaico / Repetir (Tile)</option>
+                              </select>
+                            </div>
+
+                            <div className="space-y-1">
+                              <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">Image Position</label>
+                              <select
+                                value={currentBanners.bottomPosition || "center"}
+                                onChange={(e) => handleUpdateBannerField(selectedBannerPage, "bottomPosition", e.target.value)}
+                                className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white"
+                              >
+                                <option value="center">Centro (Center)</option>
+                                <option value="top">Arriba (Top)</option>
+                                <option value="bottom">Abajo (Bottom)</option>
+                              </select>
+                            </div>
+                          </div>
                         </div>
-                      </>
+                      </div>
                     );
                   })()}
                 </div>

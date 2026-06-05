@@ -4,6 +4,43 @@ import { SUBWEBSITE_HTML_DATA, ParsedSubwebsite } from "../subwebsiteHtml";
 import { getDirectImageUrl } from "./Header";
 import { Sparkles, CheckCircle2, ShieldCheck } from "lucide-react";
 
+function getBannerStyle(url: string, fit?: string, position?: string): React.CSSProperties {
+  const directUrl = getDirectImageUrl(url) || "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&q=80&w=1920";
+  const pos = position || "center";
+  
+  if (fit === "tile") {
+    return {
+      backgroundImage: `url(${directUrl})`,
+      backgroundRepeat: "repeat",
+      backgroundSize: "auto",
+      backgroundPosition: pos,
+    };
+  } else if (fit === "contain") {
+    return {
+      backgroundImage: `url(${directUrl})`,
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "contain",
+      backgroundPosition: pos,
+      backgroundColor: "#000000",
+    };
+  } else if (fit === "fill") {
+    return {
+      backgroundImage: `url(${directUrl})`,
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "100% 100%",
+      backgroundPosition: pos,
+    };
+  } else {
+    // Default is "cover"
+    return {
+      backgroundImage: `url(${directUrl})`,
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "cover",
+      backgroundPosition: pos,
+    };
+  }
+}
+
 interface SubpageViewerProps {
   label: string;
   config: WebsiteConfig;
@@ -517,14 +554,15 @@ export default function SubpageViewer({ label, config }: SubpageViewerProps) {
       `}} />
 
       {/* TOP IMAGE HERO BANNER (BIGGER HEIGHT WITH TITLE, DESCRIPTION, AND BUTTONS) */}
-      <div className="relative min-h-[300px] sm:min-h-[380px] md:min-h-[480px] pt-24 pb-8 sm:pt-32 sm:pb-12 md:pt-40 md:pb-16 w-full overflow-hidden flex items-center justify-center px-4">
-        <img
-          src={getDirectImageUrl(bannerConfig.topBannerUrl)}
-          alt={`${label} Top Banner`}
-          className="absolute inset-0 w-full h-full object-cover"
-          onError={(e) => {
-            (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&q=80&w=1920";
-          }}
+      <div 
+        className="relative pt-24 pb-8 sm:pt-32 sm:pb-12 md:pt-40 md:pb-16 w-full overflow-hidden flex items-center justify-center px-4"
+        style={{
+          minHeight: bannerConfig.topHeight || "380px"
+        }}
+      >
+        <div 
+          className="absolute inset-0 w-full h-full animate-fade-in"
+          style={getBannerStyle(bannerConfig.topBannerUrl, bannerConfig.topFit, bannerConfig.topPosition)}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 to-transparent" />
         
@@ -563,14 +601,15 @@ export default function SubpageViewer({ label, config }: SubpageViewerProps) {
 
       {/* BOTTOM IMAGE HERO BANNER (MATCHES TOP BANNER DESIGN, RESPONSIVE, BRIGHT IMAGE) */}
       {bannerConfig.bottomBannerUrl && (
-        <div className="relative min-h-[300px] sm:min-h-[380px] md:min-h-[480px] py-8 sm:py-12 md:py-16 w-full overflow-hidden flex items-center justify-center border-t border-zinc-900 px-4">
-          <img
-            src={getDirectImageUrl(bannerConfig.bottomBannerUrl)}
-            alt={`${label} Bottom Banner`}
-            className="absolute inset-0 w-full h-full object-cover"
-            onError={(e) => {
-              (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800";
-            }}
+        <div 
+          className="relative py-8 sm:py-12 md:py-16 w-full overflow-hidden flex items-center justify-center border-t border-zinc-900 px-4"
+          style={{
+            minHeight: bannerConfig.bottomHeight || "380px"
+          }}
+        >
+          <div 
+            className="absolute inset-0 w-full h-full animate-fade-in"
+            style={getBannerStyle(bannerConfig.bottomBannerUrl, bannerConfig.bottomFit, bannerConfig.bottomPosition)}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/90 to-transparent" />
           <div className="relative z-10 max-w-3xl w-full">

@@ -32,6 +32,12 @@ export interface WebsiteConfig {
   subwebsiteBanners: Record<string, {
     topBannerUrl: string;
     bottomBannerUrl: string;
+    topHeight?: string;
+    topFit?: "cover" | "contain" | "fill" | "tile";
+    topPosition?: "center" | "top" | "bottom";
+    bottomHeight?: string;
+    bottomFit?: "cover" | "contain" | "fill" | "tile";
+    bottomPosition?: "center" | "top" | "bottom";
   }>;
   fontFamilyPage?: Record<string, string>;
   fontFamilyCategory?: Record<string, string>;
