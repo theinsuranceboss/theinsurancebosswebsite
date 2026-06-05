@@ -119,6 +119,68 @@ function SupabaseImageUploader({ value, onChange, label }: SupabaseImageUploader
   );
 }
 
+interface CarrierLogoUploaderProps {
+  value: string;
+  onChange: (url: string) => void;
+}
+
+function CarrierLogoUploader({ value, onChange }: CarrierLogoUploaderProps) {
+  const [isUploading, setIsUploading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const maxSize = 5 * 1024 * 1024;
+    if (file.size > maxSize) {
+      setErrorMsg("Logo file is too large (max 5MB).");
+      return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+      setErrorMsg("Please select a valid image file.");
+      return;
+    }
+
+    setErrorMsg(null);
+    setIsUploading(true);
+    try {
+      const publicUrl = await uploadToSupabase(file);
+      onChange(publicUrl);
+    } catch (err: any) {
+      console.error("Supabase logo upload error:", err);
+      setErrorMsg(err.message || "Upload failed.");
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  return (
+    <div className="flex items-center space-x-2">
+      <label className="flex items-center justify-center space-x-1 px-2 py-0.5 bg-zinc-950 hover:bg-zinc-900 hover:border-[#FAC000] border border-zinc-850 rounded text-[9px] font-mono text-zinc-400 cursor-pointer transition-all">
+        <Upload className="w-2.5 h-2.5 text-zinc-500" />
+        <span>{isUploading ? "Uploading..." : "Upload logo"}</span>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
+          disabled={isUploading}
+          className="hidden"
+        />
+      </label>
+
+      {isUploading && (
+        <Loader2 className="w-2.5 h-2.5 animate-spin text-[#FAC000]" />
+      )}
+
+      {errorMsg && (
+        <span className="text-[8px] font-mono text-red-500">{errorMsg}</span>
+      )}
+    </div>
+  );
+}
+
 interface AdminPanelProps {
   config: WebsiteConfig;
   isOpen: boolean;
@@ -945,21 +1007,34 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                         <div className="w-12 h-12 bg-zinc-900 rounded border border-zinc-800 flex items-center justify-center shrink-0 p-1">
                           <img src={logo} alt="" className="max-h-full max-w-full object-contain filter grayscale" onError={(e)=>{(e.target as HTMLElement).style.display="none"}} />
                         </div>
-                        <input
-                          type="text"
-                          value={logo}
-                          onChange={(e) => {
-                            const val = e.target.value;
-                            const updatedLogos = [...localConfig.carriersBanner.logos];
-                            updatedLogos[idx] = val;
-                            setLocalConfig(prev => ({
-                              ...prev,
-                              carriersBanner: { ...prev.carriersBanner, logos: updatedLogos }
-                            }));
-                          }}
-                          className="w-full bg-zinc-950 border border-zinc-850 rounded p-1.5 text-xs text-zinc-300 font-mono"
-                          placeholder="Logo Image URL or Data URL"
-                        />
+                        <div className="flex-1 flex flex-col gap-1.5">
+                          <input
+                            type="text"
+                            value={logo}
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              const updatedLogos = [...localConfig.carriersBanner.logos];
+                              updatedLogos[idx] = val;
+                              setLocalConfig(prev => ({
+                                ...prev,
+                                carriersBanner: { ...prev.carriersBanner, logos: updatedLogos }
+                              }));
+                            }}
+                            className="w-full bg-zinc-950 border border-zinc-850 rounded p-1.5 text-xs text-zinc-300 font-mono"
+                            placeholder="Logo Image URL or upload"
+                          />
+                          <CarrierLogoUploader
+                            value={logo}
+                            onChange={(url) => {
+                              const updatedLogos = [...localConfig.carriersBanner.logos];
+                              updatedLogos[idx] = url;
+                              setLocalConfig(prev => ({
+                                ...prev,
+                                carriersBanner: { ...prev.carriersBanner, logos: updatedLogos }
+                              }));
+                            }}
+                          />
+                        </div>
                         <button
                           onClick={() => {
                             const updatedLogos = localConfig.carriersBanner.logos.filter((_, i) => i !== idx);
@@ -968,7 +1043,7 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                               carriersBanner: { ...prev.carriersBanner, logos: updatedLogos }
                             }));
                           }}
-                          className="text-red-500 hover:text-red-400 p-2"
+                          className="text-red-500 hover:text-red-400 p-2 self-start"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
