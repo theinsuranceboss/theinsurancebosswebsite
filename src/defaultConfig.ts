@@ -21,17 +21,22 @@ export const DEFAULT_CONFIG: WebsiteConfig = {
   carriersBanner: {
     title: "We Work with the Most Trusted Insurance Carriers",
     subtitle: "We team up with the nation's most respected insurance companies to make sure you're protected by names you can trust.",
-    logos: [
+    speed: 25,
+    personalLogos: [
       "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 70' width='220' height='70'><rect width='220' height='70' rx='8' fill='%2318181b' stroke='%2327272a' stroke-width='1.5'/><text x='110' y='41' text-anchor='middle' fill='%23ffffff' font-family='sans-serif' font-weight='bold' font-size='15' letter-spacing='0.5'>CABRILLO COASTAL</text></svg>",
       "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 70' width='220' height='70'><rect width='220' height='70' rx='8' fill='%2318181b' stroke='%2327272a' stroke-width='1.5'/><text x='110' y='42' text-anchor='middle' fill='%23ffffff' font-family='serif' font-weight='900' font-size='20' letter-spacing='2'>HAGERTY</text></svg>",
       "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 70' width='220' height='70'><rect width='220' height='70' rx='8' fill='%2318181b' stroke='%2327272a' stroke-width='1.5'/><text x='110' y='41' text-anchor='middle' fill='%23ffffff' font-family='sans-serif' font-weight='bold' font-size='16' letter-spacing='1'>FARMERS INS.</text></svg>",
       "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 70' width='220' height='70'><rect width='220' height='70' rx='8' fill='%2318181b' stroke='%2327272a' stroke-width='1.5'/><text x='110' y='42' text-anchor='middle' fill='%23ffffff' font-family='sans-serif' font-style='italic' font-weight='800' font-size='18' letter-spacing='0.5'>swyfft</text></svg>",
-      "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 70' width='220' height='70'><rect width='220' height='70' rx='8' fill='%2318181b' stroke='%2327272a' stroke-width='1.5'/><text x='110' y='41' text-anchor='middle' fill='%23ffffff' font-family='sans-serif' font-weight='bold' font-size='15'>PLYMOUTH ROCK</text></svg>",
+      "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 70' width='220' height='70'><rect width='220' height='70' rx='8' fill='%2318181b' stroke='%2327272a' stroke-width='1.5'/><text x='110' y='41' text-anchor='middle' fill='%23ffffff' font-family='sans-serif' font-weight='bold' font-size='15'>PLYMOUTH ROCK</text></svg>"
+    ],
+    commercialLogos: [
       "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 70' width='220' height='70'><rect width='220' height='70' rx='8' fill='%2318181b' stroke='%2327272a' stroke-width='1.5'/><text x='110' y='41' text-anchor='middle' fill='%23ffffff' font-family='serif' font-weight='bold' font-size='15'>BURNS &amp; WILCOX</text></svg>",
       "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 70' width='220' height='70'><rect width='220' height='70' rx='8' fill='%2318181b' stroke='%2327272a' stroke-width='1.5'/><text x='110' y='41' text-anchor='middle' fill='%23ffffff' font-family='sans-serif' font-weight='900' font-size='18'>BTIS</text></svg>",
       "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 70' width='220' height='70'><rect width='220' height='70' rx='8' fill='%2318181b' stroke='%2327272a' stroke-width='1.5'/><text x='110' y='41' text-anchor='middle' fill='%23ffffff' font-family='sans-serif' font-weight='bold' font-size='20' letter-spacing='2'>RPS</text></svg>",
       "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 70' width='220' height='70'><rect width='220' height='70' rx='8' fill='%2318181b' stroke='%2327272a' stroke-width='1.5'/><text x='110' y='41' text-anchor='middle' fill='%23ffffff' font-family='sans-serif' font-weight='bold' font-size='18' letter-spacing='1'>TAPCO</text></svg>",
-      "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 70' width='220' height='70'><rect width='220' height='70' rx='8' fill='%2318181b' stroke='%2327272a' stroke-width='1.5'/><text x='110' y='41' text-anchor='middle' fill='%23ffffff' font-family='sans-serif' font-weight='bold' font-size='16' letter-spacing='1.5'>PATHPOINT</text></svg>",
+      "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 70' width='220' height='70'><rect width='220' height='70' rx='8' fill='%2318181b' stroke='%2327272a' stroke-width='1.5'/><text x='110' y='41' text-anchor='middle' fill='%23ffffff' font-family='sans-serif' font-weight='bold' font-size='16' letter-spacing='1.5'>PATHPOINT</text></svg>"
+    ],
+    lifeLogos: [
       "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 70' width='220' height='70'><rect width='220' height='70' rx='8' fill='%2318181b' stroke='%2327272a' stroke-width='1.5'/><text x='110' y='41' text-anchor='middle' fill='%23ffffff' font-family='sans-serif' font-weight='bold' font-size='18' letter-spacing='1'>CRUMP</text></svg>",
       "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 70' width='220' height='70'><rect width='220' height='70' rx='8' fill='%2318181b' stroke='%2327272a' stroke-width='1.5'/><text x='110' y='41' text-anchor='middle' fill='%23ffffff' font-family='serif' font-weight='800' font-size='18'>GUARDIAN</text></svg>",
       "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 70' width='220' height='70'><rect width='220' height='70' rx='8' fill='%2318181b' stroke='%2327272a' stroke-width='1.5'/><text x='110' y='41' text-anchor='middle' fill='%23ffffff' font-family='serif' font-size='14' font-weight='bold'>LINCOLN FINANCIAL</text></svg>"
@@ -247,21 +252,8 @@ export const DEFAULT_CONFIG: WebsiteConfig = {
 
   subwebsites: [
     {
-      category: "Commercial Insurance",
-      items: [
-        { label: "Commercial Insurance Main", url: "#subpage-Commercial%20Insurance%20Main" },
-        { label: "BOP (Business Owner's Policy)", url: "#subpage-BOP%20(Business%20Owner's%20Policy)" },
-        { label: "Commercial Auto", url: "#subpage-Commercial%20Auto" },
-        { label: "Cyber Liability", url: "#subpage-Cyber%20Liability" },
-        { label: "General Liability", url: "#subpage-General%20Liability" },
-        { label: "Workers' Comp", url: "#subpage-Workers'%20Comp" },
-        { label: "Employee Benefits", url: "#subpage-Employee%20Benefits" }
-      ]
-    },
-    {
       category: "Life Insurance",
       items: [
-        { label: "Life Insurance Main", url: "#subpage-Life%20Insurance%20Main" },
         { label: "Whole Life", url: "#subpage-Whole%20Life" },
         { label: "Universal Life", url: "#subpage-Universal%20Life" },
         { label: "Term Life", url: "#subpage-Term%20Life" },
@@ -272,7 +264,6 @@ export const DEFAULT_CONFIG: WebsiteConfig = {
     {
       category: "Retirement & Investment",
       items: [
-        { label: "Retirement & Investment Main", url: "#subpage-Retirement%20&%20Investment%20Main" },
         { label: "IRAs", url: "#subpage-IRAs" },
         { label: "College Savings", url: "#subpage-College%20Savings" },
         { label: "Annuities", url: "#subpage-Annuities" },
@@ -282,10 +273,7 @@ export const DEFAULT_CONFIG: WebsiteConfig = {
     {
       category: "Personal Lines",
       items: [
-        { label: "Personal Lines Main", url: "#subpage-Personal%20Lines%20Main" },
         { label: "Auto Insurance", url: "#subpage-Auto%20Insurance" },
-        { label: "Homeowners Insurance", url: "#subpage-Homeowners%20Insurance" },
-        { label: "Umbrella Insurance", url: "#subpage-Umbrella%20Insurance" },
         { label: "Landlord Dwelling", url: "#subpage-Landlord%20Dwelling" },
         { label: "Flood", url: "#subpage-Flood" },
         { label: "Specialty Vehicles", url: "#subpage-Specialty%20Vehicles" }

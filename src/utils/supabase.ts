@@ -41,3 +41,62 @@ export async function uploadToSupabase(file: File): Promise<string> {
   
   return `${SUPABASE_URL}/storage/v1/object/public/banners/${fileName}`;
 }
+
+/**
+ * Fetches a public Google Drive folder page via CORS proxy and extracts all image IDs.
+ * @param folderUrl The public sharing link of a Google Drive folder.
+ * @returns Array of direct image stream URLs from that folder.
+ */
+export async function extractGoogleDriveFolderImages(folderUrl: string): Promise<string[]> {
+  let folderId = "";
+  const folderIdMatch = folderUrl.match(/\/folders\/([a-zA-Z0-9_-]+)/);
+  if (folderIdMatch && folderIdMatch[1]) {
+    folderId = folderIdMatch[1];
+  } else {
+    const idParamMatch = folderUrl.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+    if (idParamMatch && idParamMatch[1]) {
+      folderId = idParamMatch[1];
+    }
+  }
+
+  if (!folderId) {
+    throw new Error("Could not extract folder ID from URL. Make sure it contains '/folders/FOLDER_ID' or '?id=FOLDER_ID'");
+  }
+
+  const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://drive.google.com/drive/folders/${folderId}`)}`;
+  
+  const response = await fetch(proxyUrl);
+  if (!response.ok) {
+    throw new Error("Failed to access Google Drive folder page. Ensure the folder is public ('Anyone with the link can view').");
+  }
+
+  const html = await response.text();
+
+  // Find all Google Drive file IDs mentioned in the page.
+  const fileIdRegex = /\/file\/d\/([a-zA-Z0-9_-]{25,50})/g;
+  const fileIds = new Set<string>();
+  
+  let match;
+  while ((match = fileIdRegex.exec(html)) !== null) {
+    if (match[1]) {
+      fileIds.add(match[1]);
+    }
+  }
+
+  // Fallback: search for standard Google Drive resource IDs in bootstrap/JSON blocks
+  if (fileIds.size === 0) {
+    const jsonIdRegex = /"([a-zA-Z0-9_-]{33})"/g;
+    let matchJson;
+    while ((matchJson = jsonIdRegex.exec(html)) !== null) {
+      if (matchJson[1]) {
+        fileIds.add(matchJson[1]);
+      }
+    }
+  }
+
+  if (fileIds.size === 0) {
+    throw new Error("No files could be found in the folder. Please verify the folder contains files and is publicly shared.");
+  }
+
+  return Array.from(fileIds).map(id => `https://lh3.googleusercontent.com/d/${id}`);
+}

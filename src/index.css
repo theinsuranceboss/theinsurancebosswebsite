@@ -41,7 +41,7 @@ section,
 #for-agents,
 #inner-circle,
 #about {
-  background-color: rgba(0, 0, 0, 0.72) !important;
+  background-color: transparent !important;
 }
 
 /* Make section card components translucent too with high-contrast glass style */

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { WebsiteConfig, SubwebsiteCategory, Subwebsite } from "../types";
 import { X, Save, RefreshCw, Layers, Sliders, Type, Link, Image, Trash2, Plus, Info, Layout, Lock, Upload, Loader2, AlertCircle, Grid, LogOut } from "lucide-react";
 import { getDirectImageUrl } from "./Header";
-import { uploadToSupabase } from "../utils/supabase";
+import { uploadToSupabase, extractGoogleDriveFolderImages } from "../utils/supabase";
 
 interface SupabaseImageUploaderProps {
   value: string;
@@ -198,9 +198,180 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
   });
   const [passwordError, setPasswordError] = useState("");
 
+  // Keep localConfig in sync with the saved config when the panel is opened or config changes
+  useEffect(() => {
+    if (isOpen) {
+      setLocalConfig({ ...config });
+    }
+  }, [isOpen, config]);
+
   // Initialize selected subpage for banner editing
   const allSubwebsiteLabels = localConfig.subwebsites.flatMap(c => c.items.map(i => i.label));
   const [selectedBannerPage, setSelectedBannerPage] = useState<string>(allSubwebsiteLabels[0] || "");
+
+  const renderLogoCategoryEditor = (
+    categoryKey: "personalLogos" | "commercialLogos" | "lifeLogos",
+    label: string
+  ) => {
+    const logos = localConfig.carriersBanner[categoryKey] || [];
+    
+    const updateLogos = (newLogos: string[]) => {
+      setLocalConfig(prev => ({
+        ...prev,
+        carriersBanner: {
+          ...prev.carriersBanner,
+          [categoryKey]: newLogos
+        }
+      }));
+    };
+
+    return (
+      <div className="p-5 bg-zinc-950/40 border border-zinc-900 rounded-xl space-y-4">
+        {/* Category Header */}
+        <div className="flex items-center justify-between border-b border-zinc-905 border-zinc-900 pb-2">
+          <span className="text-[11px] font-mono text-[#FAC000] font-black tracking-widest uppercase">
+            {label} ({logos.length})
+          </span>
+          <button
+            onClick={() => {
+              updateLogos([...logos, "https://"]);
+            }}
+            className="text-[10px] font-mono text-[#FAC000] hover:text-white flex items-center gap-1 font-bold"
+          >
+            <Plus className="w-3.5 h-3.5" /> ADD LOGO
+          </button>
+        </div>
+
+        {/* Category Bulk Tools */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-3 bg-zinc-950/80 border border-zinc-900/60 rounded-lg">
+          {/* Local Bulk File Uploader */}
+          <div className="space-y-1">
+            <span className="text-[9px] font-mono text-zinc-500 uppercase block font-bold">Bulk Local Upload</span>
+            <label className="flex items-center justify-center space-x-1.5 px-3 py-1.5 bg-zinc-900 hover:bg-zinc-850 hover:border-[#FAC000] border border-zinc-800 rounded text-xs font-mono text-zinc-350 cursor-pointer transition-all text-center">
+              <Upload className="w-3.5 h-3.5 text-zinc-400" />
+              <span>Select Files</span>
+              <input
+                type="file"
+                accept="image/*"
+                multiple
+                onChange={async (e) => {
+                  const files = e.target.files;
+                  if (!files || files.length === 0) return;
+                  
+                  const filesArray = Array.from(files) as File[];
+                  const uploadPromises = filesArray.map(async (file) => {
+                    try {
+                      return await uploadToSupabase(file);
+                    } catch (err) {
+                      console.error(`Failed to upload ${file.name}:`, err);
+                      return null;
+                    }
+                  });
+                  
+                  const urls = (await Promise.all(uploadPromises)).filter((url): url is string => url !== null);
+                  if (urls.length > 0) {
+                    updateLogos([...logos, ...urls]);
+                    alert(`Uploaded ${urls.length} images to ${label}!`);
+                  }
+                }}
+                className="hidden"
+              />
+            </label>
+          </div>
+
+          {/* Google Drive Link Import */}
+          <div className="space-y-1">
+            <span className="text-[9px] font-mono text-zinc-500 uppercase block font-bold">Import Google Drive Folder</span>
+            <div className="flex space-x-1.5">
+              <input
+                id={`drive-input-${categoryKey}`}
+                type="text"
+                placeholder="Paste shared folder URL..."
+                className="flex-1 bg-zinc-900 border border-zinc-850 rounded px-2 py-1 text-xs text-white"
+              />
+              <button
+                type="button"
+                onClick={async () => {
+                  const input = document.getElementById(`drive-input-${categoryKey}`) as HTMLInputElement;
+                  if (!input || !input.value) {
+                    alert("Please paste a valid Google Drive folder link first.");
+                    return;
+                  }
+                  try {
+                    const originalVal = input.value;
+                    input.disabled = true;
+                    input.placeholder = "Loading folder...";
+                    
+                    const urls = await extractGoogleDriveFolderImages(originalVal);
+                    if (urls.length > 0) {
+                      updateLogos([...logos, ...urls]);
+                      alert(`Successfully imported ${urls.length} images to ${label}!`);
+                      input.value = "";
+                    }
+                  } catch (err: any) {
+                    console.error(err);
+                    alert(`Error: ${err.message || "Failed to load Google Drive folder."}`);
+                  } finally {
+                    input.disabled = false;
+                    input.placeholder = "Paste shared folder URL...";
+                  }
+                }}
+                className="px-2.5 py-1 bg-[#FAC000] text-black font-mono font-bold text-[10px] rounded hover:bg-black hover:text-[#FAC000] border border-[#FAC000] transition-all"
+              >
+                LOAD
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Logos List */}
+        <div className="space-y-2.5 max-h-60 overflow-y-auto pr-1">
+          {logos.length === 0 ? (
+            <p className="p-2 text-zinc-650 italic text-[10px] text-center">No logos added. Upload files or paste links above.</p>
+          ) : (
+            logos.map((logo, idx) => (
+              <div key={idx} className="flex gap-2 items-center bg-zinc-900/30 p-2 border border-zinc-900 rounded">
+                <div className="w-10 h-10 bg-zinc-900 rounded border border-zinc-800 flex items-center justify-center shrink-0 p-1">
+                  <img src={getDirectImageUrl(logo)} alt="" className="max-h-full max-w-full object-contain filter grayscale" onError={(e)=>{(e.target as HTMLElement).style.display="none"}} />
+                </div>
+                <div className="flex-1 flex flex-col gap-1">
+                  <input
+                    type="text"
+                    value={logo}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      const updated = [...logos];
+                      updated[idx] = val;
+                      updateLogos(updated);
+                    }}
+                    className="w-full bg-zinc-950 border border-zinc-850 rounded p-1 text-[10px] text-zinc-300 font-mono"
+                    placeholder="Logo URL or upload"
+                  />
+                  <CarrierLogoUploader
+                    value={logo}
+                    onChange={(url) => {
+                      const updated = [...logos];
+                      updated[idx] = url;
+                      updateLogos(updated);
+                    }}
+                  />
+                </div>
+                <button
+                  onClick={() => {
+                    const updated = logos.filter((_, i) => i !== idx);
+                    updateLogos(updated);
+                  }}
+                  className="text-red-500 hover:text-red-400 p-1.5 self-start"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+    );
+  };
 
   if (!isOpen) return null;
 
@@ -560,8 +731,19 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
             
             {/* Tab Header Card */}
             <div className="p-6 bg-zinc-900/80 border border-zinc-800/60 backdrop-blur-md rounded-2xl flex items-center space-x-4 shadow-xl">
-              <div className="w-12 h-12 bg-zinc-950 border border-zinc-800 rounded-xl flex items-center justify-center text-[#FAC000] shadow-inner shrink-0">
-                {activeTab === "global" && <Layout className="w-6 h-6" />}
+              <div className="w-12 h-12 bg-zinc-950 border border-zinc-800 rounded-xl flex items-center justify-center text-[#FAC000] shadow-inner shrink-0 overflow-hidden">
+                {activeTab === "global" && (
+                  config.logoUrl ? (
+                    <img 
+                      src={getDirectImageUrl(config.logoUrl)} 
+                      alt="Logo" 
+                      className="w-9 h-9 object-contain"
+                      referrerPolicy="no-referrer"
+                    />
+                  ) : (
+                    <Layout className="w-6 h-6" />
+                  )
+                )}
                 {activeTab === "hero" && <Layers className="w-6 h-6" />}
                 {activeTab === "pillars" && <Type className="w-6 h-6" />}
                 {activeTab === "splits" && <Sliders className="w-6 h-6" />}
@@ -1023,7 +1205,7 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
 
           {/* TAB: CARRIERS BANNER */}
           {activeTab === "carriers" && (
-            <div className="space-y-4">
+            <div className="space-y-6">
               <div className="space-y-1.5">
                 <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider">Carriers Section Title</label>
                 <input
@@ -1056,79 +1238,33 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                 />
               </div>
 
-              <div className="space-y-3">
-                <div className="flex items-center justify-between border-b border-zinc-900 pb-2">
-                  <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider">Carrier Logo Image URLs ({localConfig.carriersBanner.logos.length})</label>
-                  <button
-                    onClick={() => {
-                      setLocalConfig(prev => ({
-                        ...prev,
-                        carriersBanner: {
-                          ...prev.carriersBanner,
-                          logos: [...prev.carriersBanner.logos, "https://"]
-                        }
-                      }));
-                    }}
-                    className="text-[10px] font-mono text-[#FAC000] hover:text-white flex items-center gap-1 font-bold"
-                  >
-                    <Plus className="w-3.5 h-3.5" /> ADD LOGO
-                  </button>
+              {/* Speed Slider Box */}
+              <div className="p-4 bg-zinc-950/60 border border-zinc-900 rounded-xl space-y-2">
+                <div className="flex justify-between text-[10px] font-mono">
+                  <span className="text-zinc-500 font-bold uppercase">Carousel Scrolling Speed (Shared)</span>
+                  <span className="text-white font-bold">{localConfig.carriersBanner.speed || 25}s duration (lower is faster)</span>
                 </div>
-
-                <div className="space-y-3 max-h-96 overflow-y-auto pr-1">
-                  {localConfig.carriersBanner.logos.length === 0 ? (
-                    <p className="p-2 text-zinc-550 italic text-[11px]">No logos added. Click "ADD LOGO" above.</p>
-                  ) : (
-                    localConfig.carriersBanner.logos.map((logo, idx) => (
-                      <div key={idx} className="flex gap-2 items-center bg-zinc-900/30 p-2 border border-zinc-900 rounded">
-                        <div className="w-12 h-12 bg-zinc-900 rounded border border-zinc-800 flex items-center justify-center shrink-0 p-1">
-                          <img src={logo} alt="" className="max-h-full max-w-full object-contain filter grayscale" onError={(e)=>{(e.target as HTMLElement).style.display="none"}} />
-                        </div>
-                        <div className="flex-1 flex flex-col gap-1.5">
-                          <input
-                            type="text"
-                            value={logo}
-                            onChange={(e) => {
-                              const val = e.target.value;
-                              const updatedLogos = [...localConfig.carriersBanner.logos];
-                              updatedLogos[idx] = val;
-                              setLocalConfig(prev => ({
-                                ...prev,
-                                carriersBanner: { ...prev.carriersBanner, logos: updatedLogos }
-                              }));
-                            }}
-                            className="w-full bg-zinc-950 border border-zinc-850 rounded p-1.5 text-xs text-zinc-300 font-mono"
-                            placeholder="Logo Image URL or upload"
-                          />
-                          <CarrierLogoUploader
-                            value={logo}
-                            onChange={(url) => {
-                              const updatedLogos = [...localConfig.carriersBanner.logos];
-                              updatedLogos[idx] = url;
-                              setLocalConfig(prev => ({
-                                ...prev,
-                                carriersBanner: { ...prev.carriersBanner, logos: updatedLogos }
-                              }));
-                            }}
-                          />
-                        </div>
-                        <button
-                          onClick={() => {
-                            const updatedLogos = localConfig.carriersBanner.logos.filter((_, i) => i !== idx);
-                            setLocalConfig(prev => ({
-                              ...prev,
-                              carriersBanner: { ...prev.carriersBanner, logos: updatedLogos }
-                            }));
-                          }}
-                          className="text-red-500 hover:text-red-400 p-2 self-start"
-                        >
-                          <Trash2 className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
-                    ))
-                  )}
-                </div>
+                <input
+                  type="range"
+                  min="5"
+                  max="60"
+                  step="1"
+                  value={localConfig.carriersBanner.speed || 25}
+                  onChange={(e) => {
+                    const val = parseInt(e.target.value) || 25;
+                    setLocalConfig(prev => ({
+                      ...prev,
+                      carriersBanner: { ...prev.carriersBanner, speed: val }
+                    }));
+                  }}
+                  className="w-full accent-[#FAC000] cursor-pointer"
+                />
               </div>
+
+              {/* Category Editors */}
+              {renderLogoCategoryEditor("personalLogos", "Personal Lines Carriers")}
+              {renderLogoCategoryEditor("commercialLogos", "Commercial Lines Carriers")}
+              {renderLogoCategoryEditor("lifeLogos", "Life Insurance Carriers")}
             </div>
           )}
 
@@ -1189,11 +1325,31 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                                   }}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                                <div className="relative z-10 text-center p-3 select-none pointer-events-none">
-                                  <span className="text-[8px] font-mono tracking-widest text-[#FAC000] uppercase block">TOP BANNER</span>
-                                  <h4 className="text-xs font-extrabold text-white uppercase tracking-wider mt-1">{selectedBannerPage}</h4>
-                                  <p className="text-[9px] text-zinc-400 mt-1 font-mono">
-                                    {currentBanners.topHeight || "380px"} • {currentBanners.topFit || "cover"} • {currentBanners.topPosition || "center"}
+                                <div className={`relative z-10 p-3 select-none pointer-events-none w-full flex flex-col justify-center ${
+                                  currentBanners.align === "left" 
+                                    ? "text-left items-start" 
+                                    : currentBanners.align === "right" 
+                                      ? "text-right items-end" 
+                                      : "text-center items-center"
+                                }`}>
+                                  <span className="text-[8px] font-mono tracking-widest uppercase block" style={{ color: currentBanners.titleColor || "#FAC000" }}>TOP BANNER</span>
+                                  <h4 
+                                    className="text-xs font-extrabold uppercase tracking-wider mt-1 font-sans"
+                                    style={{
+                                      color: currentBanners.titleColor || "#FAC000",
+                                      fontSize: currentBanners.titleSize ? `${currentBanners.titleSize * 0.3}px` : "12px"
+                                    }}
+                                  >
+                                    {currentBanners.titleText || selectedBannerPage}
+                                  </h4>
+                                  <p 
+                                    className="text-[8px] mt-1 line-clamp-1 font-sans font-medium"
+                                    style={{
+                                      color: currentBanners.subtitleColor || "#D4D4D8",
+                                      fontSize: currentBanners.subtitleSize ? `${currentBanners.subtitleSize * 0.5}px` : "8px"
+                                    }}
+                                  >
+                                    {currentBanners.subtitleText || "Custom subtitle description text..."}
                                   </p>
                                 </div>
                               </div>
@@ -1243,6 +1399,117 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                                 <option value="top">Arriba (Top)</option>
                                 <option value="bottom">Abajo (Bottom)</option>
                               </select>
+                            </div>
+                          </div>
+
+                          {/* Banner Text & Styling Overrides */}
+                          <div className="space-y-3 mt-3 pt-3 border-t border-zinc-900/60">
+                            <span className="text-xs font-mono text-zinc-400 font-bold uppercase tracking-wider block">Banner Text & Styles Overrides</span>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div className="space-y-1">
+                                <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">Custom Title Text</label>
+                                <input
+                                  type="text"
+                                  placeholder={selectedBannerPage}
+                                  value={currentBanners.titleText || ""}
+                                  onChange={(e) => handleUpdateBannerField(selectedBannerPage, "titleText", e.target.value)}
+                                  className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white"
+                                />
+                              </div>
+
+                              <div className="space-y-1">
+                                <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">Custom Subtitle Text</label>
+                                <input
+                                  type="text"
+                                  placeholder="Leave blank to use default subtitle..."
+                                  value={currentBanners.subtitleText || ""}
+                                  onChange={(e) => handleUpdateBannerField(selectedBannerPage, "subtitleText", e.target.value)}
+                                  className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white"
+                                />
+                              </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 items-end">
+                              {/* Alignment */}
+                              <div className="space-y-1">
+                                <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">Text Alignment</label>
+                                <select
+                                  value={currentBanners.align || "center"}
+                                  onChange={(e) => handleUpdateBannerField(selectedBannerPage, "align", e.target.value)}
+                                  className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white font-mono"
+                                >
+                                  <option value="left">Left</option>
+                                  <option value="center">Center</option>
+                                  <option value="right">Right</option>
+                                </select>
+                              </div>
+
+                              {/* Title Color */}
+                              <div className="space-y-1">
+                                <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">Title Color</label>
+                                <div className="flex space-x-1 items-center">
+                                  <input
+                                    type="color"
+                                    value={currentBanners.titleColor || "#FAC000"}
+                                    onChange={(e) => handleUpdateBannerField(selectedBannerPage, "titleColor", e.target.value)}
+                                    className="w-8 h-8 bg-transparent border border-zinc-800 rounded cursor-pointer shrink-0"
+                                  />
+                                  <input
+                                    type="text"
+                                    value={currentBanners.titleColor || ""}
+                                    onChange={(e) => handleUpdateBannerField(selectedBannerPage, "titleColor", e.target.value)}
+                                    placeholder="#FAC000"
+                                    className="w-full bg-zinc-900 border border-zinc-800 rounded p-1.5 text-[10px] text-white font-mono"
+                                  />
+                                </div>
+                              </div>
+
+                              {/* Title Size */}
+                              <div className="space-y-1">
+                                <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">Title Size (px)</label>
+                                <input
+                                  type="number"
+                                  min="20"
+                                  max="100"
+                                  value={currentBanners.titleSize || 48}
+                                  onChange={(e) => handleUpdateBannerField(selectedBannerPage, "titleSize", parseInt(e.target.value) || 48)}
+                                  className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white"
+                                />
+                              </div>
+
+                              {/* Subtitle Color */}
+                              <div className="space-y-1">
+                                <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">Subtitle Color</label>
+                                <div className="flex space-x-1 items-center">
+                                  <input
+                                    type="color"
+                                    value={currentBanners.subtitleColor || "#D4D4D8"}
+                                    onChange={(e) => handleUpdateBannerField(selectedBannerPage, "subtitleColor", e.target.value)}
+                                    className="w-8 h-8 bg-transparent border border-zinc-800 rounded cursor-pointer shrink-0"
+                                  />
+                                  <input
+                                    type="text"
+                                    value={currentBanners.subtitleColor || ""}
+                                    onChange={(e) => handleUpdateBannerField(selectedBannerPage, "subtitleColor", e.target.value)}
+                                    placeholder="#D4D4D8"
+                                    className="w-full bg-zinc-900 border border-zinc-800 rounded p-1.5 text-[10px] text-white font-mono"
+                                  />
+                                </div>
+                              </div>
+
+                              {/* Subtitle Size */}
+                              <div className="space-y-1">
+                                <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">Subtitle Size (px)</label>
+                                <input
+                                  type="number"
+                                  min="12"
+                                  max="36"
+                                  value={currentBanners.subtitleSize || 16}
+                                  onChange={(e) => handleUpdateBannerField(selectedBannerPage, "subtitleSize", parseInt(e.target.value) || 16)}
+                                  className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white"
+                                />
+                              </div>
                             </div>
                           </div>
                         </div>

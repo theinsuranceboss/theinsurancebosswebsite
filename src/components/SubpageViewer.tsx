@@ -414,18 +414,30 @@ export default function SubpageViewer({ label, config }: SubpageViewerProps) {
     return "Protect Your Family's Future and Financial Security";
   };
 
+  const activeTitle = bannerConfig.titleText !== undefined && bannerConfig.titleText !== "" 
+    ? bannerConfig.titleText 
+    : label;
+    
+  const activeSubtitle = bannerConfig.subtitleText !== undefined && bannerConfig.subtitleText !== "" 
+    ? bannerConfig.subtitleText 
+    : getSubpageDescription();
+
+  const align = bannerConfig.align || "center";
+  const alignContainerClass = align === "left" 
+    ? "text-left items-start" 
+    : align === "right" 
+      ? "text-right items-end" 
+      : "text-center items-center";
+
+  const titleColor = bannerConfig.titleColor || config.bannerTitleColor || "#FAC000";
+  const titleSize = bannerConfig.titleSize || config.bannerTitleSize || 48;
+  const subtitleColor = bannerConfig.subtitleColor || "#D4D4D8"; // zinc-300
+  const subtitleSize = bannerConfig.subtitleSize || 16; // md:text-base (16px)
+  
+  const safeLabelClass = label.replace(/[^a-zA-Z0-9-]/g, '-');
+
   return (
-    <div 
-      className="min-h-screen text-white transition-colors" 
-      style={{ 
-        backgroundColor: config.globalBackground || "#000000",
-        backgroundImage: config.globalBackgroundImage ? `url(${getDirectImageUrl(config.globalBackgroundImage)})` : "none",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "fixed",
-        backgroundRepeat: "no-repeat"
-      }}
-    >
+    <div className="min-h-screen text-white transition-colors">
       {/* DYNAMIC FONT LINK INJECTION */}
       {activeFont !== "Default" && (
         <>
@@ -566,20 +578,48 @@ export default function SubpageViewer({ label, config }: SubpageViewerProps) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 to-transparent" />
         
-        <div className="relative z-10 max-w-3xl w-full">
-          <div className="text-center bg-transparent px-5 sm:px-8 md:px-12 py-8 md:py-10 flex flex-col items-center justify-center font-sans">
-            <span className="text-[9px] sm:text-[10px] font-mono tracking-[0.3em] text-[#FAC000] uppercase font-bold bg-black/40 py-1.5 px-3 rounded border border-zinc-900/50 mb-5">
-              THE INSURANCE BOSS
-            </span>
-            <h1 className="banner-title font-black uppercase tracking-wider mb-4 drop-shadow-md leading-tight">
-              {label}
+        {/* Dynamic style tag for responsive sizes of this specific page's banner */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          .page-banner-title-${safeLabelClass} {
+            color: ${titleColor} !important;
+            font-family: ${titleFont !== "Default" ? `'${titleFont}', sans-serif` : "inherit"} !important;
+            font-size: ${titleSize * 0.6}px !important;
+            text-align: ${align} !important;
+          }
+          @media (min-width: 640px) {
+            .page-banner-title-${safeLabelClass} {
+              font-size: ${titleSize * 0.8}px !important;
+            }
+          }
+          @media (min-width: 1024px) {
+            .page-banner-title-${safeLabelClass} {
+              font-size: ${titleSize}px !important;
+            }
+          }
+          
+          .page-banner-subtitle-${safeLabelClass} {
+            color: ${subtitleColor} !important;
+            font-size: ${subtitleSize * 0.85}px !important;
+            text-align: ${align} !important;
+          }
+          @media (min-width: 640px) {
+            .page-banner-subtitle-${safeLabelClass} {
+              font-size: ${subtitleSize}px !important;
+            }
+          }
+        `}} />
+
+        <div className="relative z-10 max-w-4xl w-full">
+          <div className={`bg-transparent px-5 sm:px-8 md:px-12 py-8 md:py-10 flex flex-col justify-center font-sans ${alignContainerClass} w-full`}>
+            <h1 className={`page-banner-title-${safeLabelClass} font-black uppercase tracking-wider mb-4 drop-shadow-md leading-tight`}>
+              {activeTitle}
             </h1>
-            <p className="text-zinc-300 text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed mb-6 font-medium">
-              {getSubpageDescription()}
+            <p className={`page-banner-subtitle-${safeLabelClass} text-xs sm:text-sm md:text-base max-w-2xl leading-relaxed mb-6 font-medium`}>
+              {activeSubtitle}
             </p>
             {/* Action buttons embedded directly inside the banner */}
             {config.buttonsHtml && (
-              <div className="w-full flex justify-center font-mono" dangerouslySetInnerHTML={{ __html: config.buttonsHtml }} />
+              <div className={`w-full flex ${align === 'left' ? 'justify-start' : align === 'right' ? 'justify-end' : 'justify-center'} font-mono`} dangerouslySetInnerHTML={{ __html: config.buttonsHtml }} />
             )}
           </div>
         </div>

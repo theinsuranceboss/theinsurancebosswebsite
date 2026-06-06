@@ -27,7 +27,10 @@ export interface WebsiteConfig {
   carriersBanner: {
     title: string;
     subtitle: string;
-    logos: string[];
+    speed?: number;
+    personalLogos: string[];
+    commercialLogos: string[];
+    lifeLogos: string[];
   };
   subwebsiteBanners: Record<string, {
     topBannerUrl: string;
@@ -38,6 +41,13 @@ export interface WebsiteConfig {
     bottomHeight?: string;
     bottomFit?: "cover" | "contain" | "fill" | "tile";
     bottomPosition?: "center" | "top" | "bottom";
+    titleText?: string;
+    subtitleText?: string;
+    align?: "left" | "center" | "right";
+    titleColor?: string;
+    titleSize?: number;
+    subtitleColor?: string;
+    subtitleSize?: number;
   }>;
   fontFamilyPage?: Record<string, string>;
   fontFamilyCategory?: Record<string, string>;

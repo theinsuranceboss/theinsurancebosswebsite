@@ -108,15 +108,15 @@ export default function Header({ config, onOpenAdmin, isAdminOpen }: HeaderProps
               className="flex items-center space-x-1 hover:text-[#FAC000] transition-colors focus:outline-none py-1"
               id="header-coverage-dropdown-btn"
             >
-              <span>COVERAGE SOLUTIONS</span>
+              <span>INSURANCE TYPES</span>
               <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeDropdown === "coverage" ? "rotate-180 text-[#FAC000]" : ""}`} />
             </button>
 
             {activeDropdown === "coverage" && (
               <>
                 <div className="fixed inset-0 z-40" onClick={() => setActiveDropdown(null)} />
-                <div className="absolute left-1/2 -translate-x-[35%] mt-3 w-[840px] bg-zinc-950 mega-menu-container border border-zinc-900 rounded-xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.85)] p-6 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
-                  <div className="grid grid-cols-4 gap-6">
+                <div className="absolute left-1/2 -translate-x-[35%] mt-3 w-[720px] bg-zinc-950 mega-menu-container border border-zinc-900 rounded-xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.85)] p-6 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                  <div className="grid grid-cols-3 gap-6">
                     {config.subwebsites.map((category, idx) => (
                       <div key={idx} className="space-y-3">
                         <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-[#FAC000] block border-b border-zinc-900 pb-2 uppercase">
@@ -209,7 +209,7 @@ export default function Header({ config, onOpenAdmin, isAdminOpen }: HeaderProps
         <div className="lg:hidden bg-zinc-950 mobile-menu-container border-t border-zinc-800/80 px-4 py-6 space-y-4">
           <div className="flex flex-col space-y-3 font-mono text-sm tracking-wider font-semibold text-zinc-300">
             <div className="border-b border-zinc-900 pb-3">
-              <span className="text-[#FAC000] text-xs font-bold block mb-2 uppercase tracking-widest font-mono">COVERAGE SOLUTIONS (SUBWEBSITES)</span>
+              <span className="text-[#FAC000] text-xs font-bold block mb-2 uppercase tracking-widest font-mono">INSURANCE TYPES</span>
               <div className="space-y-4 pl-2 pt-2">
                 {config.subwebsites.map((category, idx) => (
                   <div key={idx} className="space-y-1.5">

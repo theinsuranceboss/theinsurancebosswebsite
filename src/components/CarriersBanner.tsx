@@ -1,17 +1,102 @@
-import React from "react";
+import React, { useState } from "react";
 import { WebsiteConfig } from "../types";
+import { getDirectImageUrl } from "./Header";
 
 interface CarriersBannerProps {
   config: WebsiteConfig;
 }
 
 export default function CarriersBanner({ config }: CarriersBannerProps) {
-  const { title, subtitle, logos } = config.carriersBanner;
+  const { title, subtitle, speed, personalLogos, commercialLogos, lifeLogos } = config.carriersBanner;
 
-  if (!logos || logos.length === 0) return null;
+  const duration = speed ? speed * 2 : 50; // Double the duration to make it slower (default 50 seconds)
 
-  // Duplicate list to ensure seamless infinite looping scroll
-  const scrollLogos = [...logos, ...logos, ...logos];
+  // Track failed image URLs globally to filter them out in render
+  const [failedUrls, setFailedUrls] = useState<Record<string, boolean>>({});
+
+  const renderTrack = (trackLogos: string[], categoryName: string) => {
+    if (!trackLogos || trackLogos.length === 0) return null;
+    
+    // Filter out empty, placeholder, or failed URLs
+    const validLogos = trackLogos.filter(logo => {
+      if (!logo) return false;
+      const clean = logo.trim();
+      if (clean === "" || clean === "https://" || clean === "http://" || clean.includes("placeholder")) {
+        return false;
+      }
+      return !failedUrls[logo];
+    });
+
+    if (validLogos.length === 0) return null;
+
+    // Duplicate list to ensure seamless infinite looping scroll
+    const scrollLogos = [...validLogos, ...validLogos, ...validLogos];
+    
+    return (
+      <div className="space-y-3 mt-8">
+        {/* Category Label - White text */}
+        <h3 className="text-center font-bold text-base md:text-lg tracking-wider text-white uppercase">
+          {categoryName}
+        </h3>
+        
+        {/* Marquee Carousel Container - White background strip */}
+        <div className="relative w-full carriers-track-container flex items-center py-3 bg-white border-t border-b border-zinc-100">
+          {/* Left & Right gradient mask overlays for soft premium fade effect - white themed */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
+          <div className="flex w-max carriers-track-animate space-x-6">
+            {scrollLogos.map((logo, index) => {
+              const isSvg = logo.startsWith("data:image/svg+xml");
+              
+              let svgHtml = "";
+              if (isSvg) {
+                try {
+                  const commaIdx = logo.indexOf(",");
+                  if (commaIdx !== -1) {
+                    const rawContent = logo.substring(commaIdx + 1);
+                    // Decode URL percent-encoding (like %23 -> #)
+                    svgHtml = decodeURIComponent(rawContent);
+                  }
+                } catch (e) {
+                  svgHtml = "";
+                }
+              }
+
+              return (
+                <div 
+                  key={index} 
+                  className="carrier-card flex items-center justify-center h-16 w-44 md:w-52 shrink-0 bg-transparent border-none p-2 transition-all duration-300 hover:scale-105"
+                >
+                  {isSvg && svgHtml ? (
+                    <div 
+                      className="w-full h-full flex items-center justify-center filter grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300 [&>svg]:max-h-12 [&>svg]:max-w-full [&>svg]:w-auto [&>svg]:h-auto [&>svg]:object-contain" 
+                      dangerouslySetInnerHTML={{ __html: svgHtml }} 
+                    />
+                  ) : (
+                    <img 
+                      src={getDirectImageUrl(logo)} 
+                      alt={`${categoryName} Partner Logo ${index + 1}`}
+                      className="max-h-12 max-w-full object-contain filter grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300"
+                      onError={() => {
+                        setFailedUrls(prev => ({ ...prev, [logo]: true }));
+                      }}
+                    />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const hasAnyLogos = (personalLogos && personalLogos.length > 0) || 
+                      (commercialLogos && commercialLogos.length > 0) || 
+                      (lifeLogos && lifeLogos.length > 0);
+
+  if (!hasAnyLogos) return null;
 
   return (
     <section className="py-16 bg-zinc-950 border-t border-b border-zinc-900 overflow-hidden relative select-none">
@@ -26,55 +111,28 @@ export default function CarriersBanner({ config }: CarriersBannerProps) {
           }
         }
         .carriers-track-animate {
-          animation: carriersMarquee 25s linear infinite;
+          animation: carriersMarquee ${duration}s linear infinite;
         }
         .carriers-track-container:hover .carriers-track-animate {
           animation-play-state: paused;
         }
       `}} />
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 text-center mb-10">
-        <h2 className="text-2xl md:text-3xl font-black text-white uppercase tracking-wider mb-3" style={{ transform: `scale(${config.fontScale})` }}>
+      <div className="max-w-7xl mx-auto px-4 md:px-8 text-center mb-6">
+        <h2 className="text-2xl md:text-3xl font-black uppercase tracking-wider mb-3" style={{ color: config.accentColor || "#FAC000", transform: `scale(${config.fontScale})` }}>
           {title || "We Work with the Most Trusted Insurance Carriers"}
         </h2>
-        <p className="text-zinc-400 text-xs md:text-sm max-w-2xl mx-auto leading-relaxed">
+        <p className="text-white text-xs md:text-sm max-w-2xl mx-auto leading-relaxed opacity-90">
           {subtitle || "We team up with the nation's most respected insurance companies to make sure you're protected by names you can trust."}
         </p>
       </div>
 
-      {/* Marquee Carousel Container */}
-      <div className="relative w-full carriers-track-container flex items-center py-4 bg-zinc-950/60 backdrop-blur-sm">
-        {/* Left & Right gradient mask overlays for soft premium fade effect */}
-        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-zinc-950 to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-zinc-950 to-transparent z-10 pointer-events-none" />
+      {renderTrack(personalLogos, "Personal Lines")}
+      {renderTrack(commercialLogos, "Commercial Lines")}
+      {renderTrack(lifeLogos, "Life Insurance")}
 
-        <div className="flex w-max carriers-track-animate space-x-6">
-          {scrollLogos.map((logo, index) => (
-            <div 
-              key={index} 
-              className="flex items-center justify-center h-16 w-44 md:w-52 shrink-0 bg-zinc-900/40 border border-zinc-900 rounded-lg p-2 hover:border-[#FAC000]/40 transition-all duration-300 hover:scale-105"
-            >
-              <img 
-                src={logo} 
-                alt={`Carrier Partner Logo ${index + 1}`}
-                className="max-h-12 max-w-full object-contain filter grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300"
-                onError={(e) => {
-                  // Fallback: if data URI or image breaks, show clean placeholder text
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = "none";
-                  const pNode = target.parentNode as HTMLElement;
-                  if (pNode) {
-                    const fallbackSpan = pNode.querySelector(".logo-fallback");
-                    if (fallbackSpan) fallbackSpan.classList.remove("hidden");
-                  }
-                }}
-              />
-              <span className="logo-fallback hidden text-[10px] font-mono font-bold tracking-widest text-zinc-500 uppercase">
-                CARRIER LOGO
-              </span>
-            </div>
-          ))}
-        </div>
+      <div className="text-center mt-10">
+        <h4 className="text-sm font-bold text-zinc-300 uppercase tracking-widest">And More!</h4>
       </div>
     </section>
   );

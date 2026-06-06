@@ -42,9 +42,17 @@ export default function App() {
           biggerAgency: { ...DEFAULT_CONFIG.biggerAgency, ...(parsed.biggerAgency || {}) },
           innerCircle: { ...DEFAULT_CONFIG.innerCircle, ...(parsed.innerCircle || {}) },
           aboutBoss: { ...DEFAULT_CONFIG.aboutBoss, ...(parsed.aboutBoss || {}) },
-          carriersBanner: { ...DEFAULT_CONFIG.carriersBanner, ...(parsed.carriersBanner || {}) },
+          carriersBanner: {
+            ...DEFAULT_CONFIG.carriersBanner,
+            ...(parsed.carriersBanner || {}),
+            personalLogos: parsed.carriersBanner?.personalLogos || (parsed.carriersBanner?.logos ? parsed.carriersBanner.logos : DEFAULT_CONFIG.carriersBanner.personalLogos),
+            commercialLogos: parsed.carriersBanner?.commercialLogos || DEFAULT_CONFIG.carriersBanner.commercialLogos,
+            lifeLogos: parsed.carriersBanner?.lifeLogos || DEFAULT_CONFIG.carriersBanner.lifeLogos,
+          },
           socialLinks: parsed.socialLinks || DEFAULT_CONFIG.socialLinks,
-          subwebsites: parsed.subwebsites || DEFAULT_CONFIG.subwebsites,
+          subwebsites: (!parsed.subwebsites || parsed.subwebsites.length !== 3 || parsed.subwebsites[0]?.category === "Commercial Insurance")
+            ? DEFAULT_CONFIG.subwebsites
+            : parsed.subwebsites,
           subwebsiteBanners: { ...DEFAULT_CONFIG.subwebsiteBanners, ...(parsed.subwebsiteBanners || {}) },
           fontFamilyPage: parsed.fontFamilyPage || DEFAULT_CONFIG.fontFamilyPage || {},
           fontFamilyCategory: parsed.fontFamilyCategory || DEFAULT_CONFIG.fontFamilyCategory || {},
@@ -66,6 +74,37 @@ export default function App() {
       localStorage.setItem("the_insurance_boss_config", JSON.stringify(DEFAULT_CONFIG));
     }
   }, []);
+
+  // Dynamic favicon and document title update based on custom logo settings
+  useEffect(() => {
+    // Update Document Title based on active page
+    if (activeSubpage) {
+      document.title = `${activeSubpage} | ${config.logoText || "The Insurance Boss"}`;
+    } else {
+      document.title = `${config.logoText || "The Insurance Boss"} | Personal & Commercial Insurance Coverage`;
+    }
+
+    // Find or create standard Favicon
+    let link: HTMLLinkElement | null = document.querySelector("link[rel~='icon']");
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'icon';
+      link.type = 'image/png';
+      document.head.appendChild(link);
+    }
+    
+    // Find or create Apple Touch Icon
+    let appleLink: HTMLLinkElement | null = document.querySelector("link[rel~='apple-touch-icon']");
+    if (!appleLink) {
+      appleLink = document.createElement('link');
+      appleLink.rel = 'apple-touch-icon';
+      document.head.appendChild(appleLink);
+    }
+
+    const activeLogoUrl = getDirectImageUrl(config.logoUrl) || "https://lh3.googleusercontent.com/d/1Lr3oT5chJbkjpbHTHW8f-A32Achcby6v";
+    link.href = activeLogoUrl;
+    appleLink.href = activeLogoUrl;
+  }, [config.logoUrl, config.logoText, activeSubpage]);
 
   // Hash-based routing effect
   useEffect(() => {
@@ -104,7 +143,7 @@ export default function App() {
       style={{ 
         fontFamily: "var(--font-sans)",
         backgroundColor: config.globalBackground || "#000000",
-        backgroundImage: config.globalBackgroundImage ? `url(${getDirectImageUrl(config.globalBackgroundImage)})` : "none",
+        backgroundImage: config.globalBackgroundImage ? `linear-gradient(rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.72)), url(${getDirectImageUrl(config.globalBackgroundImage)})` : "none",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: "fixed",
