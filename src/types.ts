@@ -13,6 +13,24 @@ export interface SocialLink {
   url: string;
 }
 
+export interface MetricItem {
+  title: string;
+  description: string;
+  icon: "shield" | "target" | "award" | "star" | "users" | "zap";
+}
+
+export interface MetricsConfig {
+  show: boolean;
+  title: string;
+  stabilityLabel: string;
+  stabilityStatus: string;
+  items: MetricItem[];
+  titleColor?: string;
+  stabilityLabelColor?: string;
+  itemTitleColor?: string;
+  itemDescriptionColor?: string;
+}
+
 export interface WebsiteConfig {
   logoText: string;
   logoUrl: string;
@@ -23,6 +41,27 @@ export interface WebsiteConfig {
   globalBackground: string;
   globalBackgroundImage?: string;
   buttonsHtml: string;
+  globalChatbotHtml?: string;
+  hideChatbot?: boolean;
+  chatbotGeminiKey?: string;
+  chatbotSlackWebhook?: string;
+  metrics?: MetricsConfig;
+  faqTitleColor?: string;
+  faqSubtitleColor?: string;
+  homepageLayout?: {
+    sections: {
+      id: string;
+      label: string;
+      enabled: boolean;
+    }[];
+    customHtmlBlocks: Record<string, string>;
+  };
+  subpageHtmlOverrides?: Record<string, {
+    title?: string;
+    description?: string;
+    css?: string;
+    html?: string;
+  }>;
   socialLinks: SocialLink[];
   carriersBanner: {
     title: string;
@@ -31,12 +70,15 @@ export interface WebsiteConfig {
     personalLogos: string[];
     commercialLogos: string[];
     lifeLogos: string[];
+    titleColor?: string;
+    subtitleColor?: string;
   };
   subwebsiteBanners: Record<string, {
     topBannerUrl: string;
     bottomBannerUrl: string;
     topHeight?: string;
-    topFit?: "cover" | "contain" | "fill" | "tile";
+    topFit?: "cover" | "contain" | "fill" | "tile" | "center" | "wide";
+    topOpacity?: number;
     topPosition?: "center" | "top" | "bottom";
     bottomHeight?: string;
     bottomFit?: "cover" | "contain" | "fill" | "tile";
@@ -48,6 +90,20 @@ export interface WebsiteConfig {
     titleSize?: number;
     subtitleColor?: string;
     subtitleSize?: number;
+    subtitleAlign?: "left" | "center" | "right";
+    buttonsHtml?: string;
+    showBottomBanner?: boolean;
+    bottomUseSameAsTop?: boolean;
+    bottomTitleText?: string;
+    bottomSubtitleText?: string;
+    bottomAlign?: "left" | "center" | "right";
+    bottomSubtitleAlign?: "left" | "center" | "right";
+    bottomTitleColor?: string;
+    bottomTitleSize?: number;
+    bottomSubtitleColor?: string;
+    bottomSubtitleSize?: number;
+    bottomUseSameImageAsTop?: boolean;
+    bottomOpacity?: number;
   }>;
   fontFamilyPage?: Record<string, string>;
   fontFamilyCategory?: Record<string, string>;
@@ -67,6 +123,15 @@ export interface WebsiteConfig {
     btnGrowText: string;
     btnGrowUrl: string;
     bgUrl: string;
+    titleSize?: number;
+    subtitleSize?: number;
+    align?: "left" | "center" | "right";
+    layout?: "full" | "split";
+    splitImageSide?: "left" | "right";
+    showMetrics?: boolean;
+    titleWhiteColor?: string;
+    titleYellowColor?: string;
+    subtitleColor?: string;
   };
   
   pillars: {
@@ -76,18 +141,24 @@ export interface WebsiteConfig {
       items: string[];
       btnText: string;
       btnUrl: string;
+      titleColor?: string;
+      descriptionColor?: string;
     };
     agents: {
       title: string;
       description: string;
       btnText: string;
       btnUrl: string;
+      titleColor?: string;
+      descriptionColor?: string;
     };
     partners: {
       title: string;
       description: string;
       btnText: string;
       btnUrl: string;
+      titleColor?: string;
+      descriptionColor?: string;
     };
   };
 
@@ -95,6 +166,8 @@ export interface WebsiteConfig {
     tagline: string;
     title: string;
     items: string[];
+    taglineColor?: string;
+    titleColor?: string;
   };
 
   policyReview: {
@@ -103,6 +176,8 @@ export interface WebsiteConfig {
     btnText: string;
     bgUrl: string;
     externalUrl: string;
+    titleColor?: string;
+    bodyColor?: string;
   };
 
   biggerAgency: {
@@ -112,6 +187,8 @@ export interface WebsiteConfig {
     btnText: string;
     btnUrl: string;
     bgUrl: string;
+    labelColor?: string;
+    titleColor?: string;
   };
 
   innerCircle: {
@@ -122,6 +199,9 @@ export interface WebsiteConfig {
     btnText: string;
     btnUrl: string;
     bgUrl: string;
+    labelColor?: string;
+    titleColor?: string;
+    bodyColor?: string;
   };
 
   aboutBoss: {
@@ -131,7 +211,49 @@ export interface WebsiteConfig {
     btnText: string;
     btnUrl: string;
     bgUrl: string;
+    labelColor?: string;
+    titleColor?: string;
+    bodyColor?: string;
   };
 
   subwebsites: SubwebsiteCategory[];
+  insuranceBanners: InsuranceBanner[];
+  faqs: FaqItem[];
+  testimonials?: TestimonialsConfig;
 }
+
+export interface InsuranceBanner {
+  id: string;
+  title: string;
+  subtitle: string;
+  mediaUrl: string;
+  mediaType: "image" | "video";
+  btnUrl: string;
+}
+
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+export interface TestimonialItem {
+  name: string;
+  role: string;
+  location: string;
+  quote: string;
+  category?: string;
+  rating: number;
+}
+
+export interface TestimonialsConfig {
+  show: boolean;
+  title: string;
+  subtitle: string;
+  agentReviews: TestimonialItem[];
+  clientReviews: TestimonialItem[];
+  titleColor?: string;
+  subtitleColor?: string;
+  quoteColor?: string;
+  authorColor?: string;
+}
+

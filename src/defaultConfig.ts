@@ -4,13 +4,39 @@ import { DEFAULT_BUTTONS_HTML } from "./subwebsiteHtml";
 export const DEFAULT_CONFIG: WebsiteConfig = {
   logoText: "THE INSURANCE BOSS",
   logoUrl: "https://lh3.googleusercontent.com/d/1Lr3oT5chJbkjpbHTHW8f-A32Achcby6v",
-  phone: "732-COVERED (268-3733)",
+  phone: "732-COVERED (268-3373)",
   email: "info@theinsuranceboss.com",
   accentColor: "#FAC000",
   fontScale: 1.0,
   globalBackground: "#000000",
   globalBackgroundImage: "https://lh3.googleusercontent.com/d/1FHp1j4D8MPh5fUnCoZIFSe2lIKQc61ni",
   buttonsHtml: DEFAULT_BUTTONS_HTML,
+  hideChatbot: false,
+  chatbotGeminiKey: "AIzaSyCu20SwPp_WGo5TZ03J-B11c3dOlhqbs8M",
+  chatbotSlackWebhook: "",
+  metrics: {
+    show: true,
+    title: "BENEFITS & METRICS",
+    stabilityLabel: "SYSTEM STABILITY",
+    stabilityStatus: "ACTIVE",
+    items: [
+      {
+        title: "MAXIMUM SECURITY",
+        description: "Multi-million-dollar coverage configurations designed to save costs and reduce vulnerabilities.",
+        icon: "shield"
+      },
+      {
+        title: "AGENCY SCALE SYSTEM",
+        description: "Premium lead-gen pipelines, recruitment automation, and social media dashboards.",
+        icon: "target"
+      },
+      {
+        title: "INVESTMENT GROWTH",
+        description: "Partner with our multi-business network. Elevate referral revenue channels today.",
+        icon: "award"
+      }
+    ]
+  },
   socialLinks: [
     { icon: "facebook", url: "https://facebook.com" },
     { icon: "instagram", url: "https://instagram.com" },
@@ -98,6 +124,10 @@ export const DEFAULT_CONFIG: WebsiteConfig = {
       topBannerUrl: "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&q=80&w=800",
       bottomBannerUrl: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800"
     },
+    "Commercial Property": {
+      topBannerUrl: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800",
+      bottomBannerUrl: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800"
+    },
     "Workers' Comp": {
       topBannerUrl: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=800",
       bottomBannerUrl: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800"
@@ -163,6 +193,12 @@ export const DEFAULT_CONFIG: WebsiteConfig = {
     btnGrowText: "GROW MY AGENCY",
     btnGrowUrl: "#for-agents",
     bgUrl: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&q=80&w=1920",
+    titleSize: 56,
+    subtitleSize: 18,
+    align: "left",
+    layout: "full",
+    splitImageSide: "right",
+    showMetrics: true
   },
 
   pillars: {
@@ -216,6 +252,7 @@ export const DEFAULT_CONFIG: WebsiteConfig = {
       "Lead Generation",
       "Social Media Management",
       "Automation Systems",
+      "Web Design",
       "Consulting",
       "Recruiting"
     ],
@@ -262,12 +299,13 @@ export const DEFAULT_CONFIG: WebsiteConfig = {
       ]
     },
     {
-      category: "Retirement & Investment",
+      category: "Commercial Lines",
       items: [
-        { label: "IRAs", url: "#subpage-IRAs" },
-        { label: "College Savings", url: "#subpage-College%20Savings" },
-        { label: "Annuities", url: "#subpage-Annuities" },
-        { label: "401k Rollovers", url: "#subpage-401k%20Rollovers" }
+        { label: "General Liability", url: "#subpage-General%20Liability" },
+        { label: "Commercial Property", url: "#subpage-Commercial%20Property" },
+        { label: "Workers' Compensation", url: "#subpage-Workers'%20Compensation" },
+        { label: "Business Owner's Policy (BOP)", url: "#subpage-Business%20Owner's%20Policy%20(BOP)" },
+        { label: "Commercial Auto", url: "#subpage-Commercial%20Auto" }
       ]
     },
     {
@@ -278,6 +316,147 @@ export const DEFAULT_CONFIG: WebsiteConfig = {
         { label: "Flood", url: "#subpage-Flood" },
         { label: "Specialty Vehicles", url: "#subpage-Specialty%20Vehicles" }
       ]
+    },
+    {
+      category: "Retirement & Investment",
+      items: [
+        { label: "IRAs", url: "#subpage-IRAs" },
+        { label: "College Savings", url: "#subpage-College%20Savings" },
+        { label: "Annuities", url: "#subpage-Annuities" },
+        { label: "401k Rollovers", url: "#subpage-401k%20Rollovers" }
+      ]
     }
-  ]
+  ],
+  insuranceBanners: [
+    {
+      id: "life",
+      title: "Life Insurance",
+      subtitle: "Secure your family’s future with financial protection that lasts a lifetime.",
+      mediaUrl: "https://assets.mixkit.co/videos/preview/mixkit-happy-family-in-nature-42289-large.mp4",
+      mediaType: "video",
+      btnUrl: "#subpage-Life%20Insurance"
+    },
+    {
+      id: "commercial",
+      title: "Commercial Insurance",
+      subtitle: "Protect your business, employees, and assets so you can focus on growth.",
+      mediaUrl: "https://assets.mixkit.co/videos/preview/mixkit-businessman-walking-in-modern-office-42790-large.mp4",
+      mediaType: "video",
+      btnUrl: "#subpage-Commercial%20Lines"
+    },
+    {
+      id: "homeowners",
+      title: "Homeowners Insurance",
+      subtitle: "Keep your home and everything in it safe from damage, theft, and disasters.",
+      mediaUrl: "https://assets.mixkit.co/videos/preview/mixkit-hands-holding-a-small-wooden-house-model-41582-large.mp4",
+      mediaType: "video",
+      btnUrl: "#subpage-Personal%20Lines"
+    },
+    {
+      id: "auto",
+      title: "Auto Insurance",
+      subtitle: "Stay protected on the road with coverage for accidents, repairs, and roadside help.",
+      mediaUrl: "https://assets.mixkit.co/videos/preview/mixkit-driving-a-car-on-a-highway-41584-large.mp4",
+      mediaType: "video",
+      btnUrl: "#subpage-Personal%20Lines"
+    },
+    {
+      id: "umbrella",
+      title: "Umbrella Insurance",
+      subtitle: "Get extra protection that goes beyond your standard insurance limits.",
+      mediaUrl: "https://assets.mixkit.co/videos/preview/mixkit-rain-falling-on-a-window-41586-large.mp4",
+      mediaType: "video",
+      btnUrl: "#subpage-Personal%20Lines"
+    }
+  ],
+  faqs: [
+    {
+      question: "What is The Insurance Boss?",
+      answer: "The Insurance Boss is a national insurance marketing and consulting platform designed to help individuals and businesses understand, optimize, and protect their insurance coverage. Powered by our affiliate licensed agents, we focus on smarter coverage, better pricing, and long-term risk strategy not just selling policies."
+    },
+    {
+      question: "Is The Insurance Boss an insurance company?",
+      answer: "No. The Insurance Boss is not an insurance carrier. We are a marketing and consulting engine that analyzes coverage and connects clients with licensed insurance professionals and agencies who place policies through top-rated carriers."
+    },
+    {
+      question: "How does the free policy review work?",
+      answer: "Simply upload your current insurance policy through our secure platform. Our AI-powered review tool and licensed professionals analyze your coverage for gaps, overpricing, and missed opportunities. You receive clear recommendations at no cost and with no obligation."
+    },
+    {
+      question: "Is my personal and policy information secure?",
+      answer: "Yes. All information is encrypted and handled securely. Your data is only reviewed by licensed professionals and protected systems. We never sell or share your information."
+    },
+    {
+      question: "What types of insurance does The Insurance Boss review and offer?",
+      answer: "We specialize in analyzing and marketing personal insurance (auto, home, umbrella), life insurance, commercial and business insurance, and insurance-based retirement and wealth protection strategies. All policies are placed through licensed partners when appropriate."
+    },
+    {
+      question: "How do I get quotes from multiple carriers?",
+      answer: "After your review, we leverage our licensed agency network to compare options across multiple carriers. This allows us to identify better pricing or coverage without you having to shop around or contact multiple agents."
+    },
+    {
+      question: "Am I required to switch insurance after a review?",
+      answer: "No. Our role is to educate and advise. You are never obligated to switch policies. Many clients use our insights simply to confirm they are properly covered."
+    },
+    {
+      question: "How is The Insurance Boss different from a traditional insurance agent?",
+      answer: "Traditional agents represent one company or sell policies directly. The Insurance Boss focuses on strategy, analysis, and leverage helping you understand coverage, pricing, and risk before any policy decision is made."
+    },
+    {
+      question: "What is the Insurance Boss Inner Circle Affiliate Program?",
+      answer: "The Inner Circle is our referral and affiliate program that allows business owners, professionals, and creators to earn income by connecting people with smarter insurance solutions all handled through licensed, compliant partners."
+    },
+    {
+      question: "What happens after I submit my information?",
+      answer: "Your submission is reviewed and routed to the best-fit licensed partner. You'll receive recommendations, options, and next steps without pressure or spam."
+    }
+  ],
+  testimonials: {
+    show: true,
+    title: "Testimonials",
+    subtitle: "Trusted by Professionals. Built for Families.",
+    agentReviews: [
+      {
+        quote: "An absolute game-changer for my independent agency. Navigating complex Commercial Lines like Workers' Comp and complex Business Owner’s Policies used to take days of back-and-forth. Partnering with this team has completely streamlined our consulting workflow.",
+        name: "Marcus Vance",
+        role: "Principal Agent",
+        location: "Chicago, IL",
+        rating: 5
+      },
+      {
+        quote: "The ultimate resource for policy strategy. As an agent, my clients look to me for bulletproof advice on Retirement and Investment scaling. The high-level support and consulting provided here have given me the tools to confidently build out complex 401k rollovers.",
+        name: "Sarah Jenkins",
+        role: "Insurance Consultant",
+        location: "Atlanta, GA",
+        rating: 5
+      }
+    ],
+    clientReviews: [
+      {
+        category: "Life Insurance",
+        quote: "Secured our family's financial future without the headache. We needed a complete approach to Term Life and Mortgage Protection. The consulting we received was completely transparent and highly professional.",
+        name: "David & Amanda Collins",
+        role: "Homeowners",
+        location: "Austin, TX",
+        rating: 5
+      },
+      {
+        category: "Commercial Lines",
+        quote: "They took the guesswork out of our commercial coverage. Setting up our General Liability and Commercial Property coverage for our new retail location felt overwhelming. They broke down every clause clearly.",
+        name: "Robert Harrison",
+        role: "Owner, Harrison Logistics",
+        location: "Columbus, OH",
+        rating: 5
+      },
+      {
+        category: "Personal Lines",
+        quote: "Fast, efficient, and genuinely complete. I originally reached out just to bundle my Auto Insurance and Landlord Dwelling policies, but they went above and beyond to audit my gaps—including adding Flood coverage.",
+        name: "Megan Bradley",
+        role: "Property Owner",
+        location: "Tampa, FL",
+        rating: 5
+      }
+    ]
+  }
 };
+

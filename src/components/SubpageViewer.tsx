@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { WebsiteConfig } from "../types";
 import { SUBWEBSITE_HTML_DATA, ParsedSubwebsite } from "../subwebsiteHtml";
-import { getDirectImageUrl } from "./Header";
+import { getDirectImageUrl, isVideoUrl } from "./Header";
 import { Sparkles, CheckCircle2, ShieldCheck } from "lucide-react";
 
 function getBannerStyle(url: string, fit?: string, position?: string): React.CSSProperties {
   const directUrl = getDirectImageUrl(url) || "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&q=80&w=1920";
   const pos = position || "center";
   
-  if (fit === "tile") {
+  if (fit === "tile" || fit === "til") {
     return {
       backgroundImage: `url(${directUrl})`,
       backgroundRepeat: "repeat",
@@ -30,8 +30,15 @@ function getBannerStyle(url: string, fit?: string, position?: string): React.CSS
       backgroundSize: "100% 100%",
       backgroundPosition: pos,
     };
+  } else if (fit === "center") {
+    return {
+      backgroundImage: `url(${directUrl})`,
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "auto",
+      backgroundPosition: "center",
+    };
   } else {
-    // Default is "cover"
+    // Default is "cover" or "wide"
     return {
       backgroundImage: `url(${directUrl})`,
       backgroundRepeat: "no-repeat",
@@ -41,28 +48,91 @@ function getBannerStyle(url: string, fit?: string, position?: string): React.CSS
   }
 }
 
+export function getSubpageStaticKey(label: string): string {
+  if (label === "Workers' Compensation") return "Workers' Comp";
+  if (label === "Business Owner's Policy (BOP)") return "BOP (Business Owner's Policy)";
+  if (label === "Life Insurance") return "Life Insurance Main";
+  if (label === "Commercial Lines") return "Commercial Insurance Main";
+  if (label === "Personal Lines") return "Personal Lines Main";
+  if (label === "Retirement & Investment") return "Retirement & Investment Main";
+  return label;
+}
+
 interface SubpageViewerProps {
   label: string;
   config: WebsiteConfig;
 }
 
 export default function SubpageViewer({ label, config }: SubpageViewerProps) {
-  // Try to find custom HTML data for this label
-  const customData: ParsedSubwebsite | undefined = SUBWEBSITE_HTML_DATA[label];
+  const staticKey = getSubpageStaticKey(label);
+
+  const [selectedAgentTab, setSelectedAgentTab] = useState<string>("dashboard");
+  const agentFeaturesDetails: Record<string, { title: string; text: string; stat: string }> = {
+    dashboard: {
+      title: "Real-time Command Hub",
+      text: "Track gross written premiums, state-specific policy conversions, commission splits, and downline analytics in an ultra-crisp interface.",
+      stat: "128% Avg Growth"
+    },
+    lead_gen: {
+      title: "Omnichannel Lead Pipeline",
+      text: "Direct integration with local home mortgage brokers and top auto dealers to channel high-intent exclusive leads to your agency pipeline.",
+      stat: "+24 Lead flow/day"
+    },
+    automations: {
+      title: "Zero-Touch CRM Automation",
+      text: "Automatic multi-channel SMS, email follow-ups, dynamic policy renewal review prompts, and smart calendar syncs.",
+      stat: "85% Saved Hours"
+    }
+  };
+
+  // Load overridden HTML data or fall back to static data
+  const customData: ParsedSubwebsite = {
+    title: config.subpageHtmlOverrides?.[label]?.title !== undefined 
+      ? config.subpageHtmlOverrides[label].title 
+      : (config.subpageHtmlOverrides?.[staticKey]?.title !== undefined 
+        ? config.subpageHtmlOverrides[staticKey].title 
+        : (SUBWEBSITE_HTML_DATA[staticKey]?.title || "")),
+    description: config.subpageHtmlOverrides?.[label]?.description !== undefined 
+      ? config.subpageHtmlOverrides[label].description 
+      : (config.subpageHtmlOverrides?.[staticKey]?.description !== undefined 
+        ? config.subpageHtmlOverrides[staticKey].description 
+        : (SUBWEBSITE_HTML_DATA[staticKey]?.description || "")),
+    css: config.subpageHtmlOverrides?.[label]?.css !== undefined 
+      ? config.subpageHtmlOverrides[label].css 
+      : (config.subpageHtmlOverrides?.[staticKey]?.css !== undefined 
+        ? config.subpageHtmlOverrides[staticKey].css 
+        : (SUBWEBSITE_HTML_DATA[staticKey]?.css || "")),
+    html: config.subpageHtmlOverrides?.[label]?.html !== undefined 
+      ? config.subpageHtmlOverrides[label].html 
+      : (config.subpageHtmlOverrides?.[staticKey]?.html !== undefined 
+        ? config.subpageHtmlOverrides[staticKey].html 
+        : (SUBWEBSITE_HTML_DATA[staticKey]?.html || "")),
+  };
 
   // Banner details from config
-  const bannerConfig = config.subwebsiteBanners[label] || {
+  const bannerConfig = config.subwebsiteBanners[label] || config.subwebsiteBanners[staticKey] || {
     topBannerUrl: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&q=80&w=1920",
     bottomBannerUrl: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800"
   };
+
+  const activeButtonsHtml = bannerConfig.buttonsHtml !== undefined && bannerConfig.buttonsHtml !== ""
+    ? bannerConfig.buttonsHtml 
+    : config.buttonsHtml;
 
   // Get active font family for this subpage
   const getActiveFont = () => {
     if (config.fontFamilyPage && config.fontFamilyPage[label] && config.fontFamilyPage[label] !== "Default") {
       return config.fontFamilyPage[label];
     }
+    if (config.fontFamilyPage && config.fontFamilyPage[staticKey] && config.fontFamilyPage[staticKey] !== "Default") {
+      return config.fontFamilyPage[staticKey];
+    }
+    const directCategory = config.subwebsites.find((cat) => cat.category === label || cat.category === staticKey);
+    if (directCategory && config.fontFamilyCategory && config.fontFamilyCategory[directCategory.category] && config.fontFamilyCategory[directCategory.category] !== "Default") {
+      return config.fontFamilyCategory[directCategory.category];
+    }
     const categoryObj = config.subwebsites.find((cat) =>
-      cat.items.some((item) => item.label === label)
+      cat.items.some((item) => item.label === label || item.label === staticKey)
     );
     if (categoryObj && config.fontFamilyCategory && config.fontFamilyCategory[categoryObj.category] && config.fontFamilyCategory[categoryObj.category] !== "Default") {
       return config.fontFamilyCategory[categoryObj.category];
@@ -434,6 +504,86 @@ export default function SubpageViewer({ label, config }: SubpageViewerProps) {
   const subtitleColor = bannerConfig.subtitleColor || "#D4D4D8"; // zinc-300
   const subtitleSize = bannerConfig.subtitleSize || 16; // md:text-base (16px)
   
+  const subtitleAlign = bannerConfig.subtitleAlign || align || "center";
+  const subtitleTextAlign: React.CSSProperties = {
+    color: subtitleColor,
+    fontSize: `${subtitleSize}px`,
+    textAlign: subtitleAlign as any,
+    marginLeft: subtitleAlign === "center" ? "auto" : subtitleAlign === "right" ? "auto" : "0",
+    marginRight: subtitleAlign === "center" ? "auto" : subtitleAlign === "left" ? "auto" : "0"
+  };
+
+  // Bottom banner variables and text/styling overrides
+  const bottomUseSame = bannerConfig.bottomUseSameAsTop !== false;
+  
+  const bottomTitle = bottomUseSame 
+    ? activeTitle 
+    : (bannerConfig.bottomTitleText !== undefined && bannerConfig.bottomTitleText !== "" 
+      ? bannerConfig.bottomTitleText 
+      : label);
+
+  const bottomSubtitle = bottomUseSame 
+    ? activeSubtitle 
+    : (bannerConfig.bottomSubtitleText !== undefined && bannerConfig.bottomSubtitleText !== "" 
+      ? bannerConfig.bottomSubtitleText 
+      : getSubpageDescription());
+
+  const bottomAlign = bottomUseSame 
+    ? align 
+    : (bannerConfig.bottomAlign || "center");
+
+  const bottomSubtitleAlign = bottomUseSame 
+    ? subtitleAlign 
+    : (bannerConfig.bottomSubtitleAlign || bottomAlign || "center");
+
+  const bottomTitleColor = bottomUseSame 
+    ? titleColor 
+    : (bannerConfig.bottomTitleColor || config.bannerTitleColor || "#FAC000");
+
+  const bottomTitleSize = bottomUseSame 
+    ? titleSize 
+    : (bannerConfig.bottomTitleSize || config.bannerTitleSize || 48);
+
+  const bottomSubtitleColor = bottomUseSame 
+    ? subtitleColor 
+    : (bannerConfig.bottomSubtitleColor || "#D4D4D8");
+
+  const bottomSubtitleSize = bottomUseSame 
+    ? subtitleSize 
+    : (bannerConfig.bottomSubtitleSize || 16);
+
+  const bottomAlignContainerClass = bottomAlign === "left" 
+    ? "text-left items-start" 
+    : bottomAlign === "right" 
+      ? "text-right items-end" 
+      : "text-center items-center";
+
+  const bottomSubtitleTextAlign: React.CSSProperties = {
+    color: bottomSubtitleColor,
+    fontSize: `${bottomSubtitleSize}px`,
+    textAlign: bottomSubtitleAlign as any,
+    marginLeft: bottomSubtitleAlign === "center" ? "auto" : bottomSubtitleAlign === "right" ? "auto" : "0",
+    marginRight: bottomSubtitleAlign === "center" ? "auto" : bottomSubtitleAlign === "left" ? "auto" : "0"
+  };
+
+  const bottomUseSameImage = bannerConfig.bottomUseSameImageAsTop !== false;
+
+  const activeBottomBannerUrl = bottomUseSameImage
+    ? bannerConfig.topBannerUrl
+    : bannerConfig.bottomBannerUrl;
+
+  const activeBottomFit = bottomUseSameImage
+    ? bannerConfig.topFit
+    : bannerConfig.bottomFit;
+
+  const activeBottomPosition = bottomUseSameImage
+    ? bannerConfig.topPosition
+    : bannerConfig.bottomPosition;
+
+  const activeBottomOpacity = bottomUseSameImage
+    ? (bannerConfig.topOpacity !== undefined ? bannerConfig.topOpacity : 40)
+    : (bannerConfig.bottomOpacity !== undefined ? bannerConfig.bottomOpacity : 40);
+  
   const safeLabelClass = label.replace(/[^a-zA-Z0-9-]/g, '-');
 
   return (
@@ -479,18 +629,34 @@ export default function SubpageViewer({ label, config }: SubpageViewerProps) {
       {/* DYNAMIC BANNER TITLE STYLING OVERRIDES */}
       <style dangerouslySetInnerHTML={{ __html: `
         .banner-title {
-          color: ${config.bannerTitleColor || "#FAC000"} !important;
+          color: ${titleColor} !important;
           font-family: ${titleFont !== "Default" ? `'${titleFont}', sans-serif` : "inherit"} !important;
-          font-size: ${config.bannerTitleSize ? `${config.bannerTitleSize * 0.6}px` : "24px"} !important;
+          font-size: ${titleSize * 0.6}px !important;
         }
         @media (min-width: 640px) {
           .banner-title {
-            font-size: ${config.bannerTitleSize ? `${config.bannerTitleSize * 0.8}px` : "36px"} !important;
+            font-size: ${titleSize * 0.8}px !important;
           }
         }
         @media (min-width: 1024px) {
           .banner-title {
-            font-size: ${config.bannerTitleSize ? `${config.bannerTitleSize}px` : "48px"} !important;
+            font-size: ${titleSize}px !important;
+          }
+        }
+
+        .bottom-banner-title {
+          color: ${bottomTitleColor} !important;
+          font-family: ${titleFont !== "Default" ? `'${titleFont}', sans-serif` : "inherit"} !important;
+          font-size: ${bottomTitleSize * 0.6}px !important;
+        }
+        @media (min-width: 640px) {
+          .bottom-banner-title {
+            font-size: ${bottomTitleSize * 0.8}px !important;
+          }
+        }
+        @media (min-width: 1024px) {
+          .bottom-banner-title {
+            font-size: ${bottomTitleSize}px !important;
           }
         }
 
@@ -565,61 +731,81 @@ export default function SubpageViewer({ label, config }: SubpageViewerProps) {
         }
       `}} />
 
-      {/* TOP IMAGE HERO BANNER (BIGGER HEIGHT WITH TITLE, DESCRIPTION, AND BUTTONS) */}
+      {/* TOP IMAGE HERO BANNER (PAGE START BANNER) */}
       <div 
-        className="relative pt-24 pb-8 sm:pt-32 sm:pb-12 md:pt-40 md:pb-16 w-full overflow-hidden flex items-center justify-center px-4"
+        className="relative pt-24 pb-12 sm:pt-32 sm:pb-16 md:pt-40 md:pb-24 w-full overflow-hidden flex items-center justify-center px-4"
         style={{
-          minHeight: bannerConfig.topHeight || "380px"
+          minHeight: bannerConfig.topHeight || "600px"
         }}
       >
-        <div 
-          className="absolute inset-0 w-full h-full animate-fade-in"
-          style={getBannerStyle(bannerConfig.topBannerUrl, bannerConfig.topFit, bannerConfig.topPosition)}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 to-transparent" />
+        {isVideoUrl(bannerConfig.topBannerUrl) ? (
+          <video
+            key={getDirectImageUrl(bannerConfig.topBannerUrl)}
+            src={getDirectImageUrl(bannerConfig.topBannerUrl)}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            style={{
+              opacity: bannerConfig.topOpacity !== undefined ? bannerConfig.topOpacity / 100 : 0.4
+            }}
+          />
+        ) : (
+          <div 
+            className="absolute inset-0 w-full h-full animate-fade-in"
+            style={{
+              ...getBannerStyle(bannerConfig.topBannerUrl, bannerConfig.topFit, bannerConfig.topPosition),
+              opacity: bannerConfig.topOpacity !== undefined ? bannerConfig.topOpacity / 100 : 0.4
+            }}
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/75 to-transparent" />
         
-        {/* Dynamic style tag for responsive sizes of this specific page's banner */}
-        <style dangerouslySetInnerHTML={{ __html: `
-          .page-banner-title-${safeLabelClass} {
-            color: ${titleColor} !important;
-            font-family: ${titleFont !== "Default" ? `'${titleFont}', sans-serif` : "inherit"} !important;
-            font-size: ${titleSize * 0.6}px !important;
-            text-align: ${align} !important;
-          }
-          @media (min-width: 640px) {
-            .page-banner-title-${safeLabelClass} {
-              font-size: ${titleSize * 0.8}px !important;
-            }
-          }
-          @media (min-width: 1024px) {
-            .page-banner-title-${safeLabelClass} {
-              font-size: ${titleSize}px !important;
-            }
-          }
+        <div className={`relative z-10 max-w-4xl w-full ${alignContainerClass}`}>
+          <h1 
+            className="banner-title text-3xl sm:text-4xl md:text-6xl font-black tracking-wider uppercase mb-4"
+            style={{
+              color: titleColor,
+              fontFamily: titleFont !== "Default" ? `'${titleFont}', sans-serif` : "inherit"
+            }}
+          >
+            {activeTitle}
+          </h1>
+          <p 
+            className="max-w-2xl text-zinc-300 text-sm md:text-base leading-relaxed mb-8 w-full"
+            style={subtitleTextAlign}
+          >
+            {activeSubtitle}
+          </p>
           
-          .page-banner-subtitle-${safeLabelClass} {
-            color: ${subtitleColor} !important;
-            font-size: ${subtitleSize * 0.85}px !important;
-            text-align: ${align} !important;
-          }
-          @media (min-width: 640px) {
-            .page-banner-subtitle-${safeLabelClass} {
-              font-size: ${subtitleSize}px !important;
-            }
-          }
-        `}} />
-
-        <div className="relative z-10 max-w-4xl w-full">
-          <div className={`bg-transparent px-5 sm:px-8 md:px-12 py-8 md:py-10 flex flex-col justify-center font-sans ${alignContainerClass} w-full`}>
-            <h1 className={`page-banner-title-${safeLabelClass} font-black uppercase tracking-wider mb-4 drop-shadow-md leading-tight`}>
-              {activeTitle}
-            </h1>
-            <p className={`page-banner-subtitle-${safeLabelClass} text-xs sm:text-sm md:text-base max-w-2xl leading-relaxed mb-6 font-medium`}>
-              {activeSubtitle}
-            </p>
-            {/* Action buttons embedded directly inside the banner */}
-            {config.buttonsHtml && (
-              <div className={`w-full flex ${align === 'left' ? 'justify-start' : align === 'right' ? 'justify-end' : 'justify-center'} font-mono`} dangerouslySetInnerHTML={{ __html: config.buttonsHtml }} />
+          <div className={`w-full flex ${
+            align === "left" 
+              ? "justify-start" 
+              : align === "right" 
+                ? "justify-end" 
+                : "justify-center"
+          }`}>
+            {activeButtonsHtml ? (
+              <div 
+                className={`w-full flex ${
+                  align === "left" 
+                    ? "justify-start" 
+                    : align === "right" 
+                      ? "justify-end" 
+                      : "justify-center"
+                }`}
+                dangerouslySetInnerHTML={{ __html: activeButtonsHtml }} 
+              />
+            ) : (
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="#quote"
+                  className="inline-block text-center font-mono text-xs font-black tracking-widest py-3 px-6 bg-[#FAC000] text-black hover:bg-black hover:text-[#FAC000] border border-[#FAC000] rounded transition-all duration-300 uppercase shadow-lg animate-on-scroll"
+                >
+                  GET A QUOTE
+                </a>
+              </div>
             )}
           </div>
         </div>
@@ -639,27 +825,83 @@ export default function SubpageViewer({ label, config }: SubpageViewerProps) {
         )}
       </div>
 
-      {/* BOTTOM IMAGE HERO BANNER (MATCHES TOP BANNER DESIGN, RESPONSIVE, BRIGHT IMAGE) */}
-      {bannerConfig.bottomBannerUrl && (
+      {/* BOTTOM IMAGE HERO BANNER (PAGE END BANNER) */}
+      {bannerConfig.showBottomBanner !== false && activeBottomBannerUrl && (
         <div 
-          className="relative py-8 sm:py-12 md:py-16 w-full overflow-hidden flex items-center justify-center border-t border-zinc-900 px-4"
+          className="relative py-12 sm:py-16 md:py-24 w-full overflow-hidden flex items-center justify-center px-4 border-t border-zinc-900/40"
           style={{
-            minHeight: bannerConfig.bottomHeight || "380px"
+            minHeight: bannerConfig.bottomHeight || "600px"
           }}
         >
-          <div 
-            className="absolute inset-0 w-full h-full animate-fade-in"
-            style={getBannerStyle(bannerConfig.bottomBannerUrl, bannerConfig.bottomFit, bannerConfig.bottomPosition)}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/90 to-transparent" />
-          <div className="relative z-10 max-w-3xl w-full">
-            <div className="text-center bg-transparent px-5 sm:px-8 md:px-12 py-8 md:py-10 flex flex-col items-center justify-center font-sans">
-              <h3 className="banner-title font-black uppercase tracking-wider mb-6 drop-shadow-md leading-tight">
-                READY TO SECURE YOUR COVERAGE?
-              </h3>
-              {/* Action buttons embedded directly inside the bottom banner */}
-              {config.buttonsHtml && (
-                <div className="w-full flex justify-center font-mono" dangerouslySetInnerHTML={{ __html: config.buttonsHtml }} />
+          {isVideoUrl(activeBottomBannerUrl) ? (
+            <video
+              key={getDirectImageUrl(activeBottomBannerUrl)}
+              src={getDirectImageUrl(activeBottomBannerUrl)}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+              style={{
+                opacity: activeBottomOpacity / 100
+              }}
+            />
+          ) : (
+            <div 
+              className="absolute inset-0 w-full h-full animate-fade-in"
+              style={{
+                ...getBannerStyle(activeBottomBannerUrl, activeBottomFit, activeBottomPosition),
+                opacity: activeBottomOpacity / 100
+              }}
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-zinc-950/75 to-transparent" />
+          
+          <div className={`relative z-10 max-w-4xl w-full ${bottomAlignContainerClass}`}>
+            <span className="text-[10px] font-mono tracking-widest uppercase block mb-2" style={{ color: bottomTitleColor }}>BOTTOM BANNER</span>
+            <h2 
+              className="bottom-banner-title text-2xl sm:text-3xl md:text-5xl font-black tracking-wider uppercase mb-4"
+              style={{
+                color: bottomTitleColor,
+                fontFamily: titleFont !== "Default" ? `'${titleFont}', sans-serif` : "inherit"
+              }}
+            >
+              {bottomTitle}
+            </h2>
+            <p 
+              className="max-w-2xl text-zinc-300 text-sm md:text-base leading-relaxed mb-8 w-full"
+              style={bottomSubtitleTextAlign}
+            >
+              {bottomSubtitle}
+            </p>
+            
+            <div className={`w-full flex ${
+              bottomAlign === "left" 
+                ? "justify-start" 
+                : bottomAlign === "right" 
+                  ? "justify-end" 
+                  : "justify-center"
+            }`}>
+              {activeButtonsHtml ? (
+                <div 
+                  className={`w-full flex ${
+                    bottomAlign === "left" 
+                      ? "justify-start" 
+                      : bottomAlign === "right" 
+                        ? "justify-end" 
+                        : "justify-center"
+                  }`}
+                  dangerouslySetInnerHTML={{ __html: activeButtonsHtml }} 
+                />
+              ) : (
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <a
+                    href="#quote"
+                    className="inline-block text-center font-mono text-xs font-black tracking-widest py-3 px-6 bg-[#FAC000] text-black hover:bg-black hover:text-[#FAC000] border border-[#FAC000] rounded transition-all duration-300 uppercase shadow-lg"
+                  >
+                    GET A QUOTE
+                  </a>
+                </div>
               )}
             </div>
           </div>

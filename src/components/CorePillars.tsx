@@ -43,10 +43,10 @@ export default function CorePillars({ config }: CorePillarsProps) {
               </div>
 
               {/* Title & Description */}
-              <h3 className="text-xl font-bold tracking-wider font-sans text-white mb-3">
+              <h3 className="text-xl font-bold tracking-wider font-sans mb-3" style={{ color: coverage.titleColor || "#ffffff" }}>
                 {coverage.title}
               </h3>
-              <p className="text-zinc-400 text-sm leading-relaxed mb-6">
+              <p className="text-sm leading-relaxed mb-6" style={{ color: coverage.descriptionColor || "rgb(161 161 170)" }}>
                 {coverage.description}
               </p>
 
@@ -85,10 +85,10 @@ export default function CorePillars({ config }: CorePillarsProps) {
               </div>
 
               {/* Title & Description */}
-              <h3 className="text-xl font-bold tracking-wider font-sans text-white mb-3">
+              <h3 className="text-xl font-bold tracking-wider font-sans mb-3" style={{ color: agents.titleColor || "#ffffff" }}>
                 {agents.title}
               </h3>
-              <p className="text-zinc-400 text-sm leading-relaxed mb-6">
+              <p className="text-sm leading-relaxed mb-6" style={{ color: agents.descriptionColor || "rgb(161 161 170)" }}>
                 {agents.description}
               </p>
 
@@ -127,10 +127,10 @@ export default function CorePillars({ config }: CorePillarsProps) {
               </div>
 
               {/* Title & Description */}
-              <h3 className="text-xl font-bold tracking-wider font-sans text-white mb-3">
+              <h3 className="text-xl font-bold tracking-wider font-sans mb-3" style={{ color: partners.titleColor || "#ffffff" }}>
                 {partners.title}
               </h3>
-              <p className="text-zinc-400 text-sm leading-relaxed mb-6">
+              <p className="text-sm leading-relaxed mb-6" style={{ color: partners.descriptionColor || "rgb(161 161 170)" }}>
                 {partners.description}
               </p>
 

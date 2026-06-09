@@ -13,7 +13,8 @@ import {
   Shield, 
   Phone, 
   Mail, 
-  ArrowUp 
+  ArrowUp,
+  MapPin
 } from "lucide-react";
 import { getDirectImageUrl } from "./Header";
 
@@ -105,22 +106,51 @@ export default function Footer({ config }: FooterProps) {
             <h4 className="text-xs font-mono font-bold tracking-widest text-white uppercase border-b border-zinc-900 pb-2">
               CONTACT US
             </h4>
-            <div className="space-y-3.5 text-xs text-zinc-400">
-              <p className="font-bold text-white uppercase tracking-wider">THE INSURANCE BOSS</p>
-              
-              <a href={`tel:${config.phone.replace(/[^0-9]/g, "")}`} className="flex items-center space-x-2 hover:text-[#FAC000] transition-colors">
-                <Phone className="w-3.5 h-3.5 shrink-0 text-[#FAC000]" />
-                <span className="font-mono">{config.phone}</span>
-              </a>
+            <div className="space-y-4 text-xs text-zinc-400">
+              {/* Office Locations */}
+              <div className="space-y-2">
+                <span className="text-[10px] font-mono text-zinc-550 font-bold uppercase tracking-wider block">Office Locations</span>
+                <div className="space-y-1 text-zinc-500 font-mono text-[11px] leading-relaxed">
+                  <div className="flex items-start gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-[#FAC000] shrink-0 mt-0.5" />
+                    <span>Red Bank, NJ 07701</span>
+                  </div>
+                  <div className="flex items-start gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-[#FAC000] shrink-0 mt-0.5" />
+                    <span>Staten Island, NY 10309</span>
+                  </div>
+                  <div className="flex items-start gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-[#FAC000] shrink-0 mt-0.5" />
+                    <span>Wellington, FL 33414</span>
+                  </div>
+                  <div className="flex items-start gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-[#FAC000] shrink-0 mt-0.5" />
+                    <span>Scottsdale, AZ 85255</span>
+                  </div>
+                </div>
+              </div>
 
-              <a href={`mailto:${config.email}`} className="flex items-center space-x-2 hover:text-[#FAC000] transition-colors truncate">
-                <Mail className="w-3.5 h-3.5 shrink-0 text-[#FAC000]" />
-                <span className="font-mono truncate">{config.email}</span>
-              </a>
+              {/* Coming Soon */}
+              <div className="space-y-1">
+                <span className="text-[10px] font-mono text-zinc-550 font-bold uppercase tracking-wider block">Coming Soon</span>
+                <div className="flex items-start gap-1.5 text-zinc-550 font-mono text-[11px]">
+                  <MapPin className="w-3.5 h-3.5 text-zinc-700 shrink-0 mt-0.5" />
+                  <span className="italic">Charleston, SC</span>
+                </div>
+              </div>
 
-              <p className="text-[11px] text-zinc-500 italic">
-                Serving Multiple States nationwide with smart tech solutions.
-              </p>
+              {/* Contact Directs */}
+              <div className="space-y-2 pt-3 border-t border-zinc-900/60">
+                <a href={`tel:${config.phone.replace(/[^0-9]/g, "")}`} className="flex items-center space-x-2 hover:text-[#FAC000] transition-colors">
+                  <Phone className="w-3.5 h-3.5 shrink-0 text-[#FAC000]" />
+                  <span className="font-mono">{config.phone}</span>
+                </a>
+
+                <a href={`mailto:${config.email}`} className="flex items-center space-x-2 hover:text-[#FAC000] transition-colors truncate">
+                  <Mail className="w-3.5 h-3.5 shrink-0 text-[#FAC000]" />
+                  <span className="font-mono truncate">{config.email}</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>

@@ -37,12 +37,12 @@ export default function ValueProps({ config }: ValuePropsProps) {
 
       <div className="relative max-w-7xl mx-auto px-4 md:px-8 text-center z-10">
         {/* Caption */}
-        <span className="text-xs font-mono font-bold tracking-[0.25em] block mb-2 uppercase" style={{ color: config.accentColor }}>
+        <span className="text-xs font-mono font-bold tracking-[0.25em] block mb-2 uppercase" style={{ color: config.valueProps.taglineColor || config.accentColor }}>
           {tagline}
         </span>
         
         {/* Main Title */}
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-wider uppercase mb-12">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-wider uppercase mb-12" style={{ color: config.valueProps.titleColor || "#ffffff" }}>
           {title}
         </h2>
 

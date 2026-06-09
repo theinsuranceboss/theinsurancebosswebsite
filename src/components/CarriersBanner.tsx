@@ -119,10 +119,10 @@ export default function CarriersBanner({ config }: CarriersBannerProps) {
       `}} />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 text-center mb-6">
-        <h2 className="text-2xl md:text-3xl font-black uppercase tracking-wider mb-3" style={{ color: config.accentColor || "#FAC000", transform: `scale(${config.fontScale})` }}>
+        <h2 className="text-2xl md:text-3xl font-black uppercase tracking-wider mb-3" style={{ color: config.carriersBanner.titleColor || config.accentColor || "#FAC000", transform: `scale(${config.fontScale})` }}>
           {title || "We Work with the Most Trusted Insurance Carriers"}
         </h2>
-        <p className="text-white text-xs md:text-sm max-w-2xl mx-auto leading-relaxed opacity-90">
+        <p className="text-white text-xs md:text-sm max-w-2xl mx-auto leading-relaxed opacity-90" style={{ color: config.carriersBanner.subtitleColor || "#ffffff" }}>
           {subtitle || "We team up with the nation's most respected insurance companies to make sure you're protected by names you can trust."}
         </p>
       </div>

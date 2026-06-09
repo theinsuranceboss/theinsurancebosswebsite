@@ -50,13 +50,13 @@ export default function BottomSplit({ config }: BottomSplitProps) {
           {/* LEFT PANEL: Inner Circle Turning Relationships into Revenue */}
           <div className="bg-zinc-950 border border-zinc-900 p-8 md:p-10 rounded-2xl flex flex-col justify-between relative overflow-hidden group">
             <div className="space-y-6">
-              <span className="text-[10px] font-mono font-bold tracking-[0.25em] block uppercase" style={{ color: config.accentColor }}>
+              <span className="text-[10px] font-mono font-bold tracking-[0.25em] block uppercase" style={{ color: innerCircle.labelColor || config.accentColor }}>
                 {innerCircle.label}
               </span>
-              <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-tight">
+              <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight" style={{ color: innerCircle.titleColor || "#ffffff" }}>
                 {innerCircle.title}
               </h2>
-              <p className="text-sm text-zinc-400">
+              <p className="text-sm font-normal" style={{ color: innerCircle.bodyColor || "rgb(161 161 170)" }}>
                 {innerCircle.body}
               </p>
 
@@ -81,38 +81,6 @@ export default function BottomSplit({ config }: BottomSplitProps) {
                   </button>
                 ))}
               </div>
-
-              {/* Partner Earnings Estimator calculator */}
-              <div className="bg-zinc-900/60 p-5 rounded-lg border border-zinc-850 space-y-4">
-                <div className="flex items-center justify-between border-b border-zinc-800 pb-2">
-                  <span className="text-[10px] font-mono font-bold text-zinc-400 uppercase tracking-widest flex items-center gap-1">
-                    <Calculator className="w-3.5 h-3.5 text-[#FAC000]" /> PARTNER REVENUE ESTIMATOR
-                  </span>
-                  <span className="text-[9px] font-mono text-zinc-500 uppercase">{partnerType}</span>
-                </div>
-
-                <div className="space-y-2">
-                  <div className="flex justify-between text-xs font-mono">
-                    <span className="text-zinc-400">Monthly referrals:</span>
-                    <span className="text-white font-extrabold">{referralsCount} clients</span>
-                  </div>
-                  <input
-                    type="range"
-                    min="1"
-                    max="15"
-                    value={referralsCount}
-                    onChange={(e) => setReferralsCount(Number(e.target.value))}
-                    className="w-full accent-[#FAC000]"
-                  />
-                </div>
-
-                <div className="pt-3 border-t border-zinc-800 flex justify-between items-center bg-zinc-950 p-3 rounded border border-zinc-900">
-                  <span className="text-xs font-bold text-zinc-400 font-sans">Estimated Annual Pay:</span>
-                  <span className="text-base font-mono font-black text-[#FAC000]">
-                    ${getEstimatedRevenue().toLocaleString()}.00 / yr
-                  </span>
-                </div>
-              </div>
             </div>
 
             <div className="pt-6">
@@ -128,13 +96,13 @@ export default function BottomSplit({ config }: BottomSplitProps) {
           {/* RIGHT PANEL: About the Insurance Boss */}
           <div className="bg-zinc-950 border border-zinc-900 p-8 md:p-10 rounded-2xl flex flex-col justify-between relative overflow-hidden" id="about">
             <div className="space-y-6">
-              <span className="text-[10px] font-mono font-bold tracking-[0.25em] text-zinc-500 uppercase block">
+              <span className="text-[10px] font-mono font-bold tracking-[0.25em] uppercase block" style={{ color: about.labelColor || "rgb(113 113 122)" }}>
                 {about.label}
               </span>
-              <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-tight">
+              <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight" style={{ color: about.titleColor || "#ffffff" }}>
                 {about.title}
               </h2>
-              <p className="text-sm text-zinc-400 leading-relaxed">
+              <p className="text-sm leading-relaxed" style={{ color: about.bodyColor || "rgb(161 161 170)" }}>
                 {about.body}
               </p>
             </div>

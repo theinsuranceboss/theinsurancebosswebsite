@@ -11,7 +11,10 @@ import Footer from "./components/Footer";
 import AdminPanel from "./components/AdminPanel";
 import CarriersBanner from "./components/CarriersBanner";
 import SubpageViewer from "./components/SubpageViewer";
+import FaqSection from "./components/FaqSection";
+import Testimonials from "./components/Testimonials";
 import { Sparkles, Info, Settings, ArrowRight, ShieldCheck, HelpCircle, X, ExternalLink } from "lucide-react";
+import InsuranceBossChatbot from "./components/InsuranceBossChatbot";
 
 export default function App() {
   const [config, setConfig] = useState<WebsiteConfig>(DEFAULT_CONFIG);
@@ -31,6 +34,14 @@ export default function App() {
           ...DEFAULT_CONFIG,
           ...parsed,
           hero: { ...DEFAULT_CONFIG.hero, ...(parsed.hero || {}) },
+          metrics: {
+            ...DEFAULT_CONFIG.metrics,
+            ...(parsed.metrics || {}),
+            show: parsed.metrics?.show !== undefined 
+              ? parsed.metrics.show 
+              : (parsed.hero?.showMetrics !== undefined ? parsed.hero.showMetrics : true),
+            items: parsed.metrics?.items || DEFAULT_CONFIG.metrics?.items || []
+          } as any,
           pillars: {
             ...DEFAULT_CONFIG.pillars,
             coverage: { ...DEFAULT_CONFIG.pillars?.coverage, ...(parsed.pillars?.coverage || {}) },
@@ -56,6 +67,28 @@ export default function App() {
           subwebsiteBanners: { ...DEFAULT_CONFIG.subwebsiteBanners, ...(parsed.subwebsiteBanners || {}) },
           fontFamilyPage: parsed.fontFamilyPage || DEFAULT_CONFIG.fontFamilyPage || {},
           fontFamilyCategory: parsed.fontFamilyCategory || DEFAULT_CONFIG.fontFamilyCategory || {},
+          insuranceBanners: (parsed.insuranceBanners || DEFAULT_CONFIG.insuranceBanners).map((banner: any) => {
+            const defBanner = DEFAULT_CONFIG.insuranceBanners.find(b => b.id === banner.id) || {};
+            const mediaUrl = banner.mediaUrl || defBanner.mediaUrl || "";
+            let mediaType = banner.mediaType;
+            if (!mediaType) {
+              const isVid = !!(mediaUrl.match(/\.(mp4|webm|ogg|mov)$/i) || mediaUrl.includes("mixkit.co/videos") || mediaUrl.includes("video"));
+              mediaType = isVid ? "video" : "image";
+            }
+            return {
+              ...defBanner,
+              ...banner,
+              mediaUrl,
+              mediaType
+            };
+          }),
+          faqs: parsed.faqs || DEFAULT_CONFIG.faqs,
+          testimonials: {
+            ...DEFAULT_CONFIG.testimonials,
+            ...(parsed.testimonials || {}),
+            agentReviews: parsed.testimonials?.agentReviews || DEFAULT_CONFIG.testimonials?.agentReviews || [],
+            clientReviews: parsed.testimonials?.clientReviews || DEFAULT_CONFIG.testimonials?.clientReviews || []
+          } as any,
         };
 
         // Force background update if using unsplash or if missing
@@ -124,6 +157,83 @@ export default function App() {
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
+  // Path & Hash based Admin Route listener
+  useEffect(() => {
+    const checkAdminState = () => {
+      const path = window.location.pathname;
+      const hash = window.location.hash;
+      if (path === "/admin" || path === "/admin/" || hash === "#admin") {
+        setIsAdminOpen(true);
+      }
+    };
+
+    window.addEventListener("hashchange", checkAdminState);
+    window.addEventListener("popstate", checkAdminState);
+    checkAdminState();
+
+    return () => {
+      window.removeEventListener("hashchange", checkAdminState);
+      window.removeEventListener("popstate", checkAdminState);
+    };
+  }, []);
+
+  // Dynamic script injection for chatbot and custom HTML blocks
+  useEffect(() => {
+    // 1. Remove old injected scripts
+    const oldScripts = document.querySelectorAll(".injected-global-script");
+    oldScripts.forEach(el => el.remove());
+
+    const scriptContents: string[] = [];
+
+    // Collect global chatbot script
+    if (config.globalChatbotHtml) {
+      scriptContents.push(config.globalChatbotHtml);
+    }
+
+    // Collect custom HTML blocks scripts
+    const layout = config.homepageLayout?.sections || [
+      { id: "hero", label: "Hero Section", enabled: true },
+      { id: "pillars", label: "Core Pillars", enabled: true },
+      { id: "valueProps", label: "Value Propositions", enabled: true },
+      { id: "middleSplit", label: "Policy Review", enabled: true },
+      { id: "bottomSplit", label: "Agency Overview", enabled: true },
+      { id: "carriers", label: "Carrier Logos", enabled: true },
+      { id: "customHtml1", label: "Custom HTML Block 1", enabled: false },
+      { id: "customHtml2", label: "Custom HTML Block 2", enabled: false },
+      { id: "customHtml3", label: "Custom HTML Block 3", enabled: false },
+    ];
+    
+    layout.forEach(sec => {
+      if (sec.enabled && (sec.id === "customHtml1" || sec.id === "customHtml2" || sec.id === "customHtml3")) {
+        const html = config.homepageLayout?.customHtmlBlocks?.[sec.id];
+        if (html) {
+          scriptContents.push(html);
+        }
+      }
+    });
+
+    // Parse and execute scripts
+    scriptContents.forEach(html => {
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = html;
+      const scripts = tempDiv.querySelectorAll("script");
+      scripts.forEach(oldScript => {
+        const newScript = document.createElement("script");
+        newScript.className = "injected-global-script";
+        
+        // Copy attributes
+        Array.from(oldScript.attributes).forEach(attr => {
+          newScript.setAttribute(attr.name, attr.value);
+        });
+        
+        // Copy inner code
+        newScript.textContent = oldScript.textContent;
+        
+        document.body.appendChild(newScript);
+      });
+    });
+  }, [config.globalChatbotHtml, config.homepageLayout]);
+
   const handleSaveConfig = (newConfig: WebsiteConfig) => {
     setConfig(newConfig);
     localStorage.setItem("the_insurance_boss_config", JSON.stringify(newConfig));
@@ -174,23 +284,60 @@ export default function App() {
         <SubpageViewer label={activeSubpage} config={config} />
       ) : (
         <>
-          {/* HERO SECTION */}
-          <Hero config={config} />
+          {(() => {
+            const layout = config.homepageLayout?.sections || [
+              { id: "hero", label: "Hero Section", enabled: true },
+              { id: "pillars", label: "Core Pillars", enabled: true },
+              { id: "valueProps", label: "Value Propositions", enabled: true },
+              { id: "middleSplit", label: "Policy Review", enabled: true },
+              { id: "bottomSplit", label: "Agency Overview", enabled: true },
+              { id: "carriers", label: "Carrier Logos", enabled: true },
+              { id: "customHtml1", label: "Custom HTML Block 1", enabled: false },
+              { id: "customHtml2", label: "Custom HTML Block 2", enabled: false },
+              { id: "customHtml3", label: "Custom HTML Block 3", enabled: false },
+            ];
 
-          {/* CORE PILLARS SECTION */}
-          <CorePillars config={config} />
+            return layout.map((sec) => {
+              if (!sec.enabled) return null;
+              
+              switch (sec.id) {
+                case "hero":
+                  return <React.Fragment key="hero"><Hero config={config} /></React.Fragment>;
+                case "pillars":
+                  return <React.Fragment key="pillars"><CorePillars config={config} /></React.Fragment>;
+                case "valueProps":
+                  return <React.Fragment key="valueProps"><ValueProps config={config} /></React.Fragment>;
+                case "middleSplit":
+                  return <React.Fragment key="middleSplit"><MiddleSplit config={config} /></React.Fragment>;
+                case "bottomSplit":
+                  return <React.Fragment key="bottomSplit"><BottomSplit config={config} /></React.Fragment>;
+                case "carriers":
+                  return <React.Fragment key="carriers"><CarriersBanner config={config} /></React.Fragment>;
+                case "customHtml1":
+                case "customHtml2":
+                case "customHtml3":
+                  const htmlContent = config.homepageLayout?.customHtmlBlocks?.[sec.id] || "";
+                  if (!htmlContent) return null;
+                  return (
+                    <section key={sec.id} className="relative w-full overflow-hidden">
+                      <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+                    </section>
+                  );
+                default:
+                  return null;
+              }
+            });
+          })()}
+        </>
+      )}
 
-          {/* VALUE PROPOSITIONS SECTION */}
-          <ValueProps config={config} />
-
-          {/* MIDDLE SECTION SPLIT */}
-          <MiddleSplit config={config} />
-
-          {/* BOTTOM SECTION SPLIT */}
-          <BottomSplit config={config} />
-
-          {/* CARRIERS AUTO-SCROLL SLIDESHOW BANNER */}
-          <CarriersBanner config={config} />
+      {/* TESTIMONIALS & FAQ SECTIONS (HOMEPAGE ONLY, BEFORE FOOTER) */}
+      {!activeSubpage && (
+        <>
+          {(config.testimonials?.show !== false) && (
+            <Testimonials config={config} />
+          )}
+          <FaqSection config={config} />
         </>
       )}
 
@@ -201,9 +348,27 @@ export default function App() {
       <AdminPanel
         config={config}
         isOpen={isAdminOpen}
-        onClose={() => setIsAdminOpen(false)}
+        onClose={() => {
+          setIsAdminOpen(false);
+          if (window.location.pathname === "/admin" || window.location.pathname === "/admin/") {
+            window.history.pushState(null, "", "/");
+          }
+          if (window.location.hash === "#admin") {
+            window.history.pushState(null, "", window.location.pathname);
+          }
+        }}
         onSave={handleSaveConfig}
       />
+
+      {/* Chatbot Widget Integration */}
+      {!config.hideChatbot && (
+        <InsuranceBossChatbot key={activeSubpage || "home"} config={config} />
+      )}
+
+      {/* Dynamic Chatbot Non-Script HTML container */}
+      {config.globalChatbotHtml && (
+        <div dangerouslySetInnerHTML={{ __html: config.globalChatbotHtml }} />
+      )}
     </div>
   );
 }

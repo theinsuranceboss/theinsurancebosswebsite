@@ -33,6 +33,13 @@ export function getDirectImageUrl(url: any): string {
   return url;
 }
 
+export function isVideoUrl(url: any): boolean {
+  if (typeof url !== "string" || !url) return false;
+  const direct = getDirectImageUrl(url).toLowerCase();
+  return !!(direct.match(/\.(mp4|webm|ogg|mov|m4v|avi)$/i) || direct.includes("mixkit.co/videos") || direct.includes("video"));
+}
+
+
 export default function Header({ config, onOpenAdmin, isAdminOpen }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -119,9 +126,15 @@ export default function Header({ config, onOpenAdmin, isAdminOpen }: HeaderProps
                   <div className="grid grid-cols-3 gap-6">
                     {config.subwebsites.map((category, idx) => (
                       <div key={idx} className="space-y-3">
-                        <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-[#FAC000] block border-b border-zinc-900 pb-2 uppercase">
+                        <a
+                          href={`#subpage-${encodeURIComponent(category.category)}`}
+                          className="text-[10px] font-mono font-bold tracking-[0.2em] text-[#FAC000] block border-b border-zinc-900 pb-2 uppercase hover:text-white transition-colors"
+                          onClick={() => {
+                            setActiveDropdown(null);
+                          }}
+                        >
                           {category.category}
-                        </span>
+                        </a>
                         <div className="flex flex-col space-y-2">
                           {category.items.map((sub, sIdx) => {
                             const isLocal = sub.url.startsWith("#");
@@ -180,20 +193,6 @@ export default function Header({ config, onOpenAdmin, isAdminOpen }: HeaderProps
             FOR AGENTS
           </a>
 
-          {/* ADMIN SLIDE-OUT TOGGLE */}
-          <button
-            onClick={onOpenAdmin}
-            className={`flex items-center justify-center p-2 rounded-lg border transition-all duration-300 ${
-              isAdminOpen
-                ? "bg-[#FAC000] border-[#FAC000] text-black spin-90"
-                : "bg-zinc-900 border-zinc-800 text-[#FAC000] hover:bg-zinc-800"
-            }`}
-            title="Open Admin Edit Panel"
-          >
-            <Settings className="w-4 h-4 animate-pulse" />
-            <span className="hidden md:inline ml-1.5 text-[10px] font-mono tracking-wider font-semibold">ADMIN PANEL</span>
-          </button>
-
           {/* MOBILE MENU BUTTON */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -213,7 +212,13 @@ export default function Header({ config, onOpenAdmin, isAdminOpen }: HeaderProps
               <div className="space-y-4 pl-2 pt-2">
                 {config.subwebsites.map((category, idx) => (
                   <div key={idx} className="space-y-1.5">
-                    <span className="text-[10px] uppercase tracking-wider text-zinc-500 font-bold block font-mono bg-zinc-900/50 py-1 px-2 rounded">{category.category}</span>
+                    <a
+                      href={`#subpage-${encodeURIComponent(category.category)}`}
+                      className="text-[10px] uppercase tracking-wider text-[#FAC000] hover:text-white font-bold block font-mono bg-zinc-900/50 py-1 px-2 rounded transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {category.category}
+                    </a>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pl-2">
                       {category.items.map((sub, sIdx) => {
                         const isLocal = sub.url.startsWith("#");
