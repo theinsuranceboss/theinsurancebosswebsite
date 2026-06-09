@@ -339,6 +339,37 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
   const [selectedInsuranceBannerId, setSelectedInsuranceBannerId] = useState<string>("life");
   const [previewTestimonialTab, setPreviewTestimonialTab] = useState<"agents" | "clients">("agents");
 
+  const [syncing, setSyncing] = useState(false);
+  const [syncMessage, setSyncMessage] = useState<string | null>(null);
+
+  const handleSyncToCodebase = async () => {
+    setSyncing(true);
+    setSyncMessage(null);
+    try {
+      // First save to standard local storage cache
+      onSave(localConfig);
+
+      const response = await fetch("/api/save-config", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(localConfig),
+      });
+      const result = await response.json();
+      if (result.success) {
+        setSyncMessage("✓ Config successfully written to defaultConfig.ts!");
+        setTimeout(() => setSyncMessage(null), 4000);
+      } else {
+        setSyncMessage("Error: " + result.error);
+      }
+    } catch (err: any) {
+      setSyncMessage("Error: " + err.message);
+    } finally {
+      setSyncing(false);
+    }
+  };
+
   // Keep localConfig in sync with the saved config when the panel is opened or config changes
   useEffect(() => {
     if (isOpen) {
@@ -4878,12 +4909,30 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
 
         {/* Drawer Action Bar */}
         <div className="p-6 border-t border-zinc-90 w border-zinc-900 bg-zinc-900/60 flex items-center justify-between select-none">
-          <button
-            onClick={handleResetDefaults}
-            className="text-[10px] font-mono font-bold tracking-wider text-red-500 hover:text-red-400 bg-red-500/10 border border-red-500/20 px-3.5 py-2 rounded flex items-center gap-1.5 transition-colors"
-          >
-            <RefreshCw className="w-3.5 h-3.5" /> RESET DEFAULTS
-          </button>
+          <div className="flex items-center space-x-3 flex-wrap gap-y-2">
+            <button
+              onClick={handleResetDefaults}
+              className="text-[10px] font-mono font-bold tracking-wider text-red-500 hover:text-red-400 bg-red-500/10 border border-red-500/20 px-3.5 py-2 rounded flex items-center gap-1.5 transition-colors"
+            >
+              <RefreshCw className="w-3.5 h-3.5" /> RESET DEFAULTS
+            </button>
+
+            {(window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") && (
+              <button
+                onClick={handleSyncToCodebase}
+                disabled={syncing}
+                className="text-[10px] font-mono font-bold tracking-wider text-purple-400 hover:text-purple-300 bg-purple-500/10 border border-purple-500/20 px-3.5 py-2 rounded flex items-center gap-1.5 transition-colors disabled:opacity-50"
+              >
+                {syncing ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <RefreshCw className="w-3.5 h-3.5" />} EXPORT TO CODEBASE
+              </button>
+            )}
+
+            {syncMessage && (
+              <span className="text-[11px] font-mono font-bold text-purple-400 animate-pulse">
+                {syncMessage}
+              </span>
+            )}
+          </div>
 
           <div className="flex items-center space-x-3">
             {saveSuccess && (
