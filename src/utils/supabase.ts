@@ -1,3 +1,5 @@
+import { WebsiteConfig } from "../types";
+
 export const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || "https://cbtzxyyaukurziljqjuz.supabase.co";
 export const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNidHp4eXlhdWt1cnppbGpxanV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2ODIzNTMsImV4cCI6MjA5NjI1ODM1M30.NirUq7jZLuqqU6aN2qxgt4uJjfN3gG6cWOkpzBdVj_s";
 
@@ -99,4 +101,41 @@ export async function extractGoogleDriveFolderImages(folderUrl: string): Promise
   }
 
   return Array.from(fileIds).map(id => `https://lh3.googleusercontent.com/d/${id}`);
+}
+
+/**
+ * Uploads/upserts the full WebsiteConfig JSON file directly to the Supabase Storage banners bucket.
+ * This is used to persist layout configuration in real-time.
+ * @param config The current active configuration state.
+ * @returns The public URL of the uploaded JSON configuration.
+ */
+export async function saveConfigToSupabase(config: WebsiteConfig): Promise<string> {
+  const fileName = "config.json";
+  const uploadUrl = `${SUPABASE_URL}/storage/v1/object/banners/${fileName}`;
+  
+  // Clone config and strip sensitive webhooks to comply with security/push protection rules
+  const cleanedConfig = { ...config };
+  if (cleanedConfig.chatbotSlackWebhook && cleanedConfig.chatbotSlackWebhook.includes("hooks.slack.com")) {
+    cleanedConfig.chatbotSlackWebhook = "";
+  }
+
+  const blob = new Blob([JSON.stringify(cleanedConfig, null, 2)], { type: "application/json" });
+  
+  const response = await fetch(uploadUrl, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+      "apikey": SUPABASE_ANON_KEY,
+      "Content-Type": "application/json",
+      "x-upsert": "true"
+    },
+    body: blob,
+  });
+  
+  if (!response.ok) {
+    const errText = await response.text();
+    throw new Error(`Failed to upload config to Supabase Storage: ${errText}`);
+  }
+  
+  return `${SUPABASE_URL}/storage/v1/object/public/banners/${fileName}`;
 }

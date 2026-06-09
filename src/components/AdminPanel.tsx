@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { WebsiteConfig, SubwebsiteCategory, Subwebsite } from "../types";
 import { X, Save, RefreshCw, Layers, Sliders, Type, Link, Image, Trash2, Plus, Info, Layout, Lock, Upload, Loader2, AlertCircle, Grid, LogOut, ArrowUp, ArrowDown, Code, MessageSquare, Settings, ShieldCheck, Target, Award, Star, Users, Zap } from "lucide-react";
 import { getDirectImageUrl, isVideoUrl } from "./Header";
-import { uploadToSupabase, extractGoogleDriveFolderImages } from "../utils/supabase";
+import { uploadToSupabase, extractGoogleDriveFolderImages, saveConfigToSupabase } from "../utils/supabase";
 import { SUBWEBSITE_HTML_DATA } from "../subwebsiteHtml";
 import { getSubpageStaticKey } from "./SubpageViewer";
 
@@ -341,6 +341,8 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
 
   const [syncing, setSyncing] = useState(false);
   const [syncMessage, setSyncMessage] = useState<string | null>(null);
+  const [savingToSupabase, setSavingToSupabase] = useState(false);
+  const [saveMessage, setSaveMessage] = useState<string | null>(null);
 
   const handleSyncToCodebase = async () => {
     setSyncing(true);
@@ -721,10 +723,23 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
     }));
   };
 
-  const handleSave = () => {
-    onSave(localConfig);
-    setSaveSuccess(true);
-    setTimeout(() => setSaveSuccess(false), 2500);
+  const handleSave = async () => {
+    setSavingToSupabase(true);
+    setSaveMessage(null);
+    try {
+      // First save locally to React state and localStorage cache
+      onSave(localConfig);
+
+      // Upload configuration JSON file to Supabase Storage public bucket
+      await saveConfigToSupabase(localConfig);
+
+      setSaveSuccess(true);
+      setTimeout(() => setSaveSuccess(false), 2500);
+    } catch (err: any) {
+      setSaveMessage("Error: " + err.message);
+    } finally {
+      setSavingToSupabase(false);
+    }
   };
 
   const handleResetDefaults = () => {
@@ -4935,16 +4950,22 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
           </div>
 
           <div className="flex items-center space-x-3">
+            {saveMessage && (
+              <span className="text-[11px] font-mono font-bold text-red-500 mr-2">
+                {saveMessage}
+              </span>
+            )}
             {saveSuccess && (
               <span className="text-[11px] font-mono font-bold text-emerald-400">
-                ✓ SAVED TO CACHE
+                ✓ SAVED LIVE TO CLOUD & CACHE
               </span>
             )}
             <button
               onClick={handleSave}
-              className="font-mono text-xs font-black tracking-wider bg-[#FAC000] text-black hover:bg-black hover:text-[#FAC000] border border-[#FAC000] px-5 py-2.5 rounded flex items-center gap-2 transition-all duration-300 shadow-[0_2px_10px_rgba(250,192,0,0.15)]"
+              disabled={savingToSupabase}
+              className="font-mono text-xs font-black tracking-wider bg-[#FAC000] text-black hover:bg-black hover:text-[#FAC000] border border-[#FAC000] px-5 py-2.5 rounded flex items-center gap-2 transition-all duration-300 shadow-[0_2px_10px_rgba(250,192,0,0.15)] disabled:opacity-50"
             >
-              <Save className="w-4 h-4" /> SAVE CHANGES
+              {savingToSupabase ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} SAVE CHANGES
             </button>
           </div>
         </div>

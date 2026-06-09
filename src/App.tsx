@@ -15,6 +15,78 @@ import FaqSection from "./components/FaqSection";
 import Testimonials from "./components/Testimonials";
 import { Sparkles, Info, Settings, ArrowRight, ShieldCheck, HelpCircle, X, ExternalLink } from "lucide-react";
 import InsuranceBossChatbot from "./components/InsuranceBossChatbot";
+import { SUPABASE_URL } from "./utils/supabase";
+
+// Helper function to robustly deep-merge configurations
+function mergeConfigs(parsed: any): WebsiteConfig {
+  const merged: WebsiteConfig = {
+    ...DEFAULT_CONFIG,
+    ...parsed,
+    hero: { ...DEFAULT_CONFIG.hero, ...(parsed.hero || {}) },
+    metrics: {
+      ...DEFAULT_CONFIG.metrics,
+      ...(parsed.metrics || {}),
+      show: parsed.metrics?.show !== undefined 
+        ? parsed.metrics.show 
+        : (parsed.hero?.showMetrics !== undefined ? parsed.hero.showMetrics : true),
+      items: parsed.metrics?.items || DEFAULT_CONFIG.metrics?.items || []
+    } as any,
+    pillars: {
+      ...DEFAULT_CONFIG.pillars,
+      coverage: { ...DEFAULT_CONFIG.pillars?.coverage, ...(parsed.pillars?.coverage || {}) },
+      agents: { ...DEFAULT_CONFIG.pillars?.agents, ...(parsed.pillars?.agents || {}) },
+      partners: { ...DEFAULT_CONFIG.pillars?.partners, ...(parsed.pillars?.partners || {}) }
+    },
+    valueProps: { ...DEFAULT_CONFIG.valueProps, ...(parsed.valueProps || {}) },
+    policyReview: { ...DEFAULT_CONFIG.policyReview, ...(parsed.policyReview || {}) },
+    biggerAgency: { ...DEFAULT_CONFIG.biggerAgency, ...(parsed.biggerAgency || {}) },
+    innerCircle: { ...DEFAULT_CONFIG.innerCircle, ...(parsed.innerCircle || {}) },
+    aboutBoss: { ...DEFAULT_CONFIG.aboutBoss, ...(parsed.aboutBoss || {}) },
+    carriersBanner: {
+      ...DEFAULT_CONFIG.carriersBanner,
+      ...(parsed.carriersBanner || {}),
+      personalLogos: parsed.carriersBanner?.personalLogos || (parsed.carriersBanner?.logos ? parsed.carriersBanner.logos : DEFAULT_CONFIG.carriersBanner.personalLogos),
+      commercialLogos: parsed.carriersBanner?.commercialLogos || DEFAULT_CONFIG.carriersBanner.commercialLogos,
+      lifeLogos: parsed.carriersBanner?.lifeLogos || DEFAULT_CONFIG.carriersBanner.lifeLogos,
+    },
+    socialLinks: parsed.socialLinks || DEFAULT_CONFIG.socialLinks,
+    subwebsites: (!parsed.subwebsites || parsed.subwebsites.length !== 3 || parsed.subwebsites[0]?.category === "Commercial Insurance")
+      ? DEFAULT_CONFIG.subwebsites
+      : parsed.subwebsites,
+    subwebsiteBanners: { ...DEFAULT_CONFIG.subwebsiteBanners, ...(parsed.subwebsiteBanners || {}) },
+    fontFamilyPage: parsed.fontFamilyPage || DEFAULT_CONFIG.fontFamilyPage || {},
+    fontFamilyCategory: parsed.fontFamilyCategory || DEFAULT_CONFIG.fontFamilyCategory || {},
+    insuranceBanners: (parsed.insuranceBanners || DEFAULT_CONFIG.insuranceBanners).map((banner: any) => {
+      const defBanner = DEFAULT_CONFIG.insuranceBanners.find(b => b.id === banner.id) || {};
+      const mediaUrl = banner.mediaUrl || defBanner.mediaUrl || "";
+      let mediaType = banner.mediaType;
+      if (!mediaType) {
+        const isVid = !!(mediaUrl.match(/\.(mp4|webm|ogg|mov)$/i) || mediaUrl.includes("mixkit.co/videos") || mediaUrl.includes("video"));
+        mediaType = isVid ? "video" : "image";
+      }
+      return {
+        ...defBanner,
+        ...banner,
+        mediaUrl,
+        mediaType
+      };
+    }),
+    faqs: parsed.faqs || DEFAULT_CONFIG.faqs,
+    testimonials: {
+      ...DEFAULT_CONFIG.testimonials,
+      ...(parsed.testimonials || {}),
+      agentReviews: parsed.testimonials?.agentReviews || DEFAULT_CONFIG.testimonials?.agentReviews || [],
+      clientReviews: parsed.testimonials?.clientReviews || DEFAULT_CONFIG.testimonials?.clientReviews || []
+    } as any,
+  };
+
+  // Force background update if using unsplash or if missing
+  if (!merged.globalBackgroundImage || merged.globalBackgroundImage.includes("unsplash.com")) {
+    merged.globalBackgroundImage = "https://lh3.googleusercontent.com/d/1FHp1j4D8MPh5fUnCoZIFSe2lIKQc61ni";
+  }
+
+  return merged;
+}
 
 export default function App() {
   const [config, setConfig] = useState<WebsiteConfig>(DEFAULT_CONFIG);
@@ -22,90 +94,43 @@ export default function App() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [activeSubpage, setActiveSubpage] = useState<string | null>(null);
 
-  // Read config from local storage on load
+  // Read config from Supabase Storage first, then fallback to Local Storage
   useEffect(() => {
-    const saved = localStorage.getItem("the_insurance_boss_config");
-    if (saved) {
+    async function loadConfig() {
+      // 1. Try to fetch from Supabase public storage
       try {
-        const parsed = JSON.parse(saved);
-        
-        // Robust deep merge of parsed config with DEFAULT_CONFIG to prevent undefined keys causing crashes
-        const merged: WebsiteConfig = {
-          ...DEFAULT_CONFIG,
-          ...parsed,
-          hero: { ...DEFAULT_CONFIG.hero, ...(parsed.hero || {}) },
-          metrics: {
-            ...DEFAULT_CONFIG.metrics,
-            ...(parsed.metrics || {}),
-            show: parsed.metrics?.show !== undefined 
-              ? parsed.metrics.show 
-              : (parsed.hero?.showMetrics !== undefined ? parsed.hero.showMetrics : true),
-            items: parsed.metrics?.items || DEFAULT_CONFIG.metrics?.items || []
-          } as any,
-          pillars: {
-            ...DEFAULT_CONFIG.pillars,
-            coverage: { ...DEFAULT_CONFIG.pillars?.coverage, ...(parsed.pillars?.coverage || {}) },
-            agents: { ...DEFAULT_CONFIG.pillars?.agents, ...(parsed.pillars?.agents || {}) },
-            partners: { ...DEFAULT_CONFIG.pillars?.partners, ...(parsed.pillars?.partners || {}) }
-          },
-          valueProps: { ...DEFAULT_CONFIG.valueProps, ...(parsed.valueProps || {}) },
-          policyReview: { ...DEFAULT_CONFIG.policyReview, ...(parsed.policyReview || {}) },
-          biggerAgency: { ...DEFAULT_CONFIG.biggerAgency, ...(parsed.biggerAgency || {}) },
-          innerCircle: { ...DEFAULT_CONFIG.innerCircle, ...(parsed.innerCircle || {}) },
-          aboutBoss: { ...DEFAULT_CONFIG.aboutBoss, ...(parsed.aboutBoss || {}) },
-          carriersBanner: {
-            ...DEFAULT_CONFIG.carriersBanner,
-            ...(parsed.carriersBanner || {}),
-            personalLogos: parsed.carriersBanner?.personalLogos || (parsed.carriersBanner?.logos ? parsed.carriersBanner.logos : DEFAULT_CONFIG.carriersBanner.personalLogos),
-            commercialLogos: parsed.carriersBanner?.commercialLogos || DEFAULT_CONFIG.carriersBanner.commercialLogos,
-            lifeLogos: parsed.carriersBanner?.lifeLogos || DEFAULT_CONFIG.carriersBanner.lifeLogos,
-          },
-          socialLinks: parsed.socialLinks || DEFAULT_CONFIG.socialLinks,
-          subwebsites: (!parsed.subwebsites || parsed.subwebsites.length !== 3 || parsed.subwebsites[0]?.category === "Commercial Insurance")
-            ? DEFAULT_CONFIG.subwebsites
-            : parsed.subwebsites,
-          subwebsiteBanners: { ...DEFAULT_CONFIG.subwebsiteBanners, ...(parsed.subwebsiteBanners || {}) },
-          fontFamilyPage: parsed.fontFamilyPage || DEFAULT_CONFIG.fontFamilyPage || {},
-          fontFamilyCategory: parsed.fontFamilyCategory || DEFAULT_CONFIG.fontFamilyCategory || {},
-          insuranceBanners: (parsed.insuranceBanners || DEFAULT_CONFIG.insuranceBanners).map((banner: any) => {
-            const defBanner = DEFAULT_CONFIG.insuranceBanners.find(b => b.id === banner.id) || {};
-            const mediaUrl = banner.mediaUrl || defBanner.mediaUrl || "";
-            let mediaType = banner.mediaType;
-            if (!mediaType) {
-              const isVid = !!(mediaUrl.match(/\.(mp4|webm|ogg|mov)$/i) || mediaUrl.includes("mixkit.co/videos") || mediaUrl.includes("video"));
-              mediaType = isVid ? "video" : "image";
-            }
-            return {
-              ...defBanner,
-              ...banner,
-              mediaUrl,
-              mediaType
-            };
-          }),
-          faqs: parsed.faqs || DEFAULT_CONFIG.faqs,
-          testimonials: {
-            ...DEFAULT_CONFIG.testimonials,
-            ...(parsed.testimonials || {}),
-            agentReviews: parsed.testimonials?.agentReviews || DEFAULT_CONFIG.testimonials?.agentReviews || [],
-            clientReviews: parsed.testimonials?.clientReviews || DEFAULT_CONFIG.testimonials?.clientReviews || []
-          } as any,
-        };
-
-        // Force background update if using unsplash or if missing
-        if (!merged.globalBackgroundImage || merged.globalBackgroundImage.includes("unsplash.com")) {
-          merged.globalBackgroundImage = "https://lh3.googleusercontent.com/d/1FHp1j4D8MPh5fUnCoZIFSe2lIKQc61ni";
+        const supabaseConfigUrl = `${SUPABASE_URL}/storage/v1/object/public/banners/config.json?t=${Date.now()}`;
+        const response = await fetch(supabaseConfigUrl);
+        if (response.ok) {
+          const parsed = await response.json();
+          const merged = mergeConfigs(parsed);
+          setConfig(merged);
+          // Sync to local storage for local cache
+          localStorage.setItem("the_insurance_boss_config", JSON.stringify(merged));
+          return;
         }
-        
-        // Write the merged version back to prevent future crashes
-        localStorage.setItem("the_insurance_boss_config", JSON.stringify(merged));
-        setConfig(merged);
       } catch (err) {
-        console.error("Failed to parse cached config, using default", err);
+        console.warn("Failed to load config from Supabase, falling back to local cache", err);
+      }
+
+      // 2. Fall back to local storage cache
+      const saved = localStorage.getItem("the_insurance_boss_config");
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          const merged = mergeConfigs(parsed);
+          setConfig(merged);
+        } catch (err) {
+          console.error("Failed to parse cached config, using default", err);
+          setConfig(DEFAULT_CONFIG);
+        }
+      } else {
+        localStorage.setItem("the_insurance_boss_config", JSON.stringify(DEFAULT_CONFIG));
         setConfig(DEFAULT_CONFIG);
       }
-    } else {
-      localStorage.setItem("the_insurance_boss_config", JSON.stringify(DEFAULT_CONFIG));
     }
+
+    loadConfig();
   }, []);
 
   // Dynamic favicon and document title update based on custom logo settings
