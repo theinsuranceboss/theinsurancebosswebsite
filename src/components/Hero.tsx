@@ -167,14 +167,17 @@ export default function Hero({ config }: HeroProps) {
               <div className={`pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full ${alignFlexClass}`}>
                 <a
                   href={btnReviewUrl}
-                  className="px-8 py-4 text-sm font-mono font-extrabold tracking-wider text-black text-center rounded hover:bg-black hover:text-[#FAC000] border border-[#FAC000] shadow-[0_4px_20px_rgba(250,192,0,0.25)] hover:shadow-none transition-all duration-300"
-                  style={{ backgroundColor: config.accentColor, borderColor: config.accentColor }}
+                  target={btnReviewUrl.startsWith("#") ? undefined : "_blank"}
+                  rel={btnReviewUrl.startsWith("#") ? undefined : "noopener noreferrer"}
+                  className="px-8 py-4 text-sm font-mono font-extrabold tracking-wider text-[#FAC000] text-center rounded bg-transparent hover:bg-[#FAC000] hover:text-black border-2 border-[#FAC000] hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(250,192,0,0.3)] transition-all duration-300"
                 >
                   {btnReviewText}
                 </a>
                 <a
                   href={btnGrowUrl}
-                  className="px-8 py-4 text-sm font-mono font-extrabold tracking-wider text-white text-center rounded border border-zinc-700 hover:border-[#FAC000] bg-black/40 hover:bg-zinc-950 hover:text-white transition-all duration-300 flex items-center justify-center space-x-2"
+                  target={btnGrowUrl.startsWith("#") ? undefined : "_blank"}
+                  rel={btnGrowUrl.startsWith("#") ? undefined : "noopener noreferrer"}
+                  className="px-8 py-4 text-sm font-mono font-extrabold tracking-wider text-[#FAC000] text-center rounded border-2 border-[#FAC000] bg-transparent hover:bg-[#FAC000] hover:text-black hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(250,192,0,0.3)] transition-all duration-300 flex items-center justify-center space-x-2"
                 >
                   <span>{btnGrowText}</span>
                   <ArrowRight className="w-4 h-4 ml-1" />
@@ -250,14 +253,17 @@ export default function Hero({ config }: HeroProps) {
               <div className={`pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full ${alignFlexClass}`}>
                 <a
                   href={btnReviewUrl}
-                  className="px-8 py-4 text-sm font-mono font-extrabold tracking-wider text-black text-center rounded bg-[#FAC000] hover:bg-black hover:text-[#FAC000] border border-[#FAC000] shadow-[0_4px_20px_rgba(250,192,0,0.25)] hover:shadow-none transition-all duration-300"
-                  style={{ backgroundColor: config.accentColor, borderColor: config.accentColor }}
+                  target={btnReviewUrl.startsWith("#") ? undefined : "_blank"}
+                  rel={btnReviewUrl.startsWith("#") ? undefined : "noopener noreferrer"}
+                  className="px-8 py-4 text-sm font-mono font-extrabold tracking-wider text-[#FAC000] text-center rounded bg-transparent hover:bg-[#FAC000] hover:text-black border-2 border-[#FAC000] hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(250,192,0,0.3)] transition-all duration-300"
                 >
                   {btnReviewText}
                 </a>
                 <a
                   href={btnGrowUrl}
-                  className="px-8 py-4 text-sm font-mono font-extrabold tracking-wider text-white text-center rounded border border-zinc-700 hover:border-[#FAC000] bg-black/40 hover:bg-zinc-950 hover:text-white transition-all duration-300 flex items-center justify-center space-x-2"
+                  target={btnGrowUrl.startsWith("#") ? undefined : "_blank"}
+                  rel={btnGrowUrl.startsWith("#") ? undefined : "noopener noreferrer"}
+                  className="px-8 py-4 text-sm font-mono font-extrabold tracking-wider text-[#FAC000] text-center rounded border-2 border-[#FAC000] bg-transparent hover:bg-[#FAC000] hover:text-black hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(250,192,0,0.3)] transition-all duration-300 flex items-center justify-center space-x-2"
                 >
                   <span>{btnGrowText}</span>
                   <ArrowRight className="w-4 h-4 ml-1" />

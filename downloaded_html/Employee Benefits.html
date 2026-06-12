@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Benefits - Health Insurance for Your Business | The Insurance Boss</title>
+    <meta name="description" content="Attract and retain top talent with strong employee health insurance benefits. Affordable group health plans for businesses of all sizes.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: transparent;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: transparent;
+            padding: 60px 0;
+        }
+
+        .section-title {
+            color: #ffd700;
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            color: #ffffff;
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* How It Works Section */
+        .how-works-section {
+            background: transparent;
+            padding: 60px 20px;
+        }
+
+        .how-works-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(60, 60, 60, 0.85);
+            border-left: 5px solid #ffd700;
+            padding: 50px;
+            border-radius: 12px;
+        }
+
+        .how-works-content h2 {
+            color: #ffd700;
+            font-size: 2.8em;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .how-works-content .subtitle {
+            color: #ffffff;
+            font-size: 1.3em;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .how-works-content p {
+            color: #ffffff;
+            font-size: 1.15em;
+            line-height: 1.9;
+            margin-bottom: 25px;
+        }
+
+        /* Risk Section */
+        .risk-section {
+            background: rgba(60, 60, 60, 0.85);
+            padding: 60px 20px;
+            margin-bottom: 60px;
+        }
+
+        .risk-title {
+            color: #ffd700;
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        .risk-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto 40px;
+        }
+
+        .risk-stat-box {
+            background: rgba(50, 50, 50, 0.9);
+            border: 3px solid #ffd700;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .risk-stat-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
+
+        .risk-stat-box .big-number {
+            color: #ffd700;
+            font-size: 4em;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .risk-stat-box .stat-description {
+            color: #ffffff;
+            font-size: 1.3em;
+            line-height: 1.5;
+        }
+
+        .risk-quote {
+            background: rgba(40, 40, 40, 0.95);
+            border-left: 5px solid #ffd700;
+            padding: 30px 40px;
+            max-width: 1000px;
+            margin: 40px auto 0;
+        }
+
+        .risk-quote p {
+            color: #ffffff;
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .risk-quote p:last-child {
+            margin-bottom: 0;
+        }
+
+        .risk-quote .highlight {
+            color: #ffd700;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+
+        /* Why Critical Section */
+        .why-critical-section {
+            background: transparent;
+            padding: 60px 20px;
+        }
+
+        .critical-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .critical-card {
+            background: rgba(60, 60, 60, 0.85);
+            padding: 35px;
+            border-radius: 12px;
+            border-left: 5px solid #ffd700;
+            transition: all 0.3s ease;
+        }
+
+        .critical-card:hover {
+            transform: translateX(10px);
+            background: rgba(70, 70, 70, 0.9);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .critical-card .check-icon {
+            color: #ffd700;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .critical-card h3 {
+            color: #ffd700;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .critical-card p {
+            color: #ffffff;
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+
+        /* Info Boxes */
+        .info-boxes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .info-box {
+            background: linear-gradient(145deg, rgba(70, 70, 70, 0.6), rgba(50, 50, 50, 0.6));
+            padding: 35px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .info-box:hover::before {
+            left: 100%;
+        }
+
+        .info-box:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 215, 0, 0.6);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .info-box h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 1.6em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-box p {
+            color: #ffffff;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+
+        .info-box ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        .info-box li {
+            margin: 10px 0;
+            color: #ffffff;
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .feature-item {
+            background: rgba(60, 60, 60, 0.5);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 5px solid #ffd700;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            background: rgba(70, 70, 70, 0.6);
+            transform: translateX(10px);
+        }
+
+        .feature-item h4 {
+            color: #ffd700;
+            margin-bottom: 12px;
+            font-size: 1.4em;
+        }
+
+        .feature-item p {
+            color: #ffffff;
+            line-height: 1.7;
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.1), rgba(255, 100, 0, 0.1));
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            padding: 35px;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .warning-box::before {
+            content: '⚠️';
+            font-size: 3em;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            opacity: 0.3;
+        }
+
+        .warning-box h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .warning-box p {
+            color: #ffffff;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        /* Comparison Table */
+        .comparison-wrapper {
+            overflow-x: auto;
+            margin: 40px 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(60, 60, 60, 0.5);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.1));
+        }
+
+        .comparison-table th {
+            color: #ffd700;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.2em;
+            border-bottom: 2px solid #ffd700;
+        }
+
+        .comparison-table td {
+            padding: 18px 20px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+            color: #ffffff;
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        /* Process Steps */
+        .process-steps {
+            margin: 50px 0;
+            position: relative;
+        }
+
+        .process-step {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 25px;
+            margin-bottom: 40px;
+            align-items: start;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ffd700, #fadc2f);
+            color: #000000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .step-content {
+            background: rgba(70, 70, 70, 0.5);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .step-content h3 {
+            color: #ffd700;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+
+        .step-content p {
+            color: #ffffff;
+            line-height: 1.7;
+        }
+
+        /* FAQ Accordion */
+        .faq-section {
+            margin: 60px 0;
+        }
+
+        .faq-item {
+            background: #363636; /* Dark Grey Background */
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border: none; /* No border */
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .faq-item:hover {
+            background: #404040;
+        }
+
+        .faq-question {
+            padding: 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .faq-question h3 {
+            color: #ffd700;
+            margin: 0;
+            font-size: 1.3em;
+            flex: 1;
+        }
+
+        .faq-toggle {
+            color: #ffd700;
+            font-size: 2em;
+            font-weight: 400;
+            background: transparent;
+            width: auto;
+            height: auto;
+            border-radius: 0;
+            display: block;
+            margin-left: 20px;
+            line-height: 0.5;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-toggle:hover {
+            background: transparent;
+            transform: scale(1.1);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 25px;
+            background: inherit;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+            padding: 0 25px 25px 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer p {
+            color: #ffffff;
+            line-height: 1.8;
+            font-size: 1.05em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .feature-grid, .critical-grid, .risk-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .process-step {
+                grid-template-columns: 60px 1fr;
+                gap: 15px;
+            }
+
+            .step-number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5em;
+            }
+
+            .section-title, .risk-title {
+                font-size: 2em;
+            }
+        }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li::before {
+            content: '▸';
+            color: #ffd700;
+            font-weight: bold;
+            display: inline-block;
+            width: 1.2em;
+            margin-left: -1.2em;
+        }
+
+        ul {
+            padding-left: 1.5em;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Toggle Functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', function() {
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Complete Intersection Observer
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, observerOptions);
+
+            // Animate all sections
+            document.querySelectorAll('.section-title, .section-subtitle, .info-box, .feature-item, .critical-card, .stat-box, .warning-box, .faq-item, .process-step, .comparison-table, .how-works-content, .risk-section, .risk-stat-box').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <section class="how-works-section">
+        <div class="how-works-content">
+            <h2>How Group Health Insurance Works</h2>
+            <p class="subtitle">Affordable, employer-sponsored health coverage that supports employee wellbeing and strengthens your organization.</p>
+            
+            <p>Group health insurance allows businesses to offer medical coverage to employees at significantly lower costs than individual policies. As an employer, you negotiate with insurance carriers to secure group rates based on your employee pool, then contribute a percentage of premiums while employees pay the remainder through payroll deductions. The larger your group, the better rates you typically receive, making quality healthcare affordable for your team.</p>
+            
+            <p>Coverage typically includes medical services, prescription drugs, preventive care, emergency treatment, and hospitalization. Many plans also offer multiple enrollment tiers individual, employee + spouse, employee + children, or full family coverage so employees can choose the level that best fits their needs. Employers often cover 50–80% of employee-only premiums, while employees contribute more for dependent coverage. This shared-cost structure helps make quality healthcare accessible to employees while allowing employers to manage overall benefit expenses.</p>
+            
+            <p>Compliance with the Affordable Care Act (ACA) is critical for businesses with 50+ full-time employees, requiring you to offer affordable coverage that meets minimum essential benefits. Small businesses under 50 employees aren't mandated to provide coverage but gain competitive advantages by doing so. Group plans also provide tax benefits employer contributions are tax-deductible business expenses, and employee premium payments are often made pre-tax, reducing taxable income for both parties.</p>
+        </div>
+    </section>
+
+    <section class="risk-section">
+        <h2 class="risk-title">Why Employee Benefits Drive Business Success</h2>
+        
+        <div class="risk-stats">
+            <div class="risk-stat-box">
+                <span class="big-number">78%</span>
+                <p class="stat-description">Of employees consider health benefits when choosing or staying with an employer</p>
+            </div>
+            
+            <div class="risk-stat-box">
+                <span class="big-number">56%</span>
+                <p class="stat-description">Companies that offer robust health benefits typically experience a significant reduction in employee turnover, as workers are more likely to stay with employers who prioritize their wellbeing.</p>
+            </div>
+        </div>
+        
+        <div class="risk-quote">
+            <p>Businesses without competitive health benefits struggle to attract qualified candidates and experience higher turnover, costing thousands in recruitment and training expenses per employee.</p>
+            
+            <p class="highlight">Group health insurance isn't just a benefit it's a strategic investment in your workforce and company stability.</p>
+        </div>
+    </section>
+
+    <section class="why-critical-section">
+        <div class="container">
+            <h2 class="section-title">Why Offer Employee Health Benefits</h2>
+            
+            <div class="critical-grid">
+                <div class="critical-card">
+                    <div class="check-icon">✓</div>
+                    <h3>Attract Top Talent</h3>
+                    <p>Competitive job seekers expect employer sponsored health coverage. Offering strong benefits helps your business stand out in tight labor markets and attract high-quality candidates.</p>
+                </div>
+
+                <div class="critical-card">
+                    <div class="check-icon">✓</div>
+                    <h3>Retain Valuable Employees</h3>
+                    <p>Employees with employer-provided health insurance are significantly more likely to stay long-term. Strong benefits reduce turnover, preserve institutional knowledge, and support long-term business growth.</p>
+                </div>
+
+                <div class="critical-card">
+                    <div class="check-icon">✓</div>
+                    <h3>Increase Productivity</h3>
+                    <p>Employees with access to preventive care and treatment tend to miss fewer workdays and maintain better overall health, contributing to higher productivity and improved job performance.</p>
+                </div>
+
+                <div class="critical-card">
+                    <div class="check-icon">✓</div>
+                    <h3>Tax Advantages</h3>
+                    <p>Employer contributions toward group health insurance are generally 100% tax deductible as business expenses. Small businesses may also qualify for tax credits through the Small Business Health Options Program (SHOP), if eligible.</p>
+                </div>
+
+                <div class="critical-card">
+                    <div class="check-icon">✓</div>
+                    <h3>Lower Costs Than Individual Plans</h3>
+                    <p>Group plans spread risk across multiple employees, which often results in premiums that are 20–40% lower than comparable individual coverage. Employees gain access to quality healthcare at more affordable rates.</p>
+                </div>
+
+                <div class="critical-card">
+                    <div class="check-icon">✓</div>
+                    <h3>Legal Compliance</h3>
+                    <p>Businesses with 50+ full time employees are required to offer Affordable Care Act (ACA) compliant health insurance or face potential penalties. Providing coverage helps ensure compliance and avoids costly fines.</p>
+                </div>
+
+                <div class="critical-card">
+                    <div class="check-icon">✓</div>
+                    <h3>Enhanced Company Reputation</h3>
+                    <p>Companies offering meaningful health benefits are viewed as stable, responsible, and employee-focused. This strengthens employer brand, improves public perception, and increases appeal to both customers and prospective employees.</p>
+                </div>
+
+                <div class="critical-card">
+                    <div class="check-icon">✓</div>
+                    <h3>Boosts Employee Morale & Loyalty</h3>
+                    <p>Providing health benefits shows employees that their wellbeing matters. This leads to higher morale, stronger loyalty, a more positive workplace culture, and higher overall team satisfaction.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Types of Employee Health Benefits</h2>
+            <p class="section-subtitle">Explore benefit options that help you support your team and strengthen your business.</p>
+
+            <div class="info-boxes">
+                <div class="info-box">
+                    <h3> Medical Insurance</h3>
+                    <p>Core health coverage for your employees:</p>
+                    <ul>
+                        <li>Doctor visits and specialist consultations</li>
+                        <li>Hospital stays and emergency care</li>
+                        <li>Preventive care and wellness checkups</li>
+                        <li>Prescription drug coverage</li>
+                        <li>Laboratory tests and diagnostic imaging</li>
+                        <li>Maternity and newborn care</li>
+                        <li>Mental health and substance abuse treatment</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3> Dental Insurance</h3>
+                    <p>Essential oral health benefits employees value:</p>
+                    <ul>
+                        <li>Preventive care cleanings twice yearly</li>
+                        <li>X-rays and routine examinations</li>
+                        <li>Fillings and basic restorative work</li>
+                        <li>Root canals and extractions</li>
+                        <li>Crowns, bridges, and dentures</li>
+                        <li>Orthodontics for children and adults</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3> Vision Insurance</h3>
+                    <p>Affordable eye care coverage:</p>
+                    <ul>
+                        <li>Annual complete eye exams</li>
+                        <li>Prescription eyeglasses and frames</li>
+                        <li>Contact lenses and fitting fees</li>
+                        <li>Lens upgrades and coatings</li>
+                        <li>Discounts on LASIK surgery</li>
+                        <li>Coverage for dependent children</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3> Prescription Drug Coverage</h3>
+                    <p>Manage medication needs effectively:</p>
+                    <ul>
+                        <li>Tiered copay structure for medications</li>
+                        <li>Generic drugs at lowest cost</li>
+                        <li>Preferred and non-preferred brands</li>
+                        <li>Mail-order pharmacy savings</li>
+                        <li>Specialty medication programs</li>
+                        <li>Formulary management for better options</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3> Disability Insurance</h3>
+                    <p>Income protection when employees can't work:</p>
+                    <ul>
+                        <li>Short-term disability for temporary conditions</li>
+                        <li>Long-term disability for extended illnesses</li>
+                        <li>Replaces 50-70% of employee income</li>
+                        <li>Covers injury, illness, and pregnancy</li>
+                        <li>Voluntary or employer-paid options</li>
+                        <li>Critical for employee financial security</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3>Life Insurance</h3>
+                    <p>Financial protection for employee families:</p>
+                    <ul>
+                        <li>Basic life coverage of 1-2x salary</li>
+                        <li>Accidental death and dismemberment (AD&D)</li>
+                        <li>Voluntary supplemental coverage options</li>
+                        <li>Spousal and dependent life insurance</li>
+                        <li>No medical exam for basic coverage</li>
+                        <li>Valuable recruitment and retention tool</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Health Plan Options for Your Business</h2>
+            <p class="section-subtitle">Learn how different health plan designs affect coverage and employee satisfaction.</p>
+
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h4> HMO - Health Maintenance Organization</h4>
+                    <p>Network restrictions apply. Employees choose a primary care physician who coordinates all care and provides specialist referrals. Requires staying within network. Best for businesses with employees near major medical centers.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h4>PPO - Preferred Provider Organization</h4>
+                    <p>Flexibility to see any doctor without referrals. Lower expenses when using in-network providers but covers out-of-network care. Ideal for businesses wanting flexibility and nationwide coverage for traveling employees.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h4> EPO - Exclusive Provider Organization</h4>
+                    <p>Middle ground between HMO and PPO. No referrals needed but must stay in-network except emergencies. Good balance for businesses seeking savings without strict HMO restrictions.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h4>POS - Point of Service</h4>
+                    <p>Hybrid combining HMO and PPO features. Choose primary care physician but can go out-of-network. Requires referrals for specialists. Works for businesses wanting managed care with some out-of-network options.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h4>HDHP - High Deductible Health Plan</h4>
+                    <p>Higher deductibles paired with Health Savings Accounts (HSAs) for tax-advantaged savings. Best for healthy employees who want tax benefits. Employer HSA contributions attract talent.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h4> Self-Funded Plans</h4>
+                    <p>Large employers (100+ employees) pay claims directly instead of premiums. Greater control over plan design. Requires stop-loss insurance for catastrophic protection. Complex but effective for stable workforces.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Factors Affecting Your Business Insurance</h2>
+            <p class="section-subtitle">Understand the key elements that shape your group health plans and help you prepare effectively.</p>
+
+            <div class="info-boxes">
+                <div class="info-box">
+                    <h3> Company Size</h3>
+                    <p>Larger groups often receive better rates through economies of scale. Businesses with 100+ employees typically pay 20-30% less per person than companies with fewer than 10 employees. Pooling risk across more people reduces per-capita expense.</p>
+                </div>
+
+                <div class="info-box">
+                    <h3> Geographic Location</h3>
+                    <p>Healthcare varies dramatically by region. Urban areas with higher medical expenses see different premiums. States with more competition among insurers offer better options. Location can impact rates by 30-50% for identical coverage.</p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Industry Risk Level</h3>
+                    <p>High-risk industries (construction, manufacturing) face different premiums than low-risk office environments. Claims history and workplace safety records impact rates. Industries with older workforces or physically demanding jobs pay more.</p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Employee Demographics</h3>
+                    <p>Age, gender, and health status of your workforce affect premiums. Older employees cost more to insure. Groups with chronic conditions see higher rates. Average age increasing by 10 years can raise premiums 20-40%.</p>
+                </div>
+
+                <div class="info-box">
+                    <h3> Plan Design</h3>
+                    <p>Lower-deductible plans cost more than high-deductible options. Adding dental, vision, and other benefits increases total expenses. Larger provider networks also raise premiums but improve employee choice and convenience.</p>
+                </div>
+
+                <div class="info-box">
+                    <h3> Claims History</h3>
+                    <p>Groups with high claims experience renewal rate increases. Small businesses can see 20-40% premium hikes after major claims. Larger groups have more stable rates. Wellness programs and preventive care help manage long-term expenses.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Small Business Health Insurance Advantages</h2>
+            <p class="section-subtitle">Even businesses with just a few employees can offer competitive health benefits.</p>
+
+            <div class="comparison-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Benefit</th>
+                            <th>Small Business Advantage</th>
+                            <th>How It Helps</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Tax Credits</strong></td>
+                            <td>Up to 50% of premium costs</td>
+                            <td>Businesses under 25 employees with average wages under $56,000 qualify for significant tax credits through SHOP marketplace</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tax Deductions</strong></td>
+                            <td>100% deductible expenses</td>
+                            <td>All employer health insurance contributions are fully tax-deductible business expenses, reducing taxable income</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Competitive Edge</strong></td>
+                            <td>Attract top talent</td>
+                            <td>Small businesses offering benefits compete effectively against larger companies for skilled employees</td>
+                        </tr>
+                        <tr>
+                            <td><strong>No Size Minimums</strong></td>
+                            <td>Coverage from 1 employee</td>
+                            <td>Many states allow group coverage with just one employee, making benefits accessible to micro-businesses</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Flexible Contributions</strong></td>
+                            <td>Choose your contribution level</td>
+                            <td>Decide how much to contribute (minimum 50% typically) based on budget while still offering valuable benefits</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Simple Administration</strong></td>
+                            <td>Easy enrollment and management</td>
+                            <td>Modern platforms handle enrollment, premium collection, and compliance with minimal administrative burden</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="warning-box">
+                <h3>SHOP Marketplace for Small Businesses</h3>
+                <p>The SHOP marketplace is built for small businesses with 1–50 employees. It allows you to compare plans, enroll online, and access tax credits. Companies with fewer than 25 employees and average wages under $56,000 may qualify for tax credits of up to 50% of their premium costs, helping small employers offer strong health benefits.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">How to Set Up Employee Health Benefits</h2>
+            <p class="section-subtitle">Getting started with group health insurance is simpler than most business owners expect.</p>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Assess Your Needs & Budget</h3>
+                        <p>Determine how many employees you'll cover, what percentage of premiums you'll contribute (typically 50-80%), and your total budget. Survey employees about coverage preferences. Consider mandatory vs. voluntary benefits.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Research Plan Options</h3>
+                        <p>Work with a broker to compare carriers and plan types (HMO, PPO, HDHP). Evaluate network coverage in your area. Review deductibles, copays, out-of-pocket maximums, and covered services.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Complete Application Process</h3>
+                        <p>Provide employee census data (ages, zip codes, tobacco use). Submit business information and payroll details. Some carriers require medical questionnaires for small groups.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Enroll Employees</h3>
+                        <p>Distribute plan documents and Summary of Benefits Coverage (SBC). Hold enrollment meetings to explain options. Employees complete enrollment forms and beneficiary designations.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Establish Administration Systems</h3>
+                        <p>Set up premium payment methods (typically monthly invoicing). Implement payroll deduction systems. Create process for adding new employees. Establish procedures for qualifying life events.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h3>Maintain Compliance</h3>
+                        <p>File required forms (5500, 1095-C for applicable large employers). Distribute notices (Summary Plan Description, COBRA, HIPAA). Track and report coverage for ACA compliance. Conduct annual open enrollment.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose The Insurance Boss for Employee Benefits</h2>
+            
+            <div class="info-boxes">
+                <div class="info-box">
+                    <h3>Business Insurance Specialists</h3>
+                    <p>We understand the unique challenges businesses face when selecting employee benefits. Our agents have extensive experience with group health insurance, compliance requirements, and strategies for companies of all sizes.</p>
+                </div>
+
+                <div class="info-box">
+                    <h3> Multiple Carrier Access</h3>
+                    <p>We work with all major health insurance carriers including Blue Cross Blue Shield, UnitedHealthcare, Aetna, Cigna, and regional insurers. This allows us to compare dozens of plans and find the best coverage.</p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Cost Optimization</h3>
+                    <p>We analyze your business profile to identify potential opportunities, including available tax credits, contribution strategies, and plan designs that balance strong coverage with your budget.</p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Compliance Support</h3>
+                    <p>We handle ACA compliance, COBRA administration, HIPAA requirements, and all regulatory filings. Our team stays current on changing laws and ensures your business meets all legal obligations.</p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Simplified Administration</h3>
+                    <p>We streamline enrollment, manage carrier communications, coordinate payroll deductions, and handle qualifying life events. Modern online platforms make benefits administration effortless.</p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Ongoing Partnership</h3>
+                    <p>We're with you beyond initial enrollment. Annual renewal reviews ensure you're getting best rates. We assist with claims issues, add new employees seamlessly, and adjust coverage as your business grows.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-section">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How many employees do I need to offer group health insurance?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Most states allow group health insurance with just one employee (the owner counts). However, practical minimums vary by carrier some require 2-5 enrolled employees. The larger your group, the better rates you'll receive. Even businesses with 2-10 employees can access affordable group coverage.</p>
+                        <p>For businesses under 50 employees, offering health insurance is optional but highly recommended for recruitment and retention. Companies with 50+ full-time employees face ACA penalties if they don't offer affordable coverage meeting minimum standards.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What percentage of premiums should employers pay?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Most employers contribute 50-80% of employee-only premium costs. The industry average is around 70% for employee coverage and 60% for dependent coverage. However, you determine your contribution level based on budget and competitiveness goals.</p>
+                        <p>Minimum requirements exist in some markets typically 50% of employee-only premium. Higher contributions attract better talent and improve employee satisfaction, but even 50% contribution makes insurance affordable for employees compared to individual market prices.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do small businesses get tax credits for offering health insurance?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! Businesses with fewer than 25 full-time equivalent employees can qualify for tax credits up to 50% of premium costs (35% for nonprofits) through the Small Business Health Care Tax Credit. To qualify, average employee wages must be under $56,000 annually, and you must contribute at least 50% of employee premium costs.</p>
+                        <p>The credit is highest for businesses with fewer than 10 employees earning average wages under $27,000. Even if you don't qualify for credits, all employer health insurance contributions are 100% tax-deductible business expenses.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What's the difference between fully-insured and self-funded plans?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Fully-insured plans (most common for small businesses) involve paying fixed monthly premiums to an insurance carrier who assumes all risk and pays claims. This provides predictable costs and protection against catastrophic claims. The carrier handles administration, claims processing, and compliance.</p>
+                        <p>Self-funded plans (typically for 100+ employees) mean the employer pays claims directly, only purchasing stop-loss insurance for catastrophic protection. This offers potential savings if employees are healthy, greater control over plan design, and access to detailed claims data. However, it involves more risk and complexity, requiring dedicated administration resources.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I offer different plans to different employees?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can offer multiple plan options (like HMO, PPO, and HDHP) and let employees choose what works best for them. This is common and recommended it accommodates diverse employee needs while controlling costs.</p>
+                        <p>However, you cannot discriminate based on health status, age, or protected characteristics. Contribution levels and eligibility rules must apply consistently within employee classifications. You can have different rules for full-time vs. part-time, or executives vs. general employees, but distinctions must be non-discriminatory and clearly documented.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What happens if an employee leaves the company?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>When employees leave, their coverage ends (typically at month-end). They must receive COBRA notification within 30-44 days, offering them the option to continue coverage at full cost plus 2% admin fee for 18 months. COBRA applies to businesses with 20+ employees. Smaller businesses may have state continuation requirements.</p>
+                        <p>Employees can also explore individual marketplace coverage through HealthCare.gov or state exchanges. Job loss qualifies as a Special Enrollment Period, allowing them to sign up outside open enrollment. As employer, your responsibility is timely COBRA notification and proper termination processing with the carrier.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How often do premiums increase?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Group health insurance renews annually, typically with premium increases of 3-15% depending on claims experience, healthcare inflation, and market conditions. Smaller groups (under 50) often see larger fluctuations based on claims. Larger groups have more stable, predictable rate changes.</p>
+                        <p>To manage increases: shop carriers every 2-3 years, implement wellness programs to reduce claims, consider plan design changes (higher deductibles, different networks), and work with a broker to negotiate best renewal rates. Strategic plan management can minimize premium growth significantly.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What is the Affordable Care Act (ACA) employer mandate?</h3>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The ACA employer mandate applies to businesses with 50+ full-time equivalent employees (averaged over the previous year). These "Applicable Large Employers" must offer affordable health coverage providing minimum essential benefits to 95% of full-time employees and their dependents, or face penalties.</p>
+                        <p>Coverage is "affordable" if employee-only premium doesn't exceed 9.12% of household income (2023). Minimum essential coverage includes hospitalization, physician services, and prescription drugs. Non-compliance results in penalties of $2,880 per full-time employee annually (after first 30). Businesses under 50 employees have no mandate but gain competitive advantages by offering coverage.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agency Solutions - Scale Your Insurance Business | The Insurance Boss</title>
+    <meta name="description" content="Complete solutions for insurance agencies. Lead generation, carrier access, back-office staffing, coaching, and marketing strategies to help you scale.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: transparent;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section Styling */
+        .content-section {
+            padding: 60px 0;
+            background: transparent;
+        }
+
+        .section-title {
+            color: #ffd700;
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2em;
+            color: #ffffff;
+            max-width: 900px;
+            margin-bottom: 50px;
+            line-height: 1.6;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        /* Service Card - Dark Grey + Yellow Border */
+        .service-card {
+            background: #363636; /* Dark Grey Background */
+            padding: 35px;
+            border-radius: 12px;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid #ffd700; /* Yellow Border */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            background: #404040;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.15);
+        }
+
+        .service-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            color: #ffd700;
+        }
+
+        .service-card p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .service-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .service-card li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+            color: #dddddd;
+        }
+
+        .service-card li::before {
+            content: "•";
+            color: #ffd700;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* Process Steps */
+        .process-section {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            text-align: left;
+        }
+
+        /* Process Card - Dark Grey + Yellow Border */
+        .process-card {
+            background: #363636; /* Dark Grey Background */
+            padding: 35px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #ffd700; /* Yellow Border */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .process-card:hover {
+            background: #404040;
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            color: #ffd700;
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: block;
+            opacity: 0.8;
+        }
+
+        .process-card h3 {
+            color: #ffffff;
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .process-card p {
+            color: #cccccc;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin: 60px 0;
+        }
+
+        .faq-item {
+            background: #363636; /* Dark Grey Background */
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border: none; /* NO BORDER */
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .faq-item:hover {
+            background: #404040;
+        }
+
+        .faq-question {
+            padding: 25px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .faq-question h3 {
+            color: #ffd700;
+            margin: 0;
+            font-size: 1.2em;
+            font-weight: 700;
+            flex: 1;
+        }
+
+        /* Simple Yellow Plus Toggle */
+        .faq-toggle {
+            width: auto;
+            height: auto;
+            background: transparent;
+            color: #ffd700;
+            font-size: 2em;
+            font-weight: 400;
+            display: block;
+            margin-left: 20px;
+            line-height: 0.5;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 30px;
+            background: inherit;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+            padding: 0 30px 30px 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg); /* Rotates plus to X */
+        }
+
+        .faq-answer p {
+            color: #ffffff;
+            line-height: 1.7;
+            font-size: 1.1em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .process-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .section-title { font-size: 2.2em; }
+            .services-grid, .process-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        html { scroll-behavior: smooth; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Toggle
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', function() {
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Intersection Observer
+            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, observerOptions);
+
+            // Animate elements
+            document.querySelectorAll('.section-title, .section-subtitle, .service-card, .process-card, .faq-item').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+        });
+    </script>
+</head>
+<body>
+    
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title" style="text-align: left;">How we can help</h2>
+            <p class="section-subtitle" style="text-align: left;">Start with the essentials and add more as your agency levels up. Our services are designed to plug into your business exactly where you need them.</p>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Lead Generation</h3>
+                    <p>Stop chasing cold prospects. We run targeted insurance campaigns that attract qualified, high-intent prospects and deliver them directly to your CRM.</p>
+                    <ul>
+                        <li>Exclusive, real-time leads (no shared lists)</li>
+                        <li>High-intent targeting for Auto, Home, & Life</li>
+                        <li>Automated CRM integration & notifications</li>
+                        <li>Custom funnels built for your agency brand</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <h3>Carrier Access</h3>
+                    <p>Gain direct access to top-rated national and regional carriers without the impossible volume requirements. Expand your product lineup faster.</p>
+                    <ul>
+                        <li>Access to 50+ A-rated national carriers</li>
+                        <li>Competitive commission splits & bonuses</li>
+                        <li>Commercial & Personal lines appointments</li>
+                        <li>Reduced production requirements for new agents</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <h3>Documents & Operations</h3>
+                    <p>Don't reinvent the wheel. Access our library of ready-to-use insurance SOPs, checklists, and workflows to standardize your agency.</p>
+                    <ul>
+                        <li>Standard Operating Procedures (SOPs) library</li>
+                        <li>Proven sales scripts & objection handling</li>
+                        <li>Hiring & onboarding templates</li>
+                        <li>Renewal retention workflows</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <h3>Social Media Management</h3>
+                    <p>Build authority while you sleep. We provide industry-focused content calendars and automated lead funnels to capture prospects.</p>
+                    <ul>
+                        <li>Done-for-you content calendars</li>
+                        <li>Branded graphics & video scripts</li>
+                        <li>Facebook & LinkedIn ad management</li>
+                        <li>Community engagement strategies</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <h3>Web & Graphic Design</h3>
+                    <p>Your digital storefront matters. We build clean, conversion-ready agency websites that match your current brand style.</p>
+                    <ul>
+                        <li>SEO-optimized agency websites</li>
+                        <li>Fast-loading mobile responsive designs</li>
+                        <li>Integrated quote request forms</li>
+                        <li>Logo design & brand identity packages</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <h3>Acquisition & Mergers</h3>
+                    <p>Ready to exit or expand? We connect you with qualified buyers and verified agencies for sale, guiding you through the transaction.</p>
+                    <ul>
+                        <li>Agency valuation & analysis</li>
+                        <li>Buyer/Seller matchmaking</li>
+                        <li>Deal structure consulting</li>
+                        <li>Due diligence support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section process-section">
+        <div class="container">
+            <h2 class="section-title">Premium & Confident</h2>
+            <p class="section-subtitle" style="margin: 0 auto 50px;">A streamlined process built to help your agency scale.</p>
+
+            <div class="process-grid">
+                <div class="process-card">
+                    <span class="step-number">01</span>
+                    <h3>Diagnose</h3>
+                    <p>We start by reviewing your current markets, niches, sales process, and carrier mix. We identify bottlenecks and find the fastest path to premium growth before we implement any changes.</p>
+                </div>
+                <div class="process-card">
+                    <span class="step-number">02</span>
+                    <h3>Deploy</h3>
+                    <p>We launch your custom service mix whether that's turning on lead generation, placing staffing, or rolling out new training. Every action is tracked with clear KPIs to ensure accountability.</p>
+                </div>
+                <div class="process-card">
+                    <span class="step-number">03</span>
+                    <h3>Optimize</h3>
+                    <p>Growth isn't "set it and forget it." We iterate weekly on your close rates, cross-sell opportunities, retention strategies, and referral systems to keep momentum high and costs low.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What services does The Insurance Boss offer?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>We provide complete solutions for insurance agencies, including lead generation, back-office staffing, coaching, consulting, marketing strategies, document templates, and operational support. We are a one-stop shop for agency scaling.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How does your lead generation service work?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Our lead generation uses targeted digital marketing campaigns across social media (Facebook, LinkedIn) and search engines (Google) to identify high-intent prospects looking for insurance. We filter these leads based on your specific criteria and deliver them directly to your agency in real-time.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How do I know which subscription plan is right for my agency?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>We recommend starting with a consultation. We assess your agency's size, current growth stage, and specific bottlenecks to recommend a plan that offers the tools and support you need most right now, with room to upgrade as you scale.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How do you generate leads for my insurance agency?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>We utilize a mix of paid advertising, content marketing, and funnel optimization strategies tailored to the insurance industry. Our methods are designed to attract prospects who are actively seeking coverage, ensuring higher conversion rates than generic lead vendors.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What results can I expect from coaching or consulting?</h3>
+                    <div class="faq-toggle">+</div>
+                </div>
+                <div class="faq-answer">
+                    <p>Our coaching focuses on actionable strategies, not just theory. You can expect improved sales processes, better team performance, clearer operational workflows, and ultimately, a measurable increase in written premium and retention rates.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

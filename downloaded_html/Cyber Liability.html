@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Liability Insurance - Protect Your Business from Data Breaches</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            background: transparent;
+            color: #ffffff;
+        }
+
+        /* Value Proposition Section */
+        .value-prop-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .value-prop-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .value-card {
+            background: rgba(60, 60, 60, 0.85);
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            border-top: 5px solid #ffd700;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .value-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .value-card .icon {
+            font-size: 70px;
+            margin-bottom: 20px;
+        }
+
+        .value-card h3 {
+            color: #ffd700;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .value-card p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+        /* Social Proof Section */
+        .social-proof-section {
+            padding: 60px 20px;
+            background: rgba(60, 60, 60, 0.85);
+        }
+
+        .social-proof-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .social-proof-container h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .social-proof-container .subtitle {
+            color: #ffd700;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 40px;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .stat-box {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .stat-box.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-box .number {
+            color: #ffd700;
+            font-size: 52px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-box .number-text {
+            color: #ffd700;
+            font-size: 52px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-box .label {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.4;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .testimonial {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid #ffd700;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .testimonial.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .testimonial .quote {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial .author {
+            color: #ffd700;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .testimonial .location {
+            color: #cccccc;
+            font-size: 14px;
+        }
+
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: #ffffff;
+            font-size: 20px;
+        }
+
+        /* Problem/Solution Section */
+        .problem-solution-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .problem-solution-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .problem-box,
+        .solution-box {
+            padding: 40px;
+            border-radius: 12px;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .solution-box {
+            transform: translateX(30px);
+        }
+
+        .problem-box.animate,
+        .solution-box.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* UPDATED: Changed from Red to Dark Grey with Yellow Border */
+        .problem-box {
+            background: rgba(60, 60, 60, 0.85);
+            border-left: 5px solid #ffd700;
+        }
+
+        .solution-box {
+            background: rgba(40, 80, 40, 0.85);
+            border-left: 5px solid #44ff44;
+        }
+
+        .problem-box h2,
+        .solution-box h2 {
+            color: #ffd700;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .problem-box ul,
+        .solution-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .problem-box ul li,
+        .solution-box ul li {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            padding-left: 35px;
+            position: relative;
+        }
+
+        /* UPDATED: Changed icon color from Red to Yellow */
+        .problem-box ul li::before {
+            content: "✗";
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 24px;
+            position: absolute;
+            left: 0;
+        }
+
+        .solution-box ul li::before {
+            content: "✓";
+            color: #44ff44;
+            font-weight: bold;
+            font-size: 24px;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Coverage Section */
+        .coverage-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .coverage-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .coverage-card {
+            background: rgba(60, 60, 60, 0.85);
+            padding: 40px;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease;
+        }
+
+        .coverage-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .coverage-card:hover {
+            border-color: #ffd700;
+            transform: translateY(-5px);
+        }
+
+        .coverage-card h3 {
+            color: #ffd700;
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .coverage-card p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .coverage-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .coverage-card ul li {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 12px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .coverage-card ul li::before {
+            content: "✓";
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 22px;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Threat Types Section */
+        .threats-section {
+            padding: 60px 20px;
+            background: rgba(60, 60, 60, 0.85);
+        }
+
+        .threats-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .threats-container h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .threats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .threat-item {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 30px;
+            border-radius: 8px;
+            /* UPDATED: Changed from Red to Yellow */
+            border-left: 4px solid #ffd700;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .threat-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .threat-item .icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .threat-item h3 {
+            color: #ffd700;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .threat-item p {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefits-container h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .benefit-item {
+            background: rgba(60, 60, 60, 0.85);
+            padding: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .benefit-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .benefit-item .check {
+            color: #ffd700;
+            font-size: 32px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .benefit-item .content h3 {
+            color: #ffd700;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .benefit-item .content p {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(60, 60, 60, 0.85);
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease;
+        }
+
+        .faq-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .faq-item:hover {
+            border-color: #ffd700;
+        }
+
+        .faq-header {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .faq-header h3 {
+            color: #ffd700;
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .faq-header .icon {
+            color: #ffd700;
+            font-size: 24px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-header .icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-content {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-item.active .faq-content {
+            padding: 25px 30px;
+            max-height: 1000px;
+        }
+
+        .faq-content p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .faq-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 20px;
+            background: transparent;
+        }
+
+        .cta-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.98) 0%, rgba(255, 193, 7, 0.98) 100%);
+            padding: 60px 50px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 10px 50px rgba(255, 215, 0, 0.3);
+        }
+
+        .cta-container h2 {
+            color: #1a1a1a;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        /* UPDATED: Changed from Red to Black for visibility on Yellow BG */
+        .cta-container .urgency-text {
+            color: #1a1a1a;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-container p {
+            color: #1a1a1a;
+            font-size: 22px;
+            margin-bottom: 35px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #1a1a1a;
+            color: #ffd700;
+            padding: 18px 50px;
+            font-size: 22px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            background: #2a2a2a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .value-prop-grid,
+            .coverage-grid,
+            .benefits-grid,
+            .threats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonial-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .problem-solution-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-header h2,
+            .social-proof-container h2,
+            .threats-container h2,
+            .benefits-container h2,
+            .cta-container h2 {
+                font-size: 32px;
+            }
+
+            .stats-row,
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .value-card,
+            .coverage-card,
+            .cta-container {
+                padding: 30px 20px;
+            }
+
+            .cta-container h2 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="value-prop-section">
+        <div class="value-prop-grid">
+            <div class="value-card">
+                <h3>Data Breach Response & Protection</h3>
+                <p>Cyber liability insurance may help cover expenses related to customer notifications, forensic investigations, credit monitoring, legal fees, and certain regulatory penalties following a covered data breach or cyberattack.</p>
+            </div>
+            <div class="value-card">
+                <h3>Ransomware & Cyber Extortion</h3>
+                <p>Depending on the policy, coverage can include reimbursement for ransom payments, negotiator services, system restoration, and lost income resulting from ransomware or cyber extortion events.</p>
+            </div>
+            <div class="value-card">
+                <h3>Business Interruption Coverage</h3>
+                <p>Some policies offer coverage for lost revenue and extra expenses when a covered cyber event disrupts operations, helping your business recover and resume normal activities.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="social-proof-section">
+        <div class="social-proof-container">
+            <h2>The Growing Cyber Threat</h2>
+            
+            <div class="stats-row">
+                <div class="stat-box">
+                    <span class="number" data-target="43" data-suffix="%">0</span>
+                    <span class="label">Of cyber attacks target small businesses</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number" data-target="4.45" data-prefix="$" data-suffix="M">0</span>
+                    <span class="label">Average cost of a data breach</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number" data-target="60" data-suffix="%">0</span>
+                    <span class="label">Of small businesses close within 6 months of an attack</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number-text">24/7</span>
+                    <span class="label">Support and incident response</span>
+                </div>
+            </div>
+
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <p class="quote">"Ransomware locked all our systems demanding $75,000. Our cyber insurance paid for negotiators, the ransom, forensics, and recovery. We were back online in 5 days. Without it, we'd be bankrupt."</p>
+                    <p class="author">Tom R.</p>
+                    <p class="location">Law Firm, Denver, CO</p>
+                </div>
+                <div class="testimonial">
+                    <p class="quote">"A phishing attack compromised 12,000 customer records. Our cyber policy covered the $280,000 in notification costs, credit monitoring, legal fees, and regulatory fines. Saved our business."</p>
+                    <p class="author">Lisa K.</p>
+                    <p class="location">E-commerce Business, Austin, TX</p>
+                </div>
+                <div class="testimonial">
+                    <p class="quote">"Our cloud provider was hacked, taking us offline for 3 weeks. Cyber insurance paid $150,000 in lost revenue and recovery costs. The 24/7 incident response team was invaluable."</p>
+                    <p class="author">James M.</p>
+                    <p class="location">SaaS Company, San Francisco, CA</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="problem-solution-section">
+        <div class="problem-solution-container">
+            <div class="problem-box">
+                <h2>Cyber Risks Without Insurance</h2>
+                <ul>
+                    <li>Data breach costs average $4.45 million per incident</li>
+                    <li>Notification costs of $50-300 per affected customer</li>
+                    <li>Ransomware payments with no negotiation support</li>
+                    <li>Regulatory fines up to millions for GDPR/HIPAA violations</li>
+                    <li>Business shutdown during recovery with no income</li>
+                    <li>60% of small businesses close within 6 months of attack</li>
+                </ul>
+            </div>
+
+            <div class="solution-box">
+                <h2>With Cyber Liability Coverage</h2>
+                <ul>
+                    <li>Full coverage for breach notification and response costs</li>
+                    <li>Credit monitoring and identity theft services paid</li>
+                    <li>Expert negotiators and ransom payments covered</li>
+                    <li>Legal defense and regulatory fine coverage</li>
+                    <li>Business interruption income during downtime</li>
+                    <li>24/7 incident response team and forensic experts</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="coverage-section">
+        <div class="section-header">
+            <h2>Cyber Coverage Designed for Complete Support</h2>
+            <p>Coverage options designed to help protect your business at every stage of a cyber incident from response and recovery to ongoing risk management.</p>
+        </div>
+
+        <div class="coverage-grid">
+            <div class="coverage-card">
+                <h3>First-Party Coverage</h3>
+                <p>Covers direct costs your business incurs from cyber attacks and data breaches affecting your own systems and data.</p>
+                <ul>
+                    <li>Forensic investigation expenses</li>
+                    <li>Data recovery and system restoration</li>
+                    <li>Business interruption income loss</li>
+                    <li>Ransomware payments and negotiation</li>
+                    <li>Public relations and crisis management</li>
+                    <li>Credit monitoring for affected parties</li>
+                </ul>
+            </div>
+
+            <div class="coverage-card">
+                <h3>Third-Party Coverage</h3>
+                <p>Protects against lawsuits and claims from customers, partners, and regulatory bodies affected by your data breach.</p>
+                <ul>
+                    <li>Legal defense costs and settlements</li>
+                    <li>Regulatory fines and penalties (GDPR, HIPAA)</li>
+                    <li>Payment card industry (PCI) fines</li>
+                    <li>Customer lawsuits and class actions</li>
+                    <li>Breach notification costs</li>
+                    <li>Privacy liability claims</li>
+                </ul>
+            </div>
+
+            <div class="coverage-card">
+                <h3>Data Breach Response</h3>
+                <p>Immediate access to experts who help contain the breach, investigate the cause, and manage the recovery process.</p>
+                <ul>
+                    <li>24/7 breach hotline access</li>
+                    <li>Forensic IT specialists</li>
+                    <li>Legal counsel specializing in cyber</li>
+                    <li>Public relations and media management</li>
+                    <li>Notification services for affected parties</li>
+                    <li>Crisis management coordination</li>
+                </ul>
+            </div>
+
+            <div class="coverage-card">
+                <h3>Cyber Extortion Coverage</h3>
+                <p>Covers ransom demands and associated costs when criminals threaten to release data, launch DDoS attacks, or encrypt systems.</p>
+                <ul>
+                    <li>Ransom payment to cybercriminals</li>
+                    <li>Professional negotiators and consultants</li>
+                    <li>Cryptocurrency transaction costs</li>
+                    <li>DDoS attack mitigation expenses</li>
+                    <li>System restoration after extortion</li>
+                    <li>Lost income during extortion events</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="threats-section">
+        <div class="threats-container">
+            <h2>Common Cyber Threats Covered</h2>
+            <div class="threats-grid">
+                <div class="threat-item">
+                    <div class="icon"></div>
+                    <h3>Ransomware Attacks</h3>
+                    <p>Malware encrypts your data and systems, demanding payment for decryption keys. Average ransom: $200,000+ with recovery costs exceeding $1M.</p>
+                </div>
+
+                <div class="threat-item">
+                    <div class="icon"></div>
+                    <h3>Phishing & Social Engineering</h3>
+                    <p>Employees tricked into revealing credentials or transferring money. 90% of data breaches start with phishing emails targeting staff.</p>
+                </div>
+
+                <div class="threat-item">
+                    <div class="icon"></div>
+                    <h3>Payment Card Data Theft</h3>
+                    <p>Stolen credit card information leads to PCI fines of $5,000-$100,000 per month until compliance is restored, plus customer lawsuits.</p>
+                </div>
+
+                <div class="threat-item">
+                    <div class="icon"></div>
+                    <h3>DDoS Attacks</h3>
+                    <p>Distributed denial of service floods your systems with traffic, taking you offline. Can cost $20,000-$40,000 per hour in lost revenue.</p>
+                </div>
+
+                <div class="threat-item">
+                    <div class="icon"></div>
+                    <h3>Insider Threats</h3>
+                    <p>Employees or contractors stealing data, installing malware, or sabotaging systems. 34% of breaches involve internal actors.</p>
+                </div>
+
+                <div class="threat-item">
+                    <div class="icon"></div>
+                    <h3>Cloud Provider Breaches</h3>
+                    <p>Third-party vendors compromised, exposing your customer data. You're still liable even when the breach isn't directly your fault.</p>
+                </div>
+
+                <div class="threat-item">
+                    <div class="icon"></div>
+                    <h3>Stolen Credentials</h3>
+                    <p>Usernames and passwords compromised through data breaches, keyloggers, or weak security allowing unauthorized access to systems.</p>
+                </div>
+
+                <div class="threat-item">
+                    <div class="icon"></div>
+                    <h3>Mobile Device Attacks</h3>
+                    <p>Lost or stolen phones/tablets containing business data, or malware installed through malicious apps accessing company systems.</p>
+                </div>
+
+                <div class="threat-item">
+                    <div class="icon"></div>
+                    <h3>Regulatory Violations</h3>
+                    <p>GDPR, HIPAA, CCPA violations from improper data handling result in fines averaging $1.4M plus mandatory breach notifications.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits-section">
+        <div class="benefits-container">
+            <h2>Why Cyber Liability Insurance is Essential</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Every Business is a Target</h3>
+                        <p>43% of cyber attacks target small businesses. Hackers assume small companies have weaker security and are easier targets than enterprises.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Catastrophic Financial Impact</h3>
+                        <p>Average data breach costs $4.45 million. Without insurance, this expense destroys most small businesses—60% close within 6 months of an attack.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>24/7 Expert Response Team</h3>
+                        <p>Immediate access to forensic investigators, legal counsel, PR specialists, and IT recovery experts who respond within hours of a breach.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Regulatory Compliance</h3>
+                        <p>Coverage for GDPR, HIPAA, CCPA, and PCI DSS fines and penalties. Regulatory violations can cost millions in fines and mandatory notifications.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Business Continuity</h3>
+                        <p>Business interruption coverage pays lost revenue while you're offline. Keep paying employees and bills during recovery without depleting cash reserves.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Customer Trust Protection</h3>
+                        <p>Professional breach notification and credit monitoring shows customers you're handling the incident responsibly, helping preserve your reputation.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Ransomware Negotiation</h3>
+                        <p>Expert negotiators work to reduce ransom demands (often by 30-50%) and handle cryptocurrency payments safely through proper channels.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Affordable Protection</h3>
+                        <p>Policies start at $1,000-$2,000 annually for small businesses—a fraction of potential breach costs. One incident without insurance could bankrupt you.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="section-header">
+            <h2>Cyber Liability Insurance FAQs</h2>
+            <p>Common questions about cyber insurance coverage</p>
+        </div>
+
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>What does cyber liability insurance cover?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Cyber insurance covers data breaches, ransomware attacks, business email compromise, network security failures, and privacy violations. It pays for forensic investigations, legal fees, notification costs, credit monitoring, regulatory fines, ransoms, lost income, and system recovery.</p>
+                    <p>Both first-party costs (your direct expenses) and third-party liability (lawsuits from affected parties) are covered. Policies also provide access to 24/7 breach response teams including IT forensics, legal counsel, and PR specialists.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>How much does cyber insurance cost?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Small businesses typically pay $1,000-$7,500 annually depending on revenue, industry, data volume, and security measures. Healthcare and financial services pay more due to regulatory requirements. Businesses with strong cybersecurity practices get better rates.</p>
+                    <p>Costs depend on: annual revenue, number of records stored, industry risk level, security controls in place (MFA, encryption, backups), prior breach history, and coverage limits selected. $1M-$5M limits are common for small businesses.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Do I need cyber insurance if I have General Liability?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Yes. General Liability covers physical injuries and property damage—not cyber events. GL policies explicitly exclude data breaches, ransomware, network failures, and privacy violations. You need separate cyber insurance for digital risks.</p>
+                    <p>Even if you store no customer data, you're still vulnerable to ransomware, business email compromise, and system failures that cause business interruption. Any business with computers, email, or internet needs cyber coverage.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Does cyber insurance pay ransoms?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Yes, most policies cover ransom payments when criminals encrypt your data or threaten to release sensitive information. Coverage typically includes the ransom amount, negotiator fees, cryptocurrency transaction costs, and system restoration expenses.</p>
+                    <p>Your policy provides access to professional negotiators who often reduce ransom demands by 30-50% and ensure safe payment through proper channels. The decision to pay is ultimately yours, but insurance covers the cost if you choose to pay.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>What security measures do insurers require?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Most insurers require: multi-factor authentication (MFA), regular data backups stored offline, endpoint detection software, security awareness training, patch management, encryption for sensitive data, and documented incident response plans.</p>
+                    <p>Businesses without these basic controls may be denied coverage or face significantly higher premiums. Some insurers conduct security assessments before issuing policies. Strong security practices reduce premiums and improve coverage terms.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Am I covered for employee mistakes?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Yes, cyber policies cover breaches caused by employee errors like clicking phishing emails, using weak passwords, misconfiguring systems, or accidentally exposing data. Human error causes 95% of cyber incidents, so this coverage is essential.</p>
+                    <p>Coverage typically includes social engineering fraud (employees tricked into transferring money), unintentional data disclosure, and negligent security practices. Intentional criminal acts by employees are excluded—that requires crime insurance.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>What's the difference between first-party and third-party coverage?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>First-party coverage pays YOUR direct costs: forensics, recovery, ransom, lost income, notification expenses, and PR costs. Third-party coverage defends against lawsuits from customers, partners, and regulators, covering legal fees, settlements, and regulatory fines.</p>
+                    <p>You need both. First-party handles your immediate response and recovery. Third-party protects against claims filed months or years later by affected parties. Complete cyber policies include both coverage types in one policy.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>How quickly does coverage start after a breach?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Immediately. Call the 24/7 breach hotline provided by your insurer, and they'll dispatch forensic investigators and legal counsel within hours. Don't wait—early response limits damage and reduces total costs significantly.</p>
+                    <p>Time is critical in cyber incidents. Fast response contains the breach, preserves evidence for investigation, and demonstrates good faith to regulators. Policies cover the full response team from notification through final recovery.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    
+                    // If it's a stat box with a number, animate the counter
+                    if (entry.target.classList.contains('stat-box')) {
+                        const numberElement = entry.target.querySelector('.number');
+                        if (numberElement && !numberElement.classList.contains('counted')) {
+                            animateCounter(numberElement);
+                        }
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.value-card, .stat-box, .testimonial, .problem-box, .solution-box, .coverage-card, .threat-item, .benefit-item, .faq-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter animation function
+        function animateCounter(element) {
+            element.classList.add('counted');
+            const target = parseFloat(element.getAttribute('data-target'));
+            const prefix = element.getAttribute('data-prefix') || '';
+            const suffix = element.getAttribute('data-suffix') || '';
+            const duration = 2000; // 2 seconds
+            const increment = target / (duration / 16); // 60fps
+            let current = 0;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    // Format based on whether it's a decimal or whole number
+                    if (target >= 1000) {
+                        element.textContent = prefix + Math.floor(current).toLocaleString() + suffix;
+                    } else if (target < 10) {
+                        element.textContent = prefix + current.toFixed(2) + suffix;
+                    } else {
+                        element.textContent = prefix + Math.floor(current) + suffix;
+                    }
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    // Final value
+                    if (target >= 1000) {
+                        element.textContent = prefix + target.toLocaleString() + suffix;
+                    } else if (target < 10) {
+                        element.textContent = prefix + target.toFixed(2) + suffix;
+                    } else {
+                        element.textContent = prefix + target + suffix;
+                    }
+                }
+            };
+
+            updateCounter();
+        }
+
+        // FAQ Toggle functionality
+        document.querySelectorAll('.faq-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const faqItem = header.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all other FAQs
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Toggle current FAQ
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

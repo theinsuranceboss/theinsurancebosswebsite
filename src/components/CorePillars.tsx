@@ -66,7 +66,7 @@ export default function CorePillars({ config }: CorePillarsProps) {
             <div className="pt-4">
               <a
                 href={coverage.btnUrl}
-                className="w-full text-center block font-mono text-xs font-bold tracking-wider py-3.5 px-4 bg-[#FAC000] text-black border border-[#FAC000] hover:bg-black hover:text-[#FAC000] rounded transition-all duration-300"
+                className="w-full text-center block font-mono text-xs font-bold tracking-wider py-3.5 px-4 bg-transparent text-[#FAC000] border-2 border-[#FAC000] hover:bg-[#FAC000] hover:text-black hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(250,192,0,0.3)] rounded transition-all duration-300"
               >
                 {coverage.btnText}
               </a>
@@ -108,7 +108,7 @@ export default function CorePillars({ config }: CorePillarsProps) {
             <div className="pt-4">
               <a
                 href={agents.btnUrl}
-                className="w-full text-center block font-mono text-xs font-bold tracking-wider py-3.5 px-4 bg-transparent text-white border border-zinc-800 hover:border-[#FAC000] rounded transition-all duration-300"
+                className="w-full text-center block font-mono text-xs font-bold tracking-wider py-3.5 px-4 bg-transparent text-[#FAC000] border-2 border-[#FAC000] hover:bg-[#FAC000] hover:text-black hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(250,192,0,0.3)] rounded transition-all duration-300"
               >
                 {agents.btnText}
               </a>
@@ -150,7 +150,9 @@ export default function CorePillars({ config }: CorePillarsProps) {
             <div className="pt-4">
               <a
                 href={partners.btnUrl}
-                className="w-full text-center block font-mono text-xs font-bold tracking-wider py-3.5 px-4 bg-[#FAC000]/10 hover:bg-[#FAC000] text-[#FAC000] hover:text-black border border-[#FAC000]/30 hover:border-[#FAC000] rounded transition-all duration-300"
+                target={partners.btnUrl.startsWith("#") ? undefined : "_blank"}
+                rel={partners.btnUrl.startsWith("#") ? undefined : "noopener noreferrer"}
+                className="w-full text-center block font-mono text-xs font-bold tracking-wider py-3.5 px-4 bg-transparent text-[#FAC000] border-2 border-[#FAC000] hover:bg-[#FAC000] hover:text-black hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(250,192,0,0.3)] rounded transition-all duration-300"
               >
                 {partners.btnText}
               </a>

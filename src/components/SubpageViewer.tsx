@@ -143,6 +143,17 @@ export default function SubpageViewer({ label, config }: SubpageViewerProps) {
   const activeFont = getActiveFont();
   const titleFont = config.bannerTitleFont || "Default";
 
+  // Load Zapier Interfaces web component script once
+  useEffect(() => {
+    const ZAPIER_SCRIPT_SRC = 'https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js';
+    if (!document.querySelector(`script[src="${ZAPIER_SCRIPT_SRC}"]`)) {
+      const script = document.createElement('script');
+      script.type = 'module';
+      script.src = ZAPIER_SCRIPT_SRC;
+      document.head.appendChild(script);
+    }
+  }, []);
+
   // Scroll to top when page changes and initialize animations/FAQs
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -662,21 +673,10 @@ export default function SubpageViewer({ label, config }: SubpageViewerProps) {
 
         /* Scope-override custom HTML background styling to preserve transparency and match global settings */
         .subpage-content section,
-        .subpage-content .social-proof-section,
-        .subpage-content .benefits-section,
-        .subpage-content .risk-section,
-        .subpage-content .content-section,
-        .subpage-content .hero-section,
-        .subpage-content .how-works-section,
-        .subpage-content .faq-section,
-        .subpage-content .value-prop-section,
-        .subpage-content .annuity-types-section,
-        .subpage-content .cta-section,
-        .subpage-content .features-section,
-        .subpage-content .expenses-section,
-        .subpage-content .comparison-section,
-        .subpage-content .grid-3-col,
-        .subpage-content .grid-2-col,
+        .subpage-content [class*="-section"],
+        .subpage-content [class*="-container"],
+        .subpage-content [class*="-grid"],
+        .subpage-content [class*="-wrapper"],
         .subpage-content .container {
           background: transparent !important;
           background-color: transparent !important;
@@ -697,7 +697,15 @@ export default function SubpageViewer({ label, config }: SubpageViewerProps) {
         .subpage-content .comparison-card,
         .subpage-content .feature-item,
         .subpage-content .problem-box,
-        .subpage-content .solution-box {
+        .subpage-content .solution-box,
+        .subpage-content .service-card,
+        .subpage-content .process-card,
+        .subpage-content .threat-item,
+        .subpage-content .risk-stat-box,
+        .subpage-content .critical-card,
+        .subpage-content .info-box,
+        .subpage-content .warning-box,
+        .subpage-content .comparison-table {
           background: rgba(255, 255, 255, 0.03) !important;
           background-color: rgba(255, 255, 255, 0.03) !important;
         }
@@ -894,14 +902,13 @@ export default function SubpageViewer({ label, config }: SubpageViewerProps) {
                   dangerouslySetInnerHTML={{ __html: activeButtonsHtml }} 
                 />
               ) : (
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <a
-                    href="#quote"
-                    className="inline-block text-center font-mono text-xs font-black tracking-widest py-3 px-6 bg-[#FAC000] text-black hover:bg-black hover:text-[#FAC000] border border-[#FAC000] rounded transition-all duration-300 uppercase shadow-lg"
-                  >
-                    GET A QUOTE
-                  </a>
-                </div>
+                /* Zapier Quote Form Embed — rendered as raw HTML to avoid TypeScript web component conflicts */
+                <div
+                  className="w-full flex flex-col items-center justify-center mt-4"
+                  dangerouslySetInnerHTML={{
+                    __html: `<zapier-interfaces-page-embed page-id="cmlkyd2mk002vwj9wxu01pbn3" test-id="cmlkyd2mk002vwj9wxu01pbn3-zapier-interfaces-page-embed-iframe" no-background="false" style="max-width:900px;height:500px;width:100%;"></zapier-interfaces-page-embed>`
+                  }}
+                />
               )}
             </div>
           </div>

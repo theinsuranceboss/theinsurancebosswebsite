@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Owner's Policy (BOP) - Complete Business Protection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            background: transparent;
+            color: #ffffff;
+        }
+
+        /* Value Proposition Section */
+        .value-prop-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .value-prop-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .value-card {
+            background: rgba(60, 60, 60, 0.85);
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            border-top: 5px solid #ffd700;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .value-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .value-card .icon {
+            font-size: 70px;
+            margin-bottom: 20px;
+        }
+
+        .value-card h3 {
+            color: #ffd700;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .value-card p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+        /* Social Proof Section */
+        .social-proof-section {
+            padding: 60px 20px;
+            background: rgba(60, 60, 60, 0.85);
+        }
+
+        .social-proof-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .social-proof-container h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .stat-box {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .stat-box.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-box .number {
+            color: #ffd700;
+            font-size: 52px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-box .number-text {
+            color: #ffd700;
+            font-size: 52px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-box .label {
+            color: #ffffff;
+            font-size: 18px;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .testimonial {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid #ffd700;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .testimonial.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .testimonial .quote {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial .author {
+            color: #ffd700;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .testimonial .location {
+            color: #cccccc;
+            font-size: 14px;
+        }
+
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: #ffffff;
+            font-size: 20px;
+        }
+
+        /* Problem/Solution Section */
+        .problem-solution-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .problem-solution-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .problem-box,
+        .solution-box {
+            padding: 40px;
+            border-radius: 12px;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .solution-box {
+            transform: translateX(30px);
+        }
+
+        .problem-box.animate,
+        .solution-box.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .problem-box {
+            background: rgba(80, 40, 40, 0.85);
+            border-left: 5px solid #ff4444;
+        }
+
+        .solution-box {
+            background: rgba(40, 80, 40, 0.85);
+            border-left: 5px solid #44ff44;
+        }
+
+        .problem-box h2,
+        .solution-box h2 {
+            color: #ffd700;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .problem-box ul,
+        .solution-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .problem-box ul li,
+        .solution-box ul li {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            padding-left: 35px;
+            position: relative;
+        }
+
+        .problem-box ul li::before {
+            content: "✗";
+            color: #ff4444;
+            font-weight: bold;
+            font-size: 24px;
+            position: absolute;
+            left: 0;
+        }
+
+        .solution-box ul li::before {
+            content: "✓";
+            color: #44ff44;
+            font-weight: bold;
+            font-size: 24px;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Coverage Section */
+        .coverage-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .coverage-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .coverage-card {
+            background: rgba(60, 60, 60, 0.85);
+            padding: 40px;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease;
+        }
+
+        .coverage-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .coverage-card:hover {
+            border-color: #ffd700;
+            transform: translateY(-5px);
+        }
+
+        .coverage-card h3 {
+            color: #ffd700;
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .coverage-card .included {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .coverage-card p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .coverage-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .coverage-card ul li {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 12px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .coverage-card ul li::before {
+            content: "✓";
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 22px;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            padding: 60px 20px;
+            background: rgba(60, 60, 60, 0.85);
+        }
+
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefits-container h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .benefit-item {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .benefit-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .benefit-item .check {
+            color: #ffd700;
+            font-size: 32px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .benefit-item .content h3 {
+            color: #ffd700;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .benefit-item .content p {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* Comparison Section */
+        .comparison-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .comparison-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .comparison-container h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .comparison-table {
+            background: rgba(60, 60, 60, 0.85);
+            border-radius: 12px;
+            padding: 40px;
+        }
+
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .comparison-row:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-row.header {
+            font-weight: 700;
+            font-size: 22px;
+            color: #ffd700;
+        }
+
+        .comparison-cell {
+            color: #ffffff;
+            font-size: 18px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .comparison-cell.highlight {
+            color: #ffd700;
+            font-weight: 700;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(60, 60, 60, 0.85);
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease;
+        }
+
+        .faq-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .faq-item:hover {
+            border-color: #ffd700;
+        }
+
+        .faq-header {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .faq-header h3 {
+            color: #ffd700;
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .faq-header .icon {
+            color: #ffd700;
+            font-size: 24px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-header .icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-content {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-item.active .faq-content {
+            padding: 25px 30px;
+            max-height: 1000px;
+        }
+
+        .faq-content p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .faq-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 20px;
+            background: transparent;
+        }
+
+        .cta-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.98) 0%, rgba(255, 193, 7, 0.98) 100%);
+            padding: 60px 50px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 10px 50px rgba(255, 215, 0, 0.3);
+        }
+
+        .cta-container h2 {
+            color: #1a1a1a;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-container .urgency-text {
+            color: #cc0000;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-container p {
+            color: #1a1a1a;
+            font-size: 22px;
+            margin-bottom: 35px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #1a1a1a;
+            color: #ffd700;
+            padding: 18px 50px;
+            font-size: 22px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            background: #2a2a2a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .value-prop-grid,
+            .coverage-grid,
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonial-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .problem-solution-container {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-header h2,
+            .social-proof-container h2,
+            .benefits-container h2,
+            .comparison-container h2,
+            .cta-container h2 {
+                font-size: 32px;
+            }
+
+            .stats-row,
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .value-card,
+            .coverage-card,
+            .cta-container {
+                padding: 30px 20px;
+            }
+
+            .cta-container h2 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Value Proposition Cards -->
+    <section class="value-prop-section">
+        <div class="value-prop-grid">
+            <div class="value-card">
+                <h3>3-in-1 Bundled Coverage</h3>
+                <p>A Business Owner’s Policy (BOP) conveniently combines General Liability, Commercial Property, and Business Interruption coverage into one package designed for small to mid-sized businesses.</p>
+            </div>
+            <div class="value-card">
+                <h3>Potential Savings Compared to Separate Policies</h3>
+                <p>A BOP may provide cost efficiencies compared to purchasing individual liability and property policies, offering broad protection in a single, streamlined package. Actual savings vary by carrier and coverage selections.</p>
+            </div>
+            <div class="value-card">
+                <h3>Simplified Management</h3>
+                <p>Enjoy the convenience of one policy, one renewal, and one payment helping business owners manage coverage more efficiently with support from licensed insurance professionals.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="social-proof-section">
+        <div class="social-proof-container">
+            <h2>The Smart Choice for Small Businesses</h2>
+            
+            <div class="stats-row">
+                <div class="stat-box">
+                    <span class="number" data-target="30" data-suffix="%">0</span>
+                    <span class="label">Average savings vs separate policies</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number-text">3-in-1</span>
+                    <span class="label">Coverages in one policy</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number" data-target="1" data-prefix="$" data-suffix="K">0</span>
+                    <span class="label">Starting annual cost</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number" data-target="85" data-suffix="%">0</span>
+                    <span class="label">Of small businesses qualify</span>
+                </div>
+            </div>
+
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <p class="quote">"Our BOP saved us when a pipe burst and flooded our office. Property insurance covered $78,000 in damages, and business interruption paid our expenses during the 6-week closure. One policy protected everything."</p>
+                    <p class="author">Rachel M.</p>
+                    <p class="location">Accounting Firm, Boston, MA</p>
+                </div>
+                <div class="testimonial">
+                    <p class="quote">"We switched from separate policies to a BOP and saved $1,200 annually while getting better coverage. Plus, I only have to deal with one renewal instead of three. Total game-changer."</p>
+                    <p class="author">Kevin L.</p>
+                    <p class="location">Retail Store Owner, Nashville, TN</p>
+                </div>
+                <div class="testimonial">
+                    <p class="quote">"A customer sued us after slipping in our store. Our BOP's General Liability covered the $95,000 claim. Having everything in one policy made the claims process seamless and stress-free."</p>
+                    <p class="author">Maria S.</p>
+                    <p class="location">Cafe Owner, San Diego, CA</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem/Solution Section -->
+    <section class="problem-solution-section">
+        <div class="problem-solution-container">
+            <div class="problem-box">
+                <h2>Managing Multiple Policies</h2>
+                <ul>
+                    <li>Higher costs buying General Liability and Property separately</li>
+                    <li>Multiple renewal dates to track and manage</li>
+                    <li>Different insurance companies and agents</li>
+                    <li>Potential coverage gaps between policies</li>
+                    <li>More paperwork and administrative burden</li>
+                    <li>Coordinating claims across multiple insurers</li>
+                </ul>
+            </div>
+
+            <div class="solution-box">
+                <h2>With a Business Owner's Policy</h2>
+                <ul>
+                    <li>Save 20-30% compared to separate policies</li>
+                    <li>Single renewal date and payment</li>
+                    <li>One insurance company, one relationship</li>
+                    <li>Complete coverage with no gaps</li>
+                    <li>Simplified paperwork and management</li>
+                    <li>Streamlined claims process with one carrier</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coverage Details Section -->
+    <section class="coverage-section">
+        <div class="section-header">
+            <h2>What's Included in a BOP?</h2>
+            <p>Three essential coverages bundled into one convenient policy designed to help protect your business from common risks.</p>
+        </div>
+
+        <div class="coverage-grid">
+            <div class="coverage-card">
+                <h3>General Liability Insurance</h3>
+                <span class="included">✓ INCLUDED IN BOP</span>
+                <p>Protects against third-party bodily injury, property damage, and personal injury claims. The foundation of business protection.</p>
+                <ul>
+                    <li>Customer slip-and-fall accidents</li>
+                    <li>Property damage you cause to others</li>
+                    <li>Advertising injury and copyright claims</li>
+                    <li>Legal defense costs included</li>
+                    <li>Typical limits: $1M per occurrence</li>
+                    <li>Required by most leases and contracts</li>
+                </ul>
+            </div>
+
+            <div class="coverage-card">
+                <h3>Commercial Property Insurance</h3>
+                <span class="included">✓ INCLUDED IN BOP</span>
+                <p>Covers your building, equipment, inventory, and furniture against fire, theft, vandalism, and covered perils.</p>
+                <ul>
+                    <li>Building and leasehold improvements</li>
+                    <li>Business equipment and computers</li>
+                    <li>Inventory and supplies</li>
+                    <li>Furniture and fixtures</li>
+                    <li>Fire, theft, vandalism protection</li>
+                    <li>Replacement cost coverage available</li>
+                </ul>
+            </div>
+
+            <div class="coverage-card">
+                <h3>Business Interruption Insurance</h3>
+                <span class="included">✓ INCLUDED IN BOP</span>
+                <p>Covers lost income and operating expenses when your business is forced to close temporarily due to covered property damage.</p>
+                <ul>
+                    <li>Lost revenue during closure</li>
+                    <li>Continuing operating expenses</li>
+                    <li>Employee payroll costs</li>
+                    <li>Rent or mortgage payments</li>
+                    <li>Temporary relocation expenses</li>
+                    <li>Helps keep business afloat during recovery</li>
+                </ul>
+            </div>
+
+            <div class="coverage-card">
+                <h3>Equipment Breakdown Coverage</h3>
+                <span class="included">✓ OFTEN INCLUDED IN BOP</span>
+                <p>Protects against equipment failures from electrical issues, mechanical breakdown, or operator error not covered by standard property insurance.</p>
+                <ul>
+                    <li>HVAC system failures</li>
+                    <li>Computer and server breakdowns</li>
+                    <li>Kitchen equipment malfunctions</li>
+                    <li>Manufacturing machinery repairs</li>
+                    <li>Electrical system damage</li>
+                    <li>Lost income from equipment failure</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="benefits-container">
+            <h2>Why Choose a Business Owner's Policy?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Cost Savings</h3>
+                        <p>BOPs typically cost 20-30% less than purchasing General Liability and Commercial Property separately. More coverage for less money.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Complete Protection</h3>
+                        <p>Covers your most common risks in one policy: lawsuits, property damage, lost income, and equipment breakdowns. No coverage gaps.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Simplified Management</h3>
+                        <p>One policy means one renewal date, one payment, one insurance company. Less paperwork and administrative hassle.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Fast Claims Process</h3>
+                        <p>When multiple coverages are needed, having one carrier handles everything faster than coordinating between multiple insurers.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Business Continuity</h3>
+                        <p>Business Interruption coverage ensures you can pay bills and employees even when forced to close temporarily due to covered damage.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Easy to Customize</h3>
+                        <p>Add cyber liability, professional liability, commercial auto, or umbrella coverage to your BOP as your business grows.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Perfect for Small Businesses</h3>
+                        <p>Specifically designed for businesses with less than 100 employees and under $10M in revenue. Ideal for offices, retail, and services.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Quick & Easy Application</h3>
+                        <p>Streamlined underwriting process gets you coverage fast. Most BOPs can be issued within 24-48 hours of application.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison-section">
+        <div class="comparison-container">
+            <h2>BOP vs Separate Policies</h2>
+            <div class="comparison-table">
+                <div class="comparison-row header">
+                    <div class="comparison-cell">Feature</div>
+                    <div class="comparison-cell">Separate Policies</div>
+                    <div class="comparison-cell highlight">Business Owner's Policy</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Annual Cost</div>
+                    <div class="comparison-cell">$2,500 - $4,000</div>
+                    <div class="comparison-cell highlight">$1,000 - $3,000 (30% savings)</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Number of Policies</div>
+                    <div class="comparison-cell">2-3 separate policies</div>
+                    <div class="comparison-cell highlight">1 bundled policy</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Renewal Dates</div>
+                    <div class="comparison-cell">Multiple dates to track</div>
+                    <div class="comparison-cell highlight">One renewal date</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Claims Process</div>
+                    <div class="comparison-cell">Multiple carriers to coordinate</div>
+                    <div class="comparison-cell highlight">Single carrier, faster process</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Coverage Gaps</div>
+                    <div class="comparison-cell">Possible gaps between policies</div>
+                    <div class="comparison-cell highlight">Complete, no gaps</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Business Interruption</div>
+                    <div class="comparison-cell">Must add separately</div>
+                    <div class="comparison-cell highlight">Included automatically</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Application Complexity</div>
+                    <div class="comparison-cell">Multiple applications</div>
+                    <div class="comparison-cell highlight">One simple application</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="section-header">
+            <h2>Business Owner's Policy FAQs</h2>
+            <p>Common questions about BOP coverage</p>
+        </div>
+
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Who is eligible for a Business Owner's Policy?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>BOPs are designed for small to mid-sized businesses with less than 100 employees and under $10 million in annual revenue. Eligible businesses include offices, retail stores, restaurants, salons, small manufacturers, and service providers.</p>
+                    <p>Ineligible businesses typically include banks, auto dealers, bars (in some cases), and businesses with high liability risks. Your agent can confirm eligibility based on your specific business type and operations.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>How much does a BOP cost?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>BOP costs typically range from $1,000 to $3,000 annually for most small businesses, depending on industry, location, revenue, and coverage limits. This is significantly less expensive than buying General Liability and Commercial Property separately.</p>
+                    <p>Factors affecting cost include: business type, location, building value, annual revenue, number of employees, claims history, and chosen coverage limits. Low-risk office businesses pay less than higher-risk operations.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>What's NOT covered by a BOP?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>BOPs don't cover: employee injuries (need Workers' Compensation), auto accidents (need Commercial Auto), professional errors (need Professional Liability/E&O), cyber attacks (need Cyber Liability), flood or earthquake damage (need separate policies).</p>
+                    <p>You can typically add these coverages as endorsements or purchase separate policies to complement your BOP for complete protection.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Can I customize my BOP coverage?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Yes! While BOPs have standard coverages, you can customize limits and add endorsements for specific needs. Common add-ons include: professional liability, cyber liability, employment practices liability, hired/non-owned auto, employee dishonesty, and accounts receivable coverage.</p>
+                    <p>You can also adjust property limits, liability limits, deductibles, and add special coverage for valuable equipment, signs, or outdoor property to match your business needs.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>What's the difference between a BOP and General Liability?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>General Liability is a single policy covering only third-party lawsuits (bodily injury and property damage). A BOP includes General Liability PLUS Commercial Property and Business Interruption coverage in one bundled package.</p>
+                    <p>If you rent office space with minimal property, you might only need GL. If you own equipment, inventory, or a building, a BOP provides better value by bundling multiple coverages at a lower total cost.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Does my landlord require a BOP?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Most commercial leases require General Liability insurance, which is included in a BOP. Landlords typically require $1-2 million in liability coverage and may require you to name them as an "additional insured" on your policy.</p>
+                    <p>A BOP satisfies lease requirements while also protecting your business property and income. Review your lease to confirm specific insurance requirements and coverage amounts needed.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>How quickly can I get a BOP?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Most BOPs can be issued within 24-48 hours of completing the application and payment. The application process is streamlined for small businesses you'll need basic info about your business, location, revenue, and property values.</p>
+                    <p>Once approved, you'll receive a Certificate of Insurance immediately that you can provide to landlords, clients, or vendors as proof of coverage.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Should I get a BOP or buy separate policies?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Choose a BOP if you're a small business (under 100 employees) with property to protect. You'll save 20-30% versus separate policies, get Complete coverage, and simplify management with one policy.</p>
+                    <p>Buy separate policies if you're a large business, need highly customized coverage, operate in an industry ineligible for BOPs, or only need liability coverage without property insurance. Consult with an agent to determine the best option.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+        </div>
+    </section>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    
+                    // If it's a stat box with a number, animate the counter
+                    if (entry.target.classList.contains('stat-box')) {
+                        const numberElement = entry.target.querySelector('.number');
+                        if (numberElement && !numberElement.classList.contains('counted')) {
+                            animateCounter(numberElement);
+                        }
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.value-card, .stat-box, .testimonial, .problem-box, .solution-box, .coverage-card, .benefit-item, .faq-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter animation function
+        function animateCounter(element) {
+            element.classList.add('counted');
+            const target = parseFloat(element.getAttribute('data-target'));
+            const prefix = element.getAttribute('data-prefix') || '';
+            const suffix = element.getAttribute('data-suffix') || '';
+            const duration = 2000; // 2 seconds
+            const increment = target / (duration / 16); // 60fps
+            let current = 0;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    // Format based on whether it's a decimal or whole number
+                    if (target >= 1000) {
+                        element.textContent = prefix + Math.floor(current).toLocaleString() + suffix;
+                    } else if (target < 10) {
+                        element.textContent = prefix + current.toFixed(1) + suffix;
+                    } else {
+                        element.textContent = prefix + Math.floor(current) + suffix;
+                    }
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    // Final value
+                    if (target >= 1000) {
+                        element.textContent = prefix + target.toLocaleString() + suffix;
+                    } else if (target < 10) {
+                        element.textContent = prefix + target.toFixed(1) + suffix;
+                    } else {
+                        element.textContent = prefix + target + suffix;
+                    }
+                }
+            };
+
+            updateCounter();
+        }
+
+        // FAQ Toggle functionality
+        document.querySelectorAll('.faq-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const faqItem = header.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all other FAQs
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Toggle current FAQ
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

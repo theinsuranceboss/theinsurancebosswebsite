@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workers' Compensation Insurance - Protect Your Employees & Business</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            background: transparent;
+            color: #ffffff;
+        }
+
+        /* Value Proposition Section */
+        .value-prop-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .value-prop-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .value-card {
+            background: rgba(60, 60, 60, 0.85);
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            border-top: 5px solid #ffd700;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .value-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .value-card .icon {
+            font-size: 70px;
+            margin-bottom: 20px;
+        }
+
+        .value-card h3 {
+            color: #ffd700;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .value-card p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+        /* Social Proof Section */
+        .social-proof-section {
+            padding: 60px 20px;
+            background: rgba(60, 60, 60, 0.85);
+        }
+
+        .social-proof-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .social-proof-container h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .stat-box {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .stat-box.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-box .number {
+            color: #ffd700;
+            font-size: 52px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-box .number-text {
+            color: #ffd700;
+            font-size: 52px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-box .label {
+            color: #ffffff;
+            font-size: 18px;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .testimonial {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid #ffd700;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .testimonial.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .testimonial .quote {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial .author {
+            color: #ffd700;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .testimonial .location {
+            color: #cccccc;
+            font-size: 14px;
+        }
+
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: #ffffff;
+            font-size: 20px;
+        }
+
+        /* Problem/Solution Section */
+        .problem-solution-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .problem-solution-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .problem-box,
+        .solution-box {
+            padding: 40px;
+            border-radius: 12px;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .solution-box {
+            transform: translateX(30px);
+        }
+
+        .problem-box.animate,
+        .solution-box.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .problem-box {
+            background: rgba(80, 40, 40, 0.85);
+            border-left: 5px solid #ff4444;
+        }
+
+        .solution-box {
+            background: rgba(40, 80, 40, 0.85);
+            border-left: 5px solid #44ff44;
+        }
+
+        .problem-box h2,
+        .solution-box h2 {
+            color: #ffd700;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .problem-box ul,
+        .solution-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .problem-box ul li,
+        .solution-box ul li {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            padding-left: 35px;
+            position: relative;
+        }
+
+        .problem-box ul li::before {
+            content: "✗";
+            color: #ff4444;
+            font-weight: bold;
+            font-size: 24px;
+            position: absolute;
+            left: 0;
+        }
+
+        .solution-box ul li::before {
+            content: "✓";
+            color: #44ff44;
+            font-weight: bold;
+            font-size: 24px;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Coverage Section */
+        .coverage-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .coverage-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .coverage-card {
+            background: rgba(60, 60, 60, 0.85);
+            padding: 40px;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease;
+        }
+
+        .coverage-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .coverage-card:hover {
+            border-color: #ffd700;
+            transform: translateY(-5px);
+        }
+
+        .coverage-card h3 {
+            color: #ffd700;
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .coverage-card .included {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .coverage-card p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .coverage-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .coverage-card ul li {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 12px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .coverage-card ul li::before {
+            content: "✓";
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 22px;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            padding: 60px 20px;
+            background: rgba(60, 60, 60, 0.85);
+        }
+
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefits-container h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .benefit-item {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .benefit-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .benefit-item .check {
+            color: #ffd700;
+            font-size: 32px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .benefit-item .content h3 {
+            color: #ffd700;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .benefit-item .content p {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(60, 60, 60, 0.85);
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease;
+        }
+
+        .faq-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .faq-item:hover {
+            border-color: #ffd700;
+        }
+
+        .faq-header {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .faq-header h3 {
+            color: #ffd700;
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .faq-header .icon {
+            color: #ffd700;
+            font-size: 24px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-header .icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-content {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-item.active .faq-content {
+            padding: 25px 30px;
+            max-height: 1000px;
+        }
+
+        .faq-content p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .faq-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .value-prop-grid,
+            .coverage-grid,
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonial-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .problem-solution-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-header h2,
+            .social-proof-container h2,
+            .benefits-container h2 {
+                font-size: 32px;
+            }
+
+            .stats-row,
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .value-card,
+            .coverage-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="value-prop-section">
+        <div class="value-prop-grid">
+            <div class="value-card">
+                <h3>Legal Requirements Vary by State</h3>
+                <p>Most states require employers to carry Workers’ Compensation insurance once they hire employees. Specific rules and exemptions vary, so it’s important to review state requirements with a licensed insurance professional to help remain compliant.</p>
+            </div>
+            <div class="value-card">
+                <h3>Support for Employees & Business Protection</h3>
+                <p>Workers’ Compensation insurance may help cover medical expenses, a portion of lost wages, and rehabilitation costs for employees who experience workplace injuries or illnesses while also helping protect the business from certain legal claims.</p>
+            </div>
+            <div class="value-card">
+                <h3>Helps Reduce Legal and Financial Risk</h3>
+                <p>Without appropriate Workers’ Compensation coverage, businesses may face significant legal exposure and financial liability if an employee experiences a workplace injury or illness.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="social-proof-section">
+        <div class="social-proof-container">
+            <h2>Essential Protection for Every Employer</h2>
+            
+            <div class="stats-row">
+                <div class="stat-box">
+                    <span class="number" data-target="2.8" data-suffix="M">0</span>
+                    <span class="label">Workplace injuries annually in US</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number" data-target="49" data-suffix=" States">0</span>
+                    <span class="label">Require Workers' Comp</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number" data-target="41" data-prefix="$" data-suffix="K">0</span>
+                    <span class="label">Average claim cost</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number" data-target="100" data-prefix="$" data-suffix="K+">0</span>
+                    <span class="label">Penalties for non-compliance</span>
+                </div>
+            </div>
+
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <p class="quote">"An employee fell off a ladder and broke his leg. Workers' Comp covered $52,000 in medical bills and lost wages. Without it, we would have been sued and possibly gone bankrupt."</p>
+                    <p class="author">David R.</p>
+                    <p class="location">Construction Company, Phoenix, AZ</p>
+                </div>
+                <div class="testimonial">
+                    <p class="quote">"I thought I didn't need Workers' Comp for just 3 employees. Wrong. Got hit with a $25,000 state fine and had to scramble to get coverage. Don't make my mistake get insured immediately."</p>
+                    <p class="author">Jennifer K.</p>
+                    <p class="location">Cleaning Service, Miami, FL</p>
+                </div>
+                <div class="testimonial">
+                    <p class="quote">"Our chef suffered severe burns. Workers' Comp paid for emergency treatment, surgery, rehab, and 8 weeks of wages over $87,000 total. This insurance literally saved our restaurant."</p>
+                    <p class="author">Carlos M.</p>
+                    <p class="location">Restaurant Owner, Chicago, IL</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="problem-solution-section">
+        <div class="problem-solution-container">
+            <div class="problem-box">
+                <h2>Without Workers' Compensation</h2>
+                <ul>
+                    <li>Illegal in most states face fines up to $100,000+</li>
+                    <li>Employees can sue you directly for injuries</li>
+                    <li>Pay medical bills out-of-pocket (avg. $41,000)</li>
+                    <li>Risk criminal charges and jail time for non-compliance</li>
+                    <li>Business shutdown orders from state authorities</li>
+                    <li>Can't bid on many contracts without proof of coverage</li>
+                    <li>Lawsuits can drain savings and force business closure</li>
+                </ul>
+            </div>
+
+            <div class="solution-box">
+                <h2>With Workers' Compensation</h2>
+                <ul>
+                    <li>Legally compliant in all 50 states</li>
+                    <li>Employees can't sue you for workplace injuries</li>
+                    <li>Insurance covers all medical costs and lost wages</li>
+                    <li>Avoid fines, penalties, and criminal charges</li>
+                    <li>Keep your business operating without interruption</li>
+                    <li>Meet contract requirements and bid on projects</li>
+                    <li>Protect your business assets and personal finances</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="coverage-section">
+        <div class="section-header">
+            <h2>What Does Workers' Compensation Cover?</h2>
+            <p>Coverage designed to help support employees who experience work-related injuries or illnesses, including benefits such as medical care, a portion of lost wages, and rehabilitation depending on state regulations and the policy.</p>
+        </div>
+
+        <div class="coverage-grid">
+            <div class="coverage-card">
+                <h3>Medical Expenses</h3>
+                <span class="included">✓ COVERED</span>
+                <p>Pays 100% of all medical costs related to work injuries or occupational illnesses, with no deductibles for the employee.</p>
+                <ul>
+                    <li>Emergency room and hospital visits</li>
+                    <li>Surgery and medical procedures</li>
+                    <li>Doctor visits and specialist care</li>
+                    <li>Prescription medications</li>
+                    <li>Physical therapy and rehabilitation</li>
+                    <li>Medical equipment and devices</li>
+                </ul>
+            </div>
+
+            <div class="coverage-card">
+                <h3>Lost Wage Replacement</h3>
+                <span class="included">✓ COVERED</span>
+                <p>Replaces a portion of the employee's wages while they're unable to work due to injury, typically 2/3 of their average weekly wage.</p>
+                <ul>
+                    <li>Temporary disability benefits</li>
+                    <li>Permanent disability benefits (if applicable)</li>
+                    <li>Usually covers 66% of regular wages</li>
+                    <li>Benefits continue until employee can return to work</li>
+                    <li>No waiting period for hospitalized employees</li>
+                    <li>Tax-free benefits for injured workers</li>
+                </ul>
+            </div>
+
+            <div class="coverage-card">
+                <h3>Rehabilitation Services</h3>
+                <span class="included">✓ COVERED</span>
+                <p>Helps injured employees recover and return to work through physical therapy, vocational training, and job placement assistance.</p>
+                <ul>
+                    <li>Physical and occupational therapy</li>
+                    <li>Vocational rehabilitation training</li>
+                    <li>Job retraining for new skills</li>
+                    <li>Modified duty accommodations</li>
+                    <li>Counseling and support services</li>
+                    <li>Job placement assistance</li>
+                </ul>
+            </div>
+
+            <div class="coverage-card">
+                <h3>Death Benefits</h3>
+                <span class="included">✓ COVERED</span>
+                <p>Provides financial support to dependents if an employee dies from a work-related injury or illness, including funeral expenses.</p>
+                <ul>
+                    <li>Funeral and burial expenses (up to state limits)</li>
+                    <li>Financial support for surviving spouse and dependents</li>
+                    <li>Ongoing benefits until dependents reach adulthood</li>
+                    <li>Educational benefits for children in some states</li>
+                    <li>Lump sum death benefit payments</li>
+                    <li>Continued health benefits for family</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits-section">
+        <div class="benefits-container">
+            <h2>Why Workers' Compensation is Critical</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Legal Compliance</h3>
+                        <p>Required by law in 49 states once you hire employees. Avoid fines up to $100,000, criminal charges, and business shutdowns by staying compliant.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Lawsuit Protection</h3>
+                        <p>Employees who accept Workers' Comp benefits cannot sue your business for workplace injuries. This "exclusive remedy" protects you from costly litigation.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Financial Protection</h3>
+                        <p>Insurance pays for all medical costs and lost wages, protecting your business from devastating out-of-pocket expenses that could force closure.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Employee Care</h3>
+                        <p>Show employees you value their safety and wellbeing. Workers' Comp provides fast access to medical care and wage replacement during recovery.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Contract Requirements</h3>
+                        <p>Many clients and general contractors require proof of Workers' Comp before signing contracts. Coverage opens doors to more business opportunities.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Peace of Mind</h3>
+                        <p>Focus on growing your business instead of worrying about injury-related financial disasters. Workers' Comp provides security and stability.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Fast Claims Processing</h3>
+                        <p>Injured employees get immediate medical care without filing lawsuits. Streamlined process gets workers the help they need quickly.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Return-to-Work Programs</h3>
+                        <p>Many policies include support to help injured employees return to work faster through modified duties and rehabilitation services.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="section-header">
+            <h2>Workers' Compensation FAQs</h2>
+            <p>Common questions about Workers' Comp coverage</p>
+        </div>
+
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Is Workers' Compensation insurance required by law?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Yes, Workers' Comp is required in 49 states (all except Texas) once you hire employees. Requirements vary by state, but most require coverage from your first employee. Some states exempt very small businesses (1-2 employees) or certain industries, but these exemptions are rare.</p>
+                    <p>Operating without required Workers' Comp is illegal and can result in fines up to $100,000, criminal charges, jail time, business shutdowns, and personal liability for all employee injury costs.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>What types of injuries and illnesses are covered?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Workers' Comp covers any injury or illness that arises from employment. This includes obvious accidents like falls, cuts, and burns, as well as repetitive stress injuries (carpal tunnel), occupational diseases (asbestosis, hearing loss), psychological injuries from workplace trauma, and aggravation of pre-existing conditions.</p>
+                    <p>Generally NOT covered: injuries during commutes to/from work, injuries caused by intoxication or illegal drug use, intentionally self-inflicted injuries, injuries during horseplay or fighting, and injuries while violating company policy.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Do I need Workers' Comp if I only have one employee?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>In most states, yes. The majority of states require Workers' Comp coverage from your first employee. A few states have higher thresholds (3-5 employees), and some exempt certain industries or business types. Check your specific state requirements.</p>
+                    <p>Even if not legally required, Workers' Comp is still highly recommended. Without it, you're personally liable for all medical costs, lost wages, and potential lawsuits if your employee gets injured costs that could easily exceed $100,000.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Are independent contractors covered by Workers' Compensation?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Generally no independent contractors are responsible for their own insurance. However, many states are cracking down on misclassification. If the state determines your "contractor" is actually an employee, you'll be liable for all unpaid Workers' Comp premiums, penalties, and any injury claims.</p>
+                    <p>To protect yourself, require contractors to provide their own Workers' Comp or general liability insurance and get Certificates of Insurance. Some policies allow you to purchase coverage for uninsured subcontractors.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>What happens if an employee gets injured and I don't have coverage?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Without Workers' Comp, you face severe consequences: You're personally liable for ALL medical costs and lost wages (easily $50,000-$500,000+). The employee can sue you directly for damages, pain and suffering, and legal fees. State agencies will fine you $10,000-$100,000+ for non-compliance.</p>
+                    <p>Additional consequences include: criminal charges and potential jail time in some states, immediate business shutdown orders, personal asset seizure to pay claims, inability to bid on contracts, and possible bankruptcy. One serious injury without coverage can destroy a small business.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Can employees sue my business if they have Workers' Compensation?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>No this is one of the biggest benefits of Workers' Comp. When employees accept Workers' Comp benefits, they give up the right to sue your business for workplace injuries. This "exclusive remedy" doctrine protects you from expensive litigation and unlimited liability.</p>
+                    <p>There are rare exceptions: employees can still sue if you intentionally injured them, if you don't have required Workers' Comp coverage, or if a third party (not you) caused the injury. But in 99% of cases, Workers' Comp provides full lawsuit protection.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>How quickly can I get Workers' Compensation coverage?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Most Workers' Comp policies can be issued within 24-48 hours of application. The process is faster if you have accurate payroll records, employee counts by job classification, and a clean claims history. Some insurers offer instant online quotes and same-day coverage.</p>
+                    <p>Don't wait operating without required coverage is illegal from day one. If you're hiring your first employee, get coverage BEFORE their first day of work. Many agents can bind coverage immediately over the phone while processing paperwork.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    
+                    // If it's a stat box with a number, animate the counter
+                    if (entry.target.classList.contains('stat-box')) {
+                        const numberElement = entry.target.querySelector('.number');
+                        if (numberElement && !numberElement.classList.contains('counted')) {
+                            animateCounter(numberElement);
+                        }
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.value-card, .stat-box, .testimonial, .problem-box, .solution-box, .coverage-card, .benefit-item, .faq-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter animation function
+        function animateCounter(element) {
+            element.classList.add('counted');
+            const target = parseFloat(element.getAttribute('data-target'));
+            const prefix = element.getAttribute('data-prefix') || '';
+            const suffix = element.getAttribute('data-suffix') || '';
+            const duration = 2000; // 2 seconds
+            const increment = target / (duration / 16); // 60fps
+            let current = 0;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    // Format based on whether it's a decimal or whole number
+                    if (target >= 1000) {
+                        element.textContent = prefix + Math.floor(current).toLocaleString() + suffix;
+                    } else if (target < 10) {
+                        element.textContent = prefix + current.toFixed(1) + suffix;
+                    } else {
+                        element.textContent = prefix + Math.floor(current) + suffix;
+                    }
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    // Final value
+                    if (target >= 1000) {
+                        element.textContent = prefix + target.toLocaleString() + suffix;
+                    } else if (target < 10) {
+                        element.textContent = prefix + target.toFixed(1) + suffix;
+                    } else {
+                        element.textContent = prefix + target + suffix;
+                    }
+                }
+            };
+
+            updateCounter();
+        }
+
+        // FAQ Toggle functionality
+        document.querySelectorAll('.faq-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const faqItem = header.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all other FAQs
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Toggle current FAQ
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

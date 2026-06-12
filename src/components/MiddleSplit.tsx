@@ -106,10 +106,10 @@ export default function MiddleSplit({ config }: MiddleSplitProps) {
 
             <div className="pt-4 font-mono">
               <a
-                href={policy.externalUrl || "https://theinsuranceboss.com/policy-review/"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full text-center block font-mono text-xs font-black tracking-widest py-4 bg-[#FAC000] text-black hover:bg-black hover:text-[#FAC000] border border-[#FAC000] rounded-lg transition-all duration-300 md:text-sm uppercase shadow-[0_4px_20px_rgba(250,192,0,0.15)] hover:shadow-[0_4px_30px_rgba(250,192,0,0.3)]"
+                href={policy.externalUrl || "https://theinsuranceboss.com/policy-review"}
+                target={(policy.externalUrl || "").startsWith("#") ? undefined : "_blank"}
+                rel={(policy.externalUrl || "").startsWith("#") ? undefined : "noopener noreferrer"}
+                className="w-full text-center block font-mono text-xs font-black tracking-widest py-4 bg-transparent text-[#FAC000] border-2 border-[#FAC000] hover:bg-[#FAC000] hover:text-black hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(250,192,0,0.3)] rounded-lg transition-all duration-300 md:text-sm uppercase"
               >
                 {policy.btnText || "UPLOAD POLICY"} ↗
               </a>
@@ -154,7 +154,7 @@ export default function MiddleSplit({ config }: MiddleSplitProps) {
             <div className="pt-6 font-mono">
               <a
                 href={agents.btnUrl || "#for-agents"}
-                className="w-full md:w-auto inline-block text-center font-mono text-xs font-black tracking-widest py-4 px-8 bg-zinc-900 border border-zinc-800 text-zinc-100 hover:border-[#FAC000] rounded transition-all duration-300 uppercase shadow-lg"
+                className="w-full md:w-auto inline-block text-center font-mono text-xs font-black tracking-widest py-4 px-8 bg-transparent text-[#FAC000] border-2 border-[#FAC000] hover:bg-[#FAC000] hover:text-black hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(250,192,0,0.3)] rounded transition-all duration-300 uppercase"
               >
                 {agents.btnText || "SEE AGENT SERVICES"}
               </a>

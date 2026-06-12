@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  /* Contenedor principal centrado */
+  .boss-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; 
+    padding: 20px 10px;
+    width: 100%;
+    flex-wrap: wrap;
+    font-family: 'Arial', sans-serif;
+  }
+
+  .btn-boss-medium {
+    /* Fondo transparente y borde amarillo de 2px */
+    background-color: transparent;
+    border: 2px solid #FFD700;
+    color: #FFD700;
+    
+    /* Tamaño MEDIO */
+    padding: 12px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    
+    /* Estética y suavidad */
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-width: 200px;
+  }
+
+  /* Efecto al pasar el mouse */
+  .btn-boss-medium:hover {
+    background-color: #FFD700;
+    color: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.3);
+  }
+
+  /* Ajuste para móviles */
+  @media (max-width: 480px) {
+    .btn-boss-medium {
+      width: 90%;
+      min-width: unset;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <div class="boss-button-container">
+    <a href="https://theinsuranceboss.com/contact/" class="btn-boss-medium">
+      Speak with the boss
+    </a>
+
+    <a href="https://theinsuranceboss.com/get-a-bop-quote/" class="btn-boss-medium">
+      Get a Quote
+    </a>
+  </div>
+
+</body>
+</html>

@@ -172,22 +172,22 @@ export default function Header({ config, onOpenAdmin, isAdminOpen }: HeaderProps
             )}
           </div>
 
-          <a href="#policy-review" className="hover:text-[#FAC000] transition-colors py-1">POLICY REVIEW</a>
-          <a href="#for-agents" className="hover:text-[#FAC000] transition-colors py-1">FOR AGENTS</a>
-          <a href="#inner-circle" className="hover:text-[#FAC000] transition-colors py-1">INNER CIRCLE</a>
+          <a href="#subpage-Policy%20Review" className="hover:text-[#FAC000] transition-colors py-1">POLICY REVIEW</a>
+          <a href="#subpage-For%20Agents" className="hover:text-[#FAC000] transition-colors py-1">FOR AGENTS</a>
+          <a href="#subpage-Inner%20Circle" className="hover:text-[#FAC000] transition-colors py-1">INNER CIRCLE</a>
           <a href="#about" className="hover:text-[#FAC000] transition-colors py-1">CONTACT</a>
         </nav>
 
         {/* CTA BUTTONS AND ADMIN TOGGLE */}
         <div className="flex items-center space-x-3">
           <a
-            href="#policy-review"
+            href="#subpage-Policy%20Review"
             className="hidden sm:inline-flex items-center justify-center font-mono text-xs font-bold tracking-wider px-4 py-2 border border-[#FAC000] text-black bg-[#FAC000] hover:bg-black hover:text-[#FAC000] rounded transition-all duration-300 shadow-md"
           >
             GET A QUOTE
           </a>
           <a
-            href="#for-agents"
+            href="#subpage-For%20Agents"
             className="hidden sm:inline-flex items-center justify-center font-mono text-xs font-bold tracking-wider px-4 py-2 border border-zinc-700 hover:border-[#FAC000] text-white hover:text-white bg-black/60 hover:bg-zinc-950 rounded transition-all duration-300 shadow-md"
           >
             FOR AGENTS
@@ -241,22 +241,22 @@ export default function Header({ config, onOpenAdmin, isAdminOpen }: HeaderProps
                 ))}
               </div>
             </div>
-            <a href="#policy-review" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#FAC000] transition-colors py-1">POLICY REVIEW</a>
-            <a href="#for-agents" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#FAC000] transition-colors py-1">FOR AGENTS</a>
-            <a href="#inner-circle" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#FAC000] transition-colors py-1">INNER CIRCLE</a>
+            <a href="#subpage-Policy%20Review" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#FAC000] transition-colors py-1">POLICY REVIEW</a>
+            <a href="#subpage-For%20Agents" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#FAC000] transition-colors py-1">FOR AGENTS</a>
+            <a href="#subpage-Inner%20Circle" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#FAC000] transition-colors py-1">INNER CIRCLE</a>
             <a href="#about" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#FAC000] transition-colors py-1">CONTACT</a>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-zinc-900">
             <a
-              href="#policy-review"
+              href="#subpage-Policy%20Review"
               onClick={() => setMobileMenuOpen(false)}
               className="w-full text-center font-mono text-xs font-bold tracking-wider py-2.5 bg-[#FAC000] text-black border border-[#FAC000] rounded hover:bg-transparent hover:text-[#FAC000] transition-colors"
             >
               GET A QUOTE
             </a>
             <a
-              href="#for-agents"
+              href="#subpage-For%20Agents"
               onClick={() => setMobileMenuOpen(false)}
               className="w-full text-center font-mono text-xs font-bold tracking-wider py-2.5 border border-zinc-800 hover:border-[#FAC000] text-white rounded transition-colors"
             >

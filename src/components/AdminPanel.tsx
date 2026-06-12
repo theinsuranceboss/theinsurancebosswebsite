@@ -328,7 +328,7 @@ interface AdminPanelProps {
 }
 
 export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPanelProps) {
-  const [activeTab, setActiveTab] = useState<"global" | "hero" | "pillars" | "splits" | "carriers" | "banners" | "buttons" | "fonts" | "builder" | "subpageEditor" | "integrations" | "insuranceBanners" | "faqs" | "metrics" | "testimonials">("global");
+  const [activeTab, setActiveTab] = useState<"global" | "hero" | "homepageButtons" | "pillars" | "splits" | "carriers" | "banners" | "buttons" | "fonts" | "builder" | "subpageEditor" | "integrations" | "insuranceBanners" | "faqs" | "metrics" | "testimonials">("global");
   const [localConfig, setLocalConfig] = useState<WebsiteConfig>({ ...config });
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [passwordInput, setPasswordInput] = useState("");
@@ -381,22 +381,34 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
 
   const mainCategories = ["Life Insurance", "Commercial Lines", "Personal Lines", "Retirement & Investment"];
 
-  // Keep localConfig in sync with the saved config when the panel is opened or config changes
-  useEffect(() => {
-    if (isOpen) {
-      setLocalConfig({ ...config });
-    }
-  }, [isOpen, config]);
-
-  // Initialize selected subpage for banner editing
+  // All available subpage labels (recalculated each render as localConfig changes)
   const allSubwebsiteLabels = [
     ...mainCategories,
     ...localConfig.subwebsites.flatMap(c => c.items.map(i => i.label))
   ];
-  const [selectedBannerPage, setSelectedBannerPage] = useState<string>(allSubwebsiteLabels[0] || "");
+
+  const [selectedBannerPage, setSelectedBannerPage] = useState<string>(allSubwebsiteLabels[0] || "Life Insurance");
 
   // Subpage Editor input fields state
-  const [selectedEditorPage, setSelectedEditorPage] = useState<string>(allSubwebsiteLabels[0] || "");
+  const [selectedEditorPage, setSelectedEditorPage] = useState<string>(allSubwebsiteLabels[0] || "Life Insurance");
+
+  // Sync selectedBannerPage and selectedEditorPage when config loads async from Supabase
+  // This ensures the selectors show a valid page even if config wasn't ready at mount time
+  useEffect(() => {
+    if (localConfig.subwebsites.length > 0) {
+      const labels = [
+        ...mainCategories,
+        ...localConfig.subwebsites.flatMap(c => c.items.map(i => i.label))
+      ];
+      if (!labels.includes(selectedBannerPage) || !selectedBannerPage) {
+        setSelectedBannerPage(labels[0] || "Life Insurance");
+      }
+      if (!labels.includes(selectedEditorPage) || !selectedEditorPage) {
+        setSelectedEditorPage(labels[0] || "Life Insurance");
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [localConfig.subwebsites]);
   const [editorPageHtml, setEditorPageHtml] = useState("");
   const [editorPageCss, setEditorPageCss] = useState("");
   const [editorPageTitle, setEditorPageTitle] = useState("");
@@ -1081,6 +1093,18 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
             </button>
 
             <button
+              onClick={() => setActiveTab("homepageButtons")}
+              className={`py-2 px-4.5 rounded-full font-bold transition-all flex items-center space-x-2 border text-xs cursor-pointer ${
+                activeTab === "homepageButtons" 
+                  ? "bg-[#FAC000] border-[#FAC000] text-black shadow-lg shadow-[#FAC000]/25" 
+                  : "bg-zinc-900/40 border-zinc-800/60 text-zinc-400 hover:text-white hover:border-zinc-700"
+              }`}
+            >
+              <Link className="w-3.5 h-3.5" />
+              <span>Homepage Buttons</span>
+            </button>
+
+            <button
               onClick={() => setActiveTab("metrics")}
               className={`py-2 px-4.5 rounded-full font-bold transition-all flex items-center space-x-2 border text-xs cursor-pointer ${
                 activeTab === "metrics" 
@@ -1267,6 +1291,7 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                 <h2 className="text-xl font-black text-white tracking-wide uppercase leading-tight">
                   {activeTab === "global" && "Global Branding"}
                   {activeTab === "hero" && "Hero Section Banner"}
+                  {activeTab === "homepageButtons" && "Homepage Action Buttons"}
                   {activeTab === "pillars" && "Core Value Pillars"}
                   {activeTab === "splits" && "Split Information Panels"}
                   {activeTab === "carriers" && "Insurance Carriers Slider"}
@@ -1284,6 +1309,7 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                 <p className="text-xs text-zinc-500 font-medium mt-1">
                   {activeTab === "global" && "Configure primary contact details, logo assets, social links, and the default background image."}
                   {activeTab === "hero" && "Update the main homepage hero statement, description copy, action buttons, and background preset."}
+                  {activeTab === "homepageButtons" && "Manage where all the buttons on the homepage lead."}
                   {activeTab === "pillars" && "Edit the highlights of the three main service offerings (Coverage, Agents, Partners)."}
                   {activeTab === "splits" && "Modify copywriting layouts for the growth programs, policy reviews, and About sections."}
                   {activeTab === "carriers" && "Add or modify logos of the trusted carriers that rotate on the home page."}
@@ -1879,6 +1905,90 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                       </button>
                     ))}
                   </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB: HOMEPAGE BUTTONS */}
+          {activeTab === "homepageButtons" && (
+            <div className="space-y-6">
+              <div className="p-4 bg-zinc-950 border border-zinc-900 rounded-lg space-y-4">
+                <h4 className="text-[12px] font-mono text-[#FAC000] font-bold uppercase tracking-wider block border-b border-zinc-900 pb-2">Hero Section Links</h4>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">"REVIEW MY POLICY" Button Link</label>
+                  <input
+                    type="text"
+                    value={localConfig.hero.btnReviewUrl}
+                    onChange={(e) => handleUpdateNested("hero", "btnReviewUrl", e.target.value)}
+                    className="w-full bg-zinc-900 border border-zinc-800 focus:border-[#FAC000] rounded p-2.5 text-white focus:outline-none"
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">"GROW MY AGENCY" Button Link</label>
+                  <input
+                    type="text"
+                    value={localConfig.hero.btnGrowUrl}
+                    onChange={(e) => handleUpdateNested("hero", "btnGrowUrl", e.target.value)}
+                    className="w-full bg-zinc-900 border border-zinc-800 focus:border-[#FAC000] rounded p-2.5 text-white focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="p-4 bg-zinc-950 border border-zinc-900 rounded-lg space-y-4">
+                <h4 className="text-[12px] font-mono text-[#FAC000] font-bold uppercase tracking-wider block border-b border-zinc-900 pb-2">Middle Split Section</h4>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">"UPLOAD POLICY" Button Link</label>
+                  <input
+                    type="text"
+                    value={localConfig.policyReview.externalUrl}
+                    onChange={(e) => handleUpdateNested("policyReview", "externalUrl", e.target.value)}
+                    className="w-full bg-zinc-900 border border-zinc-800 focus:border-[#FAC000] rounded p-2.5 text-white focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="p-4 bg-zinc-950 border border-zinc-900 rounded-lg space-y-4">
+                <h4 className="text-[12px] font-mono text-[#FAC000] font-bold uppercase tracking-wider block border-b border-zinc-900 pb-2">Core Pillars Section</h4>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">"BECOME A PARTNER" Button Link</label>
+                  <input
+                    type="text"
+                    value={localConfig.pillars.partners.btnUrl}
+                    onChange={(e) => handleUpdatePillar("partners", "btnUrl", e.target.value)}
+                    className="w-full bg-zinc-900 border border-zinc-800 focus:border-[#FAC000] rounded p-2.5 text-white focus:outline-none"
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">Agents Growth Button Link</label>
+                  <input
+                    type="text"
+                    value={localConfig.pillars.agents.btnUrl}
+                    onChange={(e) => handleUpdatePillar("agents", "btnUrl", e.target.value)}
+                    className="w-full bg-zinc-900 border border-zinc-800 focus:border-[#FAC000] rounded p-2.5 text-white focus:outline-none"
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">Coverage Button Link</label>
+                  <input
+                    type="text"
+                    value={localConfig.pillars.coverage.btnUrl}
+                    onChange={(e) => handleUpdatePillar("coverage", "btnUrl", e.target.value)}
+                    className="w-full bg-zinc-900 border border-zinc-800 focus:border-[#FAC000] rounded p-2.5 text-white focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="p-4 bg-zinc-950 border border-zinc-900 rounded-lg space-y-4">
+                <h4 className="text-[12px] font-mono text-[#FAC000] font-bold uppercase tracking-wider block border-b border-zinc-900 pb-2">Bottom Split Section</h4>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider block">"JOIN INNER CIRCLE" Button Link</label>
+                  <input
+                    type="text"
+                    value={localConfig.innerCircle.btnUrl}
+                    onChange={(e) => handleUpdateNested("innerCircle", "btnUrl", e.target.value)}
+                    className="w-full bg-zinc-900 border border-zinc-800 focus:border-[#FAC000] rounded p-2.5 text-white focus:outline-none"
+                  />
                 </div>
               </div>
             </div>

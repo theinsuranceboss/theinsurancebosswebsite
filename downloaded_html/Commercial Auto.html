@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commercial Auto Insurance - Protect Your Business Vehicles</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            background: transparent;
+            color: #ffffff;
+        }
+
+        /* Value Proposition Section */
+        .value-prop-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .value-prop-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .value-card {
+            background: rgba(60, 60, 60, 0.85);
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            border-top: 5px solid #ffd700;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .value-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .value-card .icon {
+            font-size: 70px;
+            margin-bottom: 20px;
+        }
+
+        .value-card h3 {
+            color: #ffd700;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .value-card p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+        /* Social Proof Section */
+        .social-proof-section {
+            padding: 60px 20px;
+            background: rgba(60, 60, 60, 0.85);
+        }
+
+        .social-proof-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .social-proof-container h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .stat-box {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .stat-box.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-box .number {
+            color: #ffd700;
+            font-size: 52px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-box .number-text {
+            color: #ffd700;
+            font-size: 52px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-box .label {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.4;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .testimonial {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid #ffd700;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .testimonial.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .testimonial .quote {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial .author {
+            color: #ffd700;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .testimonial .location {
+            color: #cccccc;
+            font-size: 14px;
+        }
+
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: #ffffff;
+            font-size: 20px;
+        }
+
+        /* Problem/Solution Section */
+        .problem-solution-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .problem-solution-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .problem-box,
+        .solution-box {
+            padding: 40px;
+            border-radius: 12px;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .solution-box {
+            transform: translateX(30px);
+        }
+
+        .problem-box.animate,
+        .solution-box.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Dark Grey with Yellow Border */
+        .problem-box {
+            background: rgba(60, 60, 60, 0.85);
+            border-left: 5px solid #ffd700;
+        }
+
+        .solution-box {
+            background: rgba(40, 80, 40, 0.85);
+            border-left: 5px solid #44ff44;
+        }
+
+        .problem-box h2,
+        .solution-box h2 {
+            color: #ffd700;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .problem-box ul,
+        .solution-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .problem-box ul li,
+        .solution-box ul li {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            padding-left: 35px;
+            position: relative;
+        }
+
+        .problem-box ul li::before {
+            content: "✗";
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 24px;
+            position: absolute;
+            left: 0;
+        }
+
+        .solution-box ul li::before {
+            content: "✓";
+            color: #44ff44;
+            font-weight: bold;
+            font-size: 24px;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Coverage Section */
+        .coverage-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .coverage-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .coverage-card {
+            background: rgba(60, 60, 60, 0.85);
+            padding: 40px;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease;
+        }
+
+        .coverage-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .coverage-card:hover {
+            border-color: #ffd700;
+            transform: translateY(-5px);
+        }
+
+        .coverage-card h3 {
+            color: #ffd700;
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .coverage-card .included {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .coverage-card p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .coverage-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .coverage-card ul li {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 12px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .coverage-card ul li::before {
+            content: "✓";
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 22px;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            padding: 60px 20px;
+            background: rgba(60, 60, 60, 0.85);
+        }
+
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefits-container h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .benefit-item {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .benefit-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .benefit-item .check {
+            color: #ffd700;
+            font-size: 32px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .benefit-item .content h3 {
+            color: #ffd700;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .benefit-item .content p {
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* Comparison Section */
+        .comparison-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .comparison-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .comparison-container h2 {
+            color: #ffd700;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .comparison-table {
+            background: rgba(60, 60, 60, 0.85);
+            border-radius: 12px;
+            padding: 40px;
+        }
+
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .comparison-row:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-row.header {
+            font-weight: 700;
+            font-size: 22px;
+            color: #ffd700;
+        }
+
+        .comparison-cell {
+            color: #ffffff;
+            font-size: 18px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .comparison-cell.highlight {
+            color: #ffd700;
+            font-weight: 700;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(60, 60, 60, 0.85);
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease;
+        }
+
+        .faq-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .faq-item:hover {
+            border-color: #ffd700;
+        }
+
+        .faq-header {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .faq-header h3 {
+            color: #ffd700;
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .faq-header .icon {
+            color: #ffd700;
+            font-size: 24px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-header .icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-content {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-item.active .faq-content {
+            padding: 25px 30px;
+            max-height: 1000px;
+        }
+
+        .faq-content p {
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .faq-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .value-prop-grid,
+            .coverage-grid,
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonial-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .problem-solution-container {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-header h2,
+            .social-proof-container h2,
+            .benefits-container h2,
+            .comparison-container h2 {
+                font-size: 32px;
+            }
+
+            .stats-row,
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .value-card,
+            .coverage-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="value-prop-section">
+        <div class="value-prop-grid">
+            <div class="value-card">
+                <h3>Personal Auto May Not Cover Business Use</h3>
+                <p>If you use your personal vehicle for business purposes, your personal auto policy may not extend coverage for business-related accidents potentially leaving gaps in protection.</p>
+            </div>
+            <div class="value-card">
+                <h3>Higher Available Coverage Limits</h3>
+                <p>Commercial auto policies can provide higher liability limits often up to $1 million or more which may help protect your business from significant medical or legal expenses following an accident.</p>
+            </div>
+            <div class="value-card">
+                <h3>Covers Employees & Business Vehicles</h3>
+                <p>Commercial auto coverage may include protection for authorized drivers using company vehicles for business, including employees, contractors, or temporary workers, depending on the policy and carrier.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="social-proof-section">
+        <div class="social-proof-container">
+            <h2>Essential Coverage for Business Vehicles</h2>
+            
+            <div class="stats-row">
+                <div class="stat-box">
+                    <span class="number" data-target="6" data-suffix="M">0</span>
+                    <span class="label">Vehicle accidents annually in US</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number" data-target="52" data-prefix="$" data-suffix="K">0</span>
+                    <span class="label">Average accident injury cost</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number" data-target="1" data-prefix="$" data-suffix="M+">0</span>
+                    <span class="label">Typical liability limits</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number-text">24/7</span>
+                    <span class="label">Coverage whenever you drive</span>
+                </div>
+            </div>
+
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <p class="quote">"My delivery driver ran a red light and totaled another car. Commercial Auto covered $180,000 in damages and medical bills. Without it, my business would've been bankrupted by the lawsuit."</p>
+                    <p class="author">Thomas B.</p>
+                    <p class="location">Delivery Service, Denver, CO</p>
+                </div>
+                <div class="testimonial">
+                    <p class="quote">"I thought my personal insurance covered business use. Wrong. After an accident during a client meeting, they denied the claim. Learned the hard way get Commercial Auto before you need it."</p>
+                    <p class="author">Sarah P.</p>
+                    <p class="location">Real Estate Agent, Austin, TX</p>
+                </div>
+                <div class="testimonial">
+                    <p class="quote">"Our work van was stolen with $25,000 in tools inside. Commercial Auto replaced everything the van, tools, and lost income during replacement. This coverage saved our contracting business."</p>
+                    <p class="author">Miguel R.</p>
+                    <p class="location">HVAC Contractor, Las Vegas, NV</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="problem-solution-section">
+        <div class="problem-solution-container">
+            <div class="problem-box">
+                <h2>With Only Personal Auto Insurance</h2>
+                <ul>
+                    <li>Claims denied for any business-related use</li>
+                    <li>Insufficient liability limits ($25K-$100K typical)</li>
+                    <li>No coverage for employees driving company vehicles</li>
+                    <li>Doesn't cover commercial vehicle types (vans, trucks)</li>
+                    <li>Won't cover tools, equipment, or cargo</li>
+                    <li>Can't meet contract requirements from clients</li>
+                    <li>Risk losing everything in a major accident lawsuit</li>
+                </ul>
+            </div>
+
+            <div class="solution-box">
+                <h2>With Commercial Auto Insurance</h2>
+                <ul>
+                    <li>Full coverage for all business-related driving</li>
+                    <li>Higher liability limits ($1M-$5M available)</li>
+                    <li>Covers any authorized employee or driver</li>
+                    <li>Protects all vehicle types: cars, vans, trucks, trailers</li>
+                    <li>Optional coverage for tools, equipment, and cargo</li>
+                    <li>Meets contract and client insurance requirements</li>
+                    <li>Business assets and personal finances protected</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="coverage-section">
+        <div class="section-header">
+            <h2>What Does Commercial Auto Insurance Cover?</h2>
+            <p>Coverage options designed to help protect your business vehicles and authorized drivers from accidents, liability, and other covered losses.</p>
+        </div>
+
+        <div class="coverage-grid">
+            <div class="coverage-card">
+                <h3>Liability Coverage</h3>
+                <span class="included">✓ ESSENTIAL</span>
+                <p>Covers bodily injury and property damage you cause to others in an accident. Protects your business from lawsuits and pays medical bills, legal fees, and damages.</p>
+                <ul>
+                    <li>Bodily injury to other drivers and passengers</li>
+                    <li>Property damage to other vehicles and structures</li>
+                    <li>Legal defense costs and court fees</li>
+                    <li>Settlement payments and judgments</li>
+                    <li>Typical limits: $1M per accident</li>
+                    <li>Required by law in all 50 states</li>
+                </ul>
+            </div>
+
+            <div class="coverage-card">
+                <h3>Physical Damage Coverage</h3>
+                <span class="included">✓ RECOMMENDED</span>
+                <p>Complete and collision coverage protects your vehicles from damage, theft, vandalism, weather, and accidents regardless of fault.</p>
+                <ul>
+                    <li>Collision: repairs after any accident</li>
+                    <li>Complete: theft, vandalism, weather damage</li>
+                    <li>Fire, flood, and storm damage</li>
+                    <li>Hit-and-run accidents</li>
+                    <li>Falling objects and animal strikes</li>
+                    <li>Replacement cost for totaled vehicles</li>
+                </ul>
+            </div>
+
+            <div class="coverage-card">
+                <h3>Hired & Non-Owned Auto</h3>
+                <span class="included">✓ CRITICAL</span>
+                <p>Covers you when employees use rental cars or their personal vehicles for business purposes. Essential for businesses without company vehicles.</p>
+                <ul>
+                    <li>Rental vehicles used for business</li>
+                    <li>Employee personal cars on business errands</li>
+                    <li>Liability coverage up to your policy limits</li>
+                    <li>Fills gaps in employee personal auto policies</li>
+                    <li>Protects during client meetings and deliveries</li>
+                    <li>Affordable add-on to general liability</li>
+                </ul>
+            </div>
+
+            <div class="coverage-card">
+                <h3>Medical Payments & Uninsured Motorist</h3>
+                <span class="included">✓ IMPORTANT</span>
+                <p>Medical Payments covers injuries to you and passengers. Uninsured/Underinsured Motorist protects you when hit by drivers with insufficient insurance.</p>
+                <ul>
+                    <li>Medical bills for you and passengers</li>
+                    <li>No-fault coverage regardless of who caused accident</li>
+                    <li>Protects against uninsured drivers (14% of motorists)</li>
+                    <li>Covers hit-and-run accidents</li>
+                    <li>Lost wages and injury compensation</li>
+                    <li>Required in many states</li>
+                </ul>
+            </div>
+
+            <div class="coverage-card">
+                <h3>Cargo & Equipment Coverage</h3>
+                <span class="included">✓ OPTIONAL</span>
+                <p>Protects tools, equipment, inventory, and cargo carried in your vehicles. Essential for contractors, delivery services, and businesses transporting goods.</p>
+                <ul>
+                    <li>Tools and equipment stored in vehicles</li>
+                    <li>Inventory and products being delivered</li>
+                    <li>Customer property in your care</li>
+                    <li>Theft from vehicles</li>
+                    <li>Damage during accidents</li>
+                    <li>Customizable limits based on value</li>
+                </ul>
+            </div>
+
+            <div class="coverage-card">
+                <h3>Towing & Rental Reimbursement</h3>
+                <span class="included">✓ OPTIONAL</span>
+                <p>Pays for towing after breakdowns and provides a rental vehicle while yours is being repaired keeping your business running without interruption.</p>
+                <ul>
+                    <li>Emergency towing and roadside assistance</li>
+                    <li>Rental car while vehicle is repaired</li>
+                    <li>Typically covers $50-$100 per day</li>
+                    <li>Prevents business interruption</li>
+                    <li>Available 24/7 nationwide</li>
+                    <li>Low cost for peace of mind</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits-section">
+        <div class="benefits-container">
+            <h2>Why Commercial Auto Insurance is Essential</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Personal Policies Won't Cover Business Use</h3>
+                        <p>Using your vehicle for business? Personal auto insurance will deny claims for deliveries, client meetings, or any commercial activity. Commercial Auto fills this gap.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Higher Liability Limits</h3>
+                        <p>Personal policies max out at $100K-$300K. Commercial Auto offers $1M-$5M limits crucial when accident costs can easily exceed $500,000 in serious injuries.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Covers All Authorized Drivers</h3>
+                        <p>Protects any employee, contractor, or authorized driver using company vehicles. One policy covers your entire team, not just the owner.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Protects Your Business Assets</h3>
+                        <p>Without Commercial Auto, your business assets are exposed to lawsuits. This coverage shields your company from financial ruin after major accidents.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Required for Contracts</h3>
+                        <p>Many clients and general contractors require proof of Commercial Auto before signing contracts. Coverage opens doors to more business opportunities.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Covers All Vehicle Types</h3>
+                        <p>Cars, vans, trucks, trailers, and specialty vehicles all qualify. Whether you have one vehicle or an entire fleet, Commercial Auto has you covered.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>Peace of Mind While Driving</h3>
+                        <p>Focus on your business without worrying about accidents bankrupting your company. Drive confidently knowing you have proper protection.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div class="content">
+                        <h3>24/7 Claims Support</h3>
+                        <p>Accidents happen anytime. Commercial Auto provides round-the-clock claims service, roadside assistance, and support when you need it most.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="comparison-section">
+        <div class="comparison-container">
+            <h2>Personal Auto vs Commercial Auto</h2>
+            <div class="comparison-table">
+                <div class="comparison-row header">
+                    <div class="comparison-cell">Feature</div>
+                    <div class="comparison-cell">Personal Auto Policy</div>
+                    <div class="comparison-cell highlight">Commercial Auto Policy</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Business Use Coverage</div>
+                    <div class="comparison-cell">Excluded/Denied</div>
+                    <div class="comparison-cell highlight">Fully Covered</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Liability Limits</div>
+                    <div class="comparison-cell">$25K - $300K</div>
+                    <div class="comparison-cell highlight">$1M - $5M+</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Employee Drivers</div>
+                    <div class="comparison-cell">Not covered</div>
+                    <div class="comparison-cell highlight">All authorized drivers covered</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Vehicle Types</div>
+                    <div class="comparison-cell">Personal vehicles only</div>
+                    <div class="comparison-cell highlight">All commercial vehicles & fleets</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Tools & Equipment</div>
+                    <div class="comparison-cell">Not covered</div>
+                    <div class="comparison-cell highlight">Coverage available</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Hired/Rental Vehicles</div>
+                    <div class="comparison-cell">Limited coverage</div>
+                    <div class="comparison-cell highlight">Full business rental coverage</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell">Contract Requirements</div>
+                    <div class="comparison-cell">Doesn't qualify</div>
+                    <div class="comparison-cell highlight">Meets all business requirements</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="section-header">
+            <h2>Commercial Auto Insurance FAQs</h2>
+            <p>Common questions about Commercial Auto coverage</p>
+        </div>
+
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Do I need Commercial Auto if I use my personal car for business?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Yes! If you use your personal vehicle for business purposes deliveries, client meetings, transporting goods, or any work related driving your personal auto insurance will likely deny claims. Personal policies explicitly exclude business use.</p>
+                    <p>The solution is Hired & Non-Owned Auto coverage, an affordable add-on (often $300-$500/year) that covers you when using personal or rental vehicles for business. Don't risk a denied claim get proper coverage.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>What's the difference between personal and commercial auto insurance?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Personal auto insurance covers you for personal errands and commuting. Commercial auto insurance covers vehicles used for business purposes deliveries, transporting clients, carrying tools/equipment, or any revenue-generating activity.</p>
+                    <p>Commercial policies offer higher liability limits ($1M+), cover multiple drivers and vehicles, protect business equipment, and meet contract requirements. Personal policies won't cover business-related accidents, leaving you personally liable.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>What vehicles qualify for Commercial Auto Insurance?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Almost any vehicle used for business qualifies: cars, SUVs, pickup trucks, cargo vans, box trucks, semi-trucks, trailers, and specialty vehicles. If it's titled to your business or used primarily for business purposes, it needs commercial coverage.</p>
+                    <p>Even personal vehicles used regularly for business (more than occasional use) may require commercial insurance. Consult with an agent to determine if your specific vehicles need commercial or personal coverage.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Does Commercial Auto cover employees driving company vehicles?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Yes! Commercial Auto covers any authorized driver operating your company vehicles for business purposes employees, contractors, temporary workers, and anyone you give permission to drive.</p>
+                    <p>Important: You should screen drivers and maintain good hiring practices. Insurers may deny coverage if an unauthorized person drives your vehicle or if drivers have serious violations you didn't disclose during underwriting.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>What if an employee uses their personal car for business?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>You need Hired & Non-Owned Auto coverage. This protects your business when employees use their personal vehicles for work errands, client visits, or deliveries. Without it, you're exposed to massive liability if they cause an accident during business activities.</p>
+                    <p>This coverage is inexpensive ($300-$600/year) and essential. Even if the employee has personal auto insurance, it may not cover business use, and you as the employer can still be sued for damages.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Is Commercial Auto Insurance required by law?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Auto liability insurance is required by law in all 50 states for any vehicle on public roads. If you use vehicles for business, you must have commercial not personal coverage. Operating with the wrong type of insurance is both illegal and financially catastrophic.</p>
+                    <p>Additionally, most commercial leases, client contracts, and vendor agreements require proof of Commercial Auto insurance with specific liability limits before you can work with them.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <h3>Can I add coverage for tools and equipment in my vehicle?</h3>
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-content">
+                    <p>Yes! Cargo and Equipment coverage protects tools, inventory, and equipment stored in or transported by your vehicles. This is essential for contractors, delivery services, and any business carrying valuable items.</p>
+                    <p>Standard Commercial Auto policies don't automatically cover cargo/equipmen you must add this endorsement. Coverage is based on the value you declare, typically starting around $10,000 and going up to $100,000+ depending on your needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    
+                    // If it's a stat box with a number, animate the counter
+                    if (entry.target.classList.contains('stat-box')) {
+                        const numberElement = entry.target.querySelector('.number');
+                        if (numberElement && !numberElement.classList.contains('counted')) {
+                            animateCounter(numberElement);
+                        }
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.value-card, .stat-box, .testimonial, .problem-box, .solution-box, .coverage-card, .benefit-item, .faq-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter animation function
+        function animateCounter(element) {
+            element.classList.add('counted');
+            const target = parseFloat(element.getAttribute('data-target'));
+            const prefix = element.getAttribute('data-prefix') || '';
+            const suffix = element.getAttribute('data-suffix') || '';
+            const duration = 2000; // 2 seconds
+            const increment = target / (duration / 16); // 60fps
+            let current = 0;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    // Format based on whether it's a decimal or whole number
+                    if (target >= 1000) {
+                        element.textContent = prefix + Math.floor(current).toLocaleString() + suffix;
+                    } else if (target < 10) {
+                        element.textContent = prefix + current.toFixed(1) + suffix;
+                    } else {
+                        element.textContent = prefix + Math.floor(current) + suffix;
+                    }
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    // Final value
+                    if (target >= 1000) {
+                        element.textContent = prefix + target.toLocaleString() + suffix;
+                    } else if (target < 10) {
+                        element.textContent = prefix + target.toFixed(1) + suffix;
+                    } else {
+                        element.textContent = prefix + target + suffix;
+                    }
+                }
+            };
+
+            updateCounter();
+        }
+
+        // FAQ Toggle functionality
+        document.querySelectorAll('.faq-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const faqItem = header.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all other FAQs
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Toggle current FAQ
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

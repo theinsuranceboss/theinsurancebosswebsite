@@ -86,7 +86,9 @@ export default function BottomSplit({ config }: BottomSplitProps) {
             <div className="pt-6">
               <a
                 href={innerCircle.btnUrl}
-                className="w-full text-center block font-mono text-xs font-extrabold tracking-wider py-4 bg-[#FAC000] text-black hover:bg-black hover:text-[#FAC000] border border-[#FAC000] rounded transition-all duration-300"
+                target={innerCircle.btnUrl.startsWith("#") ? undefined : "_blank"}
+                rel={innerCircle.btnUrl.startsWith("#") ? undefined : "noopener noreferrer"}
+                className="w-full text-center block font-mono text-xs font-extrabold tracking-wider py-4 bg-transparent text-[#FAC000] border-2 border-[#FAC000] hover:bg-[#FAC000] hover:text-black hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(250,192,0,0.3)] rounded transition-all duration-300"
               >
                 {innerCircle.btnText}
               </a>
@@ -110,7 +112,9 @@ export default function BottomSplit({ config }: BottomSplitProps) {
             <div className="pt-6">
               <a
                 href={about.btnUrl}
-                className="w-full text-center block font-mono text-xs font-extrabold tracking-wider py-4 bg-zinc-90 border border-zinc-800 text-zinc-100 hover:border-[#FAC000] rounded transition-all duration-300"
+                target={about.btnUrl.startsWith("#") ? undefined : "_blank"}
+                rel={about.btnUrl.startsWith("#") ? undefined : "noopener noreferrer"}
+                className="w-full text-center block font-mono text-xs font-extrabold tracking-wider py-4 bg-transparent text-[#FAC000] border-2 border-[#FAC000] hover:bg-[#FAC000] hover:text-black hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(250,192,0,0.3)] rounded transition-all duration-300"
               >
                 {about.btnText}
               </a>

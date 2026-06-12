@@ -50,7 +50,7 @@ function mergeConfigs(parsed: any): WebsiteConfig {
       lifeLogos: parsed.carriersBanner?.lifeLogos || DEFAULT_CONFIG.carriersBanner.lifeLogos,
     },
     socialLinks: parsed.socialLinks || DEFAULT_CONFIG.socialLinks,
-    subwebsites: (!parsed.subwebsites || parsed.subwebsites.length !== 3 || parsed.subwebsites[0]?.category === "Commercial Insurance")
+    subwebsites: (!parsed.subwebsites || parsed.subwebsites.length !== DEFAULT_CONFIG.subwebsites.length || parsed.subwebsites[0]?.category === "Commercial Insurance")
       ? DEFAULT_CONFIG.subwebsites
       : parsed.subwebsites,
     subwebsiteBanners: { ...DEFAULT_CONFIG.subwebsiteBanners, ...(parsed.subwebsiteBanners || {}) },
@@ -85,6 +85,21 @@ function mergeConfigs(parsed: any): WebsiteConfig {
     merged.globalBackgroundImage = "https://lh3.googleusercontent.com/d/1FHp1j4D8MPh5fUnCoZIFSe2lIKQc61ni";
   }
 
+  // Force correct navigation URLs for Policy Review and Inner Circle sub-apps
+  // These may be stale in Supabase/localStorage configs
+  if (merged.hero) {
+    merged.hero.btnReviewUrl = "#subpage-Policy%20Review";
+  }
+  if (merged.policyReview) {
+    merged.policyReview.externalUrl = "#subpage-Policy%20Review";
+  }
+  if (merged.innerCircle) {
+    merged.innerCircle.btnUrl = "#subpage-Inner%20Circle";
+  }
+  if (merged.aboutBoss) {
+    merged.aboutBoss.btnUrl = "#subpage-Inner%20Circle";
+  }
+
   return merged;
 }
 
@@ -93,6 +108,7 @@ export default function App() {
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [activeSubpage, setActiveSubpage] = useState<string | null>(null);
+  const [showQuoteModal, setShowQuoteModal] = useState(false);
 
   // Read config from Supabase Storage first, then fallback to Local Storage
   useEffect(() => {
@@ -202,6 +218,48 @@ export default function App() {
     };
   }, []);
 
+  // Load Zapier Interfaces script once on mount
+  useEffect(() => {
+    const ZAPIER_SRC = 'https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js';
+    if (!document.querySelector(`script[src="${ZAPIER_SRC}"]`)) {
+      const s = document.createElement('script');
+      s.type = 'module';
+      s.src = ZAPIER_SRC;
+      document.head.appendChild(s);
+    }
+  }, []);
+
+  // Global click interceptor — catches any "Get a Quote" link/button and opens the modal instead
+  useEffect(() => {
+    const handleGlobalClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      // Walk up the DOM to find a link or button
+      const el = target.closest('a, button') as HTMLAnchorElement | HTMLButtonElement | null;
+      if (!el) return;
+
+      const text = (el.textContent || "").trim().toLowerCase();
+      const href = (el as HTMLAnchorElement).href || "";
+
+      const isGetAQuote =
+        text.includes("get a quote") ||
+        text.includes("get an auto quote") ||
+        href.includes("get-a-quote") ||
+        href.includes("get-an-auto-quote") ||
+        href.includes("get-a-bop-quote") ||
+        href.includes("get-a-commercial-quote") ||
+        href.includes("back9ins.com");
+
+      if (isGetAQuote) {
+        e.preventDefault();
+        e.stopPropagation();
+        setShowQuoteModal(true);
+      }
+    };
+
+    document.addEventListener('click', handleGlobalClick, true);
+    return () => document.removeEventListener('click', handleGlobalClick, true);
+  }, []);
+
   // Dynamic script injection for chatbot and custom HTML blocks
   useEffect(() => {
     // 1. Remove old injected scripts
@@ -297,6 +355,52 @@ export default function App() {
         </div>
       )}
 
+      {/* ── ZAPIER GET A QUOTE MODAL ── */}
+      {showQuoteModal && (
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+          style={{ backgroundColor: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)' }}
+          onClick={(e) => { if (e.target === e.currentTarget) setShowQuoteModal(false); }}
+        >
+          <div
+            className="relative w-full max-w-3xl rounded-2xl overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, #0a0a0a 0%, #111111 100%)',
+              border: '1px solid rgba(250,192,0,0.25)',
+              boxShadow: '0 0 80px rgba(250,192,0,0.12), 0 25px 50px rgba(0,0,0,0.8)'
+            }}
+          >
+            {/* Modal Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b" style={{ borderColor: 'rgba(250,192,0,0.15)' }}>
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'rgba(250,192,0,0.1)', border: '1px solid rgba(250,192,0,0.3)' }}>
+                  <ShieldCheck className="w-4 h-4" style={{ color: '#FAC000' }} />
+                </div>
+                <div>
+                  <h2 className="text-white font-black text-sm uppercase tracking-widest">Get a Free Quote</h2>
+                  <p className="text-zinc-500 text-xs mt-0.5">Powered by The Insurance Boss</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowQuoteModal(false)}
+                className="text-zinc-500 hover:text-white transition-colors rounded-full p-1 hover:bg-zinc-800"
+                aria-label="Close quote form"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Zapier Form Embed */}
+            <div
+              className="w-full"
+              dangerouslySetInnerHTML={{
+                __html: `<zapier-interfaces-page-embed page-id="cmlkyd2mk002vwj9wxu01pbn3" test-id="cmlkyd2mk002vwj9wxu01pbn3-zapier-interfaces-page-embed-iframe" no-background="false" style="width:100%;height:520px;display:block;"></zapier-interfaces-page-embed>`
+              }}
+            />
+          </div>
+        </div>
+      )}
+
       {/* HEADER SECTION */}
       <Header
         config={config}
@@ -306,7 +410,27 @@ export default function App() {
 
       {/* CONDITIONAL SUBPAGE VIEW OR HOME SECTIONS */}
       {activeSubpage ? (
-        <SubpageViewer label={activeSubpage} config={config} />
+        activeSubpage === "Policy Review" ? (
+          <div className="w-full bg-black pt-20">
+            <iframe
+              src="/apps/policy-review/index.html?embed=true"
+              className="w-full border-none bg-transparent"
+              style={{ minHeight: "calc(100vh - 80px)" }}
+              title="Policy Review Tool"
+            />
+          </div>
+        ) : activeSubpage === "Inner Circle" ? (
+          <div className="w-full bg-black pt-20">
+            <iframe
+              src="/apps/inner-circle/index.html"
+              className="w-full border-none bg-transparent"
+              style={{ minHeight: "calc(100vh - 80px)" }}
+              title="Inner Circle"
+            />
+          </div>
+        ) : (
+          <SubpageViewer label={activeSubpage} config={config} />
+        )
       ) : (
         <>
           {(() => {
@@ -367,7 +491,9 @@ export default function App() {
       )}
 
       {/* FOOTER MULTI-COLUMN SECTION */}
-      <Footer config={config} />
+      {!(activeSubpage === "Policy Review" || activeSubpage === "Inner Circle") && (
+        <Footer config={config} />
+      )}
 
       {/* DRAWER ADMIN COMPONENT */}
       <AdminPanel

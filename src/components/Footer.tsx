@@ -67,7 +67,7 @@ export default function Footer({ config }: FooterProps) {
                   </a>
                 );
               })}
-              <a href="#policy-review" className="hover:text-[#FAC000] hover:underline transition-all">
+              <a href="#subpage-Policy%20Review" className="hover:text-[#FAC000] hover:underline transition-all">
                 Policy Review
               </a>
             </div>
@@ -94,10 +94,10 @@ export default function Footer({ config }: FooterProps) {
               PARTNERS & CIRCLE
             </h4>
             <ul className="space-y-2 text-xs text-zinc-400">
-              <li><a href="#inner-circle" className="hover:text-[#FAC000] transition-colors">Become a Partner</a></li>
-              <li><a href="#inner-circle" className="hover:text-[#FAC000] transition-colors">Affiliate Network</a></li>
-              <li><a href="#inner-circle" className="hover:text-[#FAC000] transition-colors">Partner Benefits</a></li>
-              <li><a href="#inner-circle" className="hover:text-[#FAC000] transition-colors">Inner Circle Dashboard</a></li>
+              <li><a href="#subpage-Inner%20Circle" className="hover:text-[#FAC000] transition-colors">Become a Partner</a></li>
+              <li><a href="#subpage-Inner%20Circle" className="hover:text-[#FAC000] transition-colors">Affiliate Network</a></li>
+              <li><a href="#subpage-Inner%20Circle" className="hover:text-[#FAC000] transition-colors">Partner Benefits</a></li>
+              <li><a href="#subpage-Inner%20Circle" className="hover:text-[#FAC000] transition-colors">Inner Circle Dashboard</a></li>
             </ul>
           </div>
 

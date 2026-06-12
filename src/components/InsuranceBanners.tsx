@@ -63,7 +63,7 @@ export default function InsuranceBanners({ config }: InsuranceBannersProps) {
                 <div className="pt-2 font-mono">
                   <a
                     href={banner.btnUrl || "#"}
-                    className="w-full text-center block font-mono text-[10px] font-black tracking-widest py-3 px-4 bg-[#FAC000] text-black hover:bg-black hover:text-[#FAC000] border border-[#FAC000] rounded transition-all duration-300 uppercase shadow-md"
+                    className="w-full text-center block font-mono text-[10px] font-black tracking-widest py-3 px-4 bg-transparent text-[#FAC000] border-2 border-[#FAC000] hover:bg-[#FAC000] hover:text-black hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(250,192,0,0.3)] rounded transition-all duration-300 uppercase"
                   >
                     FIND MORE ↗
                   </a>
