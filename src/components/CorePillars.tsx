@@ -150,8 +150,8 @@ export default function CorePillars({ config }: CorePillarsProps) {
             <div className="pt-4">
               <a
                 href={partners.btnUrl}
-                target={partners.btnUrl.startsWith("#") ? undefined : "_blank"}
-                rel={partners.btnUrl.startsWith("#") ? undefined : "noopener noreferrer"}
+                target={partners.btnUrl.startsWith("#") || partners.btnUrl.startsWith("/") ? undefined : "_blank"}
+                rel={partners.btnUrl.startsWith("#") || partners.btnUrl.startsWith("/") ? undefined : "noopener noreferrer"}
                 className="w-full text-center block font-mono text-xs font-bold tracking-wider py-3.5 px-4 bg-transparent text-[#FAC000] border-2 border-[#FAC000] hover:bg-[#FAC000] hover:text-black hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(250,192,0,0.3)] rounded transition-all duration-300"
               >
                 {partners.btnText}

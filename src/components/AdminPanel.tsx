@@ -385,6 +385,8 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
   // All available subpage labels (recalculated each render as localConfig changes)
   const allSubwebsiteLabels = [
     ...mainCategories,
+    "Policy Review",
+    "Inner Circle",
     ...localConfig.subwebsites.flatMap(c => c.items.map(i => i.label))
   ];
 
@@ -399,6 +401,8 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
     if (localConfig.subwebsites.length > 0) {
       const labels = [
         ...mainCategories,
+        "Policy Review",
+        "Inner Circle",
         ...localConfig.subwebsites.flatMap(c => c.items.map(i => i.label))
       ];
       if (!labels.includes(selectedBannerPage) || !selectedBannerPage) {

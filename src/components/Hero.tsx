@@ -167,16 +167,16 @@ export default function Hero({ config }: HeroProps) {
               <div className={`pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full ${alignFlexClass}`}>
                 <a
                   href={btnReviewUrl}
-                  target={btnReviewUrl.startsWith("#") ? undefined : "_blank"}
-                  rel={btnReviewUrl.startsWith("#") ? undefined : "noopener noreferrer"}
+                  target={btnReviewUrl.startsWith("#") || btnReviewUrl.startsWith("/") ? undefined : "_blank"}
+                  rel={btnReviewUrl.startsWith("#") || btnReviewUrl.startsWith("/") ? undefined : "noopener noreferrer"}
                   className="px-8 py-4 text-sm font-mono font-extrabold tracking-wider text-[#FAC000] text-center rounded bg-transparent hover:bg-[#FAC000] hover:text-black border-2 border-[#FAC000] hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(250,192,0,0.3)] transition-all duration-300"
                 >
                   {btnReviewText}
                 </a>
                 <a
                   href={btnGrowUrl}
-                  target={btnGrowUrl.startsWith("#") ? undefined : "_blank"}
-                  rel={btnGrowUrl.startsWith("#") ? undefined : "noopener noreferrer"}
+                  target={btnGrowUrl.startsWith("#") || btnGrowUrl.startsWith("/") ? undefined : "_blank"}
+                  rel={btnGrowUrl.startsWith("#") || btnGrowUrl.startsWith("/") ? undefined : "noopener noreferrer"}
                   className="px-8 py-4 text-sm font-mono font-extrabold tracking-wider text-[#FAC000] text-center rounded border-2 border-[#FAC000] bg-transparent hover:bg-[#FAC000] hover:text-black hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(250,192,0,0.3)] transition-all duration-300 flex items-center justify-center space-x-2"
                 >
                   <span>{btnGrowText}</span>
@@ -253,16 +253,16 @@ export default function Hero({ config }: HeroProps) {
               <div className={`pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full ${alignFlexClass}`}>
                 <a
                   href={btnReviewUrl}
-                  target={btnReviewUrl.startsWith("#") ? undefined : "_blank"}
-                  rel={btnReviewUrl.startsWith("#") ? undefined : "noopener noreferrer"}
+                  target={btnReviewUrl.startsWith("#") || btnReviewUrl.startsWith("/") ? undefined : "_blank"}
+                  rel={btnReviewUrl.startsWith("#") || btnReviewUrl.startsWith("/") ? undefined : "noopener noreferrer"}
                   className="px-8 py-4 text-sm font-mono font-extrabold tracking-wider text-[#FAC000] text-center rounded bg-transparent hover:bg-[#FAC000] hover:text-black border-2 border-[#FAC000] hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(250,192,0,0.3)] transition-all duration-300"
                 >
                   {btnReviewText}
                 </a>
                 <a
                   href={btnGrowUrl}
-                  target={btnGrowUrl.startsWith("#") ? undefined : "_blank"}
-                  rel={btnGrowUrl.startsWith("#") ? undefined : "noopener noreferrer"}
+                  target={btnGrowUrl.startsWith("#") || btnGrowUrl.startsWith("/") ? undefined : "_blank"}
+                  rel={btnGrowUrl.startsWith("#") || btnGrowUrl.startsWith("/") ? undefined : "noopener noreferrer"}
                   className="px-8 py-4 text-sm font-mono font-extrabold tracking-wider text-[#FAC000] text-center rounded border-2 border-[#FAC000] bg-transparent hover:bg-[#FAC000] hover:text-black hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(250,192,0,0.3)] transition-all duration-300 flex items-center justify-center space-x-2"
                 >
                   <span>{btnGrowText}</span>

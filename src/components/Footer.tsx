@@ -17,6 +17,7 @@ import {
   MapPin
 } from "lucide-react";
 import { getDirectImageUrl } from "./Header";
+import { labelToSlug } from "../App";
 
 const SOCIAL_ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   facebook: Facebook,
@@ -35,6 +36,22 @@ interface FooterProps {
 }
 
 export default function Footer({ config }: FooterProps) {
+  const cleanAndCheckLocalUrl = (url: string) => {
+    if (!url) return { href: "#", isLocal: true };
+    if (url.includes("insurance-decoder-pro.lovable.app")) {
+      return { href: "/policy-review", isLocal: true };
+    }
+    if (url.includes("theinsurancebossinnercircle.vercel.app")) {
+      return { href: "/inner-circle", isLocal: true };
+    }
+    const isHashUrl = url.startsWith("#subpage-");
+    const isLocal = url.startsWith("#") || url.startsWith("/");
+    const href = isHashUrl
+      ? `/${labelToSlug(decodeURIComponent(url.replace("#subpage-", "")))}`
+      : url;
+    return { href, isLocal };
+  };
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -54,11 +71,11 @@ export default function Footer({ config }: FooterProps) {
             <div className="flex flex-col space-y-2 text-xs text-zinc-400">
               {config.subwebsites.map((category, idx) => {
                 const url = category.items[0]?.url || "#";
-                const isLocal = url.startsWith("#");
+                const { href, isLocal } = cleanAndCheckLocalUrl(url);
                 return (
                   <a
                     key={idx}
-                    href={url}
+                    href={href}
                     target={isLocal ? undefined : "_blank"}
                     rel={isLocal ? undefined : "noopener noreferrer"}
                     className="hover:text-[#FAC000] hover:underline transition-all font-medium"
@@ -67,7 +84,7 @@ export default function Footer({ config }: FooterProps) {
                   </a>
                 );
               })}
-              <a href="#subpage-Policy%20Review" className="hover:text-[#FAC000] hover:underline transition-all">
+              <a href="/policy-review" className="hover:text-[#FAC000] hover:underline transition-all">
                 Policy Review
               </a>
             </div>
@@ -94,10 +111,10 @@ export default function Footer({ config }: FooterProps) {
               PARTNERS & CIRCLE
             </h4>
             <ul className="space-y-2 text-xs text-zinc-400">
-              <li><a href="#subpage-Inner%20Circle" className="hover:text-[#FAC000] transition-colors">Become a Partner</a></li>
-              <li><a href="#subpage-Inner%20Circle" className="hover:text-[#FAC000] transition-colors">Affiliate Network</a></li>
-              <li><a href="#subpage-Inner%20Circle" className="hover:text-[#FAC000] transition-colors">Partner Benefits</a></li>
-              <li><a href="#subpage-Inner%20Circle" className="hover:text-[#FAC000] transition-colors">Inner Circle Dashboard</a></li>
+              <li><a href="/inner-circle" className="hover:text-[#FAC000] transition-colors">Become a Partner</a></li>
+              <li><a href="/inner-circle" className="hover:text-[#FAC000] transition-colors">Affiliate Network</a></li>
+              <li><a href="/inner-circle" className="hover:text-[#FAC000] transition-colors">Partner Benefits</a></li>
+              <li><a href="/inner-circle" className="hover:text-[#FAC000] transition-colors">Inner Circle Dashboard</a></li>
             </ul>
           </div>
 
@@ -158,7 +175,7 @@ export default function Footer({ config }: FooterProps) {
         {/* Brand Slogan and Social Icons Row */}
         <div className="py-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
           <div className="space-y-2">
-            <div className="flex items-center space-x-2">
+            <a href="/" className="flex items-center space-x-2 hover:opacity-90 transition-all select-none max-w-fit">
               {config.logoUrl ? (
                 <img
                   src={getDirectImageUrl(config.logoUrl)}
@@ -178,7 +195,7 @@ export default function Footer({ config }: FooterProps) {
               >
                 THE INSURANCE <span className="text-[#FAC000]">BOSS</span>
               </span>
-            </div>
+            </a>
             <p className="text-xs text-zinc-500 font-mono">
               Smart Coverage. Serious Protection. Real Growth. Real Opportunity.
             </p>

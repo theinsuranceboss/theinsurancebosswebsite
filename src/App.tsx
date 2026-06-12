@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, useParams, useNavigate, Navigate } from "react-router-dom";
 import { WebsiteConfig } from "./types";
 import { DEFAULT_CONFIG } from "./defaultConfig";
 import Header, { getDirectImageUrl } from "./components/Header";
@@ -10,10 +11,8 @@ import BottomSplit from "./components/BottomSplit";
 import Footer from "./components/Footer";
 import AdminPanel from "./components/AdminPanel";
 import CarriersBanner from "./components/CarriersBanner";
-import SubpageViewer from "./components/SubpageViewer";
-import FaqSection from "./components/FaqSection";
-import Testimonials from "./components/Testimonials";
-import { Sparkles, Info, Settings, ArrowRight, ShieldCheck, HelpCircle, X, ExternalLink } from "lucide-react";
+import SubpageViewer, { getSubpageStaticKey } from "./components/SubpageViewer";
+import { Sparkles, ShieldCheck, X } from "lucide-react";
 import InsuranceBossChatbot from "./components/InsuranceBossChatbot";
 import { SUPABASE_URL, supabase } from "./utils/supabase";
 
@@ -78,6 +77,17 @@ function mergeConfigs(parsed: any): WebsiteConfig {
       agentReviews: parsed.testimonials?.agentReviews || DEFAULT_CONFIG.testimonials?.agentReviews || [],
       clientReviews: parsed.testimonials?.clientReviews || DEFAULT_CONFIG.testimonials?.clientReviews || []
     } as any,
+    // Preserve subpageHtmlOverrides deeply — critical for custom subpage HTML to persist
+    subpageHtmlOverrides: {
+      ...(DEFAULT_CONFIG.subpageHtmlOverrides || {}),
+      ...(parsed.subpageHtmlOverrides || {})
+    },
+    homepageLayout: parsed.homepageLayout
+      ? {
+          sections: parsed.homepageLayout.sections || DEFAULT_CONFIG.homepageLayout?.sections || [],
+          customHtmlBlocks: parsed.homepageLayout.customHtmlBlocks || {}
+        }
+      : DEFAULT_CONFIG.homepageLayout,
   };
 
   // Force background update if using unsplash or if missing
@@ -86,34 +96,213 @@ function mergeConfigs(parsed: any): WebsiteConfig {
   }
 
   // Force correct navigation URLs for Policy Review and Inner Circle sub-apps
-  // These may be stale in Supabase/localStorage configs
   if (merged.hero) {
-    merged.hero.btnReviewUrl = "#subpage-Policy%20Review";
+    merged.hero.btnReviewUrl = "/policy-review";
   }
   if (merged.policyReview) {
-    merged.policyReview.externalUrl = "#subpage-Policy%20Review";
+    merged.policyReview.externalUrl = "/policy-review";
   }
   if (merged.innerCircle) {
-    merged.innerCircle.btnUrl = "#subpage-Inner%20Circle";
+    merged.innerCircle.btnUrl = "/inner-circle";
   }
   if (merged.aboutBoss) {
-    merged.aboutBoss.btnUrl = "#subpage-Inner%20Circle";
+    merged.aboutBoss.btnUrl = "/inner-circle";
   }
 
   return merged;
 }
 
+// ── Converts a URL slug like "policy-review" to a display label like "Policy Review" ──
+function slugToLabel(slug: string): string {
+  // Map known slugs to their canonical labels used in SUBWEBSITE_HTML_DATA / admin panel
+  const SLUG_MAP: Record<string, string> = {
+    "policy-review": "Policy Review",
+    "inner-circle": "Inner Circle",
+    "personal-lines": "Personal Lines Main",
+    "commercial-lines": "Commercial Insurance Main",
+    "life-insurance": "Life Insurance Main",
+    "retirement-investment": "Retirement & Investment Main",
+    "auto-insurance": "Auto Insurance",
+    "home-insurance": "Home Insurance",
+    "renters-insurance": "Renters Insurance",
+    "umbrella-insurance": "Umbrella Insurance",
+    "commercial-auto": "Commercial Auto",
+    "general-liability": "General Liability",
+    "workers-comp": "Workers' Comp",
+    "bop": "BOP (Business Owner's Policy)",
+    "cyber-liability": "Cyber Liability",
+    "term-life": "Term Life Insurance",
+    "whole-life": "Whole Life Insurance",
+    "annuities": "Annuities",
+    "disability-insurance": "Disability Insurance",
+    "long-term-care": "Long-Term Care Insurance",
+  };
+  if (SLUG_MAP[slug]) return SLUG_MAP[slug];
+  // Fallback: capitalize each word
+  return slug.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+}
+
+// ── Converts a label like "Policy Review" to a URL slug like "policy-review" ──
+export function labelToSlug(label: string): string {
+  const LABEL_MAP: Record<string, string> = {
+    "Policy Review": "policy-review",
+    "Inner Circle": "inner-circle",
+    "Personal Lines Main": "personal-lines",
+    "Commercial Insurance Main": "commercial-lines",
+    "Life Insurance Main": "life-insurance",
+    "Retirement & Investment Main": "retirement-investment",
+    "Auto Insurance": "auto-insurance",
+    "Home Insurance": "home-insurance",
+    "Renters Insurance": "renters-insurance",
+    "Umbrella Insurance": "umbrella-insurance",
+    "Commercial Auto": "commercial-auto",
+    "General Liability": "general-liability",
+    "Workers' Comp": "workers-comp",
+    "Workers' Compensation": "workers-comp",
+    "BOP (Business Owner's Policy)": "bop",
+    "Business Owner's Policy (BOP)": "bop",
+    "Cyber Liability": "cyber-liability",
+    "Term Life Insurance": "term-life",
+    "Whole Life Insurance": "whole-life",
+    "Annuities": "annuities",
+    "Disability Insurance": "disability-insurance",
+    "Long-Term Care Insurance": "long-term-care",
+  };
+  if (LABEL_MAP[label]) return LABEL_MAP[label];
+  // Fallback: lowercase with hyphens
+  return label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+}
+
+// ── Context to share config across all routes ──
+export const ConfigContext = React.createContext<{
+  config: WebsiteConfig;
+  setConfig: React.Dispatch<React.SetStateAction<WebsiteConfig>>;
+  isAdminOpen: boolean;
+  setIsAdminOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  showQuoteModal: boolean;
+  setShowQuoteModal: React.Dispatch<React.SetStateAction<boolean>>;
+  toastMessage: string | null;
+  setToastMessage: React.Dispatch<React.SetStateAction<string | null>>;
+}>({
+  config: DEFAULT_CONFIG,
+  setConfig: () => {},
+  isAdminOpen: false,
+  setIsAdminOpen: () => {},
+  showQuoteModal: false,
+  setShowQuoteModal: () => {},
+  toastMessage: null,
+  setToastMessage: () => {},
+});
+
+// ── Subpage route component ──
+function SubpageRoute() {
+  const { subpageSlug } = useParams<{ subpageSlug: string }>();
+  const { config } = React.useContext(ConfigContext);
+  const label = slugToLabel(subpageSlug || "");
+  
+  useEffect(() => {
+    document.title = `${label} | ${config.logoText || "The Insurance Boss"}`;
+  }, [label, config.logoText]);
+
+  return <SubpageViewer label={label} config={config} />;
+}
+
+// ── Home page component ──
+function HomePage() {
+  const { config, setIsAdminOpen } = React.useContext(ConfigContext);
+
+  const html1 = config.homepageLayout?.customHtmlBlocks?.customHtml1 || "";
+  const html2 = config.homepageLayout?.customHtmlBlocks?.customHtml2 || "";
+  const html3 = config.homepageLayout?.customHtmlBlocks?.customHtml3 || "";
+  const hasCustomHtml = Boolean(html1 || html2 || html3);
+
+  useEffect(() => {
+    document.title = `${config.logoText || "The Insurance Boss"} | Personal & Commercial Insurance Coverage`;
+  }, [config.logoText]);
+
+  if (hasCustomHtml) {
+    return (
+      <div className="bg-white min-h-screen w-full text-black">
+        {html1 && <section className="relative w-full"><div dangerouslySetInnerHTML={{ __html: html1 }} /></section>}
+        {html2 && <section className="relative w-full"><div dangerouslySetInnerHTML={{ __html: html2 }} /></section>}
+        {html3 && <section className="relative w-full"><div dangerouslySetInnerHTML={{ __html: html3 }} /></section>}
+      </div>
+    );
+  }
+
+  const layout = config.homepageLayout?.sections || [
+    { id: "hero", label: "Hero Section", enabled: true },
+    { id: "pillars", label: "Core Pillars", enabled: true },
+    { id: "valueProps", label: "Value Propositions", enabled: true },
+    { id: "middleSplit", label: "Policy Review", enabled: true },
+    { id: "bottomSplit", label: "Agency Overview", enabled: true },
+    { id: "carriers", label: "Carrier Logos", enabled: true }
+  ];
+
+  return (
+    <>
+      <Header
+        config={config}
+        onOpenAdmin={() => setIsAdminOpen(true)}
+        isAdminOpen={false}
+      />
+      {layout.map((sec) => {
+        if (!sec.enabled) return null;
+        if (sec.id === "hero") return <Hero key="hero" config={config} />;
+        if (sec.id === "pillars") return <CorePillars key="pillars" config={config} />;
+        if (sec.id === "valueProps") return <ValueProps key="valueProps" config={config} />;
+        if (sec.id === "middleSplit") return <MiddleSplit key="middleSplit" config={config} />;
+        if (sec.id === "bottomSplit") return <BottomSplit key="bottomSplit" config={config} />;
+        if (sec.id === "carriers") return <CarriersBanner key="carriers" config={config} />;
+        return null;
+      })}
+      <Footer config={config} />
+    </>
+  );
+}
+
+// ── Subpage layout wrapper (with Header) ──
+function SubpageLayout() {
+  const { subpageSlug } = useParams<{ subpageSlug: string }>();
+  const { config, setIsAdminOpen } = React.useContext(ConfigContext);
+  const isToolPage = subpageSlug === "policy-review" || subpageSlug === "inner-circle";
+
+  return (
+    <>
+      <Header
+        config={config}
+        onOpenAdmin={() => setIsAdminOpen(true)}
+        isAdminOpen={false}
+      />
+      <SubpageRoute />
+      {!isToolPage && <Footer config={config} />}
+    </>
+  );
+}
+
+// ── Admin route: opens admin panel then redirects home ──
+function AdminRoute() {
+  const { setIsAdminOpen } = React.useContext(ConfigContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsAdminOpen(true);
+    navigate("/", { replace: true });
+  }, []);
+
+  return null;
+}
+
+// ── Main App shell ──
 export default function App() {
   const [config, setConfig] = useState<WebsiteConfig>(DEFAULT_CONFIG);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
-  const [activeSubpage, setActiveSubpage] = useState<string | null>(null);
   const [showQuoteModal, setShowQuoteModal] = useState(false);
 
   // Read config from Supabase Storage first, then fallback to Local Storage
   useEffect(() => {
     async function loadConfig() {
-      // 1. Try to fetch from Supabase public storage
       try {
         const supabaseConfigUrl = `${SUPABASE_URL}/storage/v1/object/public/banners/config.json?t=${Date.now()}`;
         const response = await fetch(supabaseConfigUrl);
@@ -121,7 +310,6 @@ export default function App() {
           const parsed = await response.json();
           const merged = mergeConfigs(parsed);
           setConfig(merged);
-          // Sync to local storage for local cache
           localStorage.setItem("the_insurance_boss_config", JSON.stringify(merged));
           return;
         }
@@ -129,7 +317,6 @@ export default function App() {
         console.warn("Failed to load config from Supabase, falling back to local cache", err);
       }
 
-      // 2. Fall back to local storage cache
       const saved = localStorage.getItem("the_insurance_boss_config");
       if (saved) {
         try {
@@ -145,20 +332,11 @@ export default function App() {
         setConfig(DEFAULT_CONFIG);
       }
     }
-
     loadConfig();
   }, []);
 
-  // Dynamic favicon and document title update based on custom logo settings
+  // Dynamic favicon update
   useEffect(() => {
-    // Update Document Title based on active page
-    if (activeSubpage) {
-      document.title = `${activeSubpage} | ${config.logoText || "The Insurance Boss"}`;
-    } else {
-      document.title = `${config.logoText || "The Insurance Boss"} | Personal & Commercial Insurance Coverage`;
-    }
-
-    // Find or create standard Favicon
     let link: HTMLLinkElement | null = document.querySelector("link[rel~='icon']");
     if (!link) {
       link = document.createElement('link');
@@ -166,57 +344,16 @@ export default function App() {
       link.type = 'image/png';
       document.head.appendChild(link);
     }
-    
-    // Find or create Apple Touch Icon
     let appleLink: HTMLLinkElement | null = document.querySelector("link[rel~='apple-touch-icon']");
     if (!appleLink) {
       appleLink = document.createElement('link');
       appleLink.rel = 'apple-touch-icon';
       document.head.appendChild(appleLink);
     }
-
     const activeLogoUrl = getDirectImageUrl(config.logoUrl) || "https://lh3.googleusercontent.com/d/1Lr3oT5chJbkjpbHTHW8f-A32Achcby6v";
     link.href = activeLogoUrl;
     appleLink.href = activeLogoUrl;
-  }, [config.logoUrl, config.logoText, activeSubpage]);
-
-  // Hash-based routing effect
-  useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash;
-      if (hash.startsWith("#subpage-")) {
-        const pageLabel = decodeURIComponent(hash.substring("#subpage-".length));
-        setActiveSubpage(pageLabel);
-      } else {
-        setActiveSubpage(null);
-      }
-    };
-
-    window.addEventListener("hashchange", handleHashChange);
-    handleHashChange(); // Run once on load
-
-    return () => window.removeEventListener("hashchange", handleHashChange);
-  }, []);
-
-  // Path & Hash based Admin Route listener
-  useEffect(() => {
-    const checkAdminState = () => {
-      const path = window.location.pathname;
-      const hash = window.location.hash;
-      if (path === "/admin" || path === "/admin/" || hash === "#admin") {
-        setIsAdminOpen(true);
-      }
-    };
-
-    window.addEventListener("hashchange", checkAdminState);
-    window.addEventListener("popstate", checkAdminState);
-    checkAdminState();
-
-    return () => {
-      window.removeEventListener("hashchange", checkAdminState);
-      window.removeEventListener("popstate", checkAdminState);
-    };
-  }, []);
+  }, [config.logoUrl]);
 
   // Load Zapier Interfaces script once on mount
   useEffect(() => {
@@ -229,28 +366,19 @@ export default function App() {
     }
   }, []);
 
-  // ── Visitor Tracking ─────────────────────────────────────────────────────
+  // Visitor Tracking
   useEffect(() => {
-    // Generate or reuse a session ID for this browser session
     let sessionId = sessionStorage.getItem('_tib_sid');
     if (!sessionId) {
       sessionId = Math.random().toString(36).slice(2) + Date.now().toString(36);
       sessionStorage.setItem('_tib_sid', sessionId);
     }
-
-    // Detect device type
     const ua = navigator.userAgent;
     const deviceType = /tablet|ipad|playbook|silk/i.test(ua) ? 'tablet'
       : /mobile|android|iphone|ipod|blackberry|opera mini|iemobile/i.test(ua) ? 'mobile'
       : 'desktop';
+    const pageLabel = window.location.pathname.replace("/", "") || "Home";
 
-    // Determine current page label
-    const hash = window.location.hash;
-    const pageLabel = hash.startsWith('#subpage-')
-      ? decodeURIComponent(hash.replace('#subpage-', ''))
-      : 'Home';
-
-    // Fetch geo from ipapi.is (free, no key needed)
     fetch('https://api.ipapi.is/?fields=ip,country_name,country_code,city')
       .then(r => r.json())
       .then(async geo => {
@@ -266,23 +394,18 @@ export default function App() {
           session_id: sessionId,
         });
       })
-      .catch(() => {
-        // Silently fail — tracking should never break the site
-      });
-  // Run once on mount
+      .catch(() => {});
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // Global click interceptor — catches any "Get a Quote" link/button and opens the modal instead
+
+  // Global click interceptor — catches any "Get a Quote" link/button and opens the modal
   useEffect(() => {
     const handleGlobalClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      // Walk up the DOM to find a link or button
       const el = target.closest('a, button') as HTMLAnchorElement | HTMLButtonElement | null;
       if (!el) return;
-
       const text = (el.textContent || "").trim().toLowerCase();
       const href = (el as HTMLAnchorElement).href || "";
-
       const isGetAQuote =
         text.includes("get a quote") ||
         text.includes("get an auto quote") ||
@@ -291,54 +414,28 @@ export default function App() {
         href.includes("get-a-bop-quote") ||
         href.includes("get-a-commercial-quote") ||
         href.includes("back9ins.com");
-
       if (isGetAQuote) {
         e.preventDefault();
         e.stopPropagation();
         setShowQuoteModal(true);
       }
     };
-
     document.addEventListener('click', handleGlobalClick, true);
     return () => document.removeEventListener('click', handleGlobalClick, true);
   }, []);
 
   // Dynamic script injection for chatbot and custom HTML blocks
   useEffect(() => {
-    // 1. Remove old injected scripts
     const oldScripts = document.querySelectorAll(".injected-global-script");
     oldScripts.forEach(el => el.remove());
-
     const scriptContents: string[] = [];
-
-    // Collect global chatbot script
     if (config.globalChatbotHtml) {
       scriptContents.push(config.globalChatbotHtml);
     }
-
-    // Collect custom HTML blocks scripts
-    const layout = config.homepageLayout?.sections || [
-      { id: "hero", label: "Hero Section", enabled: true },
-      { id: "pillars", label: "Core Pillars", enabled: true },
-      { id: "valueProps", label: "Value Propositions", enabled: true },
-      { id: "middleSplit", label: "Policy Review", enabled: true },
-      { id: "bottomSplit", label: "Agency Overview", enabled: true },
-      { id: "carriers", label: "Carrier Logos", enabled: true },
-      { id: "customHtml1", label: "Custom HTML Block 1", enabled: false },
-      { id: "customHtml2", label: "Custom HTML Block 2", enabled: false },
-      { id: "customHtml3", label: "Custom HTML Block 3", enabled: false },
-    ];
-    
-    layout.forEach(sec => {
-      if (sec.enabled && (sec.id === "customHtml1" || sec.id === "customHtml2" || sec.id === "customHtml3")) {
-        const html = config.homepageLayout?.customHtmlBlocks?.[sec.id];
-        if (html) {
-          scriptContents.push(html);
-        }
-      }
+    ["customHtml1", "customHtml2", "customHtml3"].forEach(id => {
+      const html = config.homepageLayout?.customHtmlBlocks?.[id];
+      if (html) scriptContents.push(html);
     });
-
-    // Parse and execute scripts
     scriptContents.forEach(html => {
       const tempDiv = document.createElement("div");
       tempDiv.innerHTML = html;
@@ -346,15 +443,10 @@ export default function App() {
       scripts.forEach(oldScript => {
         const newScript = document.createElement("script");
         newScript.className = "injected-global-script";
-        
-        // Copy attributes
         Array.from(oldScript.attributes).forEach(attr => {
           newScript.setAttribute(attr.name, attr.value);
         });
-        
-        // Copy inner code
         newScript.textContent = oldScript.textContent;
-        
         document.body.appendChild(newScript);
       });
     });
@@ -368,202 +460,114 @@ export default function App() {
 
   const triggerToast = (msg: string) => {
     setToastMessage(msg);
-    setTimeout(() => {
-      setToastMessage(null);
-    }, 4000);
+    setTimeout(() => setToastMessage(null), 4000);
+  };
+
+  const ctxValue = {
+    config, setConfig,
+    isAdminOpen, setIsAdminOpen,
+    showQuoteModal, setShowQuoteModal,
+    toastMessage, setToastMessage,
   };
 
   return (
-    <div 
-      className="relative min-h-screen text-white selection:bg-[#FAC000] selection:text-black transition-colors" 
-      style={{ 
-        fontFamily: "var(--font-sans)",
-        backgroundColor: config.globalBackground || "#000000",
-        backgroundImage: config.globalBackgroundImage ? `linear-gradient(rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.72)), url(${getDirectImageUrl(config.globalBackgroundImage)})` : "none",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "fixed",
-        backgroundRepeat: "no-repeat"
-      }}
-    >
-      
-      {/* Toast Alert System element */}
-      {toastMessage && (
-        <div className="fixed bottom-6 left-6 z-50 animate-bounce bg-zinc-950 border-2 border-[#FAC000] text-white py-3 px-5 rounded-lg shadow-2xl flex items-center space-x-3 text-xs font-mono font-bold">
-          <span className="w-2.5 h-2.5 bg-[#FAC000] rounded-full animate-ping" />
-          <span>{toastMessage}</span>
-          <button onClick={() => setToastMessage(null)} className="text-zinc-500 hover:text-white pl-2">
-            <X className="w-3.5 h-3.5" />
-          </button>
-        </div>
-      )}
-
-      {/* ── ZAPIER GET A QUOTE MODAL ── */}
-      {showQuoteModal && (
+    <ConfigContext.Provider value={ctxValue}>
+      <BrowserRouter>
         <div
-          className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
-          style={{ backgroundColor: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)' }}
-          onClick={(e) => { if (e.target === e.currentTarget) setShowQuoteModal(false); }}
+          className="relative min-h-screen text-white selection:bg-[#FAC000] selection:text-black transition-colors"
+          style={{
+            fontFamily: "var(--font-sans)",
+            backgroundColor: config.globalBackground || "#000000",
+            backgroundImage: config.globalBackgroundImage ? `linear-gradient(rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.72)), url(${getDirectImageUrl(config.globalBackgroundImage)})` : "none",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundAttachment: "fixed",
+            backgroundRepeat: "no-repeat"
+          }}
         >
-          <div
-            className="relative w-full max-w-3xl rounded-2xl overflow-hidden"
-            style={{
-              background: 'linear-gradient(135deg, #0a0a0a 0%, #111111 100%)',
-              border: '1px solid rgba(250,192,0,0.25)',
-              boxShadow: '0 0 80px rgba(250,192,0,0.12), 0 25px 50px rgba(0,0,0,0.8)'
-            }}
-          >
-            {/* Modal Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b" style={{ borderColor: 'rgba(250,192,0,0.15)' }}>
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'rgba(250,192,0,0.1)', border: '1px solid rgba(250,192,0,0.3)' }}>
-                  <ShieldCheck className="w-4 h-4" style={{ color: '#FAC000' }} />
-                </div>
-                <div>
-                  <h2 className="text-white font-black text-sm uppercase tracking-widest">Get a Free Quote</h2>
-                  <p className="text-zinc-500 text-xs mt-0.5">Powered by The Insurance Boss</p>
-                </div>
-              </div>
-              <button
-                onClick={() => setShowQuoteModal(false)}
-                className="text-zinc-500 hover:text-white transition-colors rounded-full p-1 hover:bg-zinc-800"
-                aria-label="Close quote form"
-              >
-                <X className="w-5 h-5" />
+          {/* Toast Alert */}
+          {toastMessage && (
+            <div className="fixed bottom-6 left-6 z-50 animate-bounce bg-zinc-950 border-2 border-[#FAC000] text-white py-3 px-5 rounded-lg shadow-2xl flex items-center space-x-3 text-xs font-mono font-bold">
+              <span className="w-2.5 h-2.5 bg-[#FAC000] rounded-full animate-ping" />
+              <span>{toastMessage}</span>
+              <button onClick={() => setToastMessage(null)} className="text-zinc-500 hover:text-white pl-2">
+                <X className="w-3.5 h-3.5" />
               </button>
             </div>
-
-            {/* Zapier Form Embed */}
-            <div
-              className="w-full"
-              dangerouslySetInnerHTML={{
-                __html: `<zapier-interfaces-page-embed page-id="cmlkyd2mk002vwj9wxu01pbn3" test-id="cmlkyd2mk002vwj9wxu01pbn3-zapier-interfaces-page-embed-iframe" no-background="false" style="width:100%;height:520px;display:block;"></zapier-interfaces-page-embed>`
-              }}
-            />
-          </div>
-        </div>
-      )}
-
-      {/* HEADER SECTION */}
-      <Header
-        config={config}
-        onOpenAdmin={() => setIsAdminOpen(true)}
-        isAdminOpen={isAdminOpen}
-      />
-
-      {/* CONDITIONAL SUBPAGE VIEW OR HOME SECTIONS */}
-      {activeSubpage ? (
-        activeSubpage === "Policy Review" ? (
-          <div className="w-full bg-black pt-20">
-            <iframe
-              src="/apps/policy-review/index.html?embed=true"
-              className="w-full border-none bg-transparent"
-              style={{ minHeight: "calc(100vh - 80px)" }}
-              title="Policy Review Tool"
-            />
-          </div>
-        ) : activeSubpage === "Inner Circle" ? (
-          <div className="w-full bg-black pt-20">
-            <iframe
-              src="/apps/inner-circle/index.html"
-              className="w-full border-none bg-transparent"
-              style={{ minHeight: "calc(100vh - 80px)" }}
-              title="Inner Circle"
-            />
-          </div>
-        ) : (
-          <SubpageViewer label={activeSubpage} config={config} />
-        )
-      ) : (
-        <>
-          {(() => {
-            const layout = config.homepageLayout?.sections || [
-              { id: "hero", label: "Hero Section", enabled: true },
-              { id: "pillars", label: "Core Pillars", enabled: true },
-              { id: "valueProps", label: "Value Propositions", enabled: true },
-              { id: "middleSplit", label: "Policy Review", enabled: true },
-              { id: "bottomSplit", label: "Agency Overview", enabled: true },
-              { id: "carriers", label: "Carrier Logos", enabled: true },
-              { id: "customHtml1", label: "Custom HTML Block 1", enabled: false },
-              { id: "customHtml2", label: "Custom HTML Block 2", enabled: false },
-              { id: "customHtml3", label: "Custom HTML Block 3", enabled: false },
-            ];
-
-            return layout.map((sec) => {
-              if (!sec.enabled) return null;
-              
-              switch (sec.id) {
-                case "hero":
-                  return <React.Fragment key="hero"><Hero config={config} /></React.Fragment>;
-                case "pillars":
-                  return <React.Fragment key="pillars"><CorePillars config={config} /></React.Fragment>;
-                case "valueProps":
-                  return <React.Fragment key="valueProps"><ValueProps config={config} /></React.Fragment>;
-                case "middleSplit":
-                  return <React.Fragment key="middleSplit"><MiddleSplit config={config} /></React.Fragment>;
-                case "bottomSplit":
-                  return <React.Fragment key="bottomSplit"><BottomSplit config={config} /></React.Fragment>;
-                case "carriers":
-                  return <React.Fragment key="carriers"><CarriersBanner config={config} /></React.Fragment>;
-                case "customHtml1":
-                case "customHtml2":
-                case "customHtml3":
-                  const htmlContent = config.homepageLayout?.customHtmlBlocks?.[sec.id] || "";
-                  if (!htmlContent) return null;
-                  return (
-                    <section key={sec.id} className="relative w-full overflow-hidden">
-                      <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
-                    </section>
-                  );
-                default:
-                  return null;
-              }
-            });
-          })()}
-        </>
-      )}
-
-      {/* TESTIMONIALS & FAQ SECTIONS (HOMEPAGE ONLY, BEFORE FOOTER) */}
-      {!activeSubpage && (
-        <>
-          {(config.testimonials?.show !== false) && (
-            <Testimonials config={config} />
           )}
-          <FaqSection config={config} />
-        </>
-      )}
 
-      {/* FOOTER MULTI-COLUMN SECTION */}
-      {!(activeSubpage === "Policy Review" || activeSubpage === "Inner Circle") && (
-        <Footer config={config} />
-      )}
+          {/* Get a Quote Modal */}
+          {showQuoteModal && (
+            <div
+              className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+              style={{ backgroundColor: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)' }}
+              onClick={(e) => { if (e.target === e.currentTarget) setShowQuoteModal(false); }}
+            >
+              <div
+                className="relative w-full max-w-3xl rounded-2xl overflow-hidden"
+                style={{
+                  background: 'linear-gradient(135deg, #0a0a0a 0%, #111111 100%)',
+                  border: '1px solid rgba(250,192,0,0.25)',
+                  boxShadow: '0 0 80px rgba(250,192,0,0.12), 0 25px 50px rgba(0,0,0,0.8)'
+                }}
+              >
+                <div className="flex items-center justify-between px-6 py-4 border-b" style={{ borderColor: 'rgba(250,192,0,0.15)' }}>
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'rgba(250,192,0,0.1)', border: '1px solid rgba(250,192,0,0.3)' }}>
+                      <ShieldCheck className="w-4 h-4" style={{ color: '#FAC000' }} />
+                    </div>
+                    <div>
+                      <h2 className="text-white font-black text-sm uppercase tracking-widest">Get a Free Quote</h2>
+                      <p className="text-zinc-500 text-xs mt-0.5">Powered by The Insurance Boss</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setShowQuoteModal(false)}
+                    className="text-zinc-500 hover:text-white transition-colors rounded-full p-1 hover:bg-zinc-800"
+                    aria-label="Close quote form"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+                <div
+                  className="w-full"
+                  dangerouslySetInnerHTML={{
+                    __html: `<zapier-interfaces-page-embed page-id="cmlkyd2mk002vwj9wxu01pbn3" test-id="cmlkyd2mk002vwj9wxu01pbn3-zapier-interfaces-page-embed-iframe" no-background="false" style="width:100%;height:520px;display:block;"></zapier-interfaces-page-embed>`
+                  }}
+                />
+              </div>
+            </div>
+          )}
 
-      {/* DRAWER ADMIN COMPONENT */}
-      <AdminPanel
-        config={config}
-        isOpen={isAdminOpen}
-        onClose={() => {
-          setIsAdminOpen(false);
-          if (window.location.pathname === "/admin" || window.location.pathname === "/admin/") {
-            window.history.pushState(null, "", "/");
-          }
-          if (window.location.hash === "#admin") {
-            window.history.pushState(null, "", window.location.pathname);
-          }
-        }}
-        onSave={handleSaveConfig}
-      />
+          {/* Routes */}
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/admin" element={<AdminRoute />} />
+            <Route path="/:subpageSlug" element={<SubpageLayout />} />
+          </Routes>
 
-      {/* Chatbot Widget Integration */}
-      {!config.hideChatbot && (
-        <InsuranceBossChatbot key={activeSubpage || "home"} config={config} />
-      )}
+          {/* Admin Panel Drawer */}
+          <AdminPanel
+            config={config}
+            isOpen={isAdminOpen}
+            onClose={() => {
+              setIsAdminOpen(false);
+              window.location.href = "/";
+            }}
+            onSave={handleSaveConfig}
+          />
 
-      {/* Dynamic Chatbot Non-Script HTML container */}
-      {config.globalChatbotHtml && (
-        <div dangerouslySetInnerHTML={{ __html: config.globalChatbotHtml }} />
-      )}
-    </div>
+          {/* Chatbot Widget */}
+          {!config.hideChatbot && (
+            <InsuranceBossChatbot config={config} />
+          )}
+
+          {/* Global chatbot/integration HTML */}
+          {config.globalChatbotHtml && (
+            <div dangerouslySetInnerHTML={{ __html: config.globalChatbotHtml }} />
+          )}
+        </div>
+      </BrowserRouter>
+    </ConfigContext.Provider>
   );
 }
-

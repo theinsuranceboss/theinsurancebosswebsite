@@ -86,8 +86,8 @@ export default function BottomSplit({ config }: BottomSplitProps) {
             <div className="pt-6">
               <a
                 href={innerCircle.btnUrl}
-                target={innerCircle.btnUrl.startsWith("#") ? undefined : "_blank"}
-                rel={innerCircle.btnUrl.startsWith("#") ? undefined : "noopener noreferrer"}
+                target={innerCircle.btnUrl.startsWith("#") || innerCircle.btnUrl.startsWith("/") ? undefined : "_blank"}
+                rel={innerCircle.btnUrl.startsWith("#") || innerCircle.btnUrl.startsWith("/") ? undefined : "noopener noreferrer"}
                 className="w-full text-center block font-mono text-xs font-extrabold tracking-wider py-4 bg-transparent text-[#FAC000] border-2 border-[#FAC000] hover:bg-[#FAC000] hover:text-black hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(250,192,0,0.3)] rounded transition-all duration-300"
               >
                 {innerCircle.btnText}
@@ -112,8 +112,8 @@ export default function BottomSplit({ config }: BottomSplitProps) {
             <div className="pt-6">
               <a
                 href={about.btnUrl}
-                target={about.btnUrl.startsWith("#") ? undefined : "_blank"}
-                rel={about.btnUrl.startsWith("#") ? undefined : "noopener noreferrer"}
+                target={about.btnUrl.startsWith("#") || about.btnUrl.startsWith("/") ? undefined : "_blank"}
+                rel={about.btnUrl.startsWith("#") || about.btnUrl.startsWith("/") ? undefined : "noopener noreferrer"}
                 className="w-full text-center block font-mono text-xs font-extrabold tracking-wider py-4 bg-transparent text-[#FAC000] border-2 border-[#FAC000] hover:bg-[#FAC000] hover:text-black hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(250,192,0,0.3)] rounded transition-all duration-300"
               >
                 {about.btnText}

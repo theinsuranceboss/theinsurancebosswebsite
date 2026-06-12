@@ -86,34 +86,39 @@ export default function SubpageViewer({ label, config }: SubpageViewerProps) {
   };
 
   // Load overridden HTML data or fall back to static data
-  const customData: ParsedSubwebsite = {
-    title: config.subpageHtmlOverrides?.[label]?.title !== undefined 
-      ? config.subpageHtmlOverrides[label].title 
-      : (config.subpageHtmlOverrides?.[staticKey]?.title !== undefined 
-        ? config.subpageHtmlOverrides[staticKey].title 
-        : (SUBWEBSITE_HTML_DATA[staticKey]?.title || "")),
-    description: config.subpageHtmlOverrides?.[label]?.description !== undefined 
-      ? config.subpageHtmlOverrides[label].description 
-      : (config.subpageHtmlOverrides?.[staticKey]?.description !== undefined 
-        ? config.subpageHtmlOverrides[staticKey].description 
-        : (SUBWEBSITE_HTML_DATA[staticKey]?.description || "")),
-    css: config.subpageHtmlOverrides?.[label]?.css !== undefined 
-      ? config.subpageHtmlOverrides[label].css 
-      : (config.subpageHtmlOverrides?.[staticKey]?.css !== undefined 
-        ? config.subpageHtmlOverrides[staticKey].css 
-        : (SUBWEBSITE_HTML_DATA[staticKey]?.css || "")),
-    html: config.subpageHtmlOverrides?.[label]?.html !== undefined 
-      ? config.subpageHtmlOverrides[label].html 
-      : (config.subpageHtmlOverrides?.[staticKey]?.html !== undefined 
-        ? config.subpageHtmlOverrides[staticKey].html 
-        : (SUBWEBSITE_HTML_DATA[staticKey]?.html || "")),
-  };
+  const customData = React.useMemo<ParsedSubwebsite>(() => {
+    return {
+      title: config.subpageHtmlOverrides?.[label]?.title !== undefined 
+        ? config.subpageHtmlOverrides[label].title 
+        : (config.subpageHtmlOverrides?.[staticKey]?.title !== undefined 
+          ? config.subpageHtmlOverrides[staticKey].title 
+          : (SUBWEBSITE_HTML_DATA[staticKey]?.title || "")),
+      description: config.subpageHtmlOverrides?.[label]?.description !== undefined 
+        ? config.subpageHtmlOverrides[label].description 
+        : (config.subpageHtmlOverrides?.[staticKey]?.description !== undefined 
+          ? config.subpageHtmlOverrides[staticKey].description 
+          : (SUBWEBSITE_HTML_DATA[staticKey]?.description || "")),
+      css: config.subpageHtmlOverrides?.[label]?.css !== undefined 
+        ? config.subpageHtmlOverrides[label].css 
+        : (config.subpageHtmlOverrides?.[staticKey]?.css !== undefined 
+          ? config.subpageHtmlOverrides[staticKey].css 
+          : (SUBWEBSITE_HTML_DATA[staticKey]?.css || "")),
+      html: config.subpageHtmlOverrides?.[label]?.html !== undefined 
+        ? config.subpageHtmlOverrides[label].html 
+        : (config.subpageHtmlOverrides?.[staticKey]?.html !== undefined 
+          ? config.subpageHtmlOverrides[staticKey].html 
+          : (SUBWEBSITE_HTML_DATA[staticKey]?.html || "")),
+    };
+  }, [config.subpageHtmlOverrides, label, staticKey]);
 
   // Banner details from config
   const bannerConfig = config.subwebsiteBanners[label] || config.subwebsiteBanners[staticKey] || {
     topBannerUrl: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&q=80&w=1920",
     bottomBannerUrl: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800"
   };
+
+  // Detect tool pages — pages without banner images render HTML full-page
+  const isToolPage = !bannerConfig.topBannerUrl || bannerConfig.topBannerUrl === "";
 
   const activeButtonsHtml = bannerConfig.buttonsHtml !== undefined && bannerConfig.buttonsHtml !== ""
     ? bannerConfig.buttonsHtml 
@@ -596,6 +601,41 @@ export default function SubpageViewer({ label, config }: SubpageViewerProps) {
     : (bannerConfig.bottomOpacity !== undefined ? bannerConfig.bottomOpacity : 40);
   
   const safeLabelClass = label.replace(/[^a-zA-Z0-9-]/g, '-');
+
+  // Tool pages render full-page HTML without any banners
+  if (isToolPage) {
+    const htmlContent = (customData?.html || "").trim();
+    const isUrl = /^https?:\/\/[^\s]+$/i.test(htmlContent) || /^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}(\/[^\s]*)?$/i.test(htmlContent);
+    const iframeSrc = isUrl ? (htmlContent.startsWith("http") ? htmlContent : `https://${htmlContent}`) : "";
+
+    return (
+      <div className="min-h-screen text-white transition-colors pt-20">
+        {customData && customData.css && !isUrl && (
+          <style dangerouslySetInnerHTML={{ __html: customData.css }} />
+        )}
+        <div className="subpage-content w-full">
+          {isUrl ? (
+            <iframe
+              src={iframeSrc}
+              title={label}
+              style={{
+                width: '100%',
+                height: 'calc(100vh - 80px)',
+                border: 'none',
+                display: 'block'
+              }}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          ) : htmlContent ? (
+            <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+          ) : (
+            renderFallback()
+          )}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen text-white transition-colors">

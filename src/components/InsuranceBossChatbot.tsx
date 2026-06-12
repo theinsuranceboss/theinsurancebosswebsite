@@ -84,6 +84,11 @@ export default function InsuranceBossChatbot({ config }: InsuranceBossChatbotPro
   }, []);
 
   // 2. Initialize Speech Recognition
+  const handleSendMessageRef = useRef<any>(null);
+  useEffect(() => {
+    handleSendMessageRef.current = handleSendMessage;
+  });
+
   useEffect(() => {
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (SpeechRecognition) {
@@ -104,7 +109,9 @@ export default function InsuranceBossChatbot({ config }: InsuranceBossChatbotPro
         const transcript = event.results[0][0].transcript;
         if (transcript.trim()) {
           setInputText(transcript);
-          handleSendMessage(transcript);
+          if (handleSendMessageRef.current) {
+            handleSendMessageRef.current(transcript);
+          }
         }
       };
 
@@ -115,7 +122,7 @@ export default function InsuranceBossChatbot({ config }: InsuranceBossChatbotPro
 
       recognitionRef.current = rec;
     }
-  }, [onboardingStep, userData, knowledgeBase]);
+  }, []);
 
   // 3. Scroll to Bottom on message updates
   useEffect(() => {

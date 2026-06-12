@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { WebsiteConfig, SubwebsiteCategory } from "../types";
 import { ChevronDown, Menu, X, Settings, Phone, Mail, ExternalLink, Search, Shield } from "lucide-react";
+import { labelToSlug } from "../App";
 
 interface HeaderProps {
   config: WebsiteConfig;
@@ -62,6 +63,23 @@ export default function Header({ config, onOpenAdmin, isAdminOpen }: HeaderProps
     setActiveDropdown(activeDropdown === menu ? null : menu);
   };
 
+  // Rewrite external tool URLs to local clean paths and verify local vs external link behavior
+  const cleanAndCheckLocalUrl = (url: string) => {
+    if (!url) return { href: "#", isLocal: true };
+    if (url.includes("insurance-decoder-pro.lovable.app")) {
+      return { href: "/policy-review", isLocal: true };
+    }
+    if (url.includes("theinsurancebossinnercircle.vercel.app")) {
+      return { href: "/inner-circle", isLocal: true };
+    }
+    const isHashUrl = url.startsWith("#subpage-");
+    const isLocal = url.startsWith("#") || url.startsWith("/");
+    const href = isHashUrl
+      ? `/${labelToSlug(decodeURIComponent(url.replace("#subpage-", "")))}`
+      : url;
+    return { href, isLocal };
+  };
+
   // Pre-configured custom quick-search over all subwebsites
   const allSubwebsites = config.subwebsites.flatMap((cat) =>
     cat.items.map((item) => ({ ...item, category: cat.category }))
@@ -79,7 +97,7 @@ export default function Header({ config, onOpenAdmin, isAdminOpen }: HeaderProps
     <header className={`fixed top-0 left-0 z-40 w-full transition-all duration-300 ${scrolled ? "bg-zinc-950 border-b border-zinc-900/60 shadow-xl py-2" : "bg-zinc-950/90 backdrop-blur-md border-b border-zinc-900/30 py-3"}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-2 flex items-center justify-between">
         {/* LOGO CONTAINER */}
-        <a href="#" className="flex select-none group mr-4 items-center" style={{ transform: `scale(${config.fontScale})` }}>
+        <a href="/" className="flex select-none group mr-4 items-center" style={{ transform: `scale(${config.fontScale})` }}>
           {config.logoUrl ? (
             <img
               src={getDirectImageUrl(config.logoUrl)}
@@ -127,7 +145,7 @@ export default function Header({ config, onOpenAdmin, isAdminOpen }: HeaderProps
                     {config.subwebsites.map((category, idx) => (
                       <div key={idx} className="space-y-3">
                         <a
-                          href={`#subpage-${encodeURIComponent(category.category)}`}
+                          href={`/${labelToSlug(category.category)}`}
                           className="text-[10px] font-mono font-bold tracking-[0.2em] text-[#FAC000] block border-b border-zinc-900 pb-2 uppercase hover:text-white transition-colors"
                           onClick={() => {
                             setActiveDropdown(null);
@@ -137,11 +155,11 @@ export default function Header({ config, onOpenAdmin, isAdminOpen }: HeaderProps
                         </a>
                         <div className="flex flex-col space-y-2">
                           {category.items.map((sub, sIdx) => {
-                            const isLocal = sub.url.startsWith("#");
+                            const { href, isLocal } = cleanAndCheckLocalUrl(sub.url);
                             return (
                               <a
                                 key={sIdx}
-                                href={sub.url}
+                                href={href}
                                 target={isLocal ? undefined : "_blank"}
                                 rel={isLocal ? undefined : "noopener noreferrer"}
                                 className="group/item font-sans text-xs text-zinc-400 hover:text-white transition-all flex items-center justify-between py-0.5 rounded"
@@ -172,22 +190,22 @@ export default function Header({ config, onOpenAdmin, isAdminOpen }: HeaderProps
             )}
           </div>
 
-          <a href="#subpage-Policy%20Review" className="hover:text-[#FAC000] transition-colors py-1">POLICY REVIEW</a>
-          <a href="#subpage-For%20Agents" className="hover:text-[#FAC000] transition-colors py-1">FOR AGENTS</a>
-          <a href="#subpage-Inner%20Circle" className="hover:text-[#FAC000] transition-colors py-1">INNER CIRCLE</a>
+          <a href="/policy-review" className="hover:text-[#FAC000] transition-colors py-1">POLICY REVIEW</a>
+          <a href="/for-agents" className="hover:text-[#FAC000] transition-colors py-1">FOR AGENTS</a>
+          <a href="/inner-circle" className="hover:text-[#FAC000] transition-colors py-1">INNER CIRCLE</a>
           <a href="#about" className="hover:text-[#FAC000] transition-colors py-1">CONTACT</a>
         </nav>
 
         {/* CTA BUTTONS AND ADMIN TOGGLE */}
         <div className="flex items-center space-x-3">
           <a
-            href="#subpage-Policy%20Review"
+            href="/policy-review"
             className="hidden sm:inline-flex items-center justify-center font-mono text-xs font-bold tracking-wider px-4 py-2 border border-[#FAC000] text-black bg-[#FAC000] hover:bg-black hover:text-[#FAC000] rounded transition-all duration-300 shadow-md"
           >
             GET A QUOTE
           </a>
           <a
-            href="#subpage-For%20Agents"
+            href="/for-agents"
             className="hidden sm:inline-flex items-center justify-center font-mono text-xs font-bold tracking-wider px-4 py-2 border border-zinc-700 hover:border-[#FAC000] text-white hover:text-white bg-black/60 hover:bg-zinc-950 rounded transition-all duration-300 shadow-md"
           >
             FOR AGENTS
@@ -213,7 +231,7 @@ export default function Header({ config, onOpenAdmin, isAdminOpen }: HeaderProps
                 {config.subwebsites.map((category, idx) => (
                   <div key={idx} className="space-y-1.5">
                     <a
-                      href={`#subpage-${encodeURIComponent(category.category)}`}
+                      href={`/${labelToSlug(category.category)}`}
                       className="text-[10px] uppercase tracking-wider text-[#FAC000] hover:text-white font-bold block font-mono bg-zinc-900/50 py-1 px-2 rounded transition-colors"
                       onClick={() => setMobileMenuOpen(false)}
                     >
@@ -221,11 +239,11 @@ export default function Header({ config, onOpenAdmin, isAdminOpen }: HeaderProps
                     </a>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pl-2">
                       {category.items.map((sub, sIdx) => {
-                        const isLocal = sub.url.startsWith("#");
+                        const { href, isLocal } = cleanAndCheckLocalUrl(sub.url);
                         return (
                           <a
                             key={sIdx}
-                            href={sub.url}
+                            href={href}
                             target={isLocal ? undefined : "_blank"}
                             rel={isLocal ? undefined : "noopener noreferrer"}
                             className="block text-zinc-400 hover:text-white transition-colors text-xs py-0.5 flex items-center justify-between"
@@ -241,22 +259,22 @@ export default function Header({ config, onOpenAdmin, isAdminOpen }: HeaderProps
                 ))}
               </div>
             </div>
-            <a href="#subpage-Policy%20Review" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#FAC000] transition-colors py-1">POLICY REVIEW</a>
-            <a href="#subpage-For%20Agents" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#FAC000] transition-colors py-1">FOR AGENTS</a>
-            <a href="#subpage-Inner%20Circle" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#FAC000] transition-colors py-1">INNER CIRCLE</a>
+            <a href="/policy-review" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#FAC000] transition-colors py-1">POLICY REVIEW</a>
+            <a href="/for-agents" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#FAC000] transition-colors py-1">FOR AGENTS</a>
+            <a href="/inner-circle" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#FAC000] transition-colors py-1">INNER CIRCLE</a>
             <a href="#about" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#FAC000] transition-colors py-1">CONTACT</a>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-zinc-900">
             <a
-              href="#subpage-Policy%20Review"
+              href="/policy-review"
               onClick={() => setMobileMenuOpen(false)}
               className="w-full text-center font-mono text-xs font-bold tracking-wider py-2.5 bg-[#FAC000] text-black border border-[#FAC000] rounded hover:bg-transparent hover:text-[#FAC000] transition-colors"
             >
               GET A QUOTE
             </a>
             <a
-              href="#subpage-For%20Agents"
+              href="/for-agents"
               onClick={() => setMobileMenuOpen(false)}
               className="w-full text-center font-mono text-xs font-bold tracking-wider py-2.5 border border-zinc-800 hover:border-[#FAC000] text-white rounded transition-colors"
             >

@@ -10,8 +10,8 @@ import {
 } from "lucide-react";
 
 // ─── Supabase client (anon key — read only for dashboard) ───────────────────
-const SUPA_URL = "https://cbtzxyyaukurziljqjuz.supabase.co";
-const SUPA_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNidHp4eXlhdWt1cnppbGpxanV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxMTkwODMsImV4cCI6MjA2MzY5NTA4M30.5fxUR7kMSDCg_PaYNDi8jckqKIyc_E2URpI5WFkU4RA";
+const SUPA_URL = "https://qkjhsiemosnwozcvzfug.supabase.co";
+const SUPA_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFramhzaWVtb3Nud296Y3Z6ZnVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxMDM0NTMsImV4cCI6MjA5MzY3OTQ1M30.4YVawL7O14lCZVYAF8H35xCDuBlfG340lzc66bFtCMM";
 const supabase = createClient(SUPA_URL, SUPA_ANON);
 
 interface VisitorEvent {
