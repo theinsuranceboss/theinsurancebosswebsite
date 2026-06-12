@@ -6,7 +6,7 @@ headers = []
 [functions."*"]
 
 [build]
-publish = "D:\\theinsurancebosswebsite2.0\\dist"
+publish = "C:\\Users\\RAE Marketing\\Desktop\\Antigravity APPs\\theinsurancebosswebsite2.0\\dist"
 publishOrigin = "ui"
 commandOrigin = "ui"
 command = "npm run build"

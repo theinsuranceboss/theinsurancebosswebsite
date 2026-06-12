@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { WebsiteConfig } from "./types";
 import { DEFAULT_CONFIG } from "./defaultConfig";
 import Header, { getDirectImageUrl } from "./components/Header";
@@ -15,7 +15,7 @@ import FaqSection from "./components/FaqSection";
 import Testimonials from "./components/Testimonials";
 import { Sparkles, Info, Settings, ArrowRight, ShieldCheck, HelpCircle, X, ExternalLink } from "lucide-react";
 import InsuranceBossChatbot from "./components/InsuranceBossChatbot";
-import { SUPABASE_URL } from "./utils/supabase";
+import { SUPABASE_URL, supabase } from "./utils/supabase";
 
 // Helper function to robustly deep-merge configurations
 function mergeConfigs(parsed: any): WebsiteConfig {
@@ -229,6 +229,49 @@ export default function App() {
     }
   }, []);
 
+  // ── Visitor Tracking ─────────────────────────────────────────────────────
+  useEffect(() => {
+    // Generate or reuse a session ID for this browser session
+    let sessionId = sessionStorage.getItem('_tib_sid');
+    if (!sessionId) {
+      sessionId = Math.random().toString(36).slice(2) + Date.now().toString(36);
+      sessionStorage.setItem('_tib_sid', sessionId);
+    }
+
+    // Detect device type
+    const ua = navigator.userAgent;
+    const deviceType = /tablet|ipad|playbook|silk/i.test(ua) ? 'tablet'
+      : /mobile|android|iphone|ipod|blackberry|opera mini|iemobile/i.test(ua) ? 'mobile'
+      : 'desktop';
+
+    // Determine current page label
+    const hash = window.location.hash;
+    const pageLabel = hash.startsWith('#subpage-')
+      ? decodeURIComponent(hash.replace('#subpage-', ''))
+      : 'Home';
+
+    // Fetch geo from ipapi.is (free, no key needed)
+    fetch('https://api.ipapi.is/?fields=ip,country_name,country_code,city')
+      .then(r => r.json())
+      .then(async geo => {
+        await supabase.from('visitor_events').insert({
+          ip: geo.ip || null,
+          country: geo.country_name || null,
+          country_code: geo.country_code || null,
+          city: geo.city || null,
+          page: pageLabel,
+          referrer: document.referrer || null,
+          device_type: deviceType,
+          user_agent: navigator.userAgent.slice(0, 200),
+          session_id: sessionId,
+        });
+      })
+      .catch(() => {
+        // Silently fail — tracking should never break the site
+      });
+  // Run once on mount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   // Global click interceptor — catches any "Get a Quote" link/button and opens the modal instead
   useEffect(() => {
     const handleGlobalClick = (e: MouseEvent) => {

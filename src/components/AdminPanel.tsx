@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { WebsiteConfig, SubwebsiteCategory, Subwebsite } from "../types";
-import { X, Save, RefreshCw, Layers, Sliders, Type, Link, Image, Trash2, Plus, Info, Layout, Lock, Upload, Loader2, AlertCircle, Grid, LogOut, ArrowUp, ArrowDown, Code, MessageSquare, Settings, ShieldCheck, Target, Award, Star, Users, Zap } from "lucide-react";
+import { X, Save, RefreshCw, Layers, Sliders, Type, Link, Image, Trash2, Plus, Info, Layout, Lock, Upload, Loader2, AlertCircle, Grid, LogOut, ArrowUp, ArrowDown, Code, MessageSquare, Settings, ShieldCheck, Target, Award, Star, Users, Zap, Globe } from "lucide-react";
 import { getDirectImageUrl, isVideoUrl } from "./Header";
 import { uploadToSupabase, extractGoogleDriveFolderImages, saveConfigToSupabase } from "../utils/supabase";
 import { SUBWEBSITE_HTML_DATA } from "../subwebsiteHtml";
 import { getSubpageStaticKey } from "./SubpageViewer";
+import { VisitorsDashboard } from "./VisitorsDashboard";
 
 interface SupabaseImageUploaderProps {
   value: string;
@@ -1250,6 +1251,18 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
               <MessageSquare className="w-3.5 h-3.5" />
               <span>FAQs</span>
             </button>
+
+            <button
+              onClick={() => setActiveTab("visitors")}
+              className={`py-2 px-4.5 rounded-full font-bold transition-all flex items-center space-x-2 border text-xs cursor-pointer ${
+                activeTab === "visitors" 
+                  ? "bg-[#FAC000] border-[#FAC000] text-black shadow-lg shadow-[#FAC000]/25" 
+                  : "bg-zinc-900/40 border-zinc-800/60 text-zinc-400 hover:text-white hover:border-zinc-700"
+              }`}
+            >
+              <Globe className="w-3.5 h-3.5" />
+              <span>Website Visitors</span>
+            </button>
           </div>
         </div>
 
@@ -1286,6 +1299,7 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                 {activeTab === "faqs" && <MessageSquare className="w-6 h-6" />}
                 {activeTab === "metrics" && <Target className="w-6 h-6" />}
                 {activeTab === "testimonials" && <Star className="w-6 h-6" />}
+                {activeTab === "visitors" && <Globe className="w-6 h-6" />}
               </div>
               <div>
                 <h2 className="text-xl font-black text-white tracking-wide uppercase leading-tight">
@@ -1305,6 +1319,7 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                   {activeTab === "faqs" && "Frequently Asked Questions (FAQs)"}
                   {activeTab === "metrics" && "Benefits & Metrics Panel"}
                   {activeTab === "testimonials" && "Customer Testimonials"}
+                  {activeTab === "visitors" && "Website Visitors Analytics"}
                 </h2>
                 <p className="text-xs text-zinc-500 font-medium mt-1">
                   {activeTab === "global" && "Configure primary contact details, logo assets, social links, and the default background image."}
@@ -1323,10 +1338,16 @@ export default function AdminPanel({ config, isOpen, onClose, onSave }: AdminPan
                   {activeTab === "faqs" && "Manage the accordion style FAQ list displayed on the homepage."}
                   {activeTab === "metrics" && "Toggle visibility, and customize headings, items, and icons of the Benefits & Metrics card on the homepage."}
                   {activeTab === "testimonials" && "Manage testimonial section visibility, section titles, and edit agent & client reviews."}
+                  {activeTab === "visitors" && "Live analytics dashboard — visitor counts, countries, devices, top pages, and recent visitors feed."}
                 </p>
               </div>
             </div>
           
+          {/* TAB: WEBSITE VISITORS */}
+          {activeTab === "visitors" && (
+            <VisitorsDashboard />
+          )}
+
           {/* TAB: GLOBAL SETTINGS */}
           {activeTab === "global" && (
             <div className="space-y-4">
